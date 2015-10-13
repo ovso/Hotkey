@@ -15,9 +15,4 @@ public class BaseFragment extends Fragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.fragment_main, null);
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 }
