@@ -1,6 +1,8 @@
-package kr.blogspot.ovsoce.hotkey;
+package kr.blogspot.ovsoce.hotkey.main;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -13,9 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
+import kr.blogspot.ovsoce.hotkey.fragment.FamilyFragment;
 
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View{
+    MainPresenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mPresenter = new MainPresenterImpl(this);
     }
 
     @Override
@@ -60,33 +68,39 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
+        if (id == R.id.nav_family) {
             // Handle the camera action
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             if(mBaseFragment == null) {
-                mBaseFragment = new BaseFragment();
+                mBaseFragment = new FamilyFragment();
                 transaction.replace(R.id.replace_content, mBaseFragment);
                 transaction.commit();
             }
 
-        } else if (id == R.id.nav_gallery) {
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.remove(mBaseFragment);
-            transaction.commit();
-            mBaseFragment = null;
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_friends) {
+            if(mBaseFragment != null) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.remove(mBaseFragment);
+                transaction.commit();
+                mBaseFragment = null;
+            }
+        } else if (id == R.id.nav_others) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_who) {
 
         } else if (id == R.id.nav_send) {
-
+            mPresenter.sendToDeveloper(getApplicationContext());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 
+    @Override
+    public void callEmailActivity(Intent intent) {
+        startActivity(intent);
+    }
 }
