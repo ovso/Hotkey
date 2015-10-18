@@ -14,6 +14,6 @@ public class MainPresenterImpl implements MainPresenter {
     }
     @Override
     public void sendToDeveloper(Context context) {
-        mView.callEmailActivity(mModel.getEmailIntent(context));
+        mView.navigateToEmail(mModel.getEmailIntent(context));
     }
 }

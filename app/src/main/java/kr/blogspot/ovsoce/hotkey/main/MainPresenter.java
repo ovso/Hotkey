@@ -9,6 +9,6 @@ import android.content.Intent;
 public interface MainPresenter {
     void sendToDeveloper(Context context);
     interface View {
-        void callEmailActivity(Intent intent);
+        void navigateToEmail(Intent intent);
     }
 }

@@ -18,6 +18,7 @@ import android.view.View;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.FamilyFragment;
+import kr.blogspot.ovsoce.hotkey.fragment.FriendsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View{
@@ -71,20 +72,14 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_family) {
             // Handle the camera action
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            if(mBaseFragment == null) {
-                mBaseFragment = new FamilyFragment();
-                transaction.replace(R.id.replace_content, mBaseFragment);
-                transaction.commit();
-            }
-
-
+            FamilyFragment fragment = new FamilyFragment();
+            transaction.replace(R.id.replace_content, fragment);
+            transaction.commit();
         } else if (id == R.id.nav_friends) {
-            if(mBaseFragment != null) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.remove(mBaseFragment);
-                transaction.commit();
-                mBaseFragment = null;
-            }
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            FriendsFragment fragment = new FriendsFragment();
+            transaction.replace(R.id.replace_content, fragment);
+            transaction.commit();
         } else if (id == R.id.nav_others) {
 
         } else if (id == R.id.nav_who) {
@@ -100,7 +95,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void callEmailActivity(Intent intent) {
+    public void navigateToEmail(Intent intent) {
         startActivity(intent);
     }
 }
