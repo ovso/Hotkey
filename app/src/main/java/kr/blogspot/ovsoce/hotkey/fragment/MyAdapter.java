@@ -13,7 +13,7 @@ import java.util.List;
 import kr.blogspot.ovsoce.hotkey.R;
 
 /**
- * Created by ovso on 2015. 10. 17..
+ * RecyclerView Adapter
  */
 public class MyAdapter extends RecyclerView.Adapter {
     List<ContactsItem> mList;
@@ -49,8 +49,6 @@ public class MyAdapter extends RecyclerView.Adapter {
             super(itemView);
             nameTv = (TextView) itemView.findViewById(R.id.tv_name);
             blockV = itemView.findViewById(R.id.v_block);
-            Log.d("MyViewHolder", "blockV = " + blockV);
-            Log.d("MyViewHolder", "nameTv = " + nameTv);
             itemView.setOnClickListener(listener);
         }
     }

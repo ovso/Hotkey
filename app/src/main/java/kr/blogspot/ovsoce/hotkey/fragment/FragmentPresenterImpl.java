@@ -20,7 +20,7 @@ public class FragmentPresenterImpl implements FragmentPresenter, View.OnClickLis
     @Override
     public void init(Context context) {
         List<ContactsItem> list = mModel.getContactsItemListData();
-        mView.initRecyclerView(new MyAdapter(list, this), new GridLayoutManager(context, 4));
+        mView.initRecyclerView(new MyAdapter(list, this), new GridLayoutManager(context, mModel.getGridLayoutSpanCount(context)));
     }
 
     @Override
