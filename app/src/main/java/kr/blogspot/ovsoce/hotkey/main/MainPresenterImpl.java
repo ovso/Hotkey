@@ -23,7 +23,6 @@ public class MainPresenterImpl implements MainPresenter {
             mView.navigateToEmail(mModel.getEmailIntent(context));
         } else {
             mView.replaceFragment(mModel.getFragmentContainerViewId(), mModel.getFragment(id));
-            Log.d("MainPresenterImpl", "onNavigationItemSelected ?");
         }
     }
 

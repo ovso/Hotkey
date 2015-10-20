@@ -11,9 +11,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mPresenter = new MainPresenterImpl(this);
+
+        navigationView.setCheckedItem(R.id.nav_family);
+        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_family));
     }
 
     @Override

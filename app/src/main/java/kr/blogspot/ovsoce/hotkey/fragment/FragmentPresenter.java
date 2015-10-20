@@ -16,5 +16,6 @@ public interface FragmentPresenter {
     interface View {
         void initRecyclerView(MyAdapter adapter, RecyclerView.LayoutManager layoutManager);
         void onClick(android.view.View v);
+        void onLongClick(android.view.View v);
     }
 }

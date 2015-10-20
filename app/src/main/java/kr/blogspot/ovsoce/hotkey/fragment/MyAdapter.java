@@ -2,7 +2,6 @@ package kr.blogspot.ovsoce.hotkey.fragment;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +14,19 @@ import kr.blogspot.ovsoce.hotkey.R;
 /**
  * RecyclerView Adapter
  */
-public class MyAdapter extends RecyclerView.Adapter {
+public class MyAdapter extends RecyclerView.Adapter{
     List<ContactsItem> mList;
-    View.OnClickListener mOnClickListener;
-    public MyAdapter(List<ContactsItem> list, View.OnClickListener listener) {
+    FragmentPresenter.View mView;
+
+    public MyAdapter(List<ContactsItem> list, FragmentPresenter.View view) {
         mList = list;
-        mOnClickListener = listener;
+        mView = view;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, null);
-        return new MyViewHolder(layoutView, mOnClickListener);
+        return new MyViewHolder(layoutView);
     }
 
     @Override
@@ -41,15 +42,27 @@ public class MyAdapter extends RecyclerView.Adapter {
         return mList.size();
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView nameTv;
         View blockV;
 
-        public MyViewHolder(View itemView, View.OnClickListener listener) {
+        public MyViewHolder(View itemView) {
             super(itemView);
             nameTv = (TextView) itemView.findViewById(R.id.tv_name);
             blockV = itemView.findViewById(R.id.v_block);
-            itemView.setOnClickListener(listener);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mView.onClick(v);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            mView.onLongClick(v);
+            return true;
         }
     }
 }

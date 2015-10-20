@@ -46,7 +46,12 @@ public class BaseFragment extends Fragment  implements FragmentPresenter.View {
     @Override
     public void onClick(View v) {
         int id = mRecyclerView.getChildLayoutPosition(v);
-        Toast.makeText(getActivity(), "id = " + id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "onClick id = " + id, Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onLongClick(View v) {
+        int id = mRecyclerView.getChildLayoutPosition(v);
+        Toast.makeText(getActivity(), "onLongClick id = " + id, Toast.LENGTH_SHORT).show();
     }
 }
