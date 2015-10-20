@@ -16,6 +16,6 @@ public class OthersFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_others, null);
+        return mView = inflater.inflate(R.layout.fragment_others, null);
     }
 }
