@@ -49,7 +49,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        getWritableDatabase();
     }
 
     // Creating Tables
@@ -75,17 +74,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //                + KEY_NUMBER + " TEXT," + KEY_COLOR + " TEXT" + ")";
 //
 //        db.execSQL(CREATE_WHO_TABLE);
-        //initDB(db);
+        initDB(db);
     }
 
     public void initDB(SQLiteDatabase db) {
+        Log.d("SQLiteDatabse");
         List<ContactsItem> list = getDBInitContactsItemListData();
+        Log.d("list.size() = " + list.size());
         int[] menuIds = {R.id.nav_family, R.id.nav_friends, R.id.nav_others};
 
         for (int id : menuIds) {
             for (ContactsItem item:list) {
                 insertContact(item, id, db);
-                //Log.d(item.getColor());
             }
         }
     }
@@ -176,7 +176,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_COLOR, item.getColor());
         // Inserting Row
         db.insert(table, null, values);
-        db.close(); // Closing database connection
+        //db.close(); // Closing database connection
     }
 
 //    public ArrayList<ContactsItem> getContactsItemList(int type) {
@@ -262,7 +262,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<ContactsItem> dataItems = new ArrayList<ContactsItem>();
         String[] colors = {"#3F51B5", "#E91E63", "#FF5722", "#4CAF50", "#607D8B", "#00BCD4", "#FFC107", "#795548", "#03A9F4", "#F44336"};
         int k=0;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 12; i++) {
             for (int j = 0; j < colors.length; j++) {
                 String id = String.valueOf(k);
                 String name = "", number="", color="";

@@ -15,7 +15,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mDatabaseHelper = new DatabaseHelper(getApplicationContext());
-        //mDatabaseHelper.initDB(mDatabaseHelper.getWritableDatabase());
         mDatabaseHelper.getWritableDatabase();
 
     }
