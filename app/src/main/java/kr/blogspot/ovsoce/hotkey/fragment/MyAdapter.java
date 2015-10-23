@@ -10,8 +10,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.ContactsItem;
-import kr.blogspot.ovsoce.hotkey.common.ContactsItemImpl;
 
 /**
  * RecyclerView Adapter

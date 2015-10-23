@@ -6,17 +6,22 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.ContactsItem;
-import kr.blogspot.ovsoce.hotkey.common.ContactsItemImpl;
-import kr.blogspot.ovsoce.hotkey.fragment.FragmentModel;
+import kr.blogspot.ovsoce.hotkey.common.Log;
+import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
+import kr.blogspot.ovsoce.hotkey.fragment.ContactsItemImpl;
 
 /**
  * Created by jaeho_oh on 2015-10-22.
@@ -37,19 +42,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //private static final String TABLE_WHO = "who";
 
     // Contacts Table Columns names
-    private static final String KEY_ID = "_id";
+    private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_NUMBER = "number";
     private static final String KEY_COLOR = "color";
 
-    private final ArrayList<ContactsItem> mContactsItemList = new ArrayList<ContactsItem>();
-    private FragmentModel mModel;
-    private Context mContext;
-    public DatabaseHelper(Context context, FragmentModel model) {
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
-        mModel = model;
-        mContext = context;
         getWritableDatabase();
     }
 
@@ -76,17 +75,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //                + KEY_NUMBER + " TEXT," + KEY_COLOR + " TEXT" + ")";
 //
 //        db.execSQL(CREATE_WHO_TABLE);
-        Toast.makeText(mContext, "DatabseHelper", Toast.LENGTH_LONG).show();
-        initDB();
+        //initDB(db);
     }
 
-    private void initDB() {
-        List<ContactsItem> list = mModel.getDBInitContactsItemListData();
-        int total = 0;
-        for(int i=0; i<mModel.getMenuIds().length; i++) {
-            for (int j=0; j<list.size(); j++) {
-                updateContact(list.get(j), mModel.getMenuIds()[i]);
-                Log.d("DatabaseHelper", "total = " + total);
+    public void initDB(SQLiteDatabase db) {
+        List<ContactsItem> list = getDBInitContactsItemListData();
+        int[] menuIds = {R.id.nav_family, R.id.nav_friends, R.id.nav_others};
+
+        for (int id : menuIds) {
+            for (ContactsItem item:list) {
+                insertContact(item, id, db);
+                //Log.d(item.getColor());
             }
         }
     }
@@ -124,6 +123,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         ContactsItem contact = new ContactsItemImpl(
+                cursor.getString(0),
                 cursor.getString(1),
                 cursor.getString(2),
                 cursor.getString(3));
@@ -151,12 +151,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Updating single contact
-    public int updateContact(ContactsItem contact, int type) {
+    public int updateContact(ContactsItem contact, int type, SQLiteDatabase db) {
+
         String table = getTable(type);
 
-        SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
+        values.put(KEY_ID, contact.getId());
         values.put(KEY_NAME, contact.getName());
         values.put(KEY_NUMBER, contact.getNumber());
         values.put(KEY_COLOR, contact.getColor());
@@ -165,17 +165,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.update(table, values, KEY_ID + " = ?", null);
     }
 
-//    public void addContact(ContactsItemImpl item, int type) {
-//
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(KEY_NAME, item.getName()); // Contact Name
-//        values.put(KEY_NUMBER, item.getNumber()); // Contact Phone
-//        values.put(KEY_COLOR, item.getColor());
-//        // Inserting Row
-//        db.insert(TABLE_FAMILY, null, values);
-//        db.close(); // Closing database connection
-//    }
+    public void insertContact(ContactsItem item, int type, SQLiteDatabase db) {
+
+        String table = getTable(type);
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, item.getId());
+        values.put(KEY_NAME, item.getName()); // Contact Name
+        values.put(KEY_NUMBER, item.getNumber()); // Contact Phone
+        values.put(KEY_COLOR, item.getColor());
+        // Inserting Row
+        db.insert(table, null, values);
+        db.close(); // Closing database connection
+    }
 
 //    public ArrayList<ContactsItem> getContactsItemList(int type) {
 //        String table = getTable(type);
@@ -227,4 +229,80 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        // return count
 //        return cursor.getCount();
 //    }
+
+    public void exportDB(Context context) {
+        //createExternalStoragePrivateFile
+        // Create a path where we will place our private file on external
+        // storage.
+        File file = new File(context.getExternalFilesDir(null), DATABASE_NAME);
+        //File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath(),DATABASE_NAME);
+        try {
+            // Very simple code to copy a picture from the application's
+            // resource into the external file.  Note that this code does
+            // no error checking, and assumes the picture is small (does not
+            // try to copy it in chunks).  Note that if external storage is
+            // not currently mounted this will silently fail.
+            InputStream is = new FileInputStream(context.getDatabasePath(DATABASE_NAME));
+            OutputStream os = new FileOutputStream(file);
+            byte[] data = new byte[is.available()];
+            is.read(data);
+            os.write(data);
+            is.close();
+            os.close();
+            Log.d(file.toString());
+        } catch (IOException e) {
+            // Unable to create file, likely because external storage is
+            // not currently mounted.
+            Log.e(e.toString());
+
+        }
+    }
+    private List<ContactsItem> getDBInitContactsItemListData() {
+
+        List<ContactsItem> dataItems = new ArrayList<ContactsItem>();
+        String[] colors = {"#3F51B5", "#E91E63", "#FF5722", "#4CAF50", "#607D8B", "#00BCD4", "#FFC107", "#795548", "#03A9F4", "#F44336"};
+        int k=0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < colors.length; j++) {
+                String id = String.valueOf(k);
+                String name = "", number="", color="";
+                color = colors[j];
+                if(id.equals("0")) name = "Indigo";
+                dataItems.add(new ContactsItemImpl(id,name,number,color));
+                Log.d("id = " + id);
+                k++;
+            }
+        }
+
+        return dataItems;
+    }
+    public List<ContactsItem> getTableContactsItemList(Context context, int type) {
+        List<ContactsItem> list = new ArrayList<ContactsItem>();
+
+        for(int i=0; i<100; i++) {
+            list.add(getContactsItem(type, i));
+        }
+
+        return list;
+    }
+    public List<ContactsItem> getDummyData() {
+
+        List<ContactsItem> dataItems = new ArrayList<ContactsItem>();
+        String[] colors = {"#3F51B5", "#E91E63", "#FF5722", "#4CAF50", "#607D8B", "#00BCD4", "#FFC107", "#795548", "#03A9F4", "#F44336"};
+        int k=0;
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < colors.length; j++) {
+                String id = String.valueOf(k);
+                String name = "", number="", color="";
+                color = colors[j];
+                if(id.equals("0")) name = "Indigo";
+                dataItems.add(new ContactsItemImpl(id,name,number,color));
+                Log.d("id = " + id);
+                k++;
+            }
+        }
+
+        return dataItems;
+    }
+
 }

@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.hotkey.common;
+package kr.blogspot.ovsoce.hotkey.fragment;
 
 /**
  * Created by ovso on 2015. 10. 17..
@@ -15,9 +15,14 @@ public class ContactsItemImpl implements ContactsItem {
         return color;
     }
 
-    String name, number, color;
+    @Override
+    public String getId() {
+        return id;
+    }
 
-    public ContactsItemImpl(String name, String number, String color) {
+    String id,name, number, color;
+
+    public ContactsItemImpl(String id, String name, String number, String color) {
         this.name = name;
         this.color = color;
         this.number = number;
