@@ -10,7 +10,7 @@ public class Log {
 			String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
 			int lineNumber = Thread.currentThread().getStackTrace()[3].getLineNumber();
 
-			android.util.Log.d(className + "." + methodName + "():" + lineNumber,msg);
+			android.util.Log.d("OJH",className + "." + methodName + "():" + lineNumber+" -> "+msg);
 		}
 	}
 	public static void d(String tag, String msg) {
@@ -24,7 +24,7 @@ public class Log {
 			String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
 			int lineNumber = Thread.currentThread().getStackTrace()[3].getLineNumber();
 
-			android.util.Log.d(className + "." + methodName + "():" + lineNumber, msg);
+			android.util.Log.e("OJH",className + "." + methodName + "():" + lineNumber+" -> "+msg);
 		}
 	}
 	public static void e(String tag, String msg) {
@@ -38,7 +38,7 @@ public class Log {
 			String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
 			int lineNumber = Thread.currentThread().getStackTrace()[3].getLineNumber();
 
-			android.util.Log.d(className + "." + methodName + "():" + lineNumber,msg);
+			android.util.Log.w("OJH",className + "." + methodName + "():" + lineNumber+" -> "+msg);
 		}
 	}
 	public static void w(String tag, String msg) {

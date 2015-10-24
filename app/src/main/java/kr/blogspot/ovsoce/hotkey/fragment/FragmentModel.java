@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.fragment;
 
+import android.app.Fragment;
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -11,19 +12,19 @@ import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 /**
  * Created by ovso on 2015. 10. 17..
  */
-public class FragmentModel {
+public abstract class FragmentModel {
 
-    private List<ContactsItemImpl> contactsItemListData;
     public int getGridLayoutSpanCount(Context context) {
         return context.getResources().getInteger(R.integer.recyclerview_gridlayout_spancount);
     }
 
-    public List<ContactsItem> getContactsItemListData(Context context) {
+    public List<ContactsItem> getContactsItemList(Context context) {
 
         MyApplication app = (MyApplication) context.getApplicationContext();
-        int type = R.id.nav_family;
 
-        //return app.getDatabaseHelper().getTableContactsItemList(context, type);
-        return app.getDatabaseHelper().getDummyData();
+        return app.getDatabaseHelper().getTableContactsItemList(getMenuId());
+        //return app.getDatabaseHelper().getDummyData();
     }
+
+    public abstract int getMenuId();
 }

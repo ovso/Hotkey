@@ -14,44 +14,6 @@ import kr.blogspot.ovsoce.hotkey.R;
 /**
  * Created by jaeho_oh on 2015-10-13.
  */
-public class BaseFragment extends Fragment  implements FragmentPresenter.View {
+public class BaseFragment extends Fragment{
 
-    FragmentPresenter mPresenter;
-    RecyclerView mRecyclerView;
-    View mView;
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        mView = inflater.inflate(R.layout.fragment_base, null);
-        return mView;
-    }
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        mRecyclerView = (RecyclerView) mView.findViewById(R.id.recyclerView);
-
-        mPresenter = new FragmentPresenterImpl(this);
-        mPresenter.init(getActivity());
-    }
-
-    @Override
-    public void initRecyclerView(MyAdapter adapter,RecyclerView.LayoutManager layoutManager) {
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onClick(View v) {
-        int id = mRecyclerView.getChildLayoutPosition(v);
-        Toast.makeText(getActivity(), "onClick id = " + id, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onLongClick(View v) {
-        int id = mRecyclerView.getChildLayoutPosition(v);
-        Toast.makeText(getActivity(), "onLongClick id = " + id, Toast.LENGTH_SHORT).show();
-    }
 }

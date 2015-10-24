@@ -12,10 +12,5 @@ import kr.blogspot.ovsoce.hotkey.R;
  * Created by jaeho_oh on 2015-10-16.
  */
 public class WhoFragment extends BaseFragment {
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        return mView = inflater.inflate(R.layout.fragment_who, null);
-    }
+
 }

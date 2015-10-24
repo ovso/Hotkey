@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
 
 /**
  * RecyclerView Adapter

@@ -78,9 +78,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void initDB(SQLiteDatabase db) {
-        Log.d("SQLiteDatabse");
         List<ContactsItem> list = getDBInitContactsItemListData();
-        Log.d("list.size() = " + list.size());
+
         int[] menuIds = {R.id.nav_family, R.id.nav_friends, R.id.nav_others};
 
         for (int id : menuIds) {
@@ -110,7 +109,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(
                 table,
-                new String[]{KEY_NAME, KEY_NUMBER, KEY_COLOR}, KEY_ID + "=?",
+                new String[]{KEY_ID, KEY_NAME, KEY_NUMBER, KEY_COLOR},
+                KEY_ID + "=?",
                 new String[]{String.valueOf(id)},
                 null,
                 null,
@@ -120,7 +120,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor != null)
             cursor.moveToFirst();
-
 
         ContactsItem contact = new ContactsItemImpl(
                 cursor.getString(0),
@@ -268,19 +267,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String name = "", number="", color="";
                 color = colors[j];
                 if(id.equals("0")) name = "Indigo";
-                dataItems.add(new ContactsItemImpl(id,name,number,color));
-                Log.d("id = " + id);
+                dataItems.add(new ContactsItemImpl(id, name, number, color));
                 k++;
             }
         }
 
         return dataItems;
     }
-    public List<ContactsItem> getTableContactsItemList(Context context, int type) {
+//    public List<ContactsItem> getTableContactsItemList(int type) {
+//        List<ContactsItem> list = new ArrayList<ContactsItem>();
+//
+//        for(int i=0; i<100; i++) {
+//            list.add(getContactsItem(type, i+1));
+//        }
+//
+//        return list;
+//    }
+    public List<ContactsItem> getTableContactsItemList(int type) {
         List<ContactsItem> list = new ArrayList<ContactsItem>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + getTable(type);
 
-        for(int i=0; i<100; i++) {
-            list.add(getContactsItem(type, i));
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                ContactsItem item = new ContactsItemImpl(cursor.getString(0),cursor.getString(1),cursor.getString(2), cursor.getString(3));
+                list.add(item);
+            } while (cursor.moveToNext());
         }
 
         return list;
