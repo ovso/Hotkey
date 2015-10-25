@@ -102,9 +102,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     // Getting single contact
-    ContactsItem getContactsItem(int type, int position) {
+    public ContactsItem getContactsItem(int type, int position) {
         SQLiteDatabase db = this.getReadableDatabase();
-        int id = position;
+        int id = position+1;
         String table = getTable(type);
 
         Cursor cursor = db.query(

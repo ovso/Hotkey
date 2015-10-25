@@ -25,6 +25,11 @@ public abstract class FragmentModel {
         return app.getDatabaseHelper().getTableContactsItemList(getMenuId());
         //return app.getDatabaseHelper().getDummyData();
     }
-
+    public ContactsItem getContactsItem(Context context, int position) {
+        ContactsItem item = null;
+        MyApplication app = (MyApplication)context.getApplicationContext();
+        item = app.getDatabaseHelper().getContactsItem(getMenuId(), position);
+        return item;
+    }
     public abstract int getMenuId();
 }

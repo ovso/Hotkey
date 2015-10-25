@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.fragment.friends;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
+import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 
 /**
@@ -35,7 +38,7 @@ public class FriendsFragment extends BaseFragment implements FriendsPresenter.Vi
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.recyclerView);
 
         mPresenter = new FriendsPresenterImpl(this);
-        mPresenter.init(getActivity());
+        mPresenter.init(getActivity(), mRecyclerView);
     }
 
     @Override
@@ -45,15 +48,17 @@ public class FriendsFragment extends BaseFragment implements FriendsPresenter.Vi
     }
 
     @Override
-    public void onClick(View v) {
-        int id = mRecyclerView.getChildLayoutPosition(v);
-        Toast.makeText(getActivity(), "onClick id = " + id, Toast.LENGTH_SHORT).show();
+    public void showItemSetDialog(ContactsItem item) {
+        Log.d("name = " + item.getName());
     }
 
     @Override
-    public void onLongClick(View v) {
-        int id = mRecyclerView.getChildLayoutPosition(v);
-        Toast.makeText(getActivity(), "onLongClick id = " + id, Toast.LENGTH_SHORT).show();
+    public void hideItemSetDialog() {
+
     }
 
+    @Override
+    public void makeACall(Intent intent) {
+        startActivity(intent);
+    }
 }

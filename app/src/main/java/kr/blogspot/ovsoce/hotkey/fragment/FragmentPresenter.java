@@ -1,21 +1,18 @@
 package kr.blogspot.ovsoce.hotkey.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.AdapterView;
-
-import java.util.List;
 
 /**
  * Created by jaeho_oh on 2015-10-16.
  */
-public interface FragmentPresenter {
-    void init(Context context);
-
+public interface FragmentPresenter{
+    void init(Context context, RecyclerView recyclerView);
     interface View {
         void initRecyclerView(MyAdapter adapter, RecyclerView.LayoutManager layoutManager);
-        void onClick(android.view.View v);
-        void onLongClick(android.view.View v);
+        void showItemSetDialog(ContactsItem item);
+        void hideItemSetDialog();
+        void makeACall(Intent intent);
     }
 }

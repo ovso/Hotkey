@@ -1,11 +1,13 @@
 package kr.blogspot.ovsoce.hotkey.fragment;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -17,11 +19,12 @@ import kr.blogspot.ovsoce.hotkey.common.Log;
  */
 public class MyAdapter extends RecyclerView.Adapter{
     List<ContactsItem> mList;
-    FragmentPresenter.View mView;
-
-    public MyAdapter(List<ContactsItem> list, FragmentPresenter.View view) {
+    RecyclerView mRecyclerView;
+    OnAdapterItemClickListener mListener;
+    public MyAdapter(List<ContactsItem> list,OnAdapterItemClickListener listener, RecyclerView recyclerView) {
         mList = list;
-        mView = view;
+        mListener = listener;
+        mRecyclerView = recyclerView;
     }
 
     @Override
@@ -43,7 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter{
         return mList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    class MyViewHolder extends RecyclerView.ViewHolder{
         TextView nameTv;
         View blockV;
 
@@ -51,19 +54,12 @@ public class MyAdapter extends RecyclerView.Adapter{
             super(itemView);
             nameTv = (TextView) itemView.findViewById(R.id.tv_name);
             blockV = itemView.findViewById(R.id.v_block);
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(mListener);
+            itemView.setOnLongClickListener(mListener);
         }
+    }
 
-        @Override
-        public void onClick(View v) {
-            mView.onClick(v);
-        }
+    public interface OnAdapterItemClickListener extends android.view.View.OnClickListener, android.view.View.OnLongClickListener {
 
-        @Override
-        public boolean onLongClick(View v) {
-            mView.onLongClick(v);
-            return true;
-        }
     }
 }

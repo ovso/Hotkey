@@ -2,6 +2,8 @@ package kr.blogspot.ovsoce.hotkey.fragment.family;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -20,8 +22,26 @@ public class FamilyPresenterImpl implements FamilyPresenter{
     }
 
     @Override
-    public void init(Context context) {
+    public void init(Context context, final RecyclerView recyclerView) {
         List<ContactsItem> list = mModel.getContactsItemList(context);
-        mView.initRecyclerView(new MyAdapter(list,mView), new GridLayoutManager(context, mModel.getGridLayoutSpanCount(context)));
+
+        MyAdapter adapter = new MyAdapter(list, new MyAdapter.OnAdapterItemClickListener() {
+            @Override
+            public void onClick(android.view.View v) {
+                int position = recyclerView.getChildAdapterPosition(v);
+                Toast.makeText(v.getContext(), position+"", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public boolean onLongClick(android.view.View v) {
+                int position = recyclerView.getChildAdapterPosition(v);
+                ContactsItem item = mModel.getContactsItem(v.getContext(), position);
+                mView.showItemSetDialog(item);
+                return true;
+            }
+        }, recyclerView);
+
+        mView.initRecyclerView(adapter, new GridLayoutManager(context, mModel.getGridLayoutSpanCount(context)));
     }
+
 }
