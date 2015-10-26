@@ -1,5 +1,7 @@
 package kr.blogspot.ovsoce.hotkey.fragment.family;
 
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +13,8 @@ import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
+import kr.blogspot.ovsoce.hotkey.dialog.BlurDialogEngine;
+import kr.blogspot.ovsoce.hotkey.dialog.BlurDialogFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
@@ -50,6 +54,8 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
     @Override
     public void showItemSetDialog(ContactsItem item) {
         Log.d("name = " + item.getName());
+        MyDialogFragment a= new MyDialogFragment();
+        a.show(getFragmentManager(), "show");
     }
 
     @Override
@@ -60,5 +66,48 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
     @Override
     public void makeACall(Intent intent) {
         startActivity(intent);
+    }
+
+    private class MyDialogFragment extends BlurDialogFragment {
+
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            //return super.onCreateView(inflater, container, savedInstanceState);
+            View view;
+            return view = inflater.inflate(R.layout.dialog_custom, null);
+        }
+
+        @Override
+        protected float getDownScaleFactor() {
+            return 8f;//super.getDownScaleFactor();
+        }
+
+        @Override
+        protected int getBlurRadius() {
+            return 8;//super.getBlurRadius();
+        }
+
+        @Override
+        protected boolean isDimmingEnable() {
+            return super.isDimmingEnable();
+        }
+
+        @Override
+        protected boolean isActionBarBlurred() {
+            return true;
+        }
+
+        @Override
+        protected boolean isRenderScriptEnable() {
+            return super.isRenderScriptEnable();
+        }
     }
 }
