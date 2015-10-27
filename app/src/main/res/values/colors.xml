@@ -3,4 +3,17 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="item_color_1">#3F51B5</color>
+    <color name="item_color_2">#E91E63</color>
+    <color name="item_color_3">#FF5722</color>
+    <color name="item_color_4">#4CAF50</color>
+    <color name="item_color_5">#607D8B</color>
+    <color name="item_color_6">#00BCD4</color>
+    <color name="item_color_7">#FFC107</color>
+    <color name="item_color_8">#795548</color>
+    <color name="item_color_9">#03A9F4</color>
+    <color name="item_color_10">#F44336</color>
+
+    <!-- String[] colors = {"#3F51B5", "#E91E63", "#FF5722", "#4CAF50", "#607D8B", "#00BCD4", "#FFC107", "#795548", "#03A9F4", "#F44336"};-->
 </resources>

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -259,7 +257,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private List<ContactsItem> getDBInitContactsItemListData() {
 
         List<ContactsItem> dataItems = new ArrayList<ContactsItem>();
-        String[] colors = {"#3F51B5", "#E91E63", "#FF5722", "#4CAF50", "#607D8B", "#00BCD4", "#FFC107", "#795548", "#03A9F4", "#F44336"};
+        String[] colors = sDefaultColors;
         int k=0;
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < colors.length; j++) {
@@ -273,6 +271,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return dataItems;
+    }
+    private static String[] sDefaultColors = new String[]{"#3F51B5", "#E91E63", "#FF5722", "#4CAF50", "#607D8B", "#00BCD4", "#FFC107", "#795548", "#03A9F4", "#F44336"};
+    public String[] getDefaultColors() {
+        return sDefaultColors;
     }
 //    public List<ContactsItem> getTableContactsItemList(int type) {
 //        List<ContactsItem> list = new ArrayList<ContactsItem>();

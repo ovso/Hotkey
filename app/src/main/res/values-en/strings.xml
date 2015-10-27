@@ -16,4 +16,16 @@
 
     <!-- ad -->
     <string name="ad_title">Some of the advertising revenue is used for the less fortunate.</string>
+
+    <!-- email -->
+    <string name="email_uri">mailto:ovsoc@daum.net</string>
+    <string name="email_msg">thank you. Ill always try.:)</string>
+
+    <!-- item dialog -->
+    <string name="name_hint">Input your name, please.</string>
+    <string name="number_hint">Please enter the numbers.</string>
+
+    <!-- common -->
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Cancel</string>
 </resources>

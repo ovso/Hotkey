@@ -1,21 +1,23 @@
-package kr.blogspot.ovsoce.hotkey.dialog;
+package kr.blogspot.ovsoce.hotkey.dialog.lib;
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
 
 import kr.blogspot.ovsoce.hotkey.R;
 
 /**
- * Encapsulate dialog behavior with blur effect for
- * app using {@link DialogFragment}.
+ * Encapsulate dialog behavior with blur effect for app using {@link DialogFragment}.
  * <p/>
  * All the screen behind the dialog will be blurred except the action bar.
  */
-public abstract class SupportBlurDialogFragment extends DialogFragment {
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+public abstract class BlurDialogFragment extends DialogFragment {
 
     /**
      * Engine used to blur.
@@ -88,6 +90,7 @@ public abstract class SupportBlurDialogFragment extends DialogFragment {
         super.onResume();
         mBlurEngine.onResume(getRetainInstance());
     }
+
 
     @Override
     public void onDismiss(DialogInterface dialog) {
@@ -169,7 +172,7 @@ public abstract class SupportBlurDialogFragment extends DialogFragment {
      * <p/>
      * Disabled by default.
      *
-     * @return enable true to enable the dimming effect.
+     * @return true to enable the dimming effect.
      */
     protected boolean isDimmingEnable() {
         return BlurDialogEngine.DEFAULT_DIMMING_POLICY;
@@ -210,5 +213,4 @@ public abstract class SupportBlurDialogFragment extends DialogFragment {
     protected boolean isRenderScriptEnable() {
         return BlurDialogEngine.DEFAULT_USE_RENDERSCRIPT;
     }
-
 }

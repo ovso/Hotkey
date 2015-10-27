@@ -2,4 +2,5 @@
 <resources>
     <integer name="recyclerview_gridlayout_spancount">3</integer>
     <integer name="blur_dialog_animation_duration">300</integer>
+    <integer name="circle_view_size">150</integer>
 </resources>

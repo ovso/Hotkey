@@ -20,4 +20,15 @@
     <!-- email -->
     <string name="email_uri">mailto:ovsoc@daum.net</string>
     <string name="email_msg">관심 가져 주셔서 고맙습니다.\n항상 노력하겠습니다.^__^</string>
+
+    <!-- item dialog -->
+    <string name="name_hint">이름을 입력해 주세요.</string>
+    <string name="number_hint">번호를 입력해 주세요.</string>
+
+    <!-- common -->
+    <string name="btn_ok">확인</string>
+    <string name="btn_cancel">취소</string>
+
+
+
 </resources>

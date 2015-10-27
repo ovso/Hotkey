@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.hotkey.dialog;
+package kr.blogspot.ovsoce.hotkey.dialog.lib;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
