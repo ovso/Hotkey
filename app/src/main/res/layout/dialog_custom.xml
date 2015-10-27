@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/et_name"
         android:layout_gravity="center_horizontal" />
@@ -35,26 +34,5 @@
         </LinearLayout>
 
     </HorizontalScrollView>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_ok"
-            android:layout_gravity="right"
-            android:id="@+id/btn_ok" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_cancel"
-            android:layout_gravity="right"
-            android:id="@+id/btn_cancel" />
-    </LinearLayout>
 
 </LinearLayout>

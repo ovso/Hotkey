@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.fragment.family;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -49,8 +50,7 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
 
     @Override
     public void showItemSetDialog(ContactsItem item) {
-        Log.d("name = " + item.getName());
-        new MyBlurDialogFragment().show(getFragmentManager(), "dialog");
+        new MyBlurDialogFragment(item).show(getFragmentManager(), "dialog");
     }
 
     @Override

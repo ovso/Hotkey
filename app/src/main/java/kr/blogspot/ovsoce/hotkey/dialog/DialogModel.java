@@ -10,6 +10,7 @@ import android.widget.ListAdapter;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
+import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 
 /**
  * Created by jaeho_oh on 2015-10-27.
@@ -17,6 +18,13 @@ import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 public class DialogModel {
     public String[] getDefaultColors(Context context) {
         MyApplication app = (MyApplication)context.getApplicationContext();
-        return app.getDatabaseHelper().getDefaultColors();    }
+        return app.getDatabaseHelper().getDefaultColors();
+    }
+
+    public DatabaseHelper getDatabaseHelper(Context context) {
+        MyApplication app = (MyApplication) context.getApplicationContext();
+        return app.getDatabaseHelper();
+    }
+
 }
 

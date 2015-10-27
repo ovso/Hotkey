@@ -100,10 +100,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     // Getting single contact
-    public ContactsItem getContactsItem(int type, int position) {
+    public ContactsItem getContactsItem(int menuType, int position) {
         SQLiteDatabase db = this.getReadableDatabase();
         int id = position+1;
-        String table = getTable(type);
+        String table = getTable(menuType);
 
         Cursor cursor = db.query(
                 table,
@@ -124,6 +124,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 cursor.getString(1),
                 cursor.getString(2),
                 cursor.getString(3));
+        contact.setMenuType(menuType);
         // return contact
         cursor.close();
         db.close();

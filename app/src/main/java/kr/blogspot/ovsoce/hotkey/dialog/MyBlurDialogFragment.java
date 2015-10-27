@@ -1,5 +1,8 @@
 package kr.blogspot.ovsoce.hotkey.dialog;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.RectF;
@@ -12,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -19,26 +23,55 @@ import android.widget.ListAdapter;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.dialog.lib.BlurDialogFragment;
+import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
+import kr.blogspot.ovsoce.hotkey.fragment.ContactsItemImpl;
 
 /**
  * Created by jaeho_oh on 2015-10-27.
  */
 public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPresenter.View, View.OnClickListener {
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public MyBlurDialogFragment(ContactsItem item) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("item", item);
+        setArguments(bundle);
     }
-
     private View mView;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        mView = inflater.inflate(R.layout.dialog_custom, container);
-        return mView;
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        //return super.onCreateDialog(savedInstanceState);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        mView = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
+        builder.setView(mView);
+        builder.setTitle("AlertDialog");
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name = ((EditText)mView.findViewById(R.id.et_name)).getText().toString().trim();
+                String number = ((EditText)mView.findViewById(R.id.et_number)).getText().toString().trim();
+                int colorPosition = 0;//(int) mView.findViewById(R.id.scroll_container).getTag();
+                Log.d("tag = " + mView.findViewById(R.id.scroll_container).getTag());
+                ContactsItemImpl item = (ContactsItemImpl) getArguments().getSerializable("item");
+
+                Log.d("id = " + item.getId());
+                Log.d("name = " + item.getName());
+                Log.d("color = " + item.getColor());
+
+                mPresenter.setContacts(getActivity(), name, number, colorPosition);
+
+                dismiss();
+            }
+        });
+        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dismiss();
+            }
+        });
+        Log.d("here ");
+        setCancelable(false);
+        return builder.create();
     }
 
     private GridView mColorGridView;
@@ -48,9 +81,6 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //mColorGridView = (GridView) mView.findViewById(R.id.grid_color);
-
-        mView.findViewById(R.id.btn_cancel).setOnClickListener(this);
-        mView.findViewById(R.id.btn_ok).setOnClickListener(this);
 
         mPresenter = new DialogPresenterImpl(this);
         mPresenter.init(getActivity());
@@ -102,12 +132,7 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.btn_cancel) {
-            dismiss();
-        } else if(v.getId() == R.id.btn_ok) {
-            dismiss();
-        } else {
-            mPresenter.setSelected((int) v.getTag(), mView.findViewById(R.id.scroll_container));
-        }
+        mPresenter.setSelected((int) v.getTag(), mView.findViewById(R.id.scroll_container));
     }
+
 }
