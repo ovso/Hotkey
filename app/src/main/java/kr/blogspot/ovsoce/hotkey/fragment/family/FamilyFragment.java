@@ -50,7 +50,7 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
 
     @Override
     public void showItemSetDialog(ContactsItem item) {
-        new MyBlurDialogFragment(item).show(getFragmentManager(), "dialog");
+        MyBlurDialogFragment.getInstance(item).show(getFragmentManager(), "dialog");
     }
 
     @Override

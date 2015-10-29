@@ -27,6 +27,7 @@ public class ContactsItemImpl implements ContactsItem {
     int menuType;
 
     public ContactsItemImpl(String id, String name, String number, String color) {
+        this.id = id;
         this.name = name;
         this.color = color;
         this.number = number;

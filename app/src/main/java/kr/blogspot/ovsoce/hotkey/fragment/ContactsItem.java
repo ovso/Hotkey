@@ -11,5 +11,4 @@ public interface ContactsItem extends Serializable {
     String getColor();
     String getId();
     int getMenuType();
-    void setMenuType(int menuType);
 }

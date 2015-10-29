@@ -30,10 +30,14 @@ import kr.blogspot.ovsoce.hotkey.fragment.ContactsItemImpl;
  * Created by jaeho_oh on 2015-10-27.
  */
 public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPresenter.View, View.OnClickListener {
-    public MyBlurDialogFragment(ContactsItem item) {
+
+    public static MyBlurDialogFragment getInstance(ContactsItem item) {
+        MyBlurDialogFragment fragment = new MyBlurDialogFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("item", item);
-        setArguments(bundle);
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
     private View mView;
 
@@ -48,17 +52,15 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String name = ((EditText)mView.findViewById(R.id.et_name)).getText().toString().trim();
-                String number = ((EditText)mView.findViewById(R.id.et_number)).getText().toString().trim();
-                int colorPosition = 0;//(int) mView.findViewById(R.id.scroll_container).getTag();
+                String name = ((EditText) mView.findViewById(R.id.et_name)).getText().toString().trim();
+                String number = ((EditText) mView.findViewById(R.id.et_number)).getText().toString().trim();
+
                 Log.d("tag = " + mView.findViewById(R.id.scroll_container).getTag());
-                ContactsItemImpl item = (ContactsItemImpl) getArguments().getSerializable("item");
 
-                Log.d("id = " + item.getId());
-                Log.d("name = " + item.getName());
-                Log.d("color = " + item.getColor());
+                int colorPosition = (int) mView.findViewById(R.id.scroll_container).getTag();
+                ContactsItem item = (ContactsItem) getArguments().getSerializable("item");
 
-                mPresenter.setContacts(getActivity(), name, number, colorPosition);
+                mPresenter.setContacts(getActivity(), item.getId(), name, number, colorPosition, item.getMenuType());
 
                 dismiss();
             }
@@ -69,7 +71,6 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
                 dismiss();
             }
         });
-        Log.d("here ");
         setCancelable(false);
         return builder.create();
     }
@@ -132,7 +133,7 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
 
     @Override
     public void onClick(View v) {
-        mPresenter.setSelected((int) v.getTag(), mView.findViewById(R.id.scroll_container));
+        mPresenter.setColorSelected((int) v.getTag(), mView.findViewById(R.id.scroll_container));
     }
 
 }

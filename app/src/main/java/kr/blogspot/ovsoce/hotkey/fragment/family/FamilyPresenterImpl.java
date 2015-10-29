@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 
@@ -36,6 +37,11 @@ public class FamilyPresenterImpl implements FamilyPresenter{
             public boolean onLongClick(android.view.View v) {
                 int position = recyclerView.getChildAdapterPosition(v);
                 ContactsItem item = mModel.getContactsItem(v.getContext(), position);
+                Log.d("id = " + item.getId());
+                Log.d("name = " + item.getName());
+                Log.d("number = " + item.getNumber());
+                Log.d("color = " + item.getColor());
+                Log.d("menuType = " + item.getMenuType());
                 mView.showItemSetDialog(item);
                 return true;
             }

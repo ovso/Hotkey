@@ -119,13 +119,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        ContactsItem contact = new ContactsItemImpl(
+        ContactsItemImpl contact = new ContactsItemImpl(
                 cursor.getString(0),
                 cursor.getString(1),
                 cursor.getString(2),
                 cursor.getString(3));
         contact.setMenuType(menuType);
-        // return contact
         cursor.close();
         db.close();
 
@@ -149,9 +148,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Updating single contact
-    public int updateContact(ContactsItem contact, int type, SQLiteDatabase db) {
-
-        String table = getTable(type);
+    public int updateContact(ContactsItem contact) {
+        SQLiteDatabase db = getWritableDatabase();
+        String table = getTable(contact.getMenuType());
 
         ContentValues values = new ContentValues();
         values.put(KEY_ID, contact.getId());

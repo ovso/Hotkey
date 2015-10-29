@@ -26,7 +26,7 @@ public class DialogPresenterImpl implements DialogPresenter {
     }
 
     @Override
-    public void setSelected(int position, android.view.View container) {
+    public void setColorSelected(int colorPosition, android.view.View container) {
         ViewGroup group = (ViewGroup) container;
         int itemCount = group.getChildCount();
 
@@ -34,13 +34,15 @@ public class DialogPresenterImpl implements DialogPresenter {
             mView.setVisible(group.getChildAt(i).findViewById(R.id.item_rect_select), android.view.View.GONE);
         }
 
-        mView.setVisible(group.getChildAt(position).findViewById(R.id.item_rect_select), android.view.View.VISIBLE);
-        container.setTag(position);
+        mView.setVisible(group.getChildAt(colorPosition).findViewById(R.id.item_rect_select), android.view.View.VISIBLE);
+        container.setTag(colorPosition);
     }
 
     @Override
-    public void setContacts(Context context, String name, String number, int colorPosition) {
-
-        //mModel.getDatabaseHelper(context).updateContact()
+    public void setContacts(Context context, String id, String name, String number, int colorPosition, int menuType) {
+        String color = mModel.getDefaultColors(context)[colorPosition];
+        ContactsItemImpl item = new ContactsItemImpl(id,name, number, color);
+        item.setMenuType(menuType);
+        mModel.getDatabaseHelper(context).updateContact(item);
     }
 }

@@ -10,8 +10,8 @@ import android.widget.ListAdapter;
  */
 public interface DialogPresenter {
     void init(Context context);
-    void setSelected(int position, android.view.View container);
-    void setContacts(Context context, String name, String number, int colorPosition);
+    void setColorSelected(int colorPosition, android.view.View container);
+    void setContacts(Context context, String id, String name, String number, int colorPosition, int menuType);
     interface View {
         void initScrollView(String[] colors);
         void setVisible(android.view.View v, int visible);
