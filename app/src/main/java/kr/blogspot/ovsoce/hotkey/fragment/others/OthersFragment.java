@@ -59,4 +59,9 @@ public class OthersFragment extends BaseFragment implements OthersPresenter.View
     public void makeACall(Intent intent) {
         startActivity(intent);
     }
+
+    @Override
+    public void updateRecyclerViewItem() {
+
+    }
 }

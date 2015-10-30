@@ -9,11 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.dialog.MyBlurDialogFragment;
 
 /**
  * Created by jaeho_oh on 2015-10-13.
  */
 public class BaseFragment extends Fragment{
+
 
 }

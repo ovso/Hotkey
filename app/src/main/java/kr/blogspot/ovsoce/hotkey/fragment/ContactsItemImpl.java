@@ -25,11 +25,16 @@ public class ContactsItemImpl implements ContactsItem {
 
     String id,name, number, color;
     int menuType;
-
-    public ContactsItemImpl(String id, String name, String number, String color) {
+    public void setId(String id){
         this.id = id;
+    }
+    public void setName(String name) {
         this.name = name;
+    }
+    public void setColor(String color) {
         this.color = color;
+    }
+    public void setNumber(String number) {
         this.number = number;
     }
     public void setMenuType(int menuType) {

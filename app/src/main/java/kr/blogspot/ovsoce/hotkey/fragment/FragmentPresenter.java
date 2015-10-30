@@ -9,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
  */
 public interface FragmentPresenter{
     void init(Context context, RecyclerView recyclerView);
+    void setItemId(Context context, RecyclerView recyclerView, String itemId);
     interface View {
         void initRecyclerView(MyAdapter adapter, RecyclerView.LayoutManager layoutManager);
         void showItemSetDialog(ContactsItem item);
         void hideItemSetDialog();
         void makeACall(Intent intent);
+        void updateRecyclerViewItem();
     }
 }

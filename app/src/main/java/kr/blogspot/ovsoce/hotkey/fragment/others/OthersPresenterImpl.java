@@ -42,4 +42,9 @@ public class OthersPresenterImpl implements OthersPresenter{
         mView.initRecyclerView(adapter, new GridLayoutManager(context, mModel.getGridLayoutSpanCount(context)));
     }
 
+    @Override
+    public void setItemId(Context context, RecyclerView recyclerView, String itemId) {
+
+    }
+
 }

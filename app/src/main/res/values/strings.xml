@@ -24,6 +24,7 @@
     <!-- item dialog -->
     <string name="name_hint">이름을 입력해 주세요.</string>
     <string name="number_hint">번호를 입력해 주세요.</string>
+    <string name="dialog_title">연락처 설정</string>
 
     <!-- common -->
     <string name="btn_ok">확인</string>

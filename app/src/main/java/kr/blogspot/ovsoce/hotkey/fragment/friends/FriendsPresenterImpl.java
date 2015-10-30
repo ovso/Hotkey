@@ -42,4 +42,9 @@ public class FriendsPresenterImpl implements FriendsPresenter{
         mView.initRecyclerView(adapter, new GridLayoutManager(context, mModel.getGridLayoutSpanCount(context)));
     }
 
+    @Override
+    public void setItemId(Context context, RecyclerView recyclerView, String itemId) {
+
+    }
+
 }

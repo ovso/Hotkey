@@ -102,7 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Getting single contact
     public ContactsItem getContactsItem(int menuType, int position) {
         SQLiteDatabase db = this.getReadableDatabase();
-        int id = position+1;
+        int id = position;
         String table = getTable(menuType);
 
         Cursor cursor = db.query(
@@ -119,12 +119,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        ContactsItemImpl contact = new ContactsItemImpl(
-                cursor.getString(0),
-                cursor.getString(1),
-                cursor.getString(2),
-                cursor.getString(3));
+        ContactsItemImpl contact = new ContactsItemImpl();
+        contact.setId(cursor.getString(0));
+        contact.setName(cursor.getString(1));
+        contact.setNumber(cursor.getString(2));
+        contact.setColor(cursor.getString(3));
         contact.setMenuType(menuType);
+
         cursor.close();
         db.close();
 
@@ -159,7 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_COLOR, contact.getColor());
 
         // updating row
-        return db.update(table, values, KEY_ID + " = ?", null);
+        return db.update(table, values, KEY_ID + " = ?", new String[]{contact.getId()});
     }
 
     public void insertContact(ContactsItem item, int type, SQLiteDatabase db) {
@@ -266,7 +267,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 //color = colors[j];
                 color = String.valueOf(j);
                 if(id.equals("0")) name = "Indigo";
-                dataItems.add(new ContactsItemImpl(id, name, number, color));
+
+                ContactsItemImpl item = new ContactsItemImpl();
+                item.setId(id);
+                item.setName(name);
+                item.setNumber(number);
+                item.setColor(color);
+
+                dataItems.add(item);
                 k++;
             }
         }
@@ -297,7 +305,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                ContactsItem item = new ContactsItemImpl(cursor.getString(0),cursor.getString(1),cursor.getString(2), cursor.getString(3));
+                ContactsItemImpl item = new ContactsItemImpl();
+
+                item.setId(cursor.getString(0));
+                item.setName(cursor.getString(1));
+                item.setNumber(cursor.getString(2));
+                item.setColor(cursor.getString(3));
+
                 list.add(item);
             } while (cursor.moveToNext());
         }
@@ -313,9 +327,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             for (int j = 0; j < colors.length; j++) {
                 String id = String.valueOf(k);
                 String name = "", number="", color="";
-                color = colors[j];
+                //color = colors[j];
+                color = String.valueOf(j);
                 if(id.equals("0")) name = "Indigo";
-                dataItems.add(new ContactsItemImpl(id,name,number,color));
+
+                ContactsItemImpl item = new ContactsItemImpl();
+
+                item.setId(id);
+                item.setName(name);
+                item.setNumber(number);
+                item.setColor(color);
+
+                dataItems.add(item);
                 Log.d("id = " + id);
                 k++;
             }

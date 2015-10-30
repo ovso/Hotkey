@@ -36,12 +36,8 @@ public class FamilyPresenterImpl implements FamilyPresenter{
             @Override
             public boolean onLongClick(android.view.View v) {
                 int position = recyclerView.getChildAdapterPosition(v);
+                Log.d("position = " + position);
                 ContactsItem item = mModel.getContactsItem(v.getContext(), position);
-                Log.d("id = " + item.getId());
-                Log.d("name = " + item.getName());
-                Log.d("number = " + item.getNumber());
-                Log.d("color = " + item.getColor());
-                Log.d("menuType = " + item.getMenuType());
                 mView.showItemSetDialog(item);
                 return true;
             }
@@ -50,4 +46,11 @@ public class FamilyPresenterImpl implements FamilyPresenter{
         mView.initRecyclerView(adapter, new GridLayoutManager(context, mModel.getGridLayoutSpanCount(context)));
     }
 
+    @Override
+    public void setItemId(Context context,RecyclerView recyclerView, String itemId) {
+        ContactsItem item = mModel.getContactsItem(context, Integer.valueOf(itemId));
+        MyAdapter adapter = (MyAdapter) recyclerView.getAdapter();
+        adapter.setUpdateItem(item);
+        mView.updateRecyclerViewItem();
+    }
 }

@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.Serializable;
+
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.dialog.MyBlurDialogFragment;
@@ -19,7 +21,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 /**
  * Created by jaeho_oh on 2015-10-16.
  */
-public class FamilyFragment extends BaseFragment implements FamilyPresenter.View{
+public class FamilyFragment extends BaseFragment implements FamilyPresenter.View, MyBlurDialogFragment.OnBlurDialogDismissListener {
 
     protected FamilyPresenter mPresenter;
     protected RecyclerView mRecyclerView;
@@ -50,7 +52,9 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
 
     @Override
     public void showItemSetDialog(ContactsItem item) {
-        MyBlurDialogFragment.getInstance(item).show(getFragmentManager(), "dialog");
+        MyBlurDialogFragment fragment = MyBlurDialogFragment.getInstance(item, this);
+        fragment.show(getFragmentManager(), "dialog");
+
     }
 
     @Override
@@ -63,5 +67,14 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
         startActivity(intent);
     }
 
+    @Override
+    public void onDismiss(String itemId) {
+        mPresenter.setItemId(getActivity(),mRecyclerView, itemId);
+    }
 
+    @Override
+    public void updateRecyclerViewItem() {
+        mRecyclerView.getAdapter().notifyDataSetChanged();
+
+    }
 }

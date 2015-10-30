@@ -1,19 +1,16 @@
 package kr.blogspot.ovsoce.hotkey.fragment;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
-import kr.blogspot.ovsoce.hotkey.common.Log;
 
 /**
  * RecyclerView Adapter
@@ -46,7 +43,9 @@ public class MyAdapter extends RecyclerView.Adapter{
         myViewHolder.blockV.setBackgroundColor(Color.parseColor(colorCode));
         myViewHolder.nameTv.setText(data.getName());
     }
-
+    public void setUpdateItem(ContactsItem item) {
+        mList.set(Integer.parseInt(item.getId()), item);
+    }
     @Override
     public int getItemCount() {
         return mList.size();

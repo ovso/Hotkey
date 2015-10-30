@@ -1,14 +1,7 @@
 package kr.blogspot.ovsoce.hotkey.dialog;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ListAdapter;
 
-import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 

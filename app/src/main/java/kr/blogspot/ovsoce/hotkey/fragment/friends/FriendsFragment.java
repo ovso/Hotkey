@@ -61,4 +61,9 @@ public class FriendsFragment extends BaseFragment implements FriendsPresenter.Vi
     public void makeACall(Intent intent) {
         startActivity(intent);
     }
+
+    @Override
+    public void updateRecyclerViewItem() {
+
+    }
 }

@@ -24,6 +24,8 @@
     <!-- item dialog -->
     <string name="name_hint">Input your name, please.</string>
     <string name="number_hint">Please enter the numbers.</string>
+    <string name="dialog_title">Contacts settings</string>
+
 
     <!-- common -->
     <string name="btn_ok">OK</string>
