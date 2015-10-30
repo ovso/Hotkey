@@ -4,27 +4,17 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.dialog.lib.BlurDialogFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
-import kr.blogspot.ovsoce.hotkey.fragment.ContactsItemImpl;
 
 /**
  * Created by jaeho_oh on 2015-10-27.
@@ -39,25 +29,25 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
 
         return fragment;
     }
-    private View mView;
+    private View mContentView;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //return super.onCreateDialog(savedInstanceState);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        mView = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
-        builder.setView(mView);
+        mContentView = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
+        builder.setView(mContentView);
         builder.setTitle("AlertDialog");
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String name = ((EditText) mView.findViewById(R.id.et_name)).getText().toString().trim();
-                String number = ((EditText) mView.findViewById(R.id.et_number)).getText().toString().trim();
+                String name = ((EditText) mContentView.findViewById(R.id.et_name)).getText().toString().trim();
+                String number = ((EditText) mContentView.findViewById(R.id.et_number)).getText().toString().trim();
 
-                Log.d("tag = " + mView.findViewById(R.id.scroll_container).getTag());
+                Log.d("tag = " + mContentView.findViewById(R.id.scroll_container).getTag());
 
-                int colorPosition = (int) mView.findViewById(R.id.scroll_container).getTag();
+                int colorPosition = (int) mContentView.findViewById(R.id.scroll_container).getTag();
                 ContactsItem item = (ContactsItem) getArguments().getSerializable("item");
 
                 mPresenter.setContacts(getActivity(), item.getId(), name, number, colorPosition, item.getMenuType());
@@ -81,7 +71,6 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //mColorGridView = (GridView) mView.findViewById(R.id.grid_color);
 
         mPresenter = new DialogPresenterImpl(this);
         mPresenter.init(getActivity());
@@ -114,7 +103,7 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
 
     @Override
     public void initScrollView(String[] colors) {
-        ViewGroup scrollContainer = (ViewGroup) mView.findViewById(R.id.scroll_container);
+        ViewGroup scrollContainer = (ViewGroup) mContentView.findViewById(R.id.scroll_container);
 
         for (int i = 0; i < colors.length; i++) {
             View scrollItem = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_color_item, null);
@@ -133,7 +122,7 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
 
     @Override
     public void onClick(View v) {
-        mPresenter.setColorSelected((int) v.getTag(), mView.findViewById(R.id.scroll_container));
+        mPresenter.setColorSelected((int) v.getTag(), mContentView.findViewById(R.id.scroll_container));
     }
 
 }

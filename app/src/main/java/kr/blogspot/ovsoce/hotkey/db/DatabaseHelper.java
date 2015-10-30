@@ -263,7 +263,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             for (int j = 0; j < colors.length; j++) {
                 String id = String.valueOf(k);
                 String name = "", number="", color="";
-                color = colors[j];
+                //color = colors[j];
+                color = String.valueOf(j);
                 if(id.equals("0")) name = "Indigo";
                 dataItems.add(new ContactsItemImpl(id, name, number, color));
                 k++;

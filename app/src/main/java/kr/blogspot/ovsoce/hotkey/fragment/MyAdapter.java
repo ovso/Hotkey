@@ -12,6 +12,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 
 /**
@@ -37,7 +38,12 @@ public class MyAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ContactsItem data = mList.get(position);
         MyViewHolder myViewHolder = (MyViewHolder)holder;
-        myViewHolder.blockV.setBackgroundColor(Color.parseColor(data.getColor()));
+        //myViewHolder.blockV.setBackgroundColor(Color.parseColor(data.getColor()));
+
+        MyApplication app = (MyApplication) myViewHolder.blockV.getContext().getApplicationContext();
+        String colorCode = app.getDatabaseHelper().getDefaultColors()[Integer.parseInt(data.getColor())];
+
+        myViewHolder.blockV.setBackgroundColor(Color.parseColor(colorCode));
         myViewHolder.nameTv.setText(data.getName());
     }
 
