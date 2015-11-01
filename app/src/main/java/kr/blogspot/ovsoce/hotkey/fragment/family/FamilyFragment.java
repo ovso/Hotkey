@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -67,23 +68,22 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
 
     @Override
     public void makeACall(Intent intent) {
-        Intent i = intent;
-        // intnet가 연속으로 와야 전화가 걸린다?
-        if(getActivity().checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, R.layout.activity_main);
+
+        if( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            Intent i = intent;// intnet가 연속으로 와야 전화가 걸린다?
+            if(getActivity().checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, R.layout.activity_main);
+            } else {
+                startActivity(i);
+            }
         } else {
-            startActivity(i);
+            startActivity(intent);
         }
-
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.d("requestCode = " + requestCode);
-        Log.d("permissions = " + permissions[0]);
-        Log.d("grantResults = " + grantResults[0]);
     }
 
     @Override
@@ -94,7 +94,5 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
     @Override
     public void updateRecyclerViewItem() {
         mRecyclerView.getAdapter().notifyDataSetChanged();
-
     }
-
 }

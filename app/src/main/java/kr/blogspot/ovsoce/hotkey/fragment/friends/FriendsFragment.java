@@ -1,6 +1,9 @@
 package kr.blogspot.ovsoce.hotkey.fragment.friends;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +14,7 @@ import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
+import kr.blogspot.ovsoce.hotkey.dialog.MyBlurDialogFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
@@ -18,7 +22,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 /**
  * Created by ovso on 2015. 10. 24..
  */
-public class FriendsFragment extends BaseFragment implements FriendsPresenter.View {
+public class FriendsFragment extends BaseFragment implements FriendsPresenter.View, MyBlurDialogFragment.OnBlurDialogDismissListener {
 
     protected FriendsPresenter mPresenter;
     protected RecyclerView mRecyclerView;
@@ -49,7 +53,8 @@ public class FriendsFragment extends BaseFragment implements FriendsPresenter.Vi
 
     @Override
     public void showItemSetDialog(ContactsItem item) {
-        Log.d("name = " + item.getName());
+        MyBlurDialogFragment fragment = MyBlurDialogFragment.getInstance(item, this);
+        fragment.show(getFragmentManager(), "dialog");
     }
 
     @Override
@@ -59,11 +64,31 @@ public class FriendsFragment extends BaseFragment implements FriendsPresenter.Vi
 
     @Override
     public void makeACall(Intent intent) {
-        startActivity(intent);
+        if( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            Intent i = intent;// intnet가 연속으로 와야 전화가 걸린다?
+            if(getActivity().checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, R.layout.activity_main);
+            } else {
+                startActivity(i);
+            }
+        } else {
+            startActivity(intent);
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
     public void updateRecyclerViewItem() {
+        mRecyclerView.getAdapter().notifyDataSetChanged();
+    }
 
+    @Override
+    public void onDismiss(String itemId) {
+        mPresenter.setItemId(getActivity(),mRecyclerView, itemId);
     }
 }

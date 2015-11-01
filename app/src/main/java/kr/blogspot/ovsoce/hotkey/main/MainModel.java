@@ -49,13 +49,14 @@ public class MainModel {
             } else {
                 baseFragment = mOthersFragment;
             }
-        } else if (id == R.id.nav_who) {
+        }
+        /*else if (id == R.id.nav_who) {
             if(mWhoFragment == null) {
                 baseFragment = new WhoFragment();
             } else {
                 baseFragment = mWhoFragment;
             }
-        }
+        }*/
 
         return baseFragment;
     }

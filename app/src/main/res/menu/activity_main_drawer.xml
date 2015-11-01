@@ -8,8 +8,8 @@
             android:title="@string/menu_title_friends" />
         <item android:id="@+id/nav_others" android:icon="@drawable/ic_perm_group_social_info"
             android:title="@string/menu_title_others" />
-        <item android:id="@+id/nav_who" android:icon="@drawable/emo_im_kissing"
-            android:title="@string/menu_title_who" />
+        <!--<item android:id="@+id/nav_who" android:icon="@drawable/emo_im_kissing"-->
+            <!--android:title="@string/menu_title_who" />-->
     </group>
 
     <item android:title="Communicate">

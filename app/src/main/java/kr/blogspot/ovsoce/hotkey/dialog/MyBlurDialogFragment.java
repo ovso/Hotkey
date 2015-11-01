@@ -158,6 +158,6 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
     }
 
     public interface OnBlurDialogDismissListener extends Serializable {
-        void onDismiss(String id);
+        void onDismiss(String itemId);
     }
 }
