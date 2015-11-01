@@ -1,13 +1,17 @@
 package kr.blogspot.ovsoce.hotkey.fragment.family;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -54,7 +58,6 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
     public void showItemSetDialog(ContactsItem item) {
         MyBlurDialogFragment fragment = MyBlurDialogFragment.getInstance(item, this);
         fragment.show(getFragmentManager(), "dialog");
-
     }
 
     @Override
@@ -64,7 +67,23 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
 
     @Override
     public void makeACall(Intent intent) {
-        startActivity(intent);
+        Intent i = intent;
+        // intnet가 연속으로 와야 전화가 걸린다?
+        if(getActivity().checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, R.layout.activity_main);
+        } else {
+            startActivity(i);
+        }
+
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.d("requestCode = " + requestCode);
+        Log.d("permissions = " + permissions[0]);
+        Log.d("grantResults = " + grantResults[0]);
     }
 
     @Override
@@ -77,4 +96,5 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
         mRecyclerView.getAdapter().notifyDataSetChanged();
 
     }
+
 }

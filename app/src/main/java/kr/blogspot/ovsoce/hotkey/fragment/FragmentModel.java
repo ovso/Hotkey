@@ -2,6 +2,8 @@ package kr.blogspot.ovsoce.hotkey.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,8 @@ import kr.blogspot.ovsoce.hotkey.application.MyApplication;
  * Created by ovso on 2015. 10. 17..
  */
 public abstract class FragmentModel {
+
+    public enum MESSAGE_TYPE{EMPTY_NUMBER};
 
     public int getGridLayoutSpanCount(Context context) {
         return context.getResources().getInteger(R.integer.recyclerview_gridlayout_spancount);
@@ -30,6 +34,25 @@ public abstract class FragmentModel {
         MyApplication app = (MyApplication)context.getApplicationContext();
         item = app.getDatabaseHelper().getContactsItem(getMenuId(), position);
         return item;
+    }
+    public Intent getMakeACallIntent(Context context, int position) {
+        String number = getContactsItem(context, position).getNumber().trim();
+        //Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+number));
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:"+number));
+
+        if(number.length()>0) {
+            return intent;
+        } else {
+            return null;
+        }
+
+    }
+    public String getMessage(Context context, MESSAGE_TYPE type) {
+        if(type == MESSAGE_TYPE.EMPTY_NUMBER){
+            return context.getString(R.string.empty_number);
+        }
+        return null;
     }
     public abstract int getMenuId();
 }

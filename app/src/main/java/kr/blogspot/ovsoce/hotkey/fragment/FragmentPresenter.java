@@ -16,5 +16,6 @@ public interface FragmentPresenter{
         void hideItemSetDialog();
         void makeACall(Intent intent);
         void updateRecyclerViewItem();
+        //void showToast(String msg);
     }
 }

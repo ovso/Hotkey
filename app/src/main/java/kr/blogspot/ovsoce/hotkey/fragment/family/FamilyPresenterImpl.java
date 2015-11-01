@@ -1,14 +1,22 @@
 package kr.blogspot.ovsoce.hotkey.fragment.family;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
+import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
+import kr.blogspot.ovsoce.hotkey.fragment.FragmentModel;
 import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 
 /**
@@ -23,14 +31,20 @@ public class FamilyPresenterImpl implements FamilyPresenter{
     }
 
     @Override
-    public void init(Context context, final RecyclerView recyclerView) {
+    public void init(final Context context, final RecyclerView recyclerView) {
         List<ContactsItem> list = mModel.getContactsItemList(context);
 
         MyAdapter adapter = new MyAdapter(list, new MyAdapter.OnAdapterItemClickListener() {
             @Override
             public void onClick(android.view.View v) {
                 int position = recyclerView.getChildAdapterPosition(v);
-                Toast.makeText(v.getContext(), position+"", Toast.LENGTH_SHORT).show();
+                Intent intent = mModel.getMakeACallIntent(v.getContext(), position);
+                if(intent != null) {
+                    mView.makeACall(intent);
+                } else {
+                    //mView.showToast(mModel.getMessage(context, FragmentModel.MESSAGE_TYPE.EMPTY_NUMBER));
+                    onLongClick(v);
+                }
             }
 
             @Override

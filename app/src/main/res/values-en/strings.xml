@@ -30,4 +30,8 @@
     <!-- common -->
     <string name="btn_ok">OK</string>
     <string name="btn_cancel">Cancel</string>
+
+    <!-- toast msg -->
+    <string name="empty_number">입력된 번호가 없습니다.</string>
+
 </resources>
