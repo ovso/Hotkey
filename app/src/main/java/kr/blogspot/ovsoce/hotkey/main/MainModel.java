@@ -60,4 +60,15 @@ public class MainModel {
 
         return baseFragment;
     }
+    public String getToolbarTitle(Context context, int menuId) {
+        String title = null;
+        if (menuId == R.id.nav_family) {
+            title = context.getString(R.string.menu_title_family);
+        } else if (menuId == R.id.nav_friends) {
+            title = context.getString(R.string.menu_title_friends);
+        } else if (menuId == R.id.nav_others) {
+            title = context.getString(R.string.menu_title_others);
+        }
+        return title;
+    }
 }

@@ -14,5 +14,6 @@ public interface MainPresenter {
     interface View {
         void navigateToEmail(Intent intent);
         void replaceFragment(int containerViewId, BaseFragment fragment);
+        void setToolbarTitle(String title);
     }
 }
