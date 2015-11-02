@@ -55,10 +55,11 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
         mRecyclerView.setAdapter(adapter);
     }
 
+    private MyBlurDialogFragment mMyBlurDialogFragment;
     @Override
     public void showItemSetDialog(ContactsItem item) {
-        MyBlurDialogFragment fragment = MyBlurDialogFragment.getInstance(item, this);
-        fragment.show(getFragmentManager(), "dialog");
+        mMyBlurDialogFragment = MyBlurDialogFragment.getInstance(item, this);
+        mMyBlurDialogFragment.show(getFragmentManager(), "dialog");
     }
 
     @Override
@@ -88,11 +89,19 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
 
     @Override
     public void onDismiss(String itemId) {
-        mPresenter.setItemId(getActivity(),mRecyclerView, itemId);
+        mPresenter.setItemId(getActivity(), mRecyclerView, itemId);
     }
 
     @Override
     public void updateRecyclerViewItem() {
         mRecyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(mMyBlurDialogFragment != null) {
+            mMyBlurDialogFragment.dismiss();
+        }
     }
 }

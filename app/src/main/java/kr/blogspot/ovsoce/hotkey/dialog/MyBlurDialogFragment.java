@@ -28,7 +28,7 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
         MyBlurDialogFragment fragment = new MyBlurDialogFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("item", item);
-        bundle.putSerializable("dismiss", listener);
+        bundle.putSerializable("listener", listener);
 
         fragment.setArguments(bundle);
 
@@ -39,7 +39,6 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //return super.onCreateDialog(savedInstanceState);
-        Log.d("here ");
         mAlertDialogBuilder = new AlertDialog.Builder(getActivity());
         mContentView = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
         mAlertDialogBuilder.setView(mContentView);
@@ -63,7 +62,7 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
                 int update = mPresenter.setContacts(getActivity(), nowItem);
                 Log.d("update = " + update);
                 if(update > 0) {
-                    ((OnBlurDialogDismissListener)getArguments().getSerializable("dismiss")).onDismiss(nowItem.getId());
+                    ((OnBlurDialogDismissListener)getArguments().getSerializable("listener")).onDismiss(nowItem.getId());
                 } else {
 
                 }
@@ -87,7 +86,6 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d("here ");
         mPresenter = new DialogPresenterImpl(this);
         mPresenter.init(this);
     }
@@ -157,7 +155,7 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
         mPresenter.setColorSelected((int) v.getTag(), mContentView.findViewById(R.id.scroll_container));
     }
 
-    public interface OnBlurDialogDismissListener extends Serializable {
+    public interface OnBlurDialogDismissListener extends Serializable{
         void onDismiss(String itemId);
     }
 }

@@ -1,0 +1,36 @@
+<resources>
+<string name="app_name">빠른단축번호 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- main menu -->
+    <string name="action_settings">Settings</string>
+    <string name="developer">Developer</string>
+    <string name="dev_email">ovsoc@daum.net</string>
+    <string name="menu_title_family">가족</string>
+    <string name="menu_title_friends">친구</string>
+    <string name="menu_title_others">기타</string>
+    <string name="menu_title_to_developer">개발자에게</string>
+    <string name="menu_title_who">who</string>
+
+    <!-- ad -->
+    <string name="ad_title">광고 수익의 일부는 어려운 이웃을 위해 쓰입니다.</string>
+
+    <!-- email -->
+    <string name="email_uri">mailto:ovsoc@daum.net</string>
+    <string name="email_msg">관심 가져 주셔서 고맙습니다.\n항상 노력하겠습니다.^__^</string>
+
+    <!-- item dialog -->
+    <string name="name_hint">이름을 입력해 주세요.</string>
+    <string name="number_hint">번호를 입력해 주세요.</string>
+    <string name="dialog_title">연락처 설정</string>
+
+    <!-- common -->
+    <string name="btn_ok">확인</string>
+    <string name="btn_cancel">취소</string>
+
+    <!-- toast msg -->
+    <string name="empty_number">입력된 번호가 없습니다.</string>
+
+</resources>
