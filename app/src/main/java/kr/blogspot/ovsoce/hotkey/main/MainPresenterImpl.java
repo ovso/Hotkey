@@ -1,6 +1,9 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
+import android.widget.TextView;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
@@ -29,6 +32,11 @@ public class MainPresenterImpl implements MainPresenter {
         }
 
         mView.setToolbarTitle(context.getString(R.string.app_name)+" : "+mModel.getToolbarTitle(context, menuId));
+    }
+
+    @Override
+    public void init(Context context) {
+        mView.setVersionName(context.getString(R.string.app_ver)+mModel.getVersionName(context));
     }
 
 }

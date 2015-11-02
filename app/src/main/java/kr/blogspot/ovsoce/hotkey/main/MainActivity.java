@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mPresenter = new MainPresenterImpl(this);
-
+        mPresenter.init(getApplicationContext());
         navigationView.setCheckedItem(R.id.nav_family);
         onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_family));
 
@@ -94,6 +95,11 @@ public class MainActivity extends AppCompatActivity
     public void setToolbarTitle(String title) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);
+    }
+
+    @Override
+    public void setVersionName(String versionName) {
+        ((TextView)findViewById(R.id.tv_version)).setText(versionName);
     }
 
 }

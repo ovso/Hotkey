@@ -11,9 +11,11 @@ import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
  */
 public interface MainPresenter {
     void onNavigationItemSelected(Context context, int id);
+    void init(Context context);
     interface View {
         void navigateToEmail(Intent intent);
         void replaceFragment(int containerViewId, BaseFragment fragment);
         void setToolbarTitle(String title);
+        void setVersionName(String versionName);
     }
 }

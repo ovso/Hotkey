@@ -14,7 +14,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.friends.FriendsFragment;
 /**
  * Created by jaeho_oh on 2015-10-16.
  */
-public class MainModel {
+public class MainModel extends Model {
     public Intent getEmailIntent(Context context) {
         Uri uri = Uri.parse(context.getString(R.string.email_uri));
         Intent intent = new Intent(Intent.ACTION_SENDTO, uri);

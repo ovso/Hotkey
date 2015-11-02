@@ -10,11 +10,12 @@ import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
+import kr.blogspot.ovsoce.hotkey.main.Model;
 
 /**
  * Created by ovso on 2015. 10. 17..
  */
-public abstract class FragmentModel {
+public abstract class FragmentModel extends Model {
 
     public enum MESSAGE_TYPE{EMPTY_NUMBER};
 
