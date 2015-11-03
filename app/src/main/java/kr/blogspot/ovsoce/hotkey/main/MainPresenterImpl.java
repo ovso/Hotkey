@@ -25,13 +25,16 @@ public class MainPresenterImpl implements MainPresenter {
     public void onNavigationItemSelected(Context context, int menuId) {
         if(menuId == R.id.nav_send) {
             mView.navigateToEmail(mModel.getEmailIntent(context));
-            MyApplication application = (MyApplication)context.getApplicationContext();
-            application.getDatabaseHelper().exportDB(context);
+            //MyApplication application = (MyApplication)context.getApplicationContext();
+            //application.getDatabaseHelper().exportDB(context);
+        } else if(menuId == R.id.nav_share) {
+            mView.navigateToShare(mModel.getShareIntent(context));
+        } else if(menuId == R.id.nav_review) {
+            mView.navigateToReview(mModel.getReviewIntent(context));
         } else {
             mView.replaceFragment(mModel.getFragmentContainerViewId(), mModel.getFragment(menuId));
+            mView.setToolbarTitle(context.getString(R.string.app_name) + " : " + mModel.getToolbarTitle(context, menuId));
         }
-
-        mView.setToolbarTitle(context.getString(R.string.app_name)+" : "+mModel.getToolbarTitle(context, menuId));
     }
 
     @Override

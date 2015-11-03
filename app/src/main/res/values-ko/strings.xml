@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">빠른단축번호 3</string>
-    <string name="app_ver">ver. </string>
+    <string name="app_ver">버전&#160;&#160;&#160;</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -10,6 +10,8 @@
     <string name="menu_title_family">가족</string>
     <string name="menu_title_friends">친구</string>
     <string name="menu_title_others">기타</string>
+    <string name="menu_title_review">리뷰 남기기</string>
+    <string name="menu_title_share">앱 공유하기</string>
     <string name="menu_title_to_developer">개발자에게</string>
     <string name="menu_title_who">who</string>
 
@@ -31,5 +33,8 @@
 
     <!-- toast msg -->
     <string name="empty_number">입력된 번호가 없습니다.</string>
+
+    <!-- share -->
+    <string name="share_to_others">다른사람에게 공유하기</string>
 
 </resources>

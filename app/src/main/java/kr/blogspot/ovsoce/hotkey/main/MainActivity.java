@@ -85,6 +85,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void navigateToShare(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToReview(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
     public void replaceFragment(int containerViewId, BaseFragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(containerViewId, fragment);

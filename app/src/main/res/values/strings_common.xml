@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="url_playstore">https://play.google.com/store/apps/details?id=kr.blogspot.ovsoce.hotkey</string>
+    <string name="url_review">market://details?id=kr.blogspot.ovsoce.hotkey</string>
+
+</resources>

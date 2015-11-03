@@ -6,10 +6,10 @@ import android.net.Uri;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
-import kr.blogspot.ovsoce.hotkey.fragment.others.OthersFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.WhoFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.family.FamilyFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.friends.FriendsFragment;
+import kr.blogspot.ovsoce.hotkey.fragment.others.OthersFragment;
 
 /**
  * Created by jaeho_oh on 2015-10-16.
@@ -70,5 +70,19 @@ public class MainModel extends Model {
             title = context.getString(R.string.menu_title_others);
         }
         return title;
+    }
+    public Intent getShareIntent(Context context) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name));
+        intent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.url_playstore));
+        intent.setType("text/plain");
+
+        return Intent.createChooser(intent, context.getString(R.string.share_to_others));
+    }
+    public Intent getReviewIntent(Context context) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(context.getString(R.string.url_review)));
+        return intent;
     }
 }
