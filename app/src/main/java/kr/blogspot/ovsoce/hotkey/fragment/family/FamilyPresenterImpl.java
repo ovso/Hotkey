@@ -58,6 +58,7 @@ public class FamilyPresenterImpl implements FamilyPresenter{
         }, recyclerView);
 
         mView.initRecyclerView(adapter, new GridLayoutManager(context, mModel.getGridLayoutSpanCount(context)));
+        mView.initAd(mModel.getCaulyAdId(context));
     }
 
     @Override

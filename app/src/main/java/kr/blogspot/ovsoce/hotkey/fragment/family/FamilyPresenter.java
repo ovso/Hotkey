@@ -10,6 +10,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.FragmentPresenter;
  */
 public interface FamilyPresenter extends FragmentPresenter {
     interface View extends FragmentPresenter.View {
+        void initAd(String appCode);
     }
 
 }

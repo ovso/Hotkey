@@ -1,10 +1,9 @@
 package kr.blogspot.ovsoce.hotkey.fragment.family;
 
 import android.Manifest;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,12 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import java.io.Serializable;
+import com.fsn.cauly.CaulyAdInfo;
+import com.fsn.cauly.CaulyAdInfoBuilder;
+import com.fsn.cauly.CaulyAdView;
+import com.fsn.cauly.CaulyAdViewListener;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.dialog.MyBlurDialogFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
@@ -26,7 +26,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 /**
  * Created by jaeho_oh on 2015-10-16.
  */
-public class FamilyFragment extends BaseFragment implements FamilyPresenter.View, MyBlurDialogFragment.OnBlurDialogDismissListener {
+public class FamilyFragment extends BaseFragment implements FamilyPresenter.View, MyBlurDialogFragment.OnBlurDialogDismissListener{
 
     protected FamilyPresenter mPresenter;
     protected RecyclerView mRecyclerView;
@@ -103,5 +103,15 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
         if(mMyBlurDialogFragment != null) {
             mMyBlurDialogFragment.dismiss();
         }
+    }
+
+    @Override
+    public void initAd(String appCode) {
+        CaulyAdInfo adInfo = new CaulyAdInfoBuilder(appCode).build();
+        CaulyAdView caulyAdView = new CaulyAdView(getActivity());
+        caulyAdView.setAdInfo(adInfo);
+
+        ViewGroup adContainer = (ViewGroup) mView.findViewById(R.id.ad_container);
+        adContainer.addView(caulyAdView);
     }
 }
