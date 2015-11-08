@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 
+import com.fsn.cauly.CaulyAdView;
+
 /**
  * Created by jaeho_oh on 2015-10-16.
  */
@@ -13,9 +15,7 @@ public interface FragmentPresenter{
     interface View {
         void initRecyclerView(MyAdapter adapter, RecyclerView.LayoutManager layoutManager);
         void showItemSetDialog(ContactsItem item);
-        void hideItemSetDialog();
         void makeACall(Intent intent);
         void updateRecyclerViewItem();
-        //void showToast(String msg);
     }
 }

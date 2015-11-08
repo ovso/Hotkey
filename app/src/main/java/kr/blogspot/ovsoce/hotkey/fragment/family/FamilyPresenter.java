@@ -1,8 +1,5 @@
 package kr.blogspot.ovsoce.hotkey.fragment.family;
 
-import android.view.View;
-
-import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.FragmentPresenter;
 
 /**
@@ -10,7 +7,6 @@ import kr.blogspot.ovsoce.hotkey.fragment.FragmentPresenter;
  */
 public interface FamilyPresenter extends FragmentPresenter {
     interface View extends FragmentPresenter.View {
-        void initAd(String appCode);
-    }
 
+    }
 }

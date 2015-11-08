@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.fsn.cauly.CaulyAdInfo;
+import com.fsn.cauly.CaulyAdInfoBuilder;
+import com.fsn.cauly.CaulyAdView;
+
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.WhoFragment;
@@ -28,35 +32,25 @@ public class MainModel extends Model {
     private FamilyFragment mFamilyFragment;
     private FriendsFragment mFriendsFragment;
     private OthersFragment mOthersFragment;
-    private WhoFragment mWhoFragment;
+
     public BaseFragment getFragment(int id) {
         BaseFragment baseFragment = null;
         if (id == R.id.nav_family) {
             if(mFamilyFragment == null) {
-                baseFragment = new FamilyFragment();
-            } else {
-                baseFragment = mFamilyFragment;
+                mFamilyFragment = new FamilyFragment();
             }
+            baseFragment = mFamilyFragment;
         } else if (id == R.id.nav_friends) {
             if(mFriendsFragment == null) {
-                baseFragment = new FriendsFragment();
-            } else {
-                baseFragment = mFriendsFragment;
+                mFriendsFragment = new FriendsFragment();
             }
+            baseFragment = mFriendsFragment;
         } else if (id == R.id.nav_others) {
             if(mOthersFragment == null) {
-                baseFragment = new OthersFragment();
-            } else {
-                baseFragment = mOthersFragment;
+                mOthersFragment = new OthersFragment();
             }
+            baseFragment = mOthersFragment;
         }
-        /*else if (id == R.id.nav_who) {
-            if(mWhoFragment == null) {
-                baseFragment = new WhoFragment();
-            } else {
-                baseFragment = mWhoFragment;
-            }
-        }*/
 
         return baseFragment;
     }
@@ -84,5 +78,16 @@ public class MainModel extends Model {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(context.getString(R.string.url_review)));
         return intent;
+    }
+    private CaulyAdView mCaulyAdView;
+    public CaulyAdView getCaulyAdView(Context context) {
+        if( mCaulyAdView == null ) {
+            CaulyAdInfo info = new CaulyAdInfoBuilder(context.getString(R.string.ad_id_cauly))
+                    .effect(CaulyAdInfo.Effect.Circle.toString())
+                    .build();
+            mCaulyAdView = new CaulyAdView(context);
+            mCaulyAdView.setAdInfo(info);
+        }
+        return mCaulyAdView;
     }
 }

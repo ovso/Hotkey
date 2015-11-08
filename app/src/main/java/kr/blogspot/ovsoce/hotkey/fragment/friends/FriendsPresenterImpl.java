@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.fsn.cauly.CaulyAdView;
+
 import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.common.Log;

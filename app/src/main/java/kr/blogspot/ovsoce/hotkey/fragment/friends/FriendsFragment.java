@@ -10,10 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.dialog.MyBlurDialogFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
@@ -55,11 +53,6 @@ public class FriendsFragment extends BaseFragment implements FriendsPresenter.Vi
     public void showItemSetDialog(ContactsItem item) {
         MyBlurDialogFragment fragment = MyBlurDialogFragment.getInstance(item, this);
         fragment.show(getFragmentManager(), "dialog");
-    }
-
-    @Override
-    public void hideItemSetDialog() {
-
     }
 
     @Override

@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.fsn.cauly.CaulyAdInfo;
+import com.fsn.cauly.CaulyAdInfoBuilder;
+import com.fsn.cauly.CaulyAdView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +51,6 @@ public abstract class FragmentModel extends Model {
         } else {
             return null;
         }
-
     }
     public String getMessage(Context context, MESSAGE_TYPE type) {
         if(type == MESSAGE_TYPE.EMPTY_NUMBER){

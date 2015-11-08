@@ -1,7 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.fragment.family;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -11,11 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.fsn.cauly.CaulyAdInfo;
-import com.fsn.cauly.CaulyAdInfoBuilder;
-import com.fsn.cauly.CaulyAdView;
-import com.fsn.cauly.CaulyAdViewListener;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.dialog.MyBlurDialogFragment;
@@ -63,11 +57,6 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
     }
 
     @Override
-    public void hideItemSetDialog() {
-
-    }
-
-    @Override
     public void makeACall(Intent intent) {
 
         if( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
@@ -105,13 +94,4 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
         }
     }
 
-    @Override
-    public void initAd(String appCode) {
-        CaulyAdInfo adInfo = new CaulyAdInfoBuilder(appCode).build();
-        CaulyAdView caulyAdView = new CaulyAdView(getActivity());
-        caulyAdView.setAdInfo(adInfo);
-
-        ViewGroup adContainer = (ViewGroup) mView.findViewById(R.id.ad_container);
-        adContainer.addView(caulyAdView);
-    }
 }

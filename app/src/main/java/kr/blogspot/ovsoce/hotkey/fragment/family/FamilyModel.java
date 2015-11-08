@@ -15,7 +15,4 @@ public class FamilyModel extends FragmentModel {
         return R.id.nav_family;
     }
 
-    public String getCaulyAdId(Context context) {
-        return context.getString(R.string.ad_id_cauly);
-    }
 }

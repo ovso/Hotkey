@@ -13,7 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.fsn.cauly.CaulyAdView;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
@@ -96,6 +99,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void replaceFragment(int containerViewId, BaseFragment fragment) {
+        Log.d("fragment = " + fragment);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(containerViewId, fragment);
         transaction.commit();
@@ -112,4 +116,9 @@ public class MainActivity extends AppCompatActivity
         ((TextView)findViewById(R.id.tv_version)).setText(versionName);
     }
 
+    @Override
+    public void initAd(CaulyAdView view) {
+        ViewGroup adContainer = (ViewGroup)findViewById(R.id.ad_container);
+        adContainer.addView(view);
+    }
 }

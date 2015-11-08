@@ -1,22 +1,14 @@
 package kr.blogspot.ovsoce.hotkey.fragment.family;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
-import kr.blogspot.ovsoce.hotkey.fragment.FragmentModel;
 import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 
 /**
@@ -58,7 +50,6 @@ public class FamilyPresenterImpl implements FamilyPresenter{
         }, recyclerView);
 
         mView.initRecyclerView(adapter, new GridLayoutManager(context, mModel.getGridLayoutSpanCount(context)));
-        mView.initAd(mModel.getCaulyAdId(context));
     }
 
     @Override

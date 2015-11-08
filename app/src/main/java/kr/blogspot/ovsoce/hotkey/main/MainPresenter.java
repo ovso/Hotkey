@@ -4,6 +4,8 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 
+import com.fsn.cauly.CaulyAdView;
+
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 
 /**
@@ -19,5 +21,6 @@ public interface MainPresenter {
         void replaceFragment(int containerViewId, BaseFragment fragment);
         void setToolbarTitle(String title);
         void setVersionName(String versionName);
+        void initAd(CaulyAdView view);
     }
 }
