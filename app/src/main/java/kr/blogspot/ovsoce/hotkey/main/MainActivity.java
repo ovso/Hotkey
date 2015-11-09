@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void replaceFragment(int containerViewId, BaseFragment fragment) {
-        Log.d("fragment = " + fragment);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(containerViewId, fragment);
         transaction.commit();
