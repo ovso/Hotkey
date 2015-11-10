@@ -3,8 +3,12 @@ package kr.blogspot.ovsoce.hotkey.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +47,7 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
         mContentView = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
         mAlertDialogBuilder.setView(mContentView);
         mAlertDialogBuilder.setTitle(R.string.dialog_title);
-        mAlertDialogBuilder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+        mAlertDialogBuilder.setPositiveButton(getString(R.string.btn_ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String name = ((EditText) mContentView.findViewById(R.id.et_name)).getText().toString().trim();
@@ -61,26 +65,30 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
 
                 int update = mPresenter.setContacts(getActivity(), nowItem);
                 Log.d("update = " + update);
-                if(update > 0) {
-                    ((OnBlurDialogDismissListener)getArguments().getSerializable("listener")).onDismiss(nowItem.getId());
+                if (update > 0) {
+                    ((OnBlurDialogDismissListener) getArguments().getSerializable("listener")).onDismiss(nowItem.getId());
                 } else {
 
                 }
 
-
             }
         });
-        mAlertDialogBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+        mAlertDialogBuilder.setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dismiss();
+            }
+        });
+        mAlertDialogBuilder.setNeutralButton("neutral", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mPresenter.pickContacts(getActivity());
             }
         });
         setCancelable(false);
         return mAlertDialogBuilder.create();
     }
 
-    private GridView mColorGridView;
     private DialogPresenter mPresenter;
 
     @Override
@@ -128,7 +136,6 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
             scrollContainer.addView(scrollItem);
         }
 
-        Log.d("colorPosition = " + colorPosition);
         mPresenter.setColorSelected(colorPosition, mContentView.findViewById(R.id.scroll_container));
 
         //mPresenter.setColorSelected();
@@ -148,7 +155,21 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
     public void setNumber(String number) {
         ((EditText)mContentView.findViewById(R.id.et_number)).setText(number);
     }
+    public final static int REQUEST_CODE_PIC_CONTACTS = 0X100;
+    @Override
+    public void navigateToContacts(Intent intent) {
+        startActivityForResult(intent, REQUEST_CODE_PIC_CONTACTS);
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("");
+        if(resultCode == getActivity().RESULT_OK) {
+            if(requestCode == REQUEST_CODE_PIC_CONTACTS) {
+                mPresenter.contactsResult(getActivity(), data);
+            }
+        }
+    }
 
     @Override
     public void onClick(View v) {

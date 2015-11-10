@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
 
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
 
 /**
  * Encapsulate dialog behavior with blur effect for app using {@link DialogFragment}.

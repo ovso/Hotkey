@@ -1,6 +1,9 @@
 package kr.blogspot.ovsoce.hotkey.dialog;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.ContactsContract;
 
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
@@ -19,5 +22,12 @@ public class DialogModel {
         return app.getDatabaseHelper();
     }
 
+    public Intent getContactsIntent(Context context) {
+        Intent intent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
+
+        return intent;
+    }
 }
 

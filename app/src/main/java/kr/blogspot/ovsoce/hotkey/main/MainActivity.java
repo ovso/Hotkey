@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.fsn.cauly.CaulyAdView;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 
 public class MainActivity extends AppCompatActivity

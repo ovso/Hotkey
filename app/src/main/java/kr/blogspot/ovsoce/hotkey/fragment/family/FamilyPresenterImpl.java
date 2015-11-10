@@ -42,7 +42,6 @@ public class FamilyPresenterImpl implements FamilyPresenter{
             @Override
             public boolean onLongClick(android.view.View v) {
                 int position = recyclerView.getChildAdapterPosition(v);
-                Log.d("position = " + position);
                 ContactsItem item = mModel.getContactsItem(v.getContext(), position);
                 mView.showItemSetDialog(item);
                 return true;

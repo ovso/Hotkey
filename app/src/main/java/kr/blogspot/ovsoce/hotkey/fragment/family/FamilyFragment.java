@@ -93,5 +93,4 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
             mMyBlurDialogFragment.dismiss();
         }
     }
-
 }
