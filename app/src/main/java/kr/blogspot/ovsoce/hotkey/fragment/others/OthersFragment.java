@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.dialog.ItemAlertDialogBuilder;
-import kr.blogspot.ovsoce.hotkey.dialog.MyBlurDialogFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
@@ -23,6 +22,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
  * Created by jaeho_oh on 2015-10-16.
  */
 public class OthersFragment extends BaseFragment implements OthersPresenter.View, ItemAlertDialogBuilder.OnClickListener{
+
     protected OthersPresenter mPresenter;
     protected RecyclerView mRecyclerView;
     protected View mView;
