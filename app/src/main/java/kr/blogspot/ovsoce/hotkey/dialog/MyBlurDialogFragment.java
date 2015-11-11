@@ -39,11 +39,12 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
         return fragment;
     }
     private View mContentView;
-    private AlertDialog.Builder mAlertDialogBuilder;
+    private ItemAlertDialogBuilder mAlertDialogBuilder;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Log.d("");
         //return super.onCreateDialog(savedInstanceState);
-        mAlertDialogBuilder = new AlertDialog.Builder(getActivity());
+        mAlertDialogBuilder = new ItemAlertDialogBuilder(null);
         mContentView = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
         mAlertDialogBuilder.setView(mContentView);
         mAlertDialogBuilder.setTitle(R.string.dialog_title);
@@ -82,17 +83,19 @@ public class MyBlurDialogFragment extends BlurDialogFragment implements DialogPr
         mAlertDialogBuilder.setNeutralButton("neutral", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Log.d("presenter = " + mPresenter);
                 mPresenter.pickContacts(getActivity());
             }
         });
         setCancelable(false);
-        return mAlertDialogBuilder.create();
+        return mAlertDialogBuilder.show();
     }
 
     private DialogPresenter mPresenter;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        Log.d("");
         super.onActivityCreated(savedInstanceState);
         mPresenter = new DialogPresenterImpl(this);
         mPresenter.init(this);

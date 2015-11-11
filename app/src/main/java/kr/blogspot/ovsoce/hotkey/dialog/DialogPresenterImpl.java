@@ -35,6 +35,13 @@ public class DialogPresenterImpl implements DialogPresenter {
     }
 
     @Override
+    public void init(Context context, ContactsItem item) {
+        mView.initScrollView(mModel.getDefaultColors(context), Integer.parseInt(item.getColor()));
+        mView.setName(item.getName());
+        mView.setNumber(item.getNumber());
+    }
+
+    @Override
     public void setColorSelected(int colorPosition, android.view.View container) {
         ViewGroup group = (ViewGroup) container;
         int itemCount = group.getChildCount();

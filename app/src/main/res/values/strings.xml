@@ -23,9 +23,10 @@
     <string name="email_msg">thank you. Ill always try.:)</string>
 
     <!-- item dialog -->
-    <string name="name_hint">Input your name, please.</string>
-    <string name="number_hint">Please enter the numbers.</string>
+    <string name="dialog_name_hint">Input your name, please.</string>
+    <string name="dialog_number_hint">Please enter the numbers.</string>
     <string name="dialog_title">Contacts settings</string>
+    <string name="dialog_import_contacts">import contacts</string>
 
     <!-- common -->
     <string name="btn_ok">OK</string>

@@ -1,6 +1,9 @@
 package kr.blogspot.ovsoce.hotkey.fragment.family;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -10,8 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.dialog.ItemAlertDialogBuilder;
 import kr.blogspot.ovsoce.hotkey.dialog.MyBlurDialogFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
@@ -20,7 +25,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 /**
  * Created by jaeho_oh on 2015-10-16.
  */
-public class FamilyFragment extends BaseFragment implements FamilyPresenter.View, MyBlurDialogFragment.OnBlurDialogDismissListener{
+public class FamilyFragment extends BaseFragment implements FamilyPresenter.View, ItemAlertDialogBuilder.OnClickListener{
 
     protected FamilyPresenter mPresenter;
     protected RecyclerView mRecyclerView;
@@ -50,10 +55,28 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
     }
 
     private MyBlurDialogFragment mMyBlurDialogFragment;
+
     @Override
     public void showItemSetDialog(ContactsItem item) {
-        mMyBlurDialogFragment = MyBlurDialogFragment.getInstance(item, this);
-        mMyBlurDialogFragment.show(getFragmentManager(), "dialog");
+//        mMyBlurDialogFragment = MyBlurDialogFragment.getInstance(item, this);
+//        mMyBlurDialogFragment.show(getFragmentManager(), "dialog");
+        ItemAlertDialogBuilder dialogBuilder = new ItemAlertDialogBuilder(this, item);
+        dialogBuilder.setPositiveButton(this);
+/*        dialogBuilder.setNeutralButton("neutralButton", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });*/
+
+        dialogBuilder.show();
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(getActivity(), "onActivityResult", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -76,10 +99,10 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    @Override
-    public void onDismiss(String itemId) {
-        mPresenter.setItemId(getActivity(), mRecyclerView, itemId);
-    }
+//    @Override
+//    public void onDismiss(String itemId) {
+//        mPresenter.setItemId(getActivity(), mRecyclerView, itemId);
+//    }
 
     @Override
     public void updateRecyclerViewItem() {
@@ -92,5 +115,11 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
         if(mMyBlurDialogFragment != null) {
             mMyBlurDialogFragment.dismiss();
         }
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, String itemId) {
+        mPresenter.setItemId(getActivity(), mRecyclerView, itemId);
+        dialog.dismiss();
     }
 }

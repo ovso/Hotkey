@@ -11,6 +11,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
  */
 public interface DialogPresenter {
     void init(DialogFragment fragment);
+    void init(Context context, ContactsItem item);
     void setColorSelected(int colorPosition, android.view.View container);
     int setContacts(Context context, ContactsItem item);
     void pickContacts(Context context);
