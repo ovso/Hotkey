@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
-import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 

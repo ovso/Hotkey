@@ -1,6 +1,7 @@
 package kr.blogspot.ovsoce.hotkey.fragment.friends;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -12,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.dialog.MyBlurDialogFragment;
+import kr.blogspot.ovsoce.hotkey.dialog.ItemAlertDialogBuilder;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
@@ -20,7 +21,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 /**
  * Created by ovso on 2015. 10. 24..
  */
-public class FriendsFragment extends BaseFragment implements FriendsPresenter.View, MyBlurDialogFragment.OnBlurDialogDismissListener {
+public class FriendsFragment extends BaseFragment implements FriendsPresenter.View, ItemAlertDialogBuilder.OnClickListener {
 
     protected FriendsPresenter mPresenter;
     protected RecyclerView mRecyclerView;
@@ -51,12 +52,13 @@ public class FriendsFragment extends BaseFragment implements FriendsPresenter.Vi
 
     @Override
     public void showItemSetDialog(ContactsItem item) {
-        MyBlurDialogFragment fragment = MyBlurDialogFragment.getInstance(item, this);
-        fragment.show(getFragmentManager(), "dialog");
+        mItemAlertDialogBuilder = new ItemAlertDialogBuilder(this, item);
+        mItemAlertDialogBuilder.setPositiveButton(this);
+        mItemAlertDialogBuilder.show();
     }
-
     @Override
     public void makeACall(Intent intent) {
+
         if( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
             Intent i = intent;// intnet가 연속으로 와야 전화가 걸린다?
             if(getActivity().checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -67,7 +69,6 @@ public class FriendsFragment extends BaseFragment implements FriendsPresenter.Vi
         } else {
             startActivity(intent);
         }
-
     }
 
     @Override
@@ -79,9 +80,9 @@ public class FriendsFragment extends BaseFragment implements FriendsPresenter.Vi
     public void updateRecyclerViewItem() {
         mRecyclerView.getAdapter().notifyDataSetChanged();
     }
-
     @Override
-    public void onDismiss(String itemId) {
-        mPresenter.setItemId(getActivity(),mRecyclerView, itemId);
+    public void onClick(DialogInterface dialog, String itemId) {
+        mPresenter.setItemId(getActivity(), mRecyclerView, itemId);
+        dialog.dismiss();
     }
 }

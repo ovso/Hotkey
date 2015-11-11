@@ -155,4 +155,8 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
     public interface OnClickListener {
         void onClick(DialogInterface dialog, String itemId);
     }
+
+    public void onAlertDialogResult(Context context, Intent data) {
+        mPresenter.contactsResult(context, data);
+    }
 }

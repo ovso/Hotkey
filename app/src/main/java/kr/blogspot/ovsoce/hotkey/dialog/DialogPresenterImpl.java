@@ -67,26 +67,24 @@ public class DialogPresenterImpl implements DialogPresenter {
 
     @Override
     public void contactsResult(Context context, Intent data) {
-        if(data != null) {
-            // Get the URI that points to the selected contact
-            Uri contactUri = data.getData();
-            // We only need the NUMBER column, because there will be only one row in the result
-            String[] projection = {ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME};
+        // Get the URI that points to the selected contact
+        Uri contactUri = data.getData();
+        // We only need the NUMBER column, because there will be only one row in the result
+        String[] projection = {ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME};
 
-            // Perform the query on the contact to get the NUMBER column
-            // We don't need a selection or sort order (there's only one result for the given URI)
-            // CAUTION: The query() method should be called from a separate thread to avoid blocking
-            // your app's UI thread. (For simplicity of the sample, this code doesn't do that.)
-            // Consider using CursorLoader to perform the query.
-            Cursor cursor = context.getContentResolver().query(contactUri, projection, null, null, null);
-            cursor.moveToFirst();
+        // Perform the query on the contact to get the NUMBER column
+        // We don't need a selection or sort order (there's only one result for the given URI)
+        // CAUTION: The query() method should be called from a separate thread to avoid blocking
+        // your app's UI thread. (For simplicity of the sample, this code doesn't do that.)
+        // Consider using CursorLoader to perform the query.
+        Cursor cursor = context.getContentResolver().query(contactUri, projection, null, null, null);
+        cursor.moveToFirst();
 
-            // Retrieve the phone number from the NUMBER column
-            int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-            mView.setNumber(cursor.getString(column));
+        // Retrieve the phone number from the NUMBER column
+        int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+        mView.setNumber(cursor.getString(column));
 
-            column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
-            mView.setName(cursor.getString(column));
-        }
+        column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+        mView.setName(cursor.getString(column));
     }
 }
