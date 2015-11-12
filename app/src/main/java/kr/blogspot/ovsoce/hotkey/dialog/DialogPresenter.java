@@ -18,6 +18,7 @@ public interface DialogPresenter {
     void contactsResult(Context context, Intent data);
     interface View {
         void setContentView();
+        void setDialogTitle(String title);
         void initScrollView(String[] colors, int colorPosition);
         void setVisible(android.view.View v, int visible);
         void setName(String name);

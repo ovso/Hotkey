@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.ContactsContract;
 
+import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 
@@ -28,6 +29,9 @@ public class DialogModel {
         intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
 
         return intent;
+    }
+    public String getTitle(Context context) {
+        return context.getString(R.string.dialog_title);
     }
 }
 

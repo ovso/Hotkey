@@ -29,6 +29,7 @@ public class DialogPresenterImpl implements DialogPresenter {
     @Override
     public void init(Context context, ContactsItem item) {
         mView.setContentView();
+        mView.setDialogTitle(mModel.getTitle(context));
         mView.initScrollView(mModel.getDefaultColors(context), Integer.parseInt(item.getColor()));
         mView.setName(item.getName());
         mView.setNumber(item.getNumber());

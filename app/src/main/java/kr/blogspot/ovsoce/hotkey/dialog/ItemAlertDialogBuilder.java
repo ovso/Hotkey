@@ -107,6 +107,11 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
     }
 
     @Override
+    public void setDialogTitle(String title) {
+        setTitle(title);
+    }
+
+    @Override
     public void initScrollView(String[] colors, int colorPosition) {
         ViewGroup scrollContainer = (ViewGroup) mContentView.findViewById(R.id.scroll_container);
 
