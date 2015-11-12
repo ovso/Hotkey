@@ -27,15 +27,8 @@ public class DialogPresenterImpl implements DialogPresenter {
     }
 
     @Override
-    public void init(DialogFragment fragment) {
-        ContactsItem item = (ContactsItem) fragment.getArguments().getSerializable("item");
-        mView.initScrollView(mModel.getDefaultColors(fragment.getActivity()), Integer.parseInt(item.getColor()));
-        mView.setName(item.getName());
-        mView.setNumber(item.getNumber());
-    }
-
-    @Override
     public void init(Context context, ContactsItem item) {
+        mView.setContentView();
         mView.initScrollView(mModel.getDefaultColors(context), Integer.parseInt(item.getColor()));
         mView.setName(item.getName());
         mView.setNumber(item.getNumber());

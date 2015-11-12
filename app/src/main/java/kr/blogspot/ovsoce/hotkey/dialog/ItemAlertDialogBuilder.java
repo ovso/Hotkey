@@ -28,14 +28,10 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
         super(fragment.getActivity());
 
         mBaseFragment = fragment;
-        mContentView = View.inflate(getContext(), R.layout.dialog_custom, null);
-        setView(mContentView);
         mItem = item;
+
         mPresenter = new DialogPresenterImpl(this);
         mPresenter.init(getContext(), item);
-    }
-    public ItemAlertDialogBuilder(Context context) {
-        super(context);
     }
     private ItemAlertDialogBuilder.OnClickListener mPositiveButtonListener = null;
 
@@ -96,7 +92,6 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
 
             @Override
             public void onClick(View v) {
-                //Log.d("AlertDialog.BUTTON_NEGATIVE");
                 alertDialog.dismiss();
             }
        });
@@ -106,12 +101,17 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
     }
 
     @Override
+    public void setContentView() {
+        mContentView = View.inflate(getContext(), R.layout.dialog_custom, null);
+        setView(mContentView);
+    }
+
+    @Override
     public void initScrollView(String[] colors, int colorPosition) {
         ViewGroup scrollContainer = (ViewGroup) mContentView.findViewById(R.id.scroll_container);
 
         for (int i = 0; i < colors.length; i++) {
             View scrollItem = LayoutInflater.from(getContext()).inflate(R.layout.dialog_color_item, null);
-            //View line = LayoutInflater.from(getContext()).inflate(R.layout.dialog_color_item_line, null);
             scrollItem.setTag(i);
             scrollItem.findViewById(R.id.item_rect).setBackgroundColor(Color.parseColor(colors[i]));
             scrollItem.setOnClickListener(this);
@@ -139,11 +139,6 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
     public final static int REQUEST_CODE_PIC_CONTACTS = 0x10;
     @Override
     public void navigateToContacts(Intent intent) {
-        //mNeutralButtonListener.onClick(alertDialog, AlertDialog.BUTTON_NEUTRAL);
-//        Intent intent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
-//        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
-//        mBaseFragment.startActivityForResult(intent, MyBlurDialogFragment.REQUEST_CODE_PIC_CONTACTS);
         mBaseFragment.startActivityForResult(intent, REQUEST_CODE_PIC_CONTACTS);
     }
 
