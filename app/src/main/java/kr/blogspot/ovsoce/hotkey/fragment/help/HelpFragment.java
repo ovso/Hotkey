@@ -3,12 +3,14 @@ package kr.blogspot.ovsoce.hotkey.fragment.help;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 
 /**
@@ -30,13 +32,5 @@ public class HelpFragment extends BaseFragment implements HelpPresenter.View {
         super.onActivityCreated(savedInstanceState);
         mPresenter = new HelpPresenterImpl(this);
         mPresenter.init(getActivity());
-    }
-
-    @Override
-    public void loadUrl(String url) {
-        WebView webView = (WebView) mContentView.findViewById(R.id.wv_help);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(url);
     }
 }

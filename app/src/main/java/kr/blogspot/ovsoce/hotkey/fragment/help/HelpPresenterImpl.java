@@ -16,6 +16,6 @@ public class HelpPresenterImpl implements HelpPresenter {
 
     @Override
     public void init(Context context) {
-        mView.loadUrl(mModel.getUrl(context));
+
     }
 }

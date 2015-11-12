@@ -8,6 +8,6 @@ import android.content.Context;
 public interface HelpPresenter {
     void init(Context context);
     interface View{
-        void loadUrl(String url);
+
     }
 }
