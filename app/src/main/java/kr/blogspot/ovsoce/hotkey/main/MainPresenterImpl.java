@@ -25,11 +25,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onNavigationItemSelected(Context context, int menuId) {
-        if(menuId == R.id.nav_send) {
-            mView.navigateToEmail(mModel.getEmailIntent(context));
-            //MyApplication application = (MyApplication)context.getApplicationContext();
-            //application.getDatabaseHelper().exportDB(context);
-        } else if(menuId == R.id.nav_share) {
+        if(menuId == R.id.nav_share) {
             mView.navigateToShare(mModel.getShareIntent(context));
         } else if(menuId == R.id.nav_review) {
             mView.navigateToReview(mModel.getReviewIntent(context));

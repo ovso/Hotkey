@@ -13,6 +13,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.WhoFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.family.FamilyFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.friends.FriendsFragment;
+import kr.blogspot.ovsoce.hotkey.fragment.help.HelpFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.others.OthersFragment;
 
 /**
@@ -32,7 +33,7 @@ public class MainModel extends Model {
     private FamilyFragment mFamilyFragment;
     private FriendsFragment mFriendsFragment;
     private OthersFragment mOthersFragment;
-
+    private HelpFragment mHelpFragment;
     public BaseFragment getFragment(int id) {
         BaseFragment baseFragment = null;
         if (id == R.id.nav_family) {
@@ -50,6 +51,11 @@ public class MainModel extends Model {
                 mOthersFragment = new OthersFragment();
             }
             baseFragment = mOthersFragment;
+        } else if (id == R.id.nav_help) {
+            if(mHelpFragment == null) {
+                mHelpFragment = new HelpFragment();
+            }
+            baseFragment = mHelpFragment;
         }
 
         return baseFragment;
@@ -62,6 +68,8 @@ public class MainModel extends Model {
             title = context.getString(R.string.menu_title_friends);
         } else if (menuId == R.id.nav_others) {
             title = context.getString(R.string.menu_title_others);
+        } else if( menuId == R.id.nav_help) {
+            title = context.getString(R.string.menu_title_help);
         }
         return title;
     }
