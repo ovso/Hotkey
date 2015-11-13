@@ -30,8 +30,17 @@ public class DialogModel {
 
         return intent;
     }
+    public Intent getSMSIntent(Context context, String number) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("sms:"+number));
+        context.startActivity(intent);
+        return intent;
+    }
     public String getTitle(Context context) {
         return context.getString(R.string.dialog_title);
+    }
+    public String getSMSToastMsg(Context context) {
+        return context.getString(R.string.empty_number);
     }
 }
 

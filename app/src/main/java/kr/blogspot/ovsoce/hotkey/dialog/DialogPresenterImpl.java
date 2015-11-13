@@ -1,11 +1,15 @@
 package kr.blogspot.ovsoce.hotkey.dialog;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.ContactsContract;
+import android.support.v4.text.TextUtilsCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -80,5 +84,14 @@ public class DialogPresenterImpl implements DialogPresenter {
 
         column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
         mView.setName(cursor.getString(column));
+    }
+
+    @Override
+    public void onClickSMS(android.view.View v, String number) {
+        if(!TextUtils.isEmpty(number)) {
+            mView.navigateToSMS(mModel.getSMSIntent(v.getContext(), number));
+        } else {
+            mView.showToast(mModel.getSMSToastMsg(v.getContext()));
+        }
     }
 }

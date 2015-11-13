@@ -28,6 +28,7 @@
     <string name="dialog_number_hint">Please enter the numbers.</string>
     <string name="dialog_title">Contacts settings</string>
     <string name="dialog_import_contacts">import contacts</string>
+    <string name="dialog_btn_text_message">Text message</string>
 
     <!-- common -->
     <string name="btn_ok">OK</string>

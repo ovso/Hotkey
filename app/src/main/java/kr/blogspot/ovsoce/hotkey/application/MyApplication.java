@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 
@@ -34,5 +35,8 @@ public class MyApplication extends Application {
             e.printStackTrace();
             return null;
         }
+    }
+    public int getSDK_INT() {
+        return Build.VERSION.SDK_INT;
     }
 }

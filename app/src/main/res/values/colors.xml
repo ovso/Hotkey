@@ -14,6 +14,5 @@
     <color name="item_color_8">#795548</color>
     <color name="item_color_9">#03A9F4</color>
     <color name="item_color_10">#F44336</color>
-
     <!-- String[] colors = {"#3F51B5", "#E91E63", "#FF5722", "#4CAF50", "#607D8B", "#00BCD4", "#FFC107", "#795548", "#03A9F4", "#F44336"};-->
 </resources>

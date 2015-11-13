@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
@@ -24,6 +27,7 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
     private View mContentView;
     private DialogPresenter mPresenter;
     private ContactsItem mItem;
+
     public ItemAlertDialogBuilder(BaseFragment fragment, ContactsItem item) {
         super(fragment.getActivity());
 
@@ -31,8 +35,9 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
         mItem = item;
 
         mPresenter = new DialogPresenterImpl(this);
-        mPresenter.init(getContext(), item);
+        mPresenter.init(mBaseFragment.getActivity(), item);
     }
+
     private ItemAlertDialogBuilder.OnClickListener mPositiveButtonListener = null;
 
     public void setPositiveButton(ItemAlertDialogBuilder.OnClickListener listener) {
@@ -42,7 +47,6 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
     @Override
     public AlertDialog show() {
         final AlertDialog alertDialog = super.create();
-
         DialogInterface.OnClickListener emptyOnClickListener = null;
 
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getContext().getText(R.string.dialog_import_contacts), emptyOnClickListener);
@@ -51,6 +55,12 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
 
         alertDialog.show();
 
+        alertDialog.findViewById(R.id.btn_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.onClickSMS(v, ((EditText)alertDialog.findViewById(R.id.et_number)).getText().toString().trim());
+            }
+        });
         alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -67,7 +77,7 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
                 String name = ((EditText) mContentView.findViewById(R.id.et_name)).getText().toString().trim();
                 String number = ((EditText) mContentView.findViewById(R.id.et_number)).getText().toString().trim();
 
-                Log.d("tag = " + mContentView.findViewById(R.id.scroll_container).getTag());
+                //Log.d("tag = " + mContentView.findViewById(R.id.scroll_container).getTag());
 
                 ContactsItem oldItem = mItem;
                 ContactsItemImpl nowItem = new ContactsItemImpl();
@@ -78,13 +88,12 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
                 nowItem.setMenuType(oldItem.getMenuType());
 
                 int update = mPresenter.setContacts(getContext(), nowItem);
-                Log.d("db pdate = " + ((update>0)?"ok":"fail"));
+                Log.d("db update = " + ((update > 0) ? "ok" : "fail"));
                 if (update > 0) {
                     mPositiveButtonListener.onClick(alertDialog, nowItem.getId());
                 } else {
 
                 }
-
 
             }
         });
@@ -94,7 +103,7 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
             public void onClick(View v) {
                 alertDialog.dismiss();
             }
-       });
+        });
 
 
         return alertDialog;
@@ -104,6 +113,7 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
     public void setContentView() {
         mContentView = View.inflate(getContext(), R.layout.dialog_custom, null);
         setView(mContentView);
+        setRippleEffect(mContentView.findViewById(R.id.btn_text));
     }
 
     @Override
@@ -133,18 +143,35 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
 
     @Override
     public void setName(String name) {
-        ((EditText)mContentView.findViewById(R.id.et_name)).setText(name);
+        ((EditText) mContentView.findViewById(R.id.et_name)).setText(name);
     }
 
     @Override
     public void setNumber(String number) {
-        ((EditText)mContentView.findViewById(R.id.et_number)).setText(number);
+        ((EditText) mContentView.findViewById(R.id.et_number)).setText(number);
     }
 
     public final static int REQUEST_CODE_PIC_CONTACTS = 0x10;
+
     @Override
     public void navigateToContacts(Intent intent) {
         mBaseFragment.startActivityForResult(intent, REQUEST_CODE_PIC_CONTACTS);
+    }
+
+    @Override
+    public void navigateToSMS(Intent intent) {
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setRippleEffect(View view) {
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+            view.setBackgroundResource(R.drawable.btn_colored_material);
+        }
     }
 
     @Override

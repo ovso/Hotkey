@@ -16,6 +16,7 @@ public interface DialogPresenter {
     int setContacts(Context context, ContactsItem item);
     void pickContacts(Context context);
     void contactsResult(Context context, Intent data);
+    void onClickSMS(android.view.View v, String number);
     interface View {
         void setContentView();
         void setDialogTitle(String title);
@@ -24,5 +25,7 @@ public interface DialogPresenter {
         void setName(String name);
         void setNumber(String number);
         void navigateToContacts(Intent intent);
+        void navigateToSMS(Intent intent);
+        void showToast(String msg);
     }
 }
