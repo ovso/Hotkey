@@ -18,9 +18,6 @@ import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 
-/**
- * Created by jaeho_oh on 2015-10-16.
- */
 public class OthersFragment extends BaseFragment implements OthersPresenter.View, ItemAlertDialogBuilder.OnClickListener{
 
     protected OthersPresenter mPresenter;

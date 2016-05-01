@@ -20,9 +20,10 @@ import com.fsn.cauly.CaulyAdView;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
+import kr.blogspot.ovsoce.hotkey.navigation.NavMenuEditActivity;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View{
+        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View, View.OnClickListener{
     MainPresenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setToolbarTitle(getString(R.string.app_name)+" : "+getString(R.string.menu_title_family));
+        setToolbarTitle(getString(R.string.app_name) + " : " + getString(R.string.menu_title_family));
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_family);
         onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_family));
 
+        findViewById(R.id.btn_menu_edit).setOnClickListener(this);
+
     }
 
     @Override
@@ -69,6 +72,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        Log.d(getClass().getSimpleName(), "oncreateOptions()");
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.activity_main_drawer, menu);
+//        return true;
+//    }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -97,6 +106,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void navigateToNavMenuEdit() {
+        Intent intent = new Intent(this, NavMenuEditActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent, NavMenuEditActivity.REQUEST_CODE);
+    }
+
+    @Override
     public void replaceFragment(int containerViewId, BaseFragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(containerViewId, fragment);
@@ -118,5 +134,10 @@ public class MainActivity extends AppCompatActivity
     public void initAd(CaulyAdView view) {
         ViewGroup adContainer = (ViewGroup)findViewById(R.id.ad_container);
         adContainer.addView(view);
+    }
+
+    @Override
+    public void onClick(View v) {
+        mPresenter.onClick(v);
     }
 }

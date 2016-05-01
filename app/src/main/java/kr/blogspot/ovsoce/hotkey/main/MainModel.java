@@ -10,15 +10,11 @@ import com.fsn.cauly.CaulyAdView;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
-import kr.blogspot.ovsoce.hotkey.fragment.WhoFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.family.FamilyFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.friends.FriendsFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.help.HelpFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.others.OthersFragment;
 
-/**
- * Created by jaeho_oh on 2015-10-16.
- */
 public class MainModel extends Model {
     public Intent getEmailIntent(Context context) {
         Uri uri = Uri.parse(context.getString(R.string.email_uri));

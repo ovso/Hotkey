@@ -1,19 +1,9 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.widget.TextView;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.application.MyApplication;
-import kr.blogspot.ovsoce.hotkey.common.Log;
-import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 
-/**
- * Created by jaeho_oh on 2015-10-16.
- */
 public class MainPresenterImpl implements MainPresenter {
     MainPresenter.View mView;
     MainModel mModel;
@@ -39,6 +29,14 @@ public class MainPresenterImpl implements MainPresenter {
     public void init(Context context) {
         mView.setVersionName(context.getString(R.string.app_ver)+mModel.getVersionName(context));
         mView.initAd(mModel.getCaulyAdView(context));
+    }
+
+    @Override
+    public void onClick(android.view.View v) {
+        int id = v.getId();
+        if(id == R.id.btn_menu_edit) {
+            mView.navigateToNavMenuEdit();
+        }
     }
 
 }

@@ -21,9 +21,6 @@ import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItemImpl;
 
-/**
- * Created by jaeho_oh on 2015-10-22.
- */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
