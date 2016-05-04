@@ -16,7 +16,7 @@ public interface MainPresenter {
         void navigateToEmail(Intent intent);
         void navigateToShare(Intent intent);
         void navigateToReview(Intent intent);
-        void navigateToNavMenuEdit();
+        void navigateToHelp();
         void replaceFragment(int containerViewId, BaseFragment fragment);
         void setToolbarTitle(String title);
         void setVersionName(String versionName);

@@ -19,9 +19,10 @@ public class MainPresenterImpl implements MainPresenter {
             mView.navigateToShare(mModel.getShareIntent(context));
         } else if(menuId == R.id.nav_review) {
             mView.navigateToReview(mModel.getReviewIntent(context));
-        } else {
+        } else if(menuId == R.id.nav_help) {
             //mView.replaceFragment(mModel.getFragmentContainerViewId(), mModel.getFragment(menuId));
-            mView.setToolbarTitle(context.getString(R.string.app_name) + " : " + mModel.getToolbarTitle(context, menuId));
+            //mView.setToolbarTitle(context.getString(R.string.app_name) + " : " + mModel.getToolbarTitle(context, menuId));
+            mView.navigateToHelp();
         }
     }
 
@@ -36,7 +37,7 @@ public class MainPresenterImpl implements MainPresenter {
     public void onClick(android.view.View v) {
         int id = v.getId();
         if(id == R.id.btn_menu_edit) {
-            mView.navigateToNavMenuEdit();
+            mView.navigateToHelp();
         }
     }
 

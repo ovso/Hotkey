@@ -56,9 +56,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        navigationView.setCheckedItem(R.id.nav_family);
-        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_family));
-
         //findViewById(R.id.btn_menu_edit).setOnClickListener(this);
         findViewById(R.id.fab).setVisibility(View.GONE);
 
@@ -134,7 +131,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void navigateToNavMenuEdit() {
+    public void navigateToHelp() {
         Intent intent = new Intent(this, NavMenuEditActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivityForResult(intent, NavMenuEditActivity.REQUEST_CODE);

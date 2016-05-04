@@ -16,7 +16,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItemImpl;
@@ -79,7 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void initDB(SQLiteDatabase db) {
         List<ContactsItem> list = getDBInitContactsItemListData();
 
-        int[] menuIds = {R.id.nav_family, R.id.nav_friends, R.id.nav_others};
+        int[] menuIds = {SECTION_NUMBER_FAMILY, SECTION_NUMBER_FRIEND, SECTION_NUMBER_OTHERS};
 
         for (int id : menuIds) {
             for (ContactsItem item:list) {

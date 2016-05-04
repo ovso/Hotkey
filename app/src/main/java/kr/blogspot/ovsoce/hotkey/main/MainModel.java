@@ -23,19 +23,6 @@ public class MainModel extends Model {
         return R.id.fragment_container;
     }
 */
-    public String getToolbarTitle(Context context, int menuId) {
-        String title = null;
-        if (menuId == R.id.nav_family) {
-            title = context.getString(R.string.menu_title_family);
-        } else if (menuId == R.id.nav_friends) {
-            title = context.getString(R.string.menu_title_friends);
-        } else if (menuId == R.id.nav_others) {
-            title = context.getString(R.string.menu_title_others);
-        } else if( menuId == R.id.nav_help) {
-            title = context.getString(R.string.menu_title_help);
-        }
-        return title;
-    }
     public Intent getShareIntent(Context context) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
