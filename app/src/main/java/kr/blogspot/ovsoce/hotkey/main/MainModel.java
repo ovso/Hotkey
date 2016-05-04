@@ -23,11 +23,7 @@ public class MainModel extends Model {
         intent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.email_msg));
         return intent;
     }
-/*
-    public int getFragmentContainerViewId() {
-        return R.id.fragment_container;
-    }
-*/
+
     public Intent getShareIntent(Context context) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
