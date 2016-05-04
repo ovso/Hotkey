@@ -17,6 +17,7 @@ import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.dialog.ItemAlertDialogBuilder;
 
 public class BaseFragment extends Fragment implements BaseFragmentPresenter.View, ItemAlertDialogBuilder.OnClickListener{
+
     public static final String ARG_SECTION_NUMBER = "section_number";
 
     public static BaseFragment newInstance(int sectionNumber) {
