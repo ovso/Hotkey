@@ -20,7 +20,7 @@ public class MainPresenterImpl implements MainPresenter {
         } else if(menuId == R.id.nav_review) {
             mView.navigateToReview(mModel.getReviewIntent(context));
         } else {
-            mView.replaceFragment(mModel.getFragmentContainerViewId(), mModel.getFragment(menuId));
+            //mView.replaceFragment(mModel.getFragmentContainerViewId(), mModel.getFragment(menuId));
             mView.setToolbarTitle(context.getString(R.string.app_name) + " : " + mModel.getToolbarTitle(context, menuId));
         }
     }
