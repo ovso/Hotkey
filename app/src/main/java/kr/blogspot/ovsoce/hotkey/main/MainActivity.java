@@ -138,13 +138,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void replaceFragment(int containerViewId, BaseFragment fragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        //transaction.replace(containerViewId, fragment);
-        transaction.commit();
-    }
-
-    @Override
     public void setToolbarTitle(String title) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);

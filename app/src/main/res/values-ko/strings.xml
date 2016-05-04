@@ -49,5 +49,5 @@
         ex) +82-2-...
     </string>
 
-    <string name="activity_name_nav_menu_edit">메뉴 편집</string>
+    <string name="activity_help_label">도움말</string>
 </resources>
