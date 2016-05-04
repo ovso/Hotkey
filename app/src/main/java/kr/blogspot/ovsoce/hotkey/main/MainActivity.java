@@ -193,11 +193,11 @@ public class MainActivity extends AppCompatActivity
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "가족";
+                    return getString(R.string.menu_title_family);
                 case 1:
-                    return "친구";
+                    return getString(R.string.menu_title_friends);
                 case 2:
-                    return "기타";
+                    return getString(R.string.menu_title_others);
             }
             return null;
         }
