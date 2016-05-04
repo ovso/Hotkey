@@ -52,9 +52,9 @@ public class FriendsFragment extends BaseFragment implements FriendsPresenter.Vi
 
     @Override
     public void showItemSetDialog(ContactsItem item) {
-        mItemAlertDialogBuilder = new ItemAlertDialogBuilder(this, item);
-        mItemAlertDialogBuilder.setPositiveButton(this);
-        mItemAlertDialogBuilder.show();
+        //mItemAlertDialogBuilder = new ItemAlertDialogBuilder(this, item);
+        //mItemAlertDialogBuilder.setPositiveButton(this);
+        //mItemAlertDialogBuilder.show();
     }
     @Override
     public void makeACall(Intent intent) {

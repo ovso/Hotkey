@@ -18,9 +18,6 @@ import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.MyAdapter;
 
-/**
- * Created by jaeho_oh on 2015-10-16.
- */
 public class FamilyFragment extends BaseFragment implements FamilyPresenter.View, ItemAlertDialogBuilder.OnClickListener{
 
     protected FamilyPresenter mPresenter;
@@ -52,9 +49,9 @@ public class FamilyFragment extends BaseFragment implements FamilyPresenter.View
 
     @Override
     public void showItemSetDialog(ContactsItem item) {
-        mItemAlertDialogBuilder = new ItemAlertDialogBuilder(this, item);
-        mItemAlertDialogBuilder.setPositiveButton(this);
-        mItemAlertDialogBuilder.show();
+        //mItemAlertDialogBuilder = new ItemAlertDialogBuilder(this, item);
+        //mItemAlertDialogBuilder.setPositiveButton(this);
+        //mItemAlertDialogBuilder.show();
     }
     @Override
     public void makeACall(Intent intent) {

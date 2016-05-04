@@ -23,7 +23,6 @@ import android.widget.TextView;
 import com.fsn.cauly.CaulyAdView;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.navigation.NavMenuEditActivity;
 
@@ -144,7 +143,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void replaceFragment(int containerViewId, BaseFragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(containerViewId, fragment);
+        //transaction.replace(containerViewId, fragment);
         transaction.commit();
     }
 
@@ -180,7 +179,8 @@ public class MainActivity extends AppCompatActivity
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            //return PlaceholderFragment.newInstance(position + 1);
+            return BaseFragment.newInstance(position);
         }
 
         @Override
