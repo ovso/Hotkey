@@ -1,9 +1,11 @@
 package kr.blogspot.ovsoce.hotkey.help;
 
+import android.content.Context;
+
 public interface HelpPresenter {
     void onClick(android.view.View view);
 
-    void onCreate();
+    void onCreate(Context context);
 
     void onOptionsItemSelected(int itemId);
 

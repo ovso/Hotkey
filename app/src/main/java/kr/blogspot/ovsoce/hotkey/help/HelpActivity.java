@@ -20,7 +20,7 @@ public class HelpActivity extends AppCompatActivity implements HelpPresenter.Vie
         setContentView(R.layout.activity_help);
 
         mPresenter = new HelpPresenterImpl(this);
-        mPresenter.onCreate();
+        mPresenter.onCreate(getApplicationContext());
     }
 
     @Override

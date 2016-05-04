@@ -1,5 +1,9 @@
 package kr.blogspot.ovsoce.hotkey.help;
 
+import android.content.Context;
+
+import kr.blogspot.ovsoce.hotkey.common.Log;
+
 public class HelpPresenterImpl implements HelpPresenter {
     private final static String URL = "";
     private HelpPresenter.View mView;
@@ -14,9 +18,14 @@ public class HelpPresenterImpl implements HelpPresenter {
     }
 
     @Override
-    public void onCreate() {
+    public void onCreate(Context context) {
         mView.onInit();
-        mView.initWebView("http://m.blog.naver.com/share_oneone/220701321810");
+        String language = mModel.getLanguage(context);
+        if(language.equalsIgnoreCase("ko")) {
+            mView.initWebView("http://blog.naver.com/share_oneone/220701321810");
+        } else {
+            mView.initWebView("http://blog.naver.com/share_oneone/220701347695");
+        }
     }
 
     @Override
