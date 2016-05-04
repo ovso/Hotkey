@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
@@ -14,7 +17,7 @@ public class HelpActivity extends AppCompatActivity implements HelpPresenter.Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_edit);
+        setContentView(R.layout.activity_help);
 
         mPresenter = new HelpPresenterImpl(this);
         mPresenter.onCreate();
@@ -23,7 +26,7 @@ public class HelpActivity extends AppCompatActivity implements HelpPresenter.Vie
     @Override
     public void onInit() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.activity_name_nav_menu_edit);
+        toolbar.setTitle(R.string.activity_help_label);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -41,6 +44,15 @@ public class HelpActivity extends AppCompatActivity implements HelpPresenter.Vie
     @Override
     public void activityFinish() {
         onBackPressed();
+    }
+
+    @Override
+    public void initWebView(String url) {
+        WebView webView = (WebView) findViewById(R.id.wv_help);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl(url);
     }
 
     @Override

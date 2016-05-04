@@ -1,6 +1,7 @@
 package kr.blogspot.ovsoce.hotkey.help;
 
 public class HelpPresenterImpl implements HelpPresenter {
+    private final static String URL = "";
     private HelpPresenter.View mView;
     private HelpModel mModel;
     HelpPresenterImpl(HelpPresenter.View view) {
@@ -15,6 +16,7 @@ public class HelpPresenterImpl implements HelpPresenter {
     @Override
     public void onCreate() {
         mView.onInit();
+        mView.initWebView("http://m.blog.naver.com/share_oneone/220701321810");
     }
 
     @Override

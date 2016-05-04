@@ -13,5 +13,7 @@ public interface HelpPresenter {
         void showToast(String msg);
 
         void activityFinish();
+
+        void initWebView(String url);
     }
 }
