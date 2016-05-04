@@ -32,13 +32,4 @@ public class MainPresenterImpl implements MainPresenter {
         mView.setVersionName(context.getString(R.string.app_ver)+mModel.getVersionName(context));
         mView.initAd(mModel.getCaulyAdView(context));
     }
-
-    @Override
-    public void onClick(android.view.View v) {
-        int id = v.getId();
-        if(id == R.id.btn_menu_edit) {
-            mView.navigateToHelp();
-        }
-    }
-
 }

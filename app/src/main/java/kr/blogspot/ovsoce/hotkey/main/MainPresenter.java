@@ -10,7 +10,6 @@ import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 public interface MainPresenter {
     void onNavigationItemSelected(Context context, int id);
     void onCreate(Context context);
-    void onClick(android.view.View v);
 
     interface View {
         void navigateToEmail(Intent intent);

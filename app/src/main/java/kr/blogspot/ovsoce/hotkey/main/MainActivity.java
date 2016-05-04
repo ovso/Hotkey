@@ -27,7 +27,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View, View.OnClickListener{
+        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     MainPresenter mPresenter;
@@ -152,11 +152,6 @@ public class MainActivity extends AppCompatActivity
     public void initAd(CaulyAdView view) {
         ViewGroup adContainer = (ViewGroup)findViewById(R.id.ad_container);
         adContainer.addView(view);
-    }
-
-    @Override
-    public void onClick(View v) {
-        mPresenter.onClick(v);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
