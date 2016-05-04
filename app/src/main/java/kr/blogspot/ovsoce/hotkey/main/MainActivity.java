@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity
     public void onInit() {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setToolbarTitle(getString(R.string.app_name) + " : " + getString(R.string.menu_title_family));
+        setToolbarTitle(getString(R.string.app_name));
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
