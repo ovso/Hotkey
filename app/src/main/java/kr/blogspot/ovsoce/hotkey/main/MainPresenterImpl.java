@@ -26,7 +26,8 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void init(Context context) {
+    public void onCreate(Context context) {
+        mView.onInit();
         mView.setVersionName(context.getString(R.string.app_ver)+mModel.getVersionName(context));
         mView.initAd(mModel.getCaulyAdView(context));
     }

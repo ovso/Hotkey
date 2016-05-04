@@ -83,15 +83,13 @@ public class MainModel extends Model {
         intent.setData(Uri.parse(context.getString(R.string.url_review)));
         return intent;
     }
-    private CaulyAdView mCaulyAdView;
     public CaulyAdView getCaulyAdView(Context context) {
-        if( mCaulyAdView == null ) {
-            CaulyAdInfo info = new CaulyAdInfoBuilder(context.getString(R.string.ad_id_cauly))
+        CaulyAdView view;
+        CaulyAdInfo info = new CaulyAdInfoBuilder(context.getString(R.string.ad_id_cauly))
                     .effect(CaulyAdInfo.Effect.Circle.toString())
                     .build();
-            mCaulyAdView = new CaulyAdView(context);
-            mCaulyAdView.setAdInfo(info);
-        }
-        return mCaulyAdView;
+        view = new CaulyAdView(context);
+        view.setAdInfo(info);
+        return view;
     }
 }

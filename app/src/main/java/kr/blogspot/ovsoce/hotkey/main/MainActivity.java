@@ -3,9 +3,7 @@ package kr.blogspot.ovsoce.hotkey.main;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,19 +28,16 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mPresenter = new MainPresenterImpl(this);
+        mPresenter.onCreate(getApplicationContext());
+
+    }
+    @Override
+    public void onInit() {
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setToolbarTitle(getString(R.string.app_name) + " : " + getString(R.string.menu_title_family));
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setVisibility(View.GONE);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -53,13 +48,11 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mPresenter = new MainPresenterImpl(this);
-        mPresenter.init(getApplicationContext());
         navigationView.setCheckedItem(R.id.nav_family);
         onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_family));
 
         findViewById(R.id.btn_menu_edit).setOnClickListener(this);
-
+        findViewById(R.id.fab).setVisibility(View.GONE);
     }
 
     @Override
