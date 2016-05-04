@@ -24,7 +24,7 @@ import com.fsn.cauly.CaulyAdView;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
-import kr.blogspot.ovsoce.hotkey.navigation.NavMenuEditActivity;
+import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View, View.OnClickListener{
@@ -132,9 +132,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void navigateToHelp() {
-        Intent intent = new Intent(this, NavMenuEditActivity.class);
+        Intent intent = new Intent(this, HelpActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivityForResult(intent, NavMenuEditActivity.REQUEST_CODE);
+        startActivityForResult(intent, HelpActivity.REQUEST_CODE);
     }
 
     @Override

@@ -1,6 +1,6 @@
-package kr.blogspot.ovsoce.hotkey.navigation;
+package kr.blogspot.ovsoce.hotkey.help;
 
-public interface NavMenuEditPresenter {
+public interface HelpPresenter {
     void onClick(android.view.View view);
 
     void onCreate();

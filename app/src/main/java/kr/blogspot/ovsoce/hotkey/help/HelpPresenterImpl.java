@@ -1,11 +1,11 @@
-package kr.blogspot.ovsoce.hotkey.navigation;
+package kr.blogspot.ovsoce.hotkey.help;
 
-public class NavMenuEditPresenterImpl implements NavMenuEditPresenter {
-    private NavMenuEditPresenter.View mView;
-    private NavMenuEditModel mModel;
-    NavMenuEditPresenterImpl(NavMenuEditPresenter.View view) {
+public class HelpPresenterImpl implements HelpPresenter {
+    private HelpPresenter.View mView;
+    private HelpModel mModel;
+    HelpPresenterImpl(HelpPresenter.View view) {
         mView = view;
-        mModel = new NavMenuEditModel();
+        mModel = new HelpModel();
     }
     @Override
     public void onClick(android.view.View view) {

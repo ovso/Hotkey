@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.hotkey.navigation;
+package kr.blogspot.ovsoce.hotkey.help;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,15 +8,15 @@ import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
 
-public class NavMenuEditActivity extends AppCompatActivity implements NavMenuEditPresenter.View {
+public class HelpActivity extends AppCompatActivity implements HelpPresenter.View {
     public static final int REQUEST_CODE = 1;
-    private NavMenuEditPresenter mPresenter;
+    private HelpPresenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_edit);
 
-        mPresenter = new NavMenuEditPresenterImpl(this);
+        mPresenter = new HelpPresenterImpl(this);
         mPresenter.onCreate();
     }
 
