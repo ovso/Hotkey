@@ -42,6 +42,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_NUMBER = "number";
     private static final String KEY_COLOR = "color";
 
+    public static final int SECTION_NUMBER_FAMILY = 0;
+    public static final int SECTION_NUMBER_FRIEND = 1;
+    public static final int SECTION_NUMBER_OTHERS = 2;
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -131,16 +135,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private String getTable(int type) {
         String table = null;
 
-        if(type == R.id.nav_family) {
+        if(type == SECTION_NUMBER_FAMILY) {
             table = TABLE_FAMILY;
-        } else if(type == R.id.nav_friends) {
+        } else if(type == SECTION_NUMBER_FRIEND) {
             table = TABLE_FRIENDS;
-        } else if(type == R.id.nav_others) {
+        } else if(type == SECTION_NUMBER_OTHERS) {
             table = TABLE_OTHERS;
         }
-//        else if(type == R.id.nav_who) {
-//            table = TABLE_WHO;
-//        }
 
         return table;
     }

@@ -17,12 +17,10 @@ import kr.blogspot.ovsoce.hotkey.application.MyApplication;
  */
 public class MyAdapter extends RecyclerView.Adapter{
     List<ContactsItem> mList;
-    RecyclerView mRecyclerView;
     OnAdapterItemClickListener mListener;
-    public MyAdapter(List<ContactsItem> list,OnAdapterItemClickListener listener, RecyclerView recyclerView) {
+    public MyAdapter(List<ContactsItem> list,OnAdapterItemClickListener listener) {
         mList = list;
         mListener = listener;
-        mRecyclerView = recyclerView;
     }
 
     @Override

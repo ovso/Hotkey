@@ -9,11 +9,6 @@ import com.fsn.cauly.CaulyAdInfoBuilder;
 import com.fsn.cauly.CaulyAdView;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
-import kr.blogspot.ovsoce.hotkey.fragment.family.FamilyFragment;
-import kr.blogspot.ovsoce.hotkey.fragment.friends.FriendsFragment;
-import kr.blogspot.ovsoce.hotkey.fragment.help.HelpFragment;
-import kr.blogspot.ovsoce.hotkey.fragment.others.OthersFragment;
 
 public class MainModel extends Model {
     public Intent getEmailIntent(Context context) {
@@ -28,36 +23,6 @@ public class MainModel extends Model {
         return R.id.fragment_container;
     }
 */
-    private FamilyFragment mFamilyFragment;
-    private FriendsFragment mFriendsFragment;
-    private OthersFragment mOthersFragment;
-    private HelpFragment mHelpFragment;
-    public BaseFragment getFragment(int id) {
-        BaseFragment baseFragment = null;
-        if (id == R.id.nav_family) {
-            if(mFamilyFragment == null) {
-                mFamilyFragment = new FamilyFragment();
-            }
-            baseFragment = mFamilyFragment;
-        } else if (id == R.id.nav_friends) {
-            if(mFriendsFragment == null) {
-                mFriendsFragment = new FriendsFragment();
-            }
-            baseFragment = mFriendsFragment;
-        } else if (id == R.id.nav_others) {
-            if(mOthersFragment == null) {
-                mOthersFragment = new OthersFragment();
-            }
-            baseFragment = mOthersFragment;
-        } else if (id == R.id.nav_help) {
-            if(mHelpFragment == null) {
-                mHelpFragment = new HelpFragment();
-            }
-            baseFragment = mHelpFragment;
-        }
-
-        return baseFragment;
-    }
     public String getToolbarTitle(Context context, int menuId) {
         String title = null;
         if (menuId == R.id.nav_family) {

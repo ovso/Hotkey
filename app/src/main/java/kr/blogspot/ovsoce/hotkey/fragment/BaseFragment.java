@@ -17,10 +17,8 @@ import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.dialog.ItemAlertDialogBuilder;
 
 public class BaseFragment extends Fragment implements BaseFragmentPresenter.View, ItemAlertDialogBuilder.OnClickListener{
-    private static final String ARG_SECTION_NUMBER = "section_number";
-    private static final int SECTION_NUMBER_FAMILY = 0;
-    private static final int SECTION__NUMBER_FRIEND = 1;
-    private static final int SECTION_NUMBER_OTHERS = 2;
+    public static final String ARG_SECTION_NUMBER = "section_number";
+
     public static BaseFragment newInstance(int sectionNumber) {
         BaseFragment fragment = new BaseFragment();
         Bundle args = new Bundle();
@@ -58,7 +56,7 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.recyclerView);
 
         mPresenter = new BaseFragmentPresenterImpl(this);
-        mPresenter.init(getActivity(), mRecyclerView);
+        mPresenter.init(getActivity(), this.getArguments().getInt(ARG_SECTION_NUMBER), mRecyclerView);
     }
 
     @Override

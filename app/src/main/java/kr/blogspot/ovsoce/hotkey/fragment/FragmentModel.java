@@ -1,24 +1,15 @@
 package kr.blogspot.ovsoce.hotkey.fragment;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.fsn.cauly.CaulyAdInfo;
-import com.fsn.cauly.CaulyAdInfoBuilder;
-import com.fsn.cauly.CaulyAdView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.main.Model;
 
-/**
- * Created by ovso on 2015. 10. 17..
- */
 public abstract class FragmentModel extends Model {
 
     public enum MESSAGE_TYPE{EMPTY_NUMBER};
@@ -59,4 +50,5 @@ public abstract class FragmentModel extends Model {
         return null;
     }
     public abstract int getMenuId();
+    public abstract void setMenuId(int id);
 }

@@ -7,19 +7,18 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
-import kr.blogspot.ovsoce.hotkey.fragment.family.FamilyModel;
-import kr.blogspot.ovsoce.hotkey.fragment.family.FamilyPresenter;
-
 public class BaseFragmentPresenterImpl implements BaseFragmentPresenter{
     private View mView;
-    private FamilyModel mModel;
+    private BaseFragmentModel mModel;
     public BaseFragmentPresenterImpl(View view) {
         mView = view;
-        mModel = new FamilyModel();
+        mModel = new BaseFragmentModel();
     }
 
     @Override
-    public void init(final Context context, final RecyclerView recyclerView) {
+    public void init(final Context context, int sectionNumber, final RecyclerView recyclerView) {
+        mModel.setMenuId(sectionNumber);
+
         List<ContactsItem> list = mModel.getContactsItemList(context);
 
         MyAdapter adapter = new MyAdapter(list, new MyAdapter.OnAdapterItemClickListener() {
@@ -42,7 +41,7 @@ public class BaseFragmentPresenterImpl implements BaseFragmentPresenter{
                 mView.showItemSetDialog(item);
                 return true;
             }
-        }, recyclerView);
+        });
 
         mView.initRecyclerView(adapter, new GridLayoutManager(context, mModel.getGridLayoutSpanCount(context)));
     }

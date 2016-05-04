@@ -6,11 +6,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.fsn.cauly.CaulyAdView;
 
-/**
- * Created by jaeho_oh on 2015-10-16.
- */
 public interface FragmentPresenter{
-    void init(Context context, RecyclerView recyclerView);
+    void init(Context context, int menuId, RecyclerView recyclerView);
     void setItemId(Context context, RecyclerView recyclerView, String itemId);
     interface View {
         void initRecyclerView(MyAdapter adapter, RecyclerView.LayoutManager layoutManager);

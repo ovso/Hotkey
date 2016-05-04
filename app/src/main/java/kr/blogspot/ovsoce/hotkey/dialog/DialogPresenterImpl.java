@@ -1,22 +1,15 @@
 package kr.blogspot.ovsoce.hotkey.dialog;
 
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.ContactsContract;
-import android.support.v4.text.TextUtilsCompat;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.ViewGroup;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
-import kr.blogspot.ovsoce.hotkey.fragment.ContactsItemImpl;
 
 /**
  * Created by jaeho_oh on 2015-10-27.
