@@ -4,7 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 
-import com.fsn.cauly.CaulyAdView;
+import kr.blogspot.ovsoce.hotkey.fragment.adapter.MyAdapter;
+import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 
 public interface FragmentPresenter{
     void init(Context context, int menuId, RecyclerView recyclerView);

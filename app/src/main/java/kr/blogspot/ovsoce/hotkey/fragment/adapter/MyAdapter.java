@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.hotkey.fragment;
+package kr.blogspot.ovsoce.hotkey.fragment.adapter;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,7 @@ import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
+import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 
 /**
  * RecyclerView Adapter

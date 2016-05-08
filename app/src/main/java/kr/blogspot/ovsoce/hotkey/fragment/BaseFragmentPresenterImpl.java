@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
+import kr.blogspot.ovsoce.hotkey.fragment.adapter.MyAdapter;
+import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
+
 public class BaseFragmentPresenterImpl implements BaseFragmentPresenter{
     private View mView;
     private BaseFragmentModel mModel;

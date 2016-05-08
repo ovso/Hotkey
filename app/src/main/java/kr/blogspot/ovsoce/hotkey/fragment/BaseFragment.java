@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.dialog.ItemAlertDialogBuilder;
+import kr.blogspot.ovsoce.hotkey.fragment.adapter.MyAdapter;
+import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 
 public class BaseFragment extends Fragment implements BaseFragmentPresenter.View, ItemAlertDialogBuilder.OnClickListener{
 
@@ -61,7 +63,7 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     }
 
     @Override
-    public void initRecyclerView(MyAdapter adapter,RecyclerView.LayoutManager layoutManager) {
+    public void initRecyclerView(MyAdapter adapter, RecyclerView.LayoutManager layoutManager) {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(adapter);
     }

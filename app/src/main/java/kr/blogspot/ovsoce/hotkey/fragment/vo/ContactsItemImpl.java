@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.hotkey.fragment;
+package kr.blogspot.ovsoce.hotkey.fragment.vo;
 
 /**
  * Created by ovso on 2015. 10. 17..

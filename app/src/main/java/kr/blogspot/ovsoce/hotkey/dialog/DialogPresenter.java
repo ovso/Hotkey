@@ -1,11 +1,9 @@
 package kr.blogspot.ovsoce.hotkey.dialog;
 
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
 
-import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
+import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 
 /**
  * Created by jaeho_oh on 2015-10-27.

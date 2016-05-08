@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.common.Log;
-import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
-import kr.blogspot.ovsoce.hotkey.fragment.ContactsItemImpl;
+import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
+import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItemImpl;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +15,8 @@ import android.widget.Toast;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
-import kr.blogspot.ovsoce.hotkey.fragment.ContactsItem;
-import kr.blogspot.ovsoce.hotkey.fragment.ContactsItemImpl;
+import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
+import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItemImpl;
 
 /**
  * Created by jaeho_oh on 2015-11-11.

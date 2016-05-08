@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.hotkey.fragment;
+package kr.blogspot.ovsoce.hotkey.fragment.vo;
 
 import java.io.Serializable;
 
