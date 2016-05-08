@@ -16,7 +16,6 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onNavigationItemSelected(Context context, int menuId) {
-        Toast.makeText(context, "!!", Toast.LENGTH_SHORT).show();
         if(menuId == R.id.nav_share) {
             mView.navigateToShare(mModel.getShareIntent(context));
         } else if(menuId == R.id.nav_review) {

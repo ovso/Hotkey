@@ -12,7 +12,6 @@ import android.widget.Toast;
 import kr.blogspot.ovsoce.hotkey.R;
 
 public class HelpActivity extends AppCompatActivity implements HelpPresenter.View {
-    public static final int REQUEST_CODE = 1;
     private HelpPresenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

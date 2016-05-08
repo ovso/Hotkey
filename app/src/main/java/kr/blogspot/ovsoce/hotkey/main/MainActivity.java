@@ -72,13 +72,6 @@ public class MainActivity extends AppCompatActivity
         //changeFont();
     }
 
-    @Override
-    public void navigateToSettings() {
-        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
-    }
-
     private void changeFont() {
         //AlexBrush-Regular.ttf
         // "SERIF", "fonts/Roboto-Regular.ttf")
@@ -161,9 +154,14 @@ public class MainActivity extends AppCompatActivity
     public void navigateToHelp() {
         Intent intent = new Intent(this, HelpActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivityForResult(intent, HelpActivity.REQUEST_CODE);
+        startActivity(intent);
     }
-
+    @Override
+    public void navigateToSettings() {
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
     @Override
     public void setToolbarTitle(String title) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
