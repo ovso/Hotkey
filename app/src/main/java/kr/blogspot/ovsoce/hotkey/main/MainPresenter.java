@@ -20,5 +20,7 @@ public interface MainPresenter {
         void setVersionName(String versionName);
         void initAd(CaulyAdView view);
         void onInit();
+
+        void navigateToSettings();
     }
 }

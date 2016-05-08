@@ -13,6 +13,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +25,10 @@ import com.fsn.cauly.CaulyAdView;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
+import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
+import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View {
@@ -64,6 +68,21 @@ public class MainActivity extends AppCompatActivity
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         initTab();
+
+        //changeFont();
+    }
+
+    @Override
+    public void navigateToSettings() {
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
+
+    private void changeFont() {
+        //AlexBrush-Regular.ttf
+        // "SERIF", "fonts/Roboto-Regular.ttf")
+        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/AlexBrush-Regular.ttf");
     }
     private void initTab() {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -103,12 +122,14 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        Log.d(getClass().getSimpleName(), "oncreateOptions()");
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.activity_main_drawer, menu);
-//        return true;
-//    }
+/*
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main_options_menu, menu);
+        return true;
+    }
+*/
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

@@ -1,6 +1,7 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
 
@@ -15,6 +16,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onNavigationItemSelected(Context context, int menuId) {
+        Toast.makeText(context, "!!", Toast.LENGTH_SHORT).show();
         if(menuId == R.id.nav_share) {
             mView.navigateToShare(mModel.getShareIntent(context));
         } else if(menuId == R.id.nav_review) {
@@ -23,6 +25,8 @@ public class MainPresenterImpl implements MainPresenter {
             //mView.replaceFragment(mModel.getFragmentContainerViewId(), mModel.getFragment(menuId));
             //mView.setToolbarTitle(context.getString(R.string.app_name) + " : " + mModel.getToolbarTitle(context, menuId));
             mView.navigateToHelp();
+        } else if(menuId == R.id.nav_settings) {
+            mView.navigateToSettings();
         }
     }
 
