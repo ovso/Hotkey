@@ -3,6 +3,7 @@ package kr.blogspot.ovsoce.hotkey.settings;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
@@ -13,6 +14,13 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        /**
+         * onInit에 구현하니 툴바가 나오지 않았다 HelpActivity에서는 제대로 나온다.
+         */
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.action_settings);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mPresenter = new SettingsPresenterImpl(this);
         mPresenter.onCreate(getApplicationContext());
@@ -20,10 +28,10 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
 
     @Override
     public void onInit() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.action_settings);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_settings);
+//        toolbar.setTitle(R.string.action_settings);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -40,4 +48,11 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
     public void activityFinish() {
         onBackPressed();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        mPresenter.onOptionsItemSelected(item.getItemId());
+        return super.onOptionsItemSelected(item);
+    }
+
 }
