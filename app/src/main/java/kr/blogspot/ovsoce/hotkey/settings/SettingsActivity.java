@@ -1,6 +1,7 @@
 package kr.blogspot.ovsoce.hotkey.settings;
 
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
 
         mPresenter = new SettingsPresenterImpl(this);
         mPresenter.onCreate(getApplicationContext());
+
     }
 
     @Override
@@ -32,6 +34,11 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
 //        toolbar.setTitle(R.string.action_settings);
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+/*        getSupportFragmentManager().beginTransaction().replace(
+                R.id.content_fragment,
+                new SettingsFragment(),
+                "settings");*/
     }
 
     @Override
@@ -55,4 +62,13 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
         return super.onOptionsItemSelected(item);
     }
 
+    public static class SettingsFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            // Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.preferences);
+        }
+    }
 }

@@ -19,7 +19,7 @@ public class SettingsPresenterImpl implements SettingsPresenter {
 
     @Override
     public void onOptionsItemSelected(int itemId) {
-        if(itemId == R.id.toolbar) {
+        if(itemId == android.R.id.home) {
             mView.activityFinish();
         }
     }
