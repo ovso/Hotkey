@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="font_names">
-        <item>가</item>
-        <item>나</item>
-        <item>다</item>
-        <item>라</item>
+        <item>기본체(네이버 나눔바른고딕체)</item>
+        <item>네이버 나눔손글씨펜체</item>
+        <item>롯데마트체</item>
+        <item>배달의민족 도현체</item>
+        <item>배달의민족 주아체</item>
+        <item>배달의민족 한나체</item>
+        <item>KBIZ한마음고딕체</item>
+        <item>KBIZ한마음명조체</item>
     </string-array>
     <string-array name="font_names_value">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>NanumBarunGothic.ttf</item>
+        <item>NanumPen.ttf</item>
+        <item>LottemartBold.ttf</item>
+        <item>BMDOHYEON_ttf.ttf</item>
+        <item>BMJUA_ttf.ttf</item>
+        <item>BMHANNA_11yrs_ttf.ttf</item>
+        <item>KBIZGothicB.otf</item>
+        <item>KBIZMyeongJoB.otf</item>
     </string-array>
 </resources>

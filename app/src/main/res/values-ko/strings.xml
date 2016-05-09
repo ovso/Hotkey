@@ -40,13 +40,10 @@
     <string name="share_to_others">다른사람에게 공유하기</string>
 
     <!-- help -->
-    <string name="help_text">
-        1. 연락처는 클릭하거나 길~게 눌러 수정할 수 있습니다.\n
-        2. 번호의 입력 형식은 다양합니다.\n
-        ex) 01098765432\n
-        ex) 010-9876-5432\n
-        ex) +82-2-...
-    </string>
-
     <string name="activity_help_label">도움말</string>
+
+    <!-- settings -->
+    <string name="settings_fonts">글꼴</string>
+    <string name="settings_set_font">글꼴을 설정합니다</string>
+
 </resources>

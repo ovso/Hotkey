@@ -1,6 +1,8 @@
 package kr.blogspot.ovsoce.hotkey.settings;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +10,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
+import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 
 public class SettingsActivity extends AppCompatActivity implements SettingsPresenter.View {
     private SettingsPresenter mPresenter;
@@ -62,13 +66,22 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
         return super.onOptionsItemSelected(item);
     }
 
-    public static class SettingsFragment extends PreferenceFragment {
+    public static class SettingsFragment extends PreferenceFragment implements
+            Preference.OnPreferenceChangeListener {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.preferences);
+            findPreference("fonts").setOnPreferenceChangeListener(this);
+        }
+
+        @Override
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            //Log.d(getClass().getSimpleName(), "newValue = " + newValue);
+            TypefaceUtil.overrideFont(preference.getContext(), "SERIF", "fonts/"+newValue);
+            return false;
         }
     }
 }

@@ -40,13 +40,9 @@
     <string name="share_to_others">share to others</string>
 
     <!-- help -->
-    <string name="help_text">
-        1. Contacts can be modified by clicking or long click.\n
-        2. Enter the number will vary type.\n
-         ex) 01098765432\n
-         ex) 010-9876-5432\n
-         ex) + 82-2 -...
-    </string>
-
     <string name="activity_help_label">Help</string>
+
+    <!-- settings -->
+    <string name="settings_fonts">Fonts</string>
+    <string name="settings_set_font">Set the font</string>
 </resources>
