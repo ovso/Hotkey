@@ -44,6 +44,6 @@
 
     <!-- settings -->
     <string name="settings_fonts">글꼴</string>
-    <string name="settings_set_font">글꼴을 설정합니다</string>
+    <string name="settings_fonts_summary">설정 후 재시작해야 전체 반영 됩니다.</string>
 
 </resources>

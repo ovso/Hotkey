@@ -2,8 +2,6 @@ package kr.blogspot.ovsoce.hotkey.settings;
 
 import android.content.Context;
 
-import kr.blogspot.ovsoce.hotkey.R;
-
 public class SettingsPresenterImpl implements SettingsPresenter {
     private SettingsPresenter.View mView;
     private SettingsModel mModel;

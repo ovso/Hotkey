@@ -33,8 +33,6 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onCreate(Context context) {
-        TypefaceUtil.overrideFont(context, "SERIF", "fonts/"+ Prefs.getString(context, "fonts", "NanumBarunGothic.ttf"));
-
         mView.onInit();
         mView.setVersionName(context.getString(R.string.app_ver)+mModel.getVersionName(context));
         mView.initAd(mModel.getCaulyAdView(context));

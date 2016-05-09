@@ -1,11 +1,11 @@
 <PreferenceScreen  xmlns:android="http://schemas.android.com/apk/res/android">
     <ListPreference
-        android:defaultValue="0"
+        android:defaultValue="NanumBarunGothic.ttf"
         android:entries="@array/font_names"
         android:entryValues="@array/font_names_value"
         android:key="fonts"
         android:title="@string/settings_fonts"
-        android:summary="@string/action_settings"/>
+        android:summary="@string/settings_fonts_summary" />
     android:negativeButtonText="@null"
     android:positiveButtonText="@null"
     android:dependency="useUserName"

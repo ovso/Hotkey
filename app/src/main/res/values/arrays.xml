@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="font_names">
-        <item>기본체(네이버 나눔바른고딕체)</item>
+        <item>네이버 나눔바른고딕체</item>
         <item>네이버 나눔손글씨펜체</item>
         <item>롯데마트체</item>
         <item>배달의민족 도현체</item>

@@ -44,5 +44,5 @@
 
     <!-- settings -->
     <string name="settings_fonts">Fonts</string>
-    <string name="settings_set_font">Set the font</string>
+    <string name="settings_fonts_summary">After you restart the entire set will be reflected</string>
 </resources>

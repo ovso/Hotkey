@@ -66,22 +66,4 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
         return super.onOptionsItemSelected(item);
     }
 
-    public static class SettingsFragment extends PreferenceFragment implements
-            Preference.OnPreferenceChangeListener {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-
-            // Load the preferences from an XML resource
-            addPreferencesFromResource(R.xml.preferences);
-            findPreference("fonts").setOnPreferenceChangeListener(this);
-        }
-
-        @Override
-        public boolean onPreferenceChange(Preference preference, Object newValue) {
-            //Log.d(getClass().getSimpleName(), "newValue = " + newValue);
-            TypefaceUtil.overrideFont(preference.getContext(), "SERIF", "fonts/"+newValue);
-            return false;
-        }
-    }
 }
