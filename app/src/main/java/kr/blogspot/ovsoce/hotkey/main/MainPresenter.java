@@ -11,6 +11,8 @@ public interface MainPresenter {
     void onNavigationItemSelected(Context context, int id);
     void onCreate(Context context);
 
+    void onActivityResult(int requestCode, int resultCode, Intent data);
+
     interface View {
         void navigateToEmail(Intent intent);
         void navigateToShare(Intent intent);
@@ -22,5 +24,7 @@ public interface MainPresenter {
         void onInit();
 
         void navigateToSettings();
+
+        void restart();
     }
 }

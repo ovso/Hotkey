@@ -9,6 +9,7 @@ import android.widget.Toast;
 import kr.blogspot.ovsoce.hotkey.R;
 
 public class SettingsActivity extends AppCompatActivity implements SettingsPresenter.View {
+    public final static int REQUEST_CODE_SETTING = 1;
     private SettingsPresenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

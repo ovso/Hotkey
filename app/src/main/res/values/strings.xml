@@ -46,5 +46,7 @@
     <string name="settings_fonts">Fonts</string>
     <string name="settings_fonts_summary">After you restart the entire set will be reflected</string>
     <string name="settings_fonts_size">Fonts size</string>
-    <string name="settings_fonts_size_summary">Change the font size.</string>
+    <string name="settings_fonts_size_summary">After you restart the entire set will be reflected</string>
+    <string name="settings_btn_restart">Restart APP</string>
+    <string name="settings_btn_cancel">cancel</string>
 </resources>

@@ -1,6 +1,10 @@
 package kr.blogspot.ovsoce.hotkey.settings;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -50,6 +54,22 @@ public class SettingsFragment extends PreferenceFragment implements
             preference.setTitle(title);
 
         }
+        new AlertDialog.Builder(getActivity())
+                .setMessage(R.string.settings_fonts_summary)
+                .setPositiveButton(R.string.settings_btn_restart, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Activity a = getActivity();
+                        a.setResult(Activity.RESULT_OK, new Intent().putExtra("restart", true));
+                        a.finish();
+                    }
+                }).setNegativeButton(R.string.settings_btn_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).show();
+
         return true;
     }
     private float getFontsSize() {

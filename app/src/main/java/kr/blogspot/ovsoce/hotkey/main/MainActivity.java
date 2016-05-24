@@ -149,8 +149,24 @@ public class MainActivity extends AppCompatActivity
     public void navigateToSettings() {
         Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        //startActivity(intent);
+        startActivityForResult(intent, SettingsActivity.REQUEST_CODE_SETTING);
+    }
+
+    @Override
+    public void restart() {
+        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mPresenter.onActivityResult(requestCode, resultCode, data);
+    }
+
     @Override
     public void setToolbarTitle(String title) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -1,11 +1,11 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
+import android.app.Activity;
 import android.content.Context;
-import android.widget.Toast;
+import android.content.Intent;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Prefs;
-import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
+import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 
 public class MainPresenterImpl implements MainPresenter {
     MainPresenter.View mView;
@@ -37,5 +37,19 @@ public class MainPresenterImpl implements MainPresenter {
         mView.onInit();
         mView.setVersionName(context.getString(R.string.app_ver)+mModel.getVersionName(context));
         mView.initAd(mModel.getCaulyAdView(context));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK) {
+            if(requestCode == SettingsActivity.REQUEST_CODE_SETTING) {
+                if (data != null) {
+                    if (data.getBooleanExtra("restart", false)) {
+                        mView.restart();
+                    }
+                }
+            }
+        }
+
     }
 }
