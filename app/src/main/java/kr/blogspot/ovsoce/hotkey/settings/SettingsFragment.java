@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.settings;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;

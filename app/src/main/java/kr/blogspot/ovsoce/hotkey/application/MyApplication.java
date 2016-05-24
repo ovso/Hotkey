@@ -2,10 +2,13 @@ package kr.blogspot.ovsoce.hotkey.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
+import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 
 /**
@@ -21,7 +24,18 @@ public class MyApplication extends Application {
         mDatabaseHelper = new DatabaseHelper(getApplicationContext());
         mDatabaseHelper.getWritableDatabase();
 
+        setFonts();
     }
+
+    /**
+     * 글꼴을 설정하는 메서드
+     */
+    private void setFonts() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String fonts = sharedPreferences.getString("fonts", "NanumBarunGothic.ttf");
+        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/"+fonts);
+    }
+
     public DatabaseHelper getDatabaseHelper() {
         return mDatabaseHelper;
     }
