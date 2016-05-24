@@ -10,9 +10,9 @@
     android:positiveButtonText="@null"
     android:dependency="useUserName"
     <ListPreference
-        android:defaultValue="20"
-        android:entries="@array/array_font_size"
-        android:entryValues="@array/array_font_size_value"
+        android:defaultValue="1.0"
+        android:entries="@array/array_fonts_size"
+        android:entryValues="@array/array_fonts_size_value"
         android:key="fonts_size"
         android:title="@string/settings_fonts_size"
         android:summary="@string/settings_fonts_size_summary" />

@@ -2,19 +2,24 @@ package kr.blogspot.ovsoce.hotkey.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 
 import com.fsn.cauly.CaulyAdInfo;
 import com.fsn.cauly.CaulyAdInfoBuilder;
 import com.fsn.cauly.CaulyAdView;
 
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
+import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 
 public class MainModel extends Model {
 
     public final static String URL_PLAYSTORE = "https://play.google.com/store/apps/details?id=kr.blogspot.ovsoce.hotkey";
     public final static String URL_REVIEW = "market://details?id=kr.blogspot.ovsoce.hotkey";
     public final static String AD_ID_CAULY = "V2f5YVvL";
+    private Context fonts;
 
     public Intent getEmailIntent(Context context) {
         Uri uri = Uri.parse(context.getString(R.string.email_uri));
@@ -47,4 +52,13 @@ public class MainModel extends Model {
         view.setAdInfo(info);
         return view;
     }
+
+    public void setFontsSize(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        float fonts_size = Float.parseFloat(sharedPreferences.getString("fonts_size", "0.8"));
+        Log.d("fonts_size = " + fonts_size);
+        TypefaceUtil.fontsSize(context, fonts_size);
+
+    }
+
 }

@@ -1,19 +1,16 @@
 package kr.blogspot.ovsoce.hotkey.application;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
+import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 
-/**
- * Created by ovso on 2015. 10. 22..
- */
 public class MyApplication extends Application {
 
     DatabaseHelper mDatabaseHelper;
@@ -26,7 +23,6 @@ public class MyApplication extends Application {
 
         setFonts();
     }
-
     /**
      * 글꼴을 설정하는 메서드
      */
