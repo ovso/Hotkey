@@ -20,6 +20,7 @@ public class SettingsFragment extends PreferenceFragment implements
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
+
         ListPreference fontsListPrefs = (ListPreference) findPreference("fonts");
         fontsListPrefs.setOnPreferenceChangeListener(this);
         String title = getFontName(fontsListPrefs, fontsListPrefs.getValue());

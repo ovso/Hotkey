@@ -4,19 +4,15 @@
         <item>네이버 나눔바른고딕체</item>
         <item>네이버 나눔손글씨펜체</item>
         <item>롯데마트체</item>
-        <item>배달의민족 한나체</item>
-        <item>KBIZ한마음명조체</item>
     </string-array>
     <string-array name="font_names_value">
         <item>NanumBarunGothic.ttf</item>
         <item>NanumPen.ttf</item>
         <item>LottemartBold.ttf</item>
-        <item>BMHANNA_11yrs_ttf.ttf</item>
-        <item>KBIZMyeongJoB.otf</item>
     </string-array>
     <string-array name="array_fonts_size">
+        <item>Small</item>
         <item>Basic</item>
-        <item>Middle</item>
         <item>Big</item>
     </string-array>
     <string-array name="array_fonts_size_value">

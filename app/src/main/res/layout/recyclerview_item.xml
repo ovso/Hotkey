@@ -6,8 +6,8 @@
     <View
         android:id="@+id/v_block"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#CCCCCC" />
+        android:layout_height="125dp"
+        android:background="#cccccc" /><!-- height에 따라 박스의 세로가 커진다 -->
 
     <TextView
         android:id="@+id/tv_name"
@@ -16,6 +16,7 @@
         android:textColor="@android:color/white"
         android:textSize="27sp"
         android:textStyle="bold"
-        android:gravity="center|center_horizontal"
-        android:layout_margin="3dp"/>
+        android:gravity="center"
+        android:layout_margin="3dp"
+        android:maxLines="3"/>
 </RelativeLayout>

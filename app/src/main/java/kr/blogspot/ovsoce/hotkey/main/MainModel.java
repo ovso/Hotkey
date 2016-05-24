@@ -55,7 +55,7 @@ public class MainModel extends Model {
 
     public void setFontsSize(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        float fonts_size = Float.parseFloat(sharedPreferences.getString("fonts_size", "0.8"));
+        float fonts_size = Float.parseFloat(sharedPreferences.getString("fonts_size", "1.0"));
         Log.d("fonts_size = " + fonts_size);
         TypefaceUtil.fontsSize(context, fonts_size);
 

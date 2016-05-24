@@ -1,17 +1,12 @@
 package kr.blogspot.ovsoce.hotkey.settings;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
-import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 
 public class SettingsActivity extends AppCompatActivity implements SettingsPresenter.View {
     private SettingsPresenter mPresenter;
@@ -34,15 +29,6 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
 
     @Override
     public void onInit() {
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_settings);
-//        toolbar.setTitle(R.string.action_settings);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-/*        getSupportFragmentManager().beginTransaction().replace(
-                R.id.content_fragment,
-                new SettingsFragment(),
-                "settings");*/
     }
 
     @Override
