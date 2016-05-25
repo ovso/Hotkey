@@ -2,7 +2,9 @@ package kr.blogspot.ovsoce.hotkey.main;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -220,20 +222,25 @@ public class MainActivity extends AppCompatActivity
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return DEFAULT_TITLE_RES_ID.length;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return getString(R.string.menu_title_family);
-                case 1:
-                    return getString(R.string.menu_title_friends);
-                case 2:
-                    return getString(R.string.menu_title_others);
-            }
-            return null;
+            return getTabItemName(position);
+        }
+
+        private SharedPreferences getSharedPreferences(){
+            return PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        }
+        private String getTabItemName(int position) {
+            SharedPreferences prefs = getSharedPreferences();
+            String key = "tab_"+position;
+            String defValue = getString(DEFAULT_TITLE_RES_ID[position]);
+
+            return prefs.getString(key, defValue);
         }
     }
+    private final static int[] DEFAULT_TITLE_RES_ID = {
+            R.string.menu_title_family,R.string.menu_title_friends,R.string.menu_title_others};
 }
