@@ -49,4 +49,8 @@
     <string name="settings_fonts_size_summary">설정 후 재시작해야 전체 반영 됩니다.</string>
     <string name="settings_btn_restart">앱 재시작</string>
     <string name="settings_btn_cancel">취소</string>
+
+    <!-- Change name dialog -->
+    <string name="dialog_title_edit_name">이름 편집</string>
+    <string name="dialog_hint_edit_name">이름을 입력하세요</string>
 </resources>

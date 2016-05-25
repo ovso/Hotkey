@@ -52,4 +52,17 @@ public class MainPresenterImpl implements MainPresenter {
         }
 
     }
+
+    @Override
+    public void onTabSelected(int position) {
+        mView.setViewPagerCurrentItem(position);
+        mModel.setTabSelectedPosition(position);
+    }
+
+    @Override
+    public void onTabReselected(int position) {
+        if(position == mModel.getTabSelectedPosition()) {
+            mView.showEditNameDialog(position);
+        }
+    }
 }

@@ -13,6 +13,10 @@ public interface MainPresenter {
 
     void onActivityResult(int requestCode, int resultCode, Intent data);
 
+    void onTabSelected(int position);
+
+    void onTabReselected(int position);
+
     interface View {
         void navigateToEmail(Intent intent);
         void navigateToShare(Intent intent);
@@ -26,5 +30,9 @@ public interface MainPresenter {
         void navigateToSettings();
 
         void restart();
+
+        void setViewPagerCurrentItem(int position);
+
+        void showEditNameDialog(int position);
     }
 }

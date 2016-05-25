@@ -20,6 +20,7 @@ public class MainModel extends Model {
     public final static String URL_REVIEW = "market://details?id=kr.blogspot.ovsoce.hotkey";
     public final static String AD_ID_CAULY = "V2f5YVvL";
     private Context fonts;
+    private int tabSelectedPosition;
 
     public Intent getEmailIntent(Context context) {
         Uri uri = Uri.parse(context.getString(R.string.email_uri));
@@ -61,4 +62,11 @@ public class MainModel extends Model {
 
     }
 
+    public void setTabSelectedPosition(int tabSelectedPosition) {
+        this.tabSelectedPosition = tabSelectedPosition;
+    }
+
+    public int getTabSelectedPosition() {
+        return tabSelectedPosition;
+    }
 }

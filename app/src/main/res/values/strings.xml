@@ -49,4 +49,8 @@
     <string name="settings_fonts_size_summary">After you restart the entire set will be reflected</string>
     <string name="settings_btn_restart">Restart APP</string>
     <string name="settings_btn_cancel">cancel</string>
+
+    <!-- Change name dialog -->
+    <string name="dialog_title_edit_name">Edit name</string>
+    <string name="dialog_hint_edit_name">Name input</string>
 </resources>

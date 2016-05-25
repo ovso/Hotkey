@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fsn.cauly.CaulyAdView;
 
@@ -74,7 +74,8 @@ public class MainActivity extends AppCompatActivity
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                mViewPager.setCurrentItem(tab.getPosition(), true);
+                //mViewPager.setCurrentItem(tab.getPosition(), true);
+                mPresenter.onTabSelected(tab.getPosition());
             }
 
             @Override
@@ -83,13 +84,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
-        tabLayout.getChildAt(0).setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(MainActivity.this, "longClick!!", Toast.LENGTH_SHORT).show();
-                return false;
+                mPresenter.onTabReselected(tab.getPosition());
             }
         });
     }
@@ -159,6 +154,30 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public void setViewPagerCurrentItem(int position) {
+        mViewPager.setCurrentItem(position, true);
+    }
+
+    @Override
+    public void showEditNameDialog(int position) {
+        new EditNameAlertDialogBuilder(this, R.layout.dialog_custom_edit_tab_name)
+                .setTitle(R.string.dialog_title_edit_name)
+                .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
     }
 
     @Override
