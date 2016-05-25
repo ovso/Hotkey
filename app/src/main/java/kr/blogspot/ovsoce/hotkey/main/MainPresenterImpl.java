@@ -3,6 +3,9 @@ package kr.blogspot.ovsoce.hotkey.main;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.widget.EditText;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
@@ -60,9 +63,23 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void onTabReselected(int position) {
+    public void onTabReselected(Context context, int position) {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String name = prefs.getString("tab_"+position,
+                context.getString(MainActivity.DEFAULT_TITLE_RES_ID[position]));
+
+
         if(position == mModel.getTabSelectedPosition()) {
-            mView.showEditNameDialog(position);
+            mView.showEditNameDialog(name, position);
         }
+    }
+
+    @Override
+    public void onClickEditNameOk(Context context, String name, int position) {
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        editor.putString("tab_"+position, name);
+        editor.apply();
+        mView.setTabTitle(name, position);
     }
 }

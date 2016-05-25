@@ -14,11 +14,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.fsn.cauly.CaulyAdView;
@@ -58,7 +60,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //findViewById(R.id.btn_menu_edit).setOnClickListener(this);
         findViewById(R.id.fab).setVisibility(View.GONE);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                mPresenter.onTabReselected(tab.getPosition());
+                mPresenter.onTabReselected(getApplicationContext(), tab.getPosition());
             }
         });
     }
@@ -164,22 +165,27 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void showEditNameDialog(int position) {
-        new EditNameAlertDialogBuilder(this, R.layout.dialog_custom_edit_tab_name)
-                .setTitle(R.string.dialog_title_edit_name)
+    public void showEditNameDialog(String name, final int position) {
+        final View view = getLayoutInflater().inflate(R.layout.dialog_custom_edit_tab_name, null);
+        final EditText nameEdit = (EditText) view.findViewById(R.id.et_edit_name);
+        nameEdit.setText(name);
+        new AlertDialog.Builder(this).setTitle(R.string.dialog_title_edit_name)
+                .setView(view)
                 .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        String name = nameEdit.getText().toString().trim();
+                        mPresenter.onClickEditNameOk(getApplicationContext(), name, position);
                     }
                 })
-                .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
+                .setNegativeButton(R.string.btn_cancel, null)
                 .show();
+    }
+
+    @Override
+    public void setTabTitle(String name, int position) {
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.getTabAt(position).setText(name);
     }
 
     @Override
@@ -241,6 +247,6 @@ public class MainActivity extends AppCompatActivity
             return prefs.getString(key, defValue);
         }
     }
-    private final static int[] DEFAULT_TITLE_RES_ID = {
+    public final static int[] DEFAULT_TITLE_RES_ID = {
             R.string.menu_title_family,R.string.menu_title_friends,R.string.menu_title_others};
 }

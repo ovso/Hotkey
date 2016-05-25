@@ -2,6 +2,7 @@ package kr.blogspot.ovsoce.hotkey.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.EditText;
 
 import com.fsn.cauly.CaulyAdView;
 
@@ -15,7 +16,9 @@ public interface MainPresenter {
 
     void onTabSelected(int position);
 
-    void onTabReselected(int position);
+    void onTabReselected(Context context, int position);
+
+    void onClickEditNameOk(Context context, String name, int position);
 
     interface View {
         void navigateToEmail(Intent intent);
@@ -33,6 +36,8 @@ public interface MainPresenter {
 
         void setViewPagerCurrentItem(int position);
 
-        void showEditNameDialog(int position);
+        void showEditNameDialog(String name, int position);
+
+        void setTabTitle(String name, int position);
     }
 }
