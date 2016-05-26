@@ -8,8 +8,8 @@ android {
         applicationId "kr.blogspot.ovsoce.hotkey"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 12
-        versionName "0.8.3"
+        versionCode 13
+        versionName "0.8.4"
         renderscriptTargetApi 16
         renderscriptSupportModeEnabled true
     }
