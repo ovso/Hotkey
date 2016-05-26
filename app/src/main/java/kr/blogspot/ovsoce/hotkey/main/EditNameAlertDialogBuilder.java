@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
 
 public class EditNameAlertDialogBuilder extends AlertDialog.Builder {
     private View view;
@@ -17,35 +18,41 @@ public class EditNameAlertDialogBuilder extends AlertDialog.Builder {
         super(context);
         init(layoutResId, position);
     }
-    DialogInterface.OnClickListener onChangeTitleListener;
-    public EditNameAlertDialogBuilder setOnClickListener(DialogInterface.OnClickListener listener) {
-        onChangeTitleListener = listener;
-        return EditNameAlertDialogBuilder.this;
-    }
     private void init(int layoutResId, final int position) {
         view = LayoutInflater.from(getContext()).inflate(layoutResId, null);
-        super.setView(view);
+        setView(view);
+        setTitle(R.string.dialog_title_edit_name);
+        setIcon(android.R.drawable.ic_menu_edit);
         setName(position);
-        setNegativeButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
+        setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SharedPreferences.Editor editor = getSharedPreferences().edit();
-                EditText nameEt = (EditText) view.findViewById(R.id.et_edit_name);
-                editor.putString("tab_"+position, nameEt.getText().toString().trim());
-                editor.apply();
+                dialog.dismiss();
 
-                if (onChangeTitleListener != null) {
-                    // 메인 타이틀 바꿀 리스너구현해야함..
+                if (onChangeTabTitleListener != null) {
+                    EditText nameEt = (EditText) view.findViewById(R.id.et_edit_name);
+                    String name = nameEt.getText().toString().trim();
+                    if(name.length() > 0) {
+                        onChangeTabTitleListener.onChangeTabTitle(name, position);
+
+                        SharedPreferences.Editor editor = getSharedPreferences().edit();
+                        editor.putString("tab_"+position, name);
+                        editor.apply();
+                    } else {
+                        Log.d("empty");
+                    }
                 }
             }
         });
         setNegativeButton(R.string.btn_cancel, null);
     }
-    public void setOnChangeTitleListener(OnChangeTitleListener listener) {
-
+    private OnChangeTabTitleListener onChangeTabTitleListener;
+    public EditNameAlertDialogBuilder setOnChangeTabTitleListener(OnChangeTabTitleListener listener) {
+        onChangeTabTitleListener = listener;
+        return this;
     }
-    public interface OnChangeTitleListener {
-        void onChange(String title);
+    public interface OnChangeTabTitleListener {
+        void onChangeTabTitle(String title, int position);
     }
     private void setName(int position) {
         EditText nameEt = (EditText) view.findViewById(R.id.et_edit_name);
@@ -57,9 +64,5 @@ public class EditNameAlertDialogBuilder extends AlertDialog.Builder {
 
     private SharedPreferences getSharedPreferences(){
         return PreferenceManager.getDefaultSharedPreferences(getContext());
-    }
-
-    public View getView() {
-        return view;
     }
 }

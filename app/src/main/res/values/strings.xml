@@ -51,6 +51,6 @@
     <string name="settings_btn_cancel">cancel</string>
 
     <!-- Change name dialog -->
-    <string name="dialog_title_edit_name">Edit name</string>
-    <string name="dialog_hint_edit_name">Name input</string>
+    <string name="dialog_title_edit_name">Edit</string>
+    <string name="empty_input_text">No values are entered</string>
 </resources>

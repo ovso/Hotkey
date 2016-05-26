@@ -2,11 +2,8 @@ package kr.blogspot.ovsoce.hotkey.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.EditText;
 
 import com.fsn.cauly.CaulyAdView;
-
-import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 
 public interface MainPresenter {
     void onNavigationItemSelected(Context context, int id);
@@ -39,5 +36,10 @@ public interface MainPresenter {
         void showEditNameDialog(String name, int position);
 
         void setTabTitle(String name, int position);
+
+        void showToast(int resId);
+        void showToast(String msg);
+
+        void showEditNameError(int resId);
     }
 }

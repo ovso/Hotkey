@@ -51,6 +51,6 @@
     <string name="settings_btn_cancel">취소</string>
 
     <!-- Change name dialog -->
-    <string name="dialog_title_edit_name">이름 편집</string>
-    <string name="dialog_hint_edit_name">이름을 입력하세요</string>
+    <string name="dialog_title_edit_name">편집</string>
+    <string name="empty_input_text">입력된 값이 없습니다</string>
 </resources>

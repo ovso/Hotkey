@@ -69,4 +69,17 @@ public class MainModel extends Model {
     public int getTabSelectedPosition() {
         return tabSelectedPosition;
     }
+
+    public String getTabName(Context context, int position) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String defValue = context.getString(MainActivity.DEFAULT_TITLE_RES_ID[position]);
+        return prefs.getString("tab_"+position, defValue);
+    }
+
+    public void setTabName(Context context, String name, int position) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("tab_"+position, name);
+        editor.apply();
+    }
 }

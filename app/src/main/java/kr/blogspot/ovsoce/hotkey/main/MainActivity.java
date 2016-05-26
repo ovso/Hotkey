@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fsn.cauly.CaulyAdView;
 
@@ -31,7 +33,7 @@ import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View {
+        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View{
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     MainPresenter mPresenter;
@@ -163,14 +165,13 @@ public class MainActivity extends AppCompatActivity
     public void setViewPagerCurrentItem(int position) {
         mViewPager.setCurrentItem(position, true);
     }
-
+    private View editNameDialogView;
     @Override
     public void showEditNameDialog(String name, final int position) {
-        final View view = getLayoutInflater().inflate(R.layout.dialog_custom_edit_tab_name, null);
-        final EditText nameEdit = (EditText) view.findViewById(R.id.et_edit_name);
+        editNameDialogView = getLayoutInflater().inflate(R.layout.dialog_custom_edit_tab_name, null);
+        final EditText nameEdit = (EditText) editNameDialogView.findViewById(R.id.et_edit_name);
         nameEdit.setText(name);
-        new AlertDialog.Builder(this).setTitle(R.string.dialog_title_edit_name)
-                .setView(view)
+        new AlertDialog.Builder(this).setTitle(R.string.dialog_title_edit_name).setIcon(android.R.drawable.ic_menu_edit).setView(editNameDialogView)
                 .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -186,6 +187,22 @@ public class MainActivity extends AppCompatActivity
     public void setTabTitle(String name, int position) {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.getTabAt(position).setText(name);
+    }
+
+    @Override
+    public void showToast(int resId) {
+        Toast.makeText(MainActivity.this, resId, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showToast(String msg) {
+        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showEditNameError(int resId) {
+        TextInputLayout t = (TextInputLayout) editNameDialogView.findViewById(R.id.til_edit_tab_name);
+        t.setError(getString(resId));
     }
 
     @Override
