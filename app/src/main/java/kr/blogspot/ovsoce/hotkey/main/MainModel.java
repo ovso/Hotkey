@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import com.fsn.cauly.CaulyAdInfo;
 import com.fsn.cauly.CaulyAdInfoBuilder;
 import com.fsn.cauly.CaulyAdView;
+import com.fsn.cauly.CaulyAdViewListener;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
@@ -44,13 +45,14 @@ public class MainModel extends Model {
         intent.setData(Uri.parse(URL_REVIEW));
         return intent;
     }
-    public CaulyAdView getCaulyAdView(Context context) {
+    public CaulyAdView getCaulyAdView(Context context, CaulyAdViewListener listener) {
         CaulyAdView view;
         CaulyAdInfo info = new CaulyAdInfoBuilder(AD_ID_CAULY)
                     .effect(CaulyAdInfo.Effect.Circle.toString())
                     .build();
         view = new CaulyAdView(context);
         view.setAdInfo(info);
+        view.setAdViewListener(listener);
         return view;
     }
 

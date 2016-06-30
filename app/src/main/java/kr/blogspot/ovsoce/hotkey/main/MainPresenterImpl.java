@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.fsn.cauly.CaulyAdView;
+import com.fsn.cauly.CaulyAdViewListener;
+
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 
@@ -37,9 +40,30 @@ public class MainPresenterImpl implements MainPresenter {
     public void onCreate(Context context) {
         mModel.setFontsSize(context);
         mView.onInit();
-        mView.initAd(mModel.getCaulyAdView(context));
+        mView.initAd(mModel.getCaulyAdView(context, caulyAdViewListener));
         mView.setVersionName(context.getString(R.string.app_ver)+mModel.getVersionName(context));
     }
+    CaulyAdViewListener caulyAdViewListener = new CaulyAdViewListener() {
+        @Override
+        public void onReceiveAd(CaulyAdView caulyAdView, boolean b) {
+
+        }
+
+        @Override
+        public void onFailedToReceiveAd(CaulyAdView caulyAdView, int i, String s) {
+            caulyAdView.reload();
+        }
+
+        @Override
+        public void onShowLandingScreen(CaulyAdView caulyAdView) {
+
+        }
+
+        @Override
+        public void onCloseLandingScreen(CaulyAdView caulyAdView) {
+
+        }
+    };
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

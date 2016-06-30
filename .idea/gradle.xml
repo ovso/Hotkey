@@ -8,7 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/CaulySDK-3.3.30" />
+            <option value="$PROJECT_DIR$/CaulySDK-3.4.8" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/tedpermission" />
           </set>
@@ -16,7 +16,7 @@
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/CaulySDK-3.3.30" />
+            <option value="$PROJECT_DIR$/CaulySDK-3.4.8" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/tedpermission" />
           </set>

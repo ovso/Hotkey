@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CaulySDK-3.3.30/CaulySDK-3.3.30.iml" filepath="$PROJECT_DIR$/CaulySDK-3.3.30/CaulySDK-3.3.30.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CaulySDK-3.4.8/CaulySDK-3.4.8.iml" filepath="$PROJECT_DIR$/CaulySDK-3.4.8/CaulySDK-3.4.8.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hotkey.iml" filepath="$PROJECT_DIR$/Hotkey.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/tedpermission/tedpermission.iml" filepath="$PROJECT_DIR$/tedpermission/tedpermission.iml" />
