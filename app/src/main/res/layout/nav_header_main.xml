@@ -32,7 +32,7 @@
             android:id="@+id/tv_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ver. 0.0.1" />
+            android:text="@string/app_ver" />
         <View
             android:layout_width="0dp"
             android:layout_weight="1"

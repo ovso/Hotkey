@@ -1,1 +1,1 @@
-include ':app', ':CaulySDK-3.3.30'
+include ':app', ':CaulySDK-3.3.30', ':tedpermission'

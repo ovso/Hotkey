@@ -37,8 +37,8 @@ public class MainPresenterImpl implements MainPresenter {
     public void onCreate(Context context) {
         mModel.setFontsSize(context);
         mView.onInit();
-        mView.setVersionName(context.getString(R.string.app_ver)+mModel.getVersionName(context));
         mView.initAd(mModel.getCaulyAdView(context));
+        mView.setVersionName(context.getString(R.string.app_ver)+mModel.getVersionName(context));
     }
 
     @Override

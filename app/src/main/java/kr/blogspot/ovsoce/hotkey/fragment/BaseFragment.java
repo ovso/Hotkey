@@ -1,6 +1,7 @@
 package kr.blogspot.ovsoce.hotkey.fragment;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,7 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.dialog.ItemAlertDialogBuilder;
 import kr.blogspot.ovsoce.hotkey.fragment.adapter.MyAdapter;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
@@ -76,8 +84,25 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     }
     private final static int REQUEST_CODE_PERMISSIONS_CALL_PHONE = 1;
     @Override
-    public void makeACall(Intent intent) {
+    public void makeACall(final Intent intent) {
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Intent i = intent;
+                startActivity(i);
+            }
 
+            @Override
+            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                Log.d(deniedPermissions.toString());
+            }
+        };
+        new TedPermission(getActivity())
+                .setPermissionListener(permissionListener)
+                .setDeniedMessage(R.string.call_phone_denied_msg)
+                .setPermissions(Manifest.permission.CALL_PHONE)
+                .check();
+/*
         if( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
             Intent i = intent;// intnet가 연속으로 와야 전화가 걸린다?
             if(getActivity().checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -88,11 +113,9 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
         } else {
             startActivity(intent);
         }
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+ */
+
     }
 
     @Override

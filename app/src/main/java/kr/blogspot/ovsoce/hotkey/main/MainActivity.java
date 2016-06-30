@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 import com.fsn.cauly.CaulyAdView;
 
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
@@ -219,7 +221,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void setVersionName(String versionName) {
-        ((TextView)findViewById(R.id.tv_version)).setText(versionName);
+        //((TextView)findViewById(R.id.tv_version)).setText(versionName);
+        Log.d("versionName = " + versionName);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if(navigationView != null) {
+            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tv_version)).setText(versionName);
+        }
     }
 
     @Override

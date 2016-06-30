@@ -53,4 +53,6 @@
     <!-- Change name dialog -->
     <string name="dialog_title_edit_name">Edit</string>
     <string name="empty_input_text">No values are entered</string>
+
+    <string name="call_phone_denied_msg">1. You can make a call must grant permission. \n 2. If a file manager app installed may not be pressing the Allow button. If you do, you must go to Settings to allow direct access.</string>
 </resources>
