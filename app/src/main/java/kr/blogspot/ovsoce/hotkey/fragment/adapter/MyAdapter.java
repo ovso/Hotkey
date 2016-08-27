@@ -17,8 +17,8 @@ import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
  * RecyclerView Adapter
  */
 public class MyAdapter extends RecyclerView.Adapter{
-    List<ContactsItem> mList;
-    OnAdapterItemClickListener mListener;
+    private List<ContactsItem> mList;
+    private OnAdapterItemClickListener mListener;
     public MyAdapter(List<ContactsItem> list,OnAdapterItemClickListener listener) {
         mList = list;
         mListener = listener;
@@ -50,11 +50,11 @@ public class MyAdapter extends RecyclerView.Adapter{
         return mList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    private class MyViewHolder extends RecyclerView.ViewHolder{
         TextView nameTv;
         View blockV;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             nameTv = (TextView) itemView.findViewById(R.id.tv_name);
             blockV = itemView.findViewById(R.id.v_block);
