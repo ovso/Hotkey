@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven' // 그래들 2.14.1로 업그레이드 하면서.. 주석처리
 apply plugin: 'maven'
 group = 'com.github.ParkSangGwon'
 
