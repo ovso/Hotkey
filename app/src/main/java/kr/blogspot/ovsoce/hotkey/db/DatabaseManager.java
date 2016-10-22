@@ -8,4 +8,5 @@ public abstract class DatabaseManager {
         mContext = context;
     }
     public abstract void close();
+
 }

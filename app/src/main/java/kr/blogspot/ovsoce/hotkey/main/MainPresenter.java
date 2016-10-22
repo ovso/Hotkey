@@ -15,9 +15,7 @@ public interface MainPresenter {
 
     void onTabReselected(int position);
 
-    void onClickEditNameOk(String name, int position);
-
-    void addTab();
+    void onTabNameEditDialogButtonClick(String tabName, int which);
 
     interface View {
         void navigateToEmail(Intent intent);
@@ -33,7 +31,7 @@ public interface MainPresenter {
 
         void setViewPagerCurrentItem(int position);
 
-        void showEditNameDialog(String name, int position);
+        void showTabNameEditDialog(String name);
 
         void setTabTitle(String name, int position);
 
@@ -53,5 +51,6 @@ public interface MainPresenter {
         void setViewPager();
 
         void setTabLayout();
+
     }
 }

@@ -81,13 +81,14 @@ public class MainActivity extends AppCompatActivity
         mViewPager.setAdapter(mSectionsPagerAdapter);
     }
 
+    @BindView(R.id.tabs)
+    TabLayout mTabLayout;
     @Override
     public void setTabLayout() {
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 //mViewPager.setCurrentItem(tab.getPosition(), true);
@@ -168,7 +169,16 @@ public class MainActivity extends AppCompatActivity
 
     @OnClick(R.id.add_tab_button)
     void onAddTabClick() {
-        mPresenter.addTab();
+        new AlertDialog.Builder(this)
+                .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("");
+                    }
+                })
+                .setNegativeButton(R.string.btn_cancel, null)
+                .setMessage(R.string.do_you_want_to_add_a_tab)
+                .show();
     }
 
     @Override
@@ -183,28 +193,36 @@ public class MainActivity extends AppCompatActivity
     public void setViewPagerCurrentItem(int position) {
         mViewPager.setCurrentItem(position, true);
     }
-    private View editNameDialogView;
+
+
+    private View mTabNameEditDialogView;
     @Override
-    public void showEditNameDialog(String name, final int position) {
-        editNameDialogView = getLayoutInflater().inflate(R.layout.dialog_custom_edit_tab_name, null);
-        final EditText nameEdit = (EditText) editNameDialogView.findViewById(R.id.et_edit_name);
+    public void showTabNameEditDialog(String name) {
+        mTabNameEditDialogView = getLayoutInflater().inflate(R.layout.dialog_custom_edit_tab_name, null);
+        final EditText nameEdit = (EditText) mTabNameEditDialogView.findViewById(R.id.et_edit_name);
         nameEdit.setText(name);
-        new AlertDialog.Builder(this).setTitle(R.string.dialog_title_edit_name).setIcon(android.R.drawable.ic_menu_edit).setView(editNameDialogView)
-                .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String name = nameEdit.getText().toString().trim();
-                        mPresenter.onClickEditNameOk(name, position);
-                    }
-                })
-                .setNegativeButton(R.string.btn_cancel, null)
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.dialog_title_edit_name)
+                .setIcon(android.R.drawable.ic_menu_edit)
+                .setView(mTabNameEditDialogView)
+                .setPositiveButton(R.string.btn_ok, mOnTabNameEditDialogClickListener)
+                .setNegativeButton(R.string.btn_cancel, mOnTabNameEditDialogClickListener)
+                .setNeutralButton(R.string.btn_del_tab, mOnTabNameEditDialogClickListener)
                 .show();
     }
 
+    private DialogInterface.OnClickListener mOnTabNameEditDialogClickListener
+            = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            EditText nameEdit = (EditText) mTabNameEditDialogView.findViewById(R.id.et_edit_name);
+            String name = nameEdit.getText().toString().trim();
+            mPresenter.onTabNameEditDialogButtonClick(name, which);
+        }
+    };
     @Override
     public void setTabTitle(String name, int position) {
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.getTabAt(position).setText(name);
+        mTabLayout.getTabAt(position).setText(name);
     }
 
     @Override
@@ -219,7 +237,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void showEditNameError(int resId) {
-        TextInputLayout t = (TextInputLayout) editNameDialogView.findViewById(R.id.til_edit_tab_name);
+        TextInputLayout t = (TextInputLayout) mTabNameEditDialogView.findViewById(R.id.til_edit_tab_name);
         t.setError(getString(resId));
     }
 

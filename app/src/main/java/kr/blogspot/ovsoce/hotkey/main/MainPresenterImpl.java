@@ -1,24 +1,30 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
 import com.fsn.cauly.CaulyAdView;
 import com.fsn.cauly.CaulyAdViewListener;
+import com.gun0912.tedpermission.util.ObjectUtils;
 
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 
 class MainPresenterImpl implements MainPresenter {
     private MainPresenter.View mView;
     private MainModel mModel;
     private MainDBManager mDBManager;
+
+    private TabManager mTabManager;
     MainPresenterImpl(MainPresenter.View view) {
         mView = view;
+
         mModel = new MainModel(mView.getContext());
 
         mDBManager = new MainDBManager(mView.getContext());
+
+        mTabManager = new TabManager(mView.getContext(), mDBManager);
     }
 
     @Override
@@ -88,33 +94,33 @@ class MainPresenterImpl implements MainPresenter {
     @Override
     public void onTabSelected(int position) {
         mView.setViewPagerCurrentItem(position);
-        mModel.setTabSelectedPosition(position);
+        mTabManager.setTabSelectedPosition(position);
     }
 
     @Override
     public void onTabReselected(int position) {
-        if(position == mModel.getTabSelectedPosition()) {
-            String name = mModel.getTabName(position);
-            mView.showEditNameDialog(name, position);
+        if(position == mTabManager.getTabSelectedPosition()) {
+            String name = mDBManager.getTabName(position);
+            mView.showTabNameEditDialog(name);
         }
     }
+
     @Override
-    public void onClickEditNameOk(String name, int position) {
-        if(name.length()<1) {
-            String tabName = mModel.getTabName(position);
-            mView.showEditNameDialog(tabName, position);
-            //mView.showToast(R.string.empty_input_text);
-            mView.showEditNameError(R.string.empty_input_text);
+    public void onTabNameEditDialogButtonClick(String tabName, int which) {
+        if(which == TabManager.BUTTON_TYPE_OK) {
+            if(ObjectUtils.isEmpty(tabName)) {
+                String oldTabName = mDBManager.getTabName(mTabManager.getTabSelectedPosition());
+                mView.showTabNameEditDialog(oldTabName);
+                mView.showEditNameError(R.string.empty_input_text);
+            } else {
+                mDBManager.setTabName(tabName, mTabManager.getTabSelectedPosition());
+                mView.setTabTitle(tabName, mTabManager.getTabSelectedPosition());
+            }
+        } else if(which == TabManager.BUTTON_TYPE_DEL) {
+            Log.d("");
         } else {
-            mModel.setTabName(name, position);
-            String tabName = mModel.getTabName(position);
-            mView.setTabTitle(tabName, position);
+            Log.d("cancel");
         }
-
     }
 
-    @Override
-    public void addTab() {
-
-    }
 }

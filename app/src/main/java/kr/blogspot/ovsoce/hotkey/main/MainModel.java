@@ -66,27 +66,6 @@ public class MainModel extends Model {
         TypefaceUtil.fontsSize(mContext, fonts_size);
     }
 
-    public void setTabSelectedPosition(int tabSelectedPosition) {
-        this.tabSelectedPosition = tabSelectedPosition;
-    }
-
-    public int getTabSelectedPosition() {
-        return tabSelectedPosition;
-    }
-
-    public String getTabName(int position) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        String defValue = mContext.getString(MainActivity.DEFAULT_TITLE_RES_ID[position]);
-        return prefs.getString("tab_"+position, defValue);
-    }
-
-    public void setTabName(String name, int position) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("tab_"+position, name);
-        editor.apply();
-    }
-
     public String getVersionName() {
         return new StringBuilder(mContext.getString(R.string.app_ver))
                 .append(getAppVersionName()).toString();
