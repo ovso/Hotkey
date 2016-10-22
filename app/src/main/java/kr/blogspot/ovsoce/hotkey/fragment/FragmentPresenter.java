@@ -8,7 +8,7 @@ import kr.blogspot.ovsoce.hotkey.fragment.adapter.MyAdapter;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 
 public interface FragmentPresenter{
-    void init(Context context, int menuId, RecyclerView recyclerView);
+    void init(int menuId, RecyclerView recyclerView);
     void setItemId(Context context, RecyclerView recyclerView, String itemId);
     interface View {
         void initRecyclerView(MyAdapter adapter, RecyclerView.LayoutManager layoutManager);

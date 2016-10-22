@@ -15,24 +15,23 @@ public class BaseFragmentPresenterImpl implements BaseFragmentPresenter{
     private BaseFragmentModel mModel;
     public BaseFragmentPresenterImpl(View view) {
         mView = view;
-        mModel = new BaseFragmentModel();
+        mModel = new BaseFragmentModel(mView.getContext());
     }
 
     @Override
-    public void init(final Context context, int sectionNumber, final RecyclerView recyclerView) {
+    public void init(int sectionNumber, final RecyclerView recyclerView) {
         mModel.setMenuId(sectionNumber);
 
-        List<ContactsItem> list = mModel.getContactsItemList(context);
+        List<ContactsItem> list = mModel.getContactsItemList();
 
         MyAdapter adapter = new MyAdapter(list, new MyAdapter.OnAdapterItemClickListener() {
             @Override
             public void onClick(android.view.View v) {
                 int position = recyclerView.getChildAdapterPosition(v);
-                Intent intent = mModel.getMakeACallIntent(v.getContext(), position);
+                Intent intent = mModel.getMakeACallIntent(position);
                 if(intent != null) {
                     mView.makeACall(intent);
                 } else {
-                    //mView.showToast(mModel.getMessage(context, FragmentModel.MESSAGE_TYPE.EMPTY_NUMBER));
                     onLongClick(v);
                 }
             }
@@ -40,18 +39,18 @@ public class BaseFragmentPresenterImpl implements BaseFragmentPresenter{
             @Override
             public boolean onLongClick(android.view.View v) {
                 int position = recyclerView.getChildAdapterPosition(v);
-                ContactsItem item = mModel.getContactsItem(v.getContext(), position);
+                ContactsItem item = mModel.getContactsItem(position);
                 mView.showItemSetDialog(item);
                 return true;
             }
         });
 
-        mView.initRecyclerView(adapter, new GridLayoutManager(context, mModel.getGridLayoutSpanCount(context)));
+        mView.initRecyclerView(adapter, new GridLayoutManager(mView.getContext(), mModel.getGridLayoutSpanCount()));
     }
 
     @Override
     public void setItemId(Context context,RecyclerView recyclerView, String itemId) {
-        ContactsItem item = mModel.getContactsItem(context, Integer.valueOf(itemId));
+        ContactsItem item = mModel.getContactsItem(Integer.valueOf(itemId));
         MyAdapter adapter = (MyAdapter) recyclerView.getAdapter();
         adapter.setUpdateItem(item);
         mView.updateRecyclerViewItem();

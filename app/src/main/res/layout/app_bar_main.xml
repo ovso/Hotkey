@@ -17,24 +17,46 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/toolbar_title_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/white"
+                    android:text="@string/app_name"/>
+                <ImageButton
+                    android:id="@+id/add_tab_button"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:src="@drawable/ic_content_add"
+                    android:scaleType="fitXY"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_gravity="right|center_vertical" />
+            </FrameLayout>
+        </android.support.v7.widget.Toolbar>
+
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextAppearance="@style/AppTheme.TextAppearance.Design.Tab"/>
+            app:tabTextAppearance="@style/AppTheme.TextAppearance.Design.Tab" />
 
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email"
-        android:visibility="gone"/>
+        android:src="@android:drawable/ic_menu_add"
+        android:visibility="gone" />
 
 </android.support.design.widget.CoordinatorLayout>

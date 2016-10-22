@@ -67,11 +67,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + KEY_NUMBER + " TEXT," + KEY_COLOR + " TEXT" + ")";
         db.execSQL(CREATE_OTHERS_TABLE);
 
-//        String CREATE_WHO_TABLE = "CREATE TABLE " + TABLE_WHO + "("
-//                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-//                + KEY_NUMBER + " TEXT," + KEY_COLOR + " TEXT" + ")";
-//
-//        db.execSQL(CREATE_WHO_TABLE);
         initDB(db);
     }
 
@@ -171,60 +166,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_COLOR, item.getColor());
         // Inserting Row
         db.insert(table, null, values);
-        //db.close(); // Closing database connection
     }
-
-//    public ArrayList<ContactsItem> getContactsItemList(int type) {
-//        String table = getTable(type);
-//
-//        try {
-//            mContactsItemList.clear();
-//
-//            // Select All Query
-//            String selectQuery = "SELECT  * FROM " + table;
-//
-//            SQLiteDatabase db = this.getWritableDatabase();
-//            Cursor cursor = db.rawQuery(selectQuery, null);
-//
-//            // looping through all rows and adding to list
-//            if (cursor.moveToFirst()) {
-//                do {
-//                    ContactsItem contact = new ContactsItemImpl(cursor.getString(1),cursor.getString(2),cursor.getString(3));
-//                    // Adding contact to list
-//                    mContactsItemList.add(contact);
-//                } while (cursor.moveToNext());
-//            }
-//
-//            // return contact list
-//            cursor.close();
-//            db.close();
-//            return mContactsItemList;
-//        } catch (Exception e) {
-//            Log.e("DatabaseHelper", e.toString());
-//        }
-//
-//        return mContactsItemList;
-//    }
-
-    // Deleting single contact
-//    public void deleteContact(int id) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.delete(TABLE_CONTACTS, KEY_ID + " = ?",
-//                new String[] { String.valueOf(id) });
-//        db.close();
-//    }
-
-    // Getting contacts Count
-//    public int Get_Total_Contacts() {
-//        String countQuery = "SELECT  * FROM " + TABLE_CONTACTS;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery(countQuery, null);
-//        cursor.close();
-//
-//        // return count
-//        return cursor.getCount();
-//    }
-
     public void exportDB(Context context) {
         //createExternalStoragePrivateFile
         // Create a path where we will place our private file on external
@@ -282,15 +224,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public String[] getDefaultColors() {
         return sDefaultColors;
     }
-//    public List<ContactsItem> getTableContactsItemList(int type) {
-//        List<ContactsItem> list = new ArrayList<ContactsItem>();
-//
-//        for(int i=0; i<100; i++) {
-//            list.add(getContactsItem(type, i+1));
-//        }
-//
-//        return list;
-//    }
+
     public List<ContactsItem> getTableContactsItemList(int type) {
         List<ContactsItem> list = new ArrayList<ContactsItem>();
         // Select All Query

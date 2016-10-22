@@ -23,45 +23,47 @@ public class MainModel extends Model {
     private Context fonts;
     private int tabSelectedPosition;
 
-    public Intent getEmailIntent(Context context) {
-        Uri uri = Uri.parse(context.getString(R.string.email_uri));
+    MainModel(Context context) {
+        super(context);
+    }
+    public Intent getEmailIntent() {
+        Uri uri = Uri.parse(mContext.getString(R.string.email_uri));
         Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.email_msg));
+        intent.putExtra(Intent.EXTRA_TEXT, mContext.getString(R.string.email_msg));
         return intent;
     }
 
-    public Intent getShareIntent(Context context) {
+    public Intent getShareIntent() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
-        intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name));
+        intent.putExtra(Intent.EXTRA_SUBJECT, mContext.getString(R.string.app_name));
         intent.putExtra(Intent.EXTRA_TEXT, URL_PLAYSTORE);
         intent.setType("text/plain");
 
-        return Intent.createChooser(intent, context.getString(R.string.share_to_others));
+        return Intent.createChooser(intent, mContext.getString(R.string.share_to_others));
     }
-    public Intent getReviewIntent(Context context) {
+    public Intent getReviewIntent() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(URL_REVIEW));
         return intent;
     }
-    public CaulyAdView getCaulyAdView(Context context, CaulyAdViewListener listener) {
+    public CaulyAdView getCaulyAdView(CaulyAdViewListener listener) {
         CaulyAdView view;
         CaulyAdInfo info = new CaulyAdInfoBuilder(AD_ID_CAULY)
                     .effect(CaulyAdInfo.Effect.Circle.toString())
                     .build();
-        view = new CaulyAdView(context);
+        view = new CaulyAdView(mContext);
         view.setAdInfo(info);
         view.setAdViewListener(listener);
         return view;
     }
 
-    public void setFontsSize(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    public void setFontsSize() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         float fonts_size = Float.parseFloat(sharedPreferences.getString("fonts_size", "1.0"));
         Log.d("fonts_size = " + fonts_size);
-        TypefaceUtil.fontsSize(context, fonts_size);
-
+        TypefaceUtil.fontsSize(mContext, fonts_size);
     }
 
     public void setTabSelectedPosition(int tabSelectedPosition) {
@@ -72,16 +74,21 @@ public class MainModel extends Model {
         return tabSelectedPosition;
     }
 
-    public String getTabName(Context context, int position) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String defValue = context.getString(MainActivity.DEFAULT_TITLE_RES_ID[position]);
+    public String getTabName(int position) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String defValue = mContext.getString(MainActivity.DEFAULT_TITLE_RES_ID[position]);
         return prefs.getString("tab_"+position, defValue);
     }
 
-    public void setTabName(Context context, String name, int position) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    public void setTabName(String name, int position) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("tab_"+position, name);
         editor.apply();
+    }
+
+    public String getVersionName() {
+        return new StringBuilder(mContext.getString(R.string.app_ver))
+                .append(getAppVersionName()).toString();
     }
 }

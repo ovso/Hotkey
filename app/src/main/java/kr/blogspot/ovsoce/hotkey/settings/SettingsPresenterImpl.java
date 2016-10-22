@@ -7,7 +7,7 @@ public class SettingsPresenterImpl implements SettingsPresenter {
     private SettingsModel mModel;
     public SettingsPresenterImpl(View view) {
         mView = view;
-        mModel = new SettingsModel();
+        mModel = new SettingsModel(mView.getContext());
     }
 
     @Override

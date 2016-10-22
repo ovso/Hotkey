@@ -3,8 +3,6 @@ package kr.blogspot.ovsoce.hotkey.main;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import com.fsn.cauly.CaulyAdView;
 import com.fsn.cauly.CaulyAdViewListener;
@@ -12,21 +10,23 @@ import com.fsn.cauly.CaulyAdViewListener;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 
-public class MainPresenterImpl implements MainPresenter {
-    MainPresenter.View mView;
-    MainModel mModel;
-
+class MainPresenterImpl implements MainPresenter {
+    private MainPresenter.View mView;
+    private MainModel mModel;
+    private MainDBManager mDBManager;
     MainPresenterImpl(MainPresenter.View view) {
         mView = view;
-        mModel = new MainModel();
+        mModel = new MainModel(mView.getContext());
+
+        mDBManager = new MainDBManager(mView.getContext());
     }
 
     @Override
-    public void onNavigationItemSelected(Context context, int menuId) {
+    public void onNavigationItemSelected(int menuId) {
         if(menuId == R.id.nav_share) {
-            mView.navigateToShare(mModel.getShareIntent(context));
+            mView.navigateToShare(mModel.getShareIntent());
         } else if(menuId == R.id.nav_review) {
-            mView.navigateToReview(mModel.getReviewIntent(context));
+            mView.navigateToReview(mModel.getReviewIntent());
         } else if(menuId == R.id.nav_help) {
             //mView.replaceFragment(mModel.getFragmentContainerViewId(), mModel.getFragment(menuId));
             //mView.setToolbarTitle(context.getString(R.string.app_name) + " : " + mModel.getToolbarTitle(context, menuId));
@@ -37,13 +37,19 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void onCreate(Context context) {
-        mModel.setFontsSize(context);
-        mView.onInit();
-        mView.initAd(mModel.getCaulyAdView(context, caulyAdViewListener));
-        mView.setVersionName(context.getString(R.string.app_ver)+mModel.getVersionName(context));
+    public void onCreate() {
+        mView.setVersionName(mModel.getVersionName());
+        mModel.setFontsSize();
+        mView.setToolbar();
+        mView.setDrawableLayout();
+        mView.setListener();
+        mView.setViewPager();
+        mView.setTabLayout();
+        mView.initAd(mModel.getCaulyAdView(caulyAdViewListener));
+
     }
-    CaulyAdViewListener caulyAdViewListener = new CaulyAdViewListener() {
+
+    private CaulyAdViewListener caulyAdViewListener = new CaulyAdViewListener() {
         @Override
         public void onReceiveAd(CaulyAdView caulyAdView, boolean b) {
 
@@ -86,24 +92,29 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void onTabReselected(Context context, int position) {
+    public void onTabReselected(int position) {
         if(position == mModel.getTabSelectedPosition()) {
-            String name = mModel.getTabName(context, position);
+            String name = mModel.getTabName(position);
             mView.showEditNameDialog(name, position);
         }
     }
     @Override
-    public void onClickEditNameOk(Context context, String name, int position) {
+    public void onClickEditNameOk(String name, int position) {
         if(name.length()<1) {
-            String tabName = mModel.getTabName(context, position);
+            String tabName = mModel.getTabName(position);
             mView.showEditNameDialog(tabName, position);
             //mView.showToast(R.string.empty_input_text);
             mView.showEditNameError(R.string.empty_input_text);
         } else {
-            mModel.setTabName(context, name, position);
-            String tabName = mModel.getTabName(context, position);
+            mModel.setTabName(name, position);
+            String tabName = mModel.getTabName(position);
             mView.setTabTitle(tabName, position);
         }
+
+    }
+
+    @Override
+    public void addTab() {
 
     }
 }

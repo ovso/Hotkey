@@ -13,27 +13,30 @@ import kr.blogspot.ovsoce.hotkey.main.Model;
 
 public abstract class FragmentModel extends Model {
 
+    public FragmentModel(Context context) {
+        super(context);
+    }
+
     public enum MESSAGE_TYPE{EMPTY_NUMBER};
 
-    public int getGridLayoutSpanCount(Context context) {
-        return context.getResources().getInteger(R.integer.recyclerview_gridlayout_spancount);
+    public int getGridLayoutSpanCount() {
+        return mContext.getResources().getInteger(R.integer.recyclerview_gridlayout_spancount);
     }
 
-    public List<ContactsItem> getContactsItemList(Context context) {
+    public List<ContactsItem> getContactsItemList() {
 
-        MyApplication app = (MyApplication) context.getApplicationContext();
+        MyApplication app = (MyApplication) mContext.getApplicationContext();
 
         return app.getDatabaseHelper().getTableContactsItemList(getMenuId());
-        //return app.getDatabaseHelper().getDummyData();
     }
-    public ContactsItem getContactsItem(Context context, int position) {
+    public ContactsItem getContactsItem(int position) {
         ContactsItem item = null;
-        MyApplication app = (MyApplication)context.getApplicationContext();
+        MyApplication app = (MyApplication)mContext.getApplicationContext();
         item = app.getDatabaseHelper().getContactsItem(getMenuId(), position);
         return item;
     }
-    public Intent getMakeACallIntent(Context context, int position) {
-        String number = getContactsItem(context, position).getNumber().trim();
+    public Intent getMakeACallIntent(int position) {
+        String number = getContactsItem(position).getNumber().trim();
         //Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+number));
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:"+number));
@@ -44,9 +47,9 @@ public abstract class FragmentModel extends Model {
             return null;
         }
     }
-    public String getMessage(Context context, MESSAGE_TYPE type) {
+    public String getMessage(MESSAGE_TYPE type) {
         if(type == MESSAGE_TYPE.EMPTY_NUMBER){
-            return context.getString(R.string.empty_number);
+            return mContext.getString(R.string.empty_number);
         }
         return null;
     }

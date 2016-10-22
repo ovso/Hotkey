@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.settings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -53,4 +54,8 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public Context getContext() {
+        return this;
+    }
 }

@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +19,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +28,10 @@ import android.widget.Toast;
 
 import com.fsn.cauly.CaulyAdView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
@@ -38,42 +42,47 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View{
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-    MainPresenter mPresenter;
+    private MainPresenter mPresenter;
+
+    private Unbinder mUnbinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mUnbinder = ButterKnife.bind(this);
+
         mPresenter = new MainPresenterImpl(this);
-        mPresenter.onCreate(getApplicationContext());
+        mPresenter.onCreate();
 
     }
+
+    @BindView(R.id.nav_view)
+    NavigationView mNavigationView;
+
     @Override
-    public void onInit() {
+    public void setListener() {
+        mNavigationView.setNavigationItemSelectedListener(this);
+    }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setToolbarTitle(getString(R.string.app_name));
-        setSupportActionBar(toolbar);
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+    @Override
+    public void setToolbar() {
+        setSupportActionBar(mToolbar);
+    }
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        findViewById(R.id.fab).setVisibility(View.GONE);
-
+    @Override
+    public void setViewPager() {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        initTab();
     }
 
-    private void initTab() {
+    @Override
+    public void setTabLayout() {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
@@ -91,9 +100,19 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                mPresenter.onTabReselected(getApplicationContext(), tab.getPosition());
+                mPresenter.onTabReselected(tab.getPosition());
             }
         });
+
+    }
+
+    @Override
+    public void setDrawableLayout() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
     }
 
     @Override
@@ -106,19 +125,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-/*
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main_options_menu, menu);
-        return true;
-    }
-*/
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        mPresenter.onNavigationItemSelected(getApplicationContext(), item.getItemId());
+        mPresenter.onNavigationItemSelected(item.getItemId());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -155,6 +166,11 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(intent, SettingsActivity.REQUEST_CODE_SETTING);
     }
 
+    @OnClick(R.id.add_tab_button)
+    void onAddTabClick() {
+        mPresenter.addTab();
+    }
+
     @Override
     public void restart() {
         finish();
@@ -178,7 +194,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String name = nameEdit.getText().toString().trim();
-                        mPresenter.onClickEditNameOk(getApplicationContext(), name, position);
+                        mPresenter.onClickEditNameOk(name, position);
                     }
                 })
                 .setNegativeButton(R.string.btn_cancel, null)
@@ -208,15 +224,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        mPresenter.onActivityResult(requestCode, resultCode, data);
+    public Context getContext() {
+        return this;
     }
 
     @Override
-    public void setToolbarTitle(String title) {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(title);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mPresenter.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -271,6 +286,13 @@ public class MainActivity extends AppCompatActivity
             return prefs.getString(key, defValue);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
+    }
+
     public final static int[] DEFAULT_TITLE_RES_ID = {
             R.string.menu_title_family,R.string.menu_title_friends,R.string.menu_title_others};
 }
