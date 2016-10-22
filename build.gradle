@@ -11,6 +11,8 @@ buildscript {
         // in the individual module build.gradle files
 
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath "io.realm:realm-gradle-plugin:2.0.2"
+
     }
 }
 
@@ -23,4 +25,15 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+
+    buildToolsVersion = "23.0.1"
+
+    supportLibVersion = "23.4.0"
+
+    tedPermissionVersion = "1.0.0"
+
+    butterKnifeVersion = "8.4.0"
 }
