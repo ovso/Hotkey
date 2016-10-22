@@ -12,7 +12,7 @@ public class Model {
         mContext = context;
     }
 
-    public String getAppVersionName() {
+    public String getVersionName() {
         PackageManager manager = mContext.getPackageManager();
         try {
             PackageInfo info = manager.getPackageInfo(mContext.getPackageName(), 0);

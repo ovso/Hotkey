@@ -18,12 +18,11 @@ public interface MainPresenter {
     void onTabNameEditDialogButtonClick(String tabName, int which);
 
     interface View {
-        void navigateToEmail(Intent intent);
-        void navigateToShare(Intent intent);
-        void navigateToReview(Intent intent);
+        void navigateToShare(String playStoreUrl);
+        void navigateToReview(String reviewUrl);
         void navigateToHelp();
         void setVersionName(String versionName);
-        void initAd(CaulyAdView view);
+        void setAd(String appCode);
 
         void navigateToSettings();
 

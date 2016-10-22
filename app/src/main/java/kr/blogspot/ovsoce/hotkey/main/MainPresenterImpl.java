@@ -30,12 +30,10 @@ class MainPresenterImpl implements MainPresenter {
     @Override
     public void onNavigationItemSelected(int menuId) {
         if(menuId == R.id.nav_share) {
-            mView.navigateToShare(mModel.getShareIntent());
+            mView.navigateToShare(mModel.getPlayStoreUrl());
         } else if(menuId == R.id.nav_review) {
-            mView.navigateToReview(mModel.getReviewIntent());
+            mView.navigateToReview(mModel.getReviewUrl());
         } else if(menuId == R.id.nav_help) {
-            //mView.replaceFragment(mModel.getFragmentContainerViewId(), mModel.getFragment(menuId));
-            //mView.setToolbarTitle(context.getString(R.string.app_name) + " : " + mModel.getToolbarTitle(context, menuId));
             mView.navigateToHelp();
         } else if(menuId == R.id.nav_settings) {
             mView.navigateToSettings();
@@ -51,7 +49,7 @@ class MainPresenterImpl implements MainPresenter {
         mView.setListener();
         mView.setViewPager();
         mView.setTabLayout();
-        mView.initAd(mModel.getCaulyAdView(caulyAdViewListener));
+        mView.setAd(mModel.getAppCode());
 
     }
 
@@ -117,7 +115,7 @@ class MainPresenterImpl implements MainPresenter {
                 mView.setTabTitle(tabName, mTabManager.getTabSelectedPosition());
             }
         } else if(which == TabManager.BUTTON_TYPE_DEL) {
-            Log.d("");
+            Log.d("delete");
         } else {
             Log.d("cancel");
         }

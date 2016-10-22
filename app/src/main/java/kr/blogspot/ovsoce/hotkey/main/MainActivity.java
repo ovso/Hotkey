@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
@@ -26,7 +27,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fsn.cauly.CaulyAdInfo;
+import com.fsn.cauly.CaulyAdInfoBuilder;
 import com.fsn.cauly.CaulyAdView;
+import com.fsn.cauly.CaulyAdViewListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -139,17 +143,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void navigateToEmail(Intent intent) {
+    public void navigateToShare(String url) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+        intent.putExtra(Intent.EXTRA_TEXT, url);
+        intent.setType("text/plain");
+
+        intent = Intent.createChooser(intent, getString(R.string.share_to_others));
         startActivity(intent);
     }
 
     @Override
-    public void navigateToShare(Intent intent) {
-        startActivity(intent);
-    }
+    public void navigateToReview(String reviewUrl) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(reviewUrl));
 
-    @Override
-    public void navigateToReview(Intent intent) {
         startActivity(intent);
     }
 
@@ -254,19 +263,45 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void setVersionName(String versionName) {
-        //((TextView)findViewById(R.id.tv_version)).setText(versionName);
-        Log.d("versionName = " + versionName);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if(navigationView != null) {
-            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tv_version)).setText(versionName);
-        }
+        ((TextView)mNavigationView.getHeaderView(0).findViewById(R.id.tv_version)).setText(versionName);
     }
 
     @Override
-    public void initAd(CaulyAdView view) {
+    public void setAd(String appCode) {
+
+        CaulyAdView view;
+        CaulyAdInfo info = new CaulyAdInfoBuilder(appCode)
+                .effect(CaulyAdInfo.Effect.Circle.toString())
+                .build();
+        view = new CaulyAdView(this);
+        view.setAdInfo(info);
+        view.setAdViewListener(caulyAdViewListener);
+
+
         ViewGroup adContainer = (ViewGroup)findViewById(R.id.ad_container);
         adContainer.addView(view);
     }
+    private CaulyAdViewListener caulyAdViewListener = new CaulyAdViewListener() {
+        @Override
+        public void onReceiveAd(CaulyAdView caulyAdView, boolean b) {
+
+        }
+
+        @Override
+        public void onFailedToReceiveAd(CaulyAdView caulyAdView, int i, String s) {
+            caulyAdView.reload();
+        }
+
+        @Override
+        public void onShowLandingScreen(CaulyAdView caulyAdView) {
+
+        }
+
+        @Override
+        public void onCloseLandingScreen(CaulyAdView caulyAdView) {
+
+        }
+    };
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
