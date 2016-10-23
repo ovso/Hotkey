@@ -17,6 +17,10 @@ public interface MainPresenter {
 
     void onTabNameEditDialogButtonClick(String tabName, int which);
 
+    void onDestroy();
+
+    void onAddTabClick();
+
     interface View {
         void navigateToShare(String playStoreUrl);
         void navigateToReview(String reviewUrl);
@@ -51,5 +55,6 @@ public interface MainPresenter {
 
         void setTabLayout();
 
+        void addTab();
     }
 }

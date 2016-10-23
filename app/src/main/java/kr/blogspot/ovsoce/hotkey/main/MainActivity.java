@@ -32,6 +32,9 @@ import com.fsn.cauly.CaulyAdInfoBuilder;
 import com.fsn.cauly.CaulyAdView;
 import com.fsn.cauly.CaulyAdViewListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -45,7 +48,6 @@ import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View{
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
     private MainPresenter mPresenter;
 
     private Unbinder mUnbinder;
@@ -78,10 +80,16 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(mToolbar);
     }
 
+    @BindView(R.id.viewpager)
+    ViewPager mViewPager;
+
     @Override
     public void setViewPager() {
+
+        List<Fragment> fragmentList = new ArrayList<>();
+
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
     }
 
@@ -109,6 +117,11 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+    }
+
+    @Override
+    public void addTab() {
+        mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_content_add));
     }
 
     @Override
@@ -182,7 +195,7 @@ public class MainActivity extends AppCompatActivity
                 .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("");
+                        mPresenter.onAddTabClick();
                     }
                 })
                 .setNegativeButton(R.string.btn_cancel, null)
@@ -343,6 +356,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mPresenter.onDestroy();
         mUnbinder.unbind();
     }
 

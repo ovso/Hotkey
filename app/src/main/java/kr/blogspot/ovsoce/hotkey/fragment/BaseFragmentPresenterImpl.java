@@ -10,10 +10,10 @@ import java.util.List;
 import kr.blogspot.ovsoce.hotkey.fragment.adapter.MyAdapter;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 
-public class BaseFragmentPresenterImpl implements BaseFragmentPresenter{
+class BaseFragmentPresenterImpl implements BaseFragmentPresenter{
     private View mView;
     private BaseFragmentModel mModel;
-    public BaseFragmentPresenterImpl(View view) {
+    BaseFragmentPresenterImpl(View view) {
         mView = view;
         mModel = new BaseFragmentModel(mView.getContext());
     }

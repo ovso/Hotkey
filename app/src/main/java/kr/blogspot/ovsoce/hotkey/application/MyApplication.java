@@ -2,16 +2,17 @@ package kr.blogspot.ovsoce.hotkey.application;
 
 import android.app.Application;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 
+import io.realm.Realm;
+import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 
 public class MyApplication extends Application {
 
     DatabaseHelper mDatabaseHelper;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -21,29 +22,20 @@ public class MyApplication extends Application {
 
         setFonts();
 
-
+        Realm.init(this);
+        Log.d("");
     }
+
     /**
      * 글꼴을 설정하는 메서드
      */
     private void setFonts() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String fonts = sharedPreferences.getString("fonts", "NanumBarunGothic.ttf");
-        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/"+fonts);
+        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/" + fonts);
     }
 
     public DatabaseHelper getDatabaseHelper() {
         return mDatabaseHelper;
-    }
-
-    public String getVersionName() {
-        PackageManager manager = getPackageManager();
-        try {
-            PackageInfo info = manager.getPackageInfo(getPackageName(), 0);
-            return info.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }

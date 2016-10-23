@@ -3,8 +3,6 @@ package kr.blogspot.ovsoce.hotkey.main;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.fsn.cauly.CaulyAdView;
-import com.fsn.cauly.CaulyAdViewListener;
 import com.gun0912.tedpermission.util.ObjectUtils;
 
 import kr.blogspot.ovsoce.hotkey.R;
@@ -53,28 +51,6 @@ class MainPresenterImpl implements MainPresenter {
 
     }
 
-    private CaulyAdViewListener caulyAdViewListener = new CaulyAdViewListener() {
-        @Override
-        public void onReceiveAd(CaulyAdView caulyAdView, boolean b) {
-
-        }
-
-        @Override
-        public void onFailedToReceiveAd(CaulyAdView caulyAdView, int i, String s) {
-            caulyAdView.reload();
-        }
-
-        @Override
-        public void onShowLandingScreen(CaulyAdView caulyAdView) {
-
-        }
-
-        @Override
-        public void onCloseLandingScreen(CaulyAdView caulyAdView) {
-
-        }
-    };
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == Activity.RESULT_OK) {
@@ -119,6 +95,16 @@ class MainPresenterImpl implements MainPresenter {
         } else {
             Log.d("cancel");
         }
+    }
+
+    @Override
+    public void onAddTabClick() {
+        mView.addTab();
+    }
+
+    @Override
+    public void onDestroy() {
+        mDBManager.close();
     }
 
 }

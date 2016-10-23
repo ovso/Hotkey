@@ -13,7 +13,7 @@ public class MainDBManager extends DatabaseManager {
 
     @Override
     public void close() {
-
+        mRealm.close();
     }
 
     public String getTabName(int tabSelectedPosition) {
