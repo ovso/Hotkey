@@ -37,7 +37,8 @@
                     android:src="@drawable/ic_content_add"
                     android:scaleType="fitXY"
                     android:background="?attr/selectableItemBackground"
-                    android:layout_gravity="right|center_vertical" />
+                    android:layout_gravity="right|center_vertical"
+                    android:visibility="gone"/>
             </FrameLayout>
         </android.support.v7.widget.Toolbar>
 

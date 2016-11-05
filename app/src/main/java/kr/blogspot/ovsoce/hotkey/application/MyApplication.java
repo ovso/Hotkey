@@ -23,6 +23,7 @@ public class MyApplication extends Application {
         setFonts();
 
         Realm.init(this);
+
         Log.d("");
     }
 
