@@ -3,7 +3,7 @@ package kr.blogspot.ovsoce.hotkey.main;
 import android.content.Context;
 import android.content.Intent;
 
-import com.fsn.cauly.CaulyAdView;
+import java.util.List;
 
 public interface MainPresenter {
     void onNavigationItemSelected(int id);
@@ -34,7 +34,7 @@ public interface MainPresenter {
 
         void setViewPagerCurrentItem(int position);
 
-        void showTabNameEditDialog(String name);
+        void showTabNameEditDialog(String name, boolean isRemoveTab);
 
         void setTabTitle(String name, int position);
 
@@ -51,12 +51,14 @@ public interface MainPresenter {
 
         void setListener();
 
-        void setViewPager(int count);
+        void setViewPager(int count, List<String> pageTitleList);
 
         void setTabLayout();
 
         void addTab();
 
-        void updateViewPager(int count);
+        void updateViewPager(int count, List<String> pageTitleList);
+
+        void removeTab(int tabPosition);
     }
 }

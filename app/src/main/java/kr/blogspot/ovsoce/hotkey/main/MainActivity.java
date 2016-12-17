@@ -83,22 +83,23 @@ public class MainActivity extends AppCompatActivity
     ViewPager mViewPager;
 
     @Override
-    public void setViewPager(int count) {
+    public void setViewPager(int count, List<String> pageTitleList) {
         List<Fragment> fragmentList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             fragmentList.add(BaseFragment.newInstance(i));
         }
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), fragmentList);
+        mSectionsPagerAdapter
+                = new SectionsPagerAdapter(getSupportFragmentManager(), fragmentList, pageTitleList);
         mViewPager.setAdapter(mSectionsPagerAdapter);
     }
 
     @Override
-    public void updateViewPager(int count) {
+    public void updateViewPager(int count, List<String> pageTitleList) {
         List<Fragment> fragmentList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             fragmentList.add(BaseFragment.newInstance(i));
         }
-        mSectionsPagerAdapter.updateFragmentList(fragmentList);
+        mSectionsPagerAdapter.updateFragmentList(fragmentList, pageTitleList);
         mSectionsPagerAdapter.notifyDataSetChanged();
     }
 
@@ -132,6 +133,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void addTab() {
         mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_content_add));
+    }
+
+    @Override
+    public void removeTab(int tabPosition) {
+        mTabLayout.removeTabAt(tabPosition);
     }
 
     @Override
@@ -225,18 +231,18 @@ public class MainActivity extends AppCompatActivity
     private View mTabNameEditDialogView;
 
     @Override
-    public void showTabNameEditDialog(String name) {
+    public void showTabNameEditDialog(String name, boolean isRemoveTab) {
         mTabNameEditDialogView = getLayoutInflater().inflate(R.layout.dialog_custom_edit_tab_name, null);
         final EditText nameEdit = (EditText) mTabNameEditDialogView.findViewById(R.id.et_edit_name);
         nameEdit.setText(name);
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.dialog_title_edit_name)
-                .setIcon(android.R.drawable.ic_menu_edit)
-                .setView(mTabNameEditDialogView)
-                .setPositiveButton(R.string.btn_ok, mOnTabNameEditDialogClickListener)
-                .setNegativeButton(R.string.btn_cancel, mOnTabNameEditDialogClickListener)
-                .setNeutralButton(R.string.btn_del_tab, mOnTabNameEditDialogClickListener)
-                .show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.dialog_title_edit_name);
+        builder.setIcon(android.R.drawable.ic_menu_edit);
+        builder.setView(mTabNameEditDialogView);
+        builder.setPositiveButton(R.string.btn_ok, mOnTabNameEditDialogClickListener);
+        builder.setNegativeButton(R.string.btn_cancel, mOnTabNameEditDialogClickListener);
+        if(isRemoveTab) builder.setNeutralButton(R.string.btn_del_tab, mOnTabNameEditDialogClickListener);
+        builder.show();
     }
 
     private DialogInterface.OnClickListener mOnTabNameEditDialogClickListener
@@ -325,9 +331,12 @@ public class MainActivity extends AppCompatActivity
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         private List<Fragment> mFragmentList;
-        public SectionsPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+        private List<String> mPageTitleList;
+        public SectionsPagerAdapter(FragmentManager fm
+                , List<Fragment> fragmentList, List<String> pageTitleList) {
             super(fm);
             mFragmentList = fragmentList;
+            mPageTitleList = pageTitleList;
         }
 
         @Override
@@ -342,28 +351,12 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return getTabItemName(position);
+            return mPageTitleList.get(position);
         }
 
-        private SharedPreferences getSharedPreferences(){
-            return PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        }
-        private String getTabItemName(int position) {
-            SharedPreferences prefs = getSharedPreferences();
-            String key = "tab_"+position;
-            String defValue;
-            if(position < 3) {
-                defValue = getString(DEFAULT_TITLE_RES_ID[position]);
-            } else {
-                defValue = getString(R.string.default_tab_name);
-            }
-
-
-            return prefs.getString(key, defValue);
-        }
-
-        public void updateFragmentList(List<Fragment> fragmentList) {
+        public void updateFragmentList(List<Fragment> fragmentList, List<String> pageTitleList) {
             mFragmentList = fragmentList;
+            mPageTitleList = pageTitleList;
         }
     }
 

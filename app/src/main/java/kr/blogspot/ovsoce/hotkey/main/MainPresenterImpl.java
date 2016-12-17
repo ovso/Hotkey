@@ -42,10 +42,10 @@ class MainPresenterImpl implements MainPresenter {
         mView.setToolbar();
         mView.setDrawableLayout();
         mView.setListener();
-        mView.setViewPager(mDBManager.getTabCount());
+        int tabCount = mDBManager.getTabCount();
+        mView.setViewPager(tabCount, mDBManager.getPageTitleList(tabCount));
         mView.setTabLayout();
         mView.setAd(mModel.getAppCode());
-
     }
 
     @Override
@@ -71,7 +71,7 @@ class MainPresenterImpl implements MainPresenter {
     public void onTabReselected(int position) {
         if(position == mTabManager.getTabSelectedPosition()) {
             String name = mDBManager.getTabName(position);
-            mView.showTabNameEditDialog(name);
+            mView.showTabNameEditDialog(name, mTabManager.isRemoveTab());
         }
     }
 
@@ -80,14 +80,20 @@ class MainPresenterImpl implements MainPresenter {
         if(which == TabManager.BUTTON_TYPE_OK) {
             if(ObjectUtils.isEmpty(tabName)) {
                 String oldTabName = mDBManager.getTabName(mTabManager.getTabSelectedPosition());
-                mView.showTabNameEditDialog(oldTabName);
+                mView.showTabNameEditDialog(oldTabName, mTabManager.isRemoveTab());
                 mView.showEditNameError(R.string.empty_input_text);
             } else {
                 mDBManager.setTabName(tabName, mTabManager.getTabSelectedPosition());
                 mView.setTabTitle(tabName, mTabManager.getTabSelectedPosition());
             }
         } else if(which == TabManager.BUTTON_TYPE_DEL) {
-            Log.d("delete");
+            boolean deleted = mDBManager.deleteTable(mTabManager.getTabSelectedPosition());
+            if (deleted) {
+                mView.removeTab(mTabManager.getTabSelectedPosition());
+                int tabCount = mDBManager.getTabCount();
+                mView.updateViewPager(tabCount, mDBManager.getPageTitleList(tabCount));
+                mView.setTabLayout();
+            }
         } else {
             Log.d("cancel");
         }
@@ -97,7 +103,8 @@ class MainPresenterImpl implements MainPresenter {
     public void onAddTabClick() {
         if (mDBManager.createTable()) {
             mView.addTab();
-            mView.updateViewPager(mDBManager.getTabCount());
+            int tabCount = mDBManager.getTabCount();
+            mView.updateViewPager(tabCount, mDBManager.getPageTitleList(tabCount));
             mView.setTabLayout();
         }
     }

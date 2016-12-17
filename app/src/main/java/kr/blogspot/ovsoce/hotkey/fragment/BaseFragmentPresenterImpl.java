@@ -2,7 +2,6 @@ package kr.blogspot.ovsoce.hotkey.fragment;
 
 import android.Manifest;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -17,9 +16,13 @@ import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
     private View mView;
     private BaseFragmentModel mModel;
+    private BaseFragmentDatabaseManager mDbManager;
+
     BaseFragmentPresenterImpl(View view) {
+        Context context = view.getContext();
         mView = view;
-        mModel = new BaseFragmentModel(mView.getContext());
+        mModel = new BaseFragmentModel(context);
+        mDbManager = new BaseFragmentDatabaseManager(context);
     }
 
     @Override

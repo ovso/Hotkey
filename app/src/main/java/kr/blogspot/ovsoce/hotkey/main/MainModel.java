@@ -1,15 +1,8 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.preference.PreferenceManager;
-
-import com.fsn.cauly.CaulyAdInfo;
-import com.fsn.cauly.CaulyAdInfoBuilder;
-import com.fsn.cauly.CaulyAdView;
-import com.fsn.cauly.CaulyAdViewListener;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
@@ -47,4 +40,5 @@ public class MainModel extends Model {
     public String getAppCode() {
         return AD_ID_CAULY;
     }
+
 }

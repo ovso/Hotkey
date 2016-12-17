@@ -24,4 +24,9 @@ public class TabManager {
     public int getTabSelectedPosition() {
         return tabSelectedPosition;
     }
+
+    public boolean isRemoveTab() {
+        if(tabSelectedPosition < MainActivity.DEFAULT_TITLE_RES_ID.length) return false;
+        else return true;
+    }
 }

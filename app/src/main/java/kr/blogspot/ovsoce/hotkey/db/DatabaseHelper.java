@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.common.Log;
@@ -71,8 +73,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean deleteTable(int tabPosition) {
+        String sql = "drop table if exists " + getTableName(tabPosition);
+        getWritableDatabase().execSQL(sql);
+        return true;
+    }
+
     public boolean createTable() {
-        String tableName = "group_"+getTableCount();
+        String tableName = "group_"+System.currentTimeMillis();
         String sql = "CREATE TABLE " + tableName + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_NUMBER + " TEXT," + KEY_COLOR + " TEXT" + ")";
@@ -89,11 +97,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public long getTableCount() {
         String sql = "SELECT count(*) FROM " +
-                "sqlite_master WHERE type = 'table' AND name != 'android_metadata' AND name != 'sqlite_sequence'";
+                "sqlite_master WHERE type = 'table' AND " +
+                "name != 'android_metadata' AND name != 'sqlite_sequence'";
         return getReadableDatabase().compileStatement(sql).simpleQueryForLong();
     }
+    public List<String> getUserMadeTableNameList() {
+        ArrayList<String> tableNameList = new ArrayList<>();
+        Cursor c = getReadableDatabase().rawQuery("SELECT name FROM " +
+                "sqlite_master WHERE type='table'", null);
+        if (c.moveToFirst()) {
+            while ( !c.isAfterLast() ) {
+                String tableName = c.getString( c.getColumnIndex("name"));
+                if (tableName.split("_")[0].equals("group")) {
+                    tableNameList.add(tableName);
+                }
+                c.moveToNext();
+            }
+        }
 
-    // Upgrading database
+        return sortStringList(tableNameList);
+    }
+
+    private List<String> sortStringList(List<String> tableNameList) {
+        Collections.sort(tableNameList, new NameAscCompare());
+        return tableNameList;
+    }
+
+    static class NameAscCompare implements Comparator<String> {
+
+        /**
+         * 오름차순(ASC)
+         */
+        @Override
+        public int compare(String arg0, String arg1) {
+            return arg0.compareTo(arg1);
+        }
+
+    }
+
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d("");
@@ -131,17 +173,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    private String getTableName(int position) {
+    public String getTableName(int tabPosition) {
         String table;
 
-        if (position == SECTION_NUMBER_FAMILY) {
+        if (tabPosition == SECTION_NUMBER_FAMILY) {
             table = TABLE_FAMILY;
-        } else if (position == SECTION_NUMBER_FRIEND) {
+        } else if (tabPosition == SECTION_NUMBER_FRIEND) {
             table = TABLE_FRIENDS;
-        } else if (position == SECTION_NUMBER_OTHERS) {
+        } else if (tabPosition == SECTION_NUMBER_OTHERS) {
             table = TABLE_OTHERS;
         } else {
-            table = "group_"+position;
+            table = getUserMadeTableNameList().get(tabPosition-3); // 3 -> 기본 테이블 갯수..
         }
 
         return table;
@@ -210,10 +252,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sDefaultColors;
     }
 
-    public List<ContactsItem> getTableContactsItemList(int type) {
+    public List<ContactsItem> getTableContactsItemList(int tabPosition) {
         List<ContactsItem> list = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + getTableName(type);
+        String selectQuery = "SELECT  * FROM " + getTableName(tabPosition);
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
