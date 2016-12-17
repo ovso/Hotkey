@@ -51,10 +51,12 @@ public interface MainPresenter {
 
         void setListener();
 
-        void setViewPager();
+        void setViewPager(int count);
 
         void setTabLayout();
 
         void addTab();
+
+        void updateViewPager(int count);
     }
 }

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItemImpl;
 
@@ -38,6 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("");
         String CREATE_FAMILY_TABLE = "CREATE TABLE " + TABLE_FAMILY + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_NUMBER + " TEXT," + KEY_COLOR + " TEXT" + ")";
@@ -57,65 +59,89 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void initDB(SQLiteDatabase db) {
+        Log.d("");
         List<ContactsItem> list = getDBInitContactsItemListData();
 
         int[] menuIds = {SECTION_NUMBER_FAMILY, SECTION_NUMBER_FRIEND, SECTION_NUMBER_OTHERS};
 
         for (int id : menuIds) {
-            for (ContactsItem item:list) {
+            for (ContactsItem item : list) {
                 insertContact(item, id, db);
             }
         }
     }
 
+    public boolean createTable() {
+        String tableName = "group_"+getTableCount();
+        String sql = "CREATE TABLE " + tableName + "("
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+                + KEY_NUMBER + " TEXT," + KEY_COLOR + " TEXT" + ")";
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(sql);
+
+        List<ContactsItem> list = getDBInitContactsItemListData();
+        for (ContactsItem item : list) {
+            insertContact(item, tableName, db);
+        }
+
+        return true;
+    }
+
+    public long getTableCount() {
+        String sql = "SELECT count(*) FROM " +
+                "sqlite_master WHERE type = 'table' AND name != 'android_metadata' AND name != 'sqlite_sequence'";
+        return getReadableDatabase().compileStatement(sql).simpleQueryForLong();
+    }
+
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older table if existed
+        Log.d("");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAMILY);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FRIENDS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OTHERS);
     }
-    // Getting single contact
-    public ContactsItem getContactsItem(int menuType, int position) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String table = getTable(menuType);
 
+    public ContactsItem getContactsItem(int tabPosition, int itemPosition) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String table = getTableName(tabPosition);
         Cursor cursor = db.query(
                 table,
                 new String[]{KEY_ID, KEY_NAME, KEY_NUMBER, KEY_COLOR},
                 KEY_ID + "=?",
-                new String[]{String.valueOf(position)},
+                new String[]{String.valueOf(itemPosition)},
                 null,
                 null,
                 null,
                 null
         );
-
-        if (cursor != null)
+        if (cursor != null) {
             cursor.moveToFirst();
-
-        ContactsItemImpl contact = new ContactsItemImpl();
-        contact.setId(cursor.getString(0));
-        contact.setName(cursor.getString(1));
-        contact.setNumber(cursor.getString(2));
-        contact.setColor(cursor.getString(3));
-        contact.setMenuType(menuType);
-
-        cursor.close();
-        db.close();
-
-        return contact;
+            ContactsItemImpl contact = new ContactsItemImpl();
+            contact.setId(cursor.getString(0));
+            contact.setName(cursor.getString(1));
+            contact.setNumber(cursor.getString(2));
+            contact.setColor(cursor.getString(3));
+            contact.setTabPosition(tabPosition);
+            cursor.close();
+            db.close();
+            return contact;
+        } else {
+            return null;
+        }
     }
-    private String getTable(int type) {
-        String table = null;
 
-        if(type == SECTION_NUMBER_FAMILY) {
+    private String getTableName(int position) {
+        String table;
+
+        if (position == SECTION_NUMBER_FAMILY) {
             table = TABLE_FAMILY;
-        } else if(type == SECTION_NUMBER_FRIEND) {
+        } else if (position == SECTION_NUMBER_FRIEND) {
             table = TABLE_FRIENDS;
-        } else if(type == SECTION_NUMBER_OTHERS) {
+        } else if (position == SECTION_NUMBER_OTHERS) {
             table = TABLE_OTHERS;
+        } else {
+            table = "group_"+position;
         }
 
         return table;
@@ -124,42 +150,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Updating single contact
     public int updateContact(ContactsItem contact) {
         SQLiteDatabase db = getWritableDatabase();
-        String table = getTable(contact.getMenuType());
-
         ContentValues values = new ContentValues();
         values.put(KEY_ID, contact.getId());
         values.put(KEY_NAME, contact.getName());
         values.put(KEY_NUMBER, contact.getNumber());
         values.put(KEY_COLOR, contact.getColor());
-
-        // updating row
+        String table = getTableName(contact.getTabPosition());
         return db.update(table, values, KEY_ID + " = ?", new String[]{contact.getId()});
     }
 
     private void insertContact(ContactsItem item, int type, SQLiteDatabase db) {
-
-        String table = getTable(type);
-
+        String table = getTableName(type);
         ContentValues values = new ContentValues();
         values.put(KEY_ID, item.getId());
-        values.put(KEY_NAME, item.getName()); // Contact Name
-        values.put(KEY_NUMBER, item.getNumber()); // Contact Phone
+        values.put(KEY_NAME, item.getName());
+        values.put(KEY_NUMBER, item.getNumber());
         values.put(KEY_COLOR, item.getColor());
-        // Inserting Row
         db.insert(table, null, values);
     }
-    private List<ContactsItem> getDBInitContactsItemListData() {
 
+    private void insertContact(ContactsItem item, String tableName, SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, item.getId());
+        values.put(KEY_NAME, item.getName());
+        values.put(KEY_NUMBER, item.getNumber());
+        values.put(KEY_COLOR, item.getColor());
+        db.insert(tableName, null, values);
+    }
+
+    private List<ContactsItem> getDBInitContactsItemListData() {
         List<ContactsItem> dataItems = new ArrayList<>();
         String[] colors = sDefaultColors;
-        int k=0;
+        int k = 0;
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < colors.length; j++) {
                 String id = String.valueOf(k);
-                String name = "", number="", color="";
+                String name = "", number = "", color = "";
                 //color = colors[j];
                 color = String.valueOf(j);
-                if(id.equals("0")) name = "Indigo";
+                if (id.equals("0")) name = "Indigo";
 
                 ContactsItemImpl item = new ContactsItemImpl();
                 item.setId(id);
@@ -174,7 +203,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return dataItems;
     }
+
     private static String[] sDefaultColors = new String[]{"#3F51B5", "#E91E63", "#FF5722", "#4CAF50", "#607D8B", "#00BCD4", "#FFC107", "#795548", "#03A9F4", "#F44336"};
+
     public String[] getDefaultColors() {
         return sDefaultColors;
     }
@@ -182,7 +213,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<ContactsItem> getTableContactsItemList(int type) {
         List<ContactsItem> list = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + getTable(type);
+        String selectQuery = "SELECT  * FROM " + getTableName(type);
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -203,4 +234,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return list;
     }
+
 }

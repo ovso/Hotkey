@@ -1,16 +1,20 @@
 package kr.blogspot.ovsoce.hotkey.fragment;
 
+import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.List;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+import com.gun0912.tedpermission.util.ObjectUtils;
 
-import kr.blogspot.ovsoce.hotkey.fragment.adapter.MyAdapter;
+import java.util.ArrayList;
+
+import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 
-class BaseFragmentPresenterImpl implements BaseFragmentPresenter{
+class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
     private View mView;
     private BaseFragmentModel mModel;
     BaseFragmentPresenterImpl(View view) {
@@ -19,40 +23,49 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter{
     }
 
     @Override
-    public void init(int sectionNumber, final RecyclerView recyclerView) {
-        mModel.setMenuId(sectionNumber);
+    public void onActivityCreated(int position) {
+        mModel.setTabPosition(position);
+        mView.setRecyclerView(mModel.getContactsItemList());
+    }
 
-        List<ContactsItem> list = mModel.getContactsItemList();
+    @Override
+    public void onItemAlertDialogOkClick(String itemId) {
+        ContactsItem item = mModel.getContactsItem(Integer.valueOf(itemId));
+        mView.updateRecyclerViewItem(item);
+    }
 
-        MyAdapter adapter = new MyAdapter(list, new MyAdapter.OnAdapterItemClickListener() {
+    @Override
+    public void onAdapterItemClick(final int position) {
+        final String phoneNumber = mModel.getPhoneNumber(position);
+        PermissionListener permissionListener = new PermissionListener() {
             @Override
-            public void onClick(android.view.View v) {
-                int position = recyclerView.getChildAdapterPosition(v);
-                Intent intent = mModel.getMakeACallIntent(position);
-                if(intent != null) {
-                    mView.makeACall(intent);
+            public void onPermissionGranted() {
+                if(!ObjectUtils.isEmpty(phoneNumber)) {
+                    mView.makeCall(phoneNumber);
                 } else {
-                    onLongClick(v);
+                    onAdapterItemLongClick(position);
                 }
             }
 
             @Override
-            public boolean onLongClick(android.view.View v) {
-                int position = recyclerView.getChildAdapterPosition(v);
-                ContactsItem item = mModel.getContactsItem(position);
-                mView.showItemSetDialog(item);
-                return true;
+            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                Log.d(deniedPermissions.toString());
             }
-        });
-
-        mView.initRecyclerView(adapter, new GridLayoutManager(mView.getContext(), mModel.getGridLayoutSpanCount()));
+        };
+        if (!ObjectUtils.isEmpty(phoneNumber)) {
+            new TedPermission(mView.getContext())
+                    .setPermissionListener(permissionListener)
+                    .setDeniedMessage(R.string.call_phone_denied_msg)
+                    .setPermissions(Manifest.permission.CALL_PHONE)
+                    .check();
+        } else {
+            onAdapterItemLongClick(position);
+        }
     }
 
     @Override
-    public void setItemId(Context context,RecyclerView recyclerView, String itemId) {
-        ContactsItem item = mModel.getContactsItem(Integer.valueOf(itemId));
-        MyAdapter adapter = (MyAdapter) recyclerView.getAdapter();
-        adapter.setUpdateItem(item);
-        mView.updateRecyclerViewItem();
+    public void onAdapterItemLongClick(int position) {
+        ContactsItem item = mModel.getContactsItem(position);
+        mView.showItemSetDialog(item);
     }
 }

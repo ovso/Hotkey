@@ -1,19 +1,19 @@
 package kr.blogspot.ovsoce.hotkey.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 
-import kr.blogspot.ovsoce.hotkey.fragment.adapter.MyAdapter;
+import java.util.List;
+
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 
 public interface FragmentPresenter{
-    void init(int menuId, RecyclerView recyclerView);
-    void setItemId(Context context, RecyclerView recyclerView, String itemId);
+    void onActivityCreated(int menuId);
+    void onItemAlertDialogOkClick(String itemId);
     interface View {
-        void initRecyclerView(MyAdapter adapter, RecyclerView.LayoutManager layoutManager);
+        void setRecyclerView(List<ContactsItem> contactsItemList);
         void showItemSetDialog(ContactsItem item);
-        void makeACall(Intent intent);
-        void updateRecyclerViewItem();
+        void makeCall(String phoneNumber);
+        void updateRecyclerViewItem(ContactsItem item);
     }
 }

@@ -1,8 +1,5 @@
 package kr.blogspot.ovsoce.hotkey.fragment.vo;
 
-/**
- * Created by ovso on 2015. 10. 17..
- */
 public class ContactsItemImpl implements ContactsItem {
 
     public String getName() {
@@ -14,8 +11,8 @@ public class ContactsItemImpl implements ContactsItem {
     public String getColor() {
         return color;
     }
-    public int getMenuType() {
-        return menuType;
+    public int getTabPosition() {
+        return tabPosition;
     }
 
     @Override
@@ -24,7 +21,7 @@ public class ContactsItemImpl implements ContactsItem {
     }
 
     String id,name, number, color;
-    int menuType;
+    int tabPosition;
     public void setId(String id){
         this.id = id;
     }
@@ -37,14 +34,7 @@ public class ContactsItemImpl implements ContactsItem {
     public void setNumber(String number) {
         this.number = number;
     }
-    public void setMenuType(int menuType) {
-        this.menuType = menuType;
+    public void setTabPosition(int tabPosition) {
+        this.tabPosition = tabPosition;
     }
-//    public ContactsItemImpl(String id, String name, String number, String color, int menuType) {
-//        this.name = name;
-//        this.color = color;
-//        this.number = number;
-//        this.menuType = menuType;
-//    }
-
 }

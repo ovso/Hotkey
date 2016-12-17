@@ -17,11 +17,8 @@ class MainPresenterImpl implements MainPresenter {
     private TabManager mTabManager;
     MainPresenterImpl(MainPresenter.View view) {
         mView = view;
-
         mModel = new MainModel(mView.getContext());
-
         mDBManager = new MainDBManager(mView.getContext());
-
         mTabManager = new TabManager(mView.getContext(), mDBManager);
     }
 
@@ -45,7 +42,7 @@ class MainPresenterImpl implements MainPresenter {
         mView.setToolbar();
         mView.setDrawableLayout();
         mView.setListener();
-        mView.setViewPager();
+        mView.setViewPager(mDBManager.getTabCount());
         mView.setTabLayout();
         mView.setAd(mModel.getAppCode());
 
@@ -62,7 +59,6 @@ class MainPresenterImpl implements MainPresenter {
                 }
             }
         }
-
     }
 
     @Override
@@ -99,7 +95,11 @@ class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onAddTabClick() {
-        mView.addTab();
+        if (mDBManager.createTable()) {
+            mView.addTab();
+            mView.updateViewPager(mDBManager.getTabCount());
+            mView.setTabLayout();
+        }
     }
 
     @Override

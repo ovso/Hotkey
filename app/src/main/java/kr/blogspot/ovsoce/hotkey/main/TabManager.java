@@ -1,8 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 public class TabManager {
     public final static int BUTTON_TYPE_OK = -1;

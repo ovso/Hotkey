@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.facebook.stetho.Stetho;
+
 import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 
@@ -14,10 +16,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         mDatabaseHelper = new DatabaseHelper(getApplicationContext());
-        mDatabaseHelper.getWritableDatabase();
-
+        Stetho.initializeWithDefaults(this);
         setFonts();
     }
 

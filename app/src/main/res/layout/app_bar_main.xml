@@ -38,7 +38,7 @@
                     android:scaleType="fitXY"
                     android:background="?attr/selectableItemBackground"
                     android:layout_gravity="right|center_vertical"
-                    android:visibility="gone"/>
+                    android:visibility="visible"/>
             </FrameLayout>
         </android.support.v7.widget.Toolbar>
 

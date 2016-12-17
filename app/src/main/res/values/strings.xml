@@ -57,4 +57,5 @@
     <string name="call_phone_denied_msg">1. You can make a call must grant permission. \n 2. If a file manager app installed may not be pressing the Allow button. If you do, you must go to Settings to allow direct access.</string>
     <string name="do_you_want_to_add_a_tab">Do you want to add ad tab(group)?</string>
     <string name="btn_del_tab">del Tab</string>
+    <string name="default_tab_name">\?</string>
 </resources>

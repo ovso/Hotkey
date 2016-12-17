@@ -35,4 +35,6 @@ ext {
     tedPermissionVersion = "1.0.0"
 
     butterKnifeVersion = "8.4.0"
+
+    stethoVersion = "1.4.2"
 }

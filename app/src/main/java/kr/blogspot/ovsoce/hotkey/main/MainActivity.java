@@ -40,7 +40,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
@@ -84,40 +83,51 @@ public class MainActivity extends AppCompatActivity
     ViewPager mViewPager;
 
     @Override
-    public void setViewPager() {
-
+    public void setViewPager(int count) {
         List<Fragment> fragmentList = new ArrayList<>();
-
-
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        for (int i = 0; i < count; i++) {
+            fragmentList.add(BaseFragment.newInstance(i));
+        }
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), fragmentList);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+    }
+
+    @Override
+    public void updateViewPager(int count) {
+        List<Fragment> fragmentList = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            fragmentList.add(BaseFragment.newInstance(i));
+        }
+        mSectionsPagerAdapter.updateFragmentList(fragmentList);
+        mSectionsPagerAdapter.notifyDataSetChanged();
     }
 
     @BindView(R.id.tabs)
     TabLayout mTabLayout;
+
     @Override
     public void setTabLayout() {
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                //mViewPager.setCurrentItem(tab.getPosition(), true);
-                mPresenter.onTabSelected(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                mPresenter.onTabReselected(tab.getPosition());
-            }
-        });
-
+        mTabLayout.setOnTabSelectedListener(mOnTabSelectedListener);
     }
+
+    private TabLayout.OnTabSelectedListener mOnTabSelectedListener = new TabLayout.OnTabSelectedListener() {
+        @Override
+        public void onTabSelected(TabLayout.Tab tab) {
+            mPresenter.onTabSelected(tab.getPosition());
+        }
+
+        @Override
+        public void onTabUnselected(TabLayout.Tab tab) {
+        }
+
+        @Override
+        public void onTabReselected(TabLayout.Tab tab) {
+            mPresenter.onTabReselected(tab.getPosition());
+        }
+    };
 
     @Override
     public void addTab() {
@@ -146,12 +156,9 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         mPresenter.onNavigationItemSelected(item.getItemId());
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-
         return true;
     }
 
@@ -185,7 +192,6 @@ public class MainActivity extends AppCompatActivity
     public void navigateToSettings() {
         Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        //startActivity(intent);
         startActivityForResult(intent, SettingsActivity.REQUEST_CODE_SETTING);
     }
 
@@ -216,8 +222,8 @@ public class MainActivity extends AppCompatActivity
         mViewPager.setCurrentItem(position, true);
     }
 
-
     private View mTabNameEditDialogView;
+
     @Override
     public void showTabNameEditDialog(String name) {
         mTabNameEditDialogView = getLayoutInflater().inflate(R.layout.dialog_custom_edit_tab_name, null);
@@ -318,22 +324,20 @@ public class MainActivity extends AppCompatActivity
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        private List<Fragment> mFragmentList;
+        public SectionsPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
             super(fm);
+            mFragmentList = fragmentList;
         }
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            //return PlaceholderFragment.newInstance(position + 1);
-            return BaseFragment.newInstance(position);
+            return mFragmentList.get(position);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return DEFAULT_TITLE_RES_ID.length;
+            return mFragmentList.size();
         }
 
         @Override
@@ -347,9 +351,19 @@ public class MainActivity extends AppCompatActivity
         private String getTabItemName(int position) {
             SharedPreferences prefs = getSharedPreferences();
             String key = "tab_"+position;
-            String defValue = getString(DEFAULT_TITLE_RES_ID[position]);
+            String defValue;
+            if(position < 3) {
+                defValue = getString(DEFAULT_TITLE_RES_ID[position]);
+            } else {
+                defValue = getString(R.string.default_tab_name);
+            }
+
 
             return prefs.getString(key, defValue);
+        }
+
+        public void updateFragmentList(List<Fragment> fragmentList) {
+            mFragmentList = fragmentList;
         }
     }
 

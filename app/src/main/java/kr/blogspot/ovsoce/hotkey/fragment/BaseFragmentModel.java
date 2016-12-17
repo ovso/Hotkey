@@ -4,18 +4,18 @@ import android.content.Context;
 
 public class BaseFragmentModel extends FragmentModel {
 
-    private int menuId = -1;
+    private int tabPosition = 0;
 
     public BaseFragmentModel(Context context) {
         super(context);
     }
 
     @Override
-    public int getMenuId() {
-        return menuId;
+    public int getTabPosition() {
+        return tabPosition;
     }
 
-    public void setMenuId(int menuId) {
-        this.menuId = menuId;
+    public void setTabPosition(int tabPosition) {
+        this.tabPosition = tabPosition;
     }
 }

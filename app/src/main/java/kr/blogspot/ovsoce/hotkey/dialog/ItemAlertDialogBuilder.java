@@ -18,9 +18,6 @@ import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItemImpl;
 
-/**
- * Created by jaeho_oh on 2015-11-11.
- */
 public class ItemAlertDialogBuilder extends AlertDialog.Builder implements DialogPresenter.View, View.OnClickListener {
     private BaseFragment mBaseFragment = null;
     private View mContentView;
@@ -29,20 +26,17 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
 
     public ItemAlertDialogBuilder(BaseFragment fragment, ContactsItem item) {
         super(fragment.getActivity());
-
         mBaseFragment = fragment;
         mItem = item;
-
         mPresenter = new DialogPresenterImpl(this);
         mPresenter.init(mBaseFragment.getActivity(), item);
     }
 
-    private ItemAlertDialogBuilder.OnClickListener mPositiveButtonListener = null;
+    private OnOkClickListener mOnOkClickListener = null;
 
-    public void setPositiveButton(ItemAlertDialogBuilder.OnClickListener listener) {
-        mPositiveButtonListener = listener;
+    public void setOnOkButtonListener(OnOkClickListener listener) {
+        mOnOkClickListener = listener;
     }
-
     @Override
     public AlertDialog show() {
         final AlertDialog alertDialog = super.create();
@@ -64,7 +58,6 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
 
             @Override
             public void onClick(View v) {
-                //Log.d("AlertDialog.BUTTON_NEUTRAL");
                 mPresenter.pickContacts(getContext());
             }
         });
@@ -72,11 +65,8 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
 
             @Override
             public void onClick(View v) {
-                //Log.d("AlertDialog.BUTTON_POSITIVE");
                 String name = ((EditText) mContentView.findViewById(R.id.et_name)).getText().toString().trim();
                 String number = ((EditText) mContentView.findViewById(R.id.et_number)).getText().toString().trim();
-
-                //Log.d("tag = " + mContentView.findViewById(R.id.scroll_container).getTag());
 
                 ContactsItem oldItem = mItem;
                 ContactsItemImpl nowItem = new ContactsItemImpl();
@@ -84,16 +74,15 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
                 nowItem.setName(name);
                 nowItem.setNumber(number);
                 nowItem.setColor(mContentView.findViewById(R.id.scroll_container).getTag().toString());
-                nowItem.setMenuType(oldItem.getMenuType());
+                nowItem.setTabPosition(oldItem.getTabPosition());
 
                 int update = mPresenter.setContacts(getContext(), nowItem);
                 Log.d("db update = " + ((update > 0) ? "ok" : "fail"));
                 if (update > 0) {
-                    mPositiveButtonListener.onClick(alertDialog, nowItem.getId());
+                    mOnOkClickListener.onClick(alertDialog, nowItem.getId());
                 } else {
 
                 }
-
             }
         });
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
@@ -103,7 +92,6 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
                 alertDialog.dismiss();
             }
         });
-
 
         return alertDialog;
     }
@@ -178,11 +166,11 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
         mPresenter.setColorSelected((int) v.getTag(), mContentView.findViewById(R.id.scroll_container));
     }
 
-    public interface OnClickListener {
-        void onClick(DialogInterface dialog, String itemId);
-    }
-
     public void onAlertDialogResult(Context context, Intent data) {
         mPresenter.contactsResult(context, data);
+    }
+
+    public interface OnOkClickListener {
+        void onClick(DialogInterface dialog, String itemId);
     }
 }
