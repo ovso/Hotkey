@@ -4,16 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import kr.blogspot.ovsoce.hotkey.db.DatabaseManager;
-
-public class MainDBManager extends DatabaseManager {
+public class MainDBManager{
+    private Context mContext;
     MainDBManager(Context context) {
-        super(context);
-    }
-
-    @Override
-    public void close() {
-        mRealm.close();
+        mContext = context;
     }
 
     public String getTabName(int tabSelectedPosition) {
@@ -28,4 +22,5 @@ public class MainDBManager extends DatabaseManager {
         editor.putString("tab_"+tabSelectedPosition, tabName);
         editor.apply();
     }
+
 }

@@ -11,9 +11,6 @@ import android.view.ViewGroup;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 
-/**
- * Created by jaeho_oh on 2015-10-27.
- */
 public class DialogPresenterImpl implements DialogPresenter {
     DialogPresenter.View mView;
     DialogModel mModel;

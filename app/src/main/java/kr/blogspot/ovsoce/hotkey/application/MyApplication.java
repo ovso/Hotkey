@@ -4,8 +4,6 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import io.realm.Realm;
-import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 
@@ -21,10 +19,6 @@ public class MyApplication extends Application {
         mDatabaseHelper.getWritableDatabase();
 
         setFonts();
-
-        Realm.init(this);
-
-        Log.d("");
     }
 
     /**

@@ -104,7 +104,7 @@ class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onDestroy() {
-        mDBManager.close();
+
     }
 
 }
