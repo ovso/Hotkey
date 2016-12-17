@@ -40,6 +40,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.MyProgressDialog;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
@@ -140,14 +141,18 @@ public class MainActivity extends AppCompatActivity
         mTabLayout.removeTabAt(tabPosition);
     }
 
+    private MyProgressDialog mProgressBar;
+
     @Override
     public void showProgressBar() {
-
+        mProgressBar = MyProgressDialog.show(this, null, null);
     }
 
     @Override
     public void hideProgressBar() {
-
+        if (mProgressBar != null) {
+            mProgressBar.dismiss();
+        }
     }
 
     @Override
