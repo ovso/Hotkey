@@ -5,11 +5,14 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
+import com.gun0912.tedpermission.util.ObjectUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
+import kr.blogspot.ovsoce.hotkey.common.Prefs;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 
 public class MainDBManager {
@@ -22,13 +25,22 @@ public class MainDBManager {
     public String getTabName(int tabSelectedPosition) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         Resources res = mContext.getResources();
+        String key = "";
         String defValue;
         if(tabSelectedPosition < MainActivity.DEFAULT_TITLE_RES_ID.length) {
+            String oldName = prefs.getString("tab_"+tabSelectedPosition, null);
+            if(ObjectUtils.isEmpty(oldName)) {
+                key = getTableName(tabSelectedPosition);
+            } else {
+                Prefs.putString(mContext, getTableName(tabSelectedPosition), oldName);
+                key = getTableName(tabSelectedPosition);
+            }
             defValue = res.getString(MainActivity.DEFAULT_TITLE_RES_ID[tabSelectedPosition]);
         } else {
+            key = getTableName(tabSelectedPosition);
             defValue = res.getString(R.string.default_tab_name);
         }
-        return prefs.getString(getTableName(tabSelectedPosition), defValue);
+        return prefs.getString(key, defValue);
     }
 
     public void setTabName(String tabName, int tabSelectedPosition) {

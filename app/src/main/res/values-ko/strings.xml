@@ -57,4 +57,5 @@
     <string name="call_phone_denied_msg">1. 권한을 허용하셔야 전화를 걸 수 있습니다. \n 2. 파일매니저 앱이 설치되어 있을 경우 [허용] 버튼이 눌러지지 않을 수 있습니다. 그럴 경우 설정으로 이동하여 직접 권한을 허용해 주어야 합니다.</string>
     <string name="do_you_want_to_add_a_tab">탭(그룹)을 추가하시겠어요?</string>
     <string name="btn_del_tab">탭 제거</string>
+    <string name="default_tab_name">\?</string>
 </resources>
