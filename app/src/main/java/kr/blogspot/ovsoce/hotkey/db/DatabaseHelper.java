@@ -5,18 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItemImpl;
 
@@ -26,14 +18,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "hotkey.db";
 
-    private static final String FILE_PATH = Environment.getExternalStorageDirectory()
-            .getAbsolutePath() + File.separator + DATABASE_NAME;
-
-    // Contacts table name
     private static final String TABLE_FAMILY = "family";
     private static final String TABLE_FRIENDS = "friends";
     private static final String TABLE_OTHERS = "others";
-    //private static final String TABLE_WHO = "who";
 
     // Contacts Table Columns names
     private static final String KEY_ID = "id";
@@ -41,15 +28,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_NUMBER = "number";
     private static final String KEY_COLOR = "color";
 
-    public static final int SECTION_NUMBER_FAMILY = 0;
-    public static final int SECTION_NUMBER_FRIEND = 1;
-    public static final int SECTION_NUMBER_OTHERS = 2;
+    private static final int SECTION_NUMBER_FAMILY = 0;
+    private static final int SECTION_NUMBER_FRIEND = 1;
+    private static final int SECTION_NUMBER_OTHERS = 2;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_FAMILY_TABLE = "CREATE TABLE " + TABLE_FAMILY + "("
@@ -70,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         initDB(db);
     }
 
-    public void initDB(SQLiteDatabase db) {
+    private void initDB(SQLiteDatabase db) {
         List<ContactsItem> list = getDBInitContactsItemListData();
 
         int[] menuIds = {SECTION_NUMBER_FAMILY, SECTION_NUMBER_FRIEND, SECTION_NUMBER_OTHERS};
@@ -89,22 +75,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAMILY);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FRIENDS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OTHERS);
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_WHO);
-
-        // Create tables again
-        onCreate(db);
     }
     // Getting single contact
     public ContactsItem getContactsItem(int menuType, int position) {
         SQLiteDatabase db = this.getReadableDatabase();
-        int id = position;
         String table = getTable(menuType);
 
         Cursor cursor = db.query(
                 table,
                 new String[]{KEY_ID, KEY_NAME, KEY_NUMBER, KEY_COLOR},
                 KEY_ID + "=?",
-                new String[]{String.valueOf(id)},
+                new String[]{String.valueOf(position)},
                 null,
                 null,
                 null,
@@ -155,7 +136,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.update(table, values, KEY_ID + " = ?", new String[]{contact.getId()});
     }
 
-    public void insertContact(ContactsItem item, int type, SQLiteDatabase db) {
+    private void insertContact(ContactsItem item, int type, SQLiteDatabase db) {
 
         String table = getTable(type);
 
@@ -167,36 +148,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Inserting Row
         db.insert(table, null, values);
     }
-    public void exportDB(Context context) {
-        //createExternalStoragePrivateFile
-        // Create a path where we will place our private file on external
-        // storage.
-        File file = new File(context.getExternalFilesDir(null), DATABASE_NAME);
-        //File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath(),DATABASE_NAME);
-        try {
-            // Very simple code to copy a picture from the application's
-            // resource into the external file.  Note that this code does
-            // no error checking, and assumes the picture is small (does not
-            // try to copy it in chunks).  Note that if external storage is
-            // not currently mounted this will silently fail.
-            InputStream is = new FileInputStream(context.getDatabasePath(DATABASE_NAME));
-            OutputStream os = new FileOutputStream(file);
-            byte[] data = new byte[is.available()];
-            is.read(data);
-            os.write(data);
-            is.close();
-            os.close();
-            Log.d(file.toString());
-        } catch (IOException e) {
-            // Unable to create file, likely because external storage is
-            // not currently mounted.
-            Log.e(e.toString());
-
-        }
-    }
     private List<ContactsItem> getDBInitContactsItemListData() {
 
-        List<ContactsItem> dataItems = new ArrayList<ContactsItem>();
+        List<ContactsItem> dataItems = new ArrayList<>();
         String[] colors = sDefaultColors;
         int k=0;
         for (int i = 0; i < 12; i++) {
@@ -226,7 +180,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<ContactsItem> getTableContactsItemList(int type) {
-        List<ContactsItem> list = new ArrayList<ContactsItem>();
+        List<ContactsItem> list = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + getTable(type);
 
@@ -249,33 +203,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return list;
     }
-    public List<ContactsItem> getDummyData() {
-
-        List<ContactsItem> dataItems = new ArrayList<ContactsItem>();
-        String[] colors = {"#3F51B5", "#E91E63", "#FF5722", "#4CAF50", "#607D8B", "#00BCD4", "#FFC107", "#795548", "#03A9F4", "#F44336"};
-        int k=0;
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < colors.length; j++) {
-                String id = String.valueOf(k);
-                String name = "", number="", color="";
-                //color = colors[j];
-                color = String.valueOf(j);
-                if(id.equals("0")) name = "Indigo";
-
-                ContactsItemImpl item = new ContactsItemImpl();
-
-                item.setId(id);
-                item.setName(name);
-                item.setNumber(number);
-                item.setColor(color);
-
-                dataItems.add(item);
-                Log.d("id = " + id);
-                k++;
-            }
-        }
-
-        return dataItems;
-    }
-
 }
