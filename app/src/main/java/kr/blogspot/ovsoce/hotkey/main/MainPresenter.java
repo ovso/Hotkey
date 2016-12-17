@@ -60,5 +60,9 @@ public interface MainPresenter {
         void updateViewPager(int count, List<String> pageTitleList);
 
         void removeTab(int tabPosition);
+
+        void showProgressBar();
+
+        void hideProgressBar();
     }
 }

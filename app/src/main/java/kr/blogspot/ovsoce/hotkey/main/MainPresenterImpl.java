@@ -2,6 +2,9 @@ package kr.blogspot.ovsoce.hotkey.main;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.gun0912.tedpermission.util.ObjectUtils;
 
@@ -15,6 +18,7 @@ class MainPresenterImpl implements MainPresenter {
     private MainDBManager mDBManager;
 
     private TabManager mTabManager;
+
     MainPresenterImpl(MainPresenter.View view) {
         mView = view;
         mModel = new MainModel(mView.getContext());
@@ -24,13 +28,13 @@ class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onNavigationItemSelected(int menuId) {
-        if(menuId == R.id.nav_share) {
+        if (menuId == R.id.nav_share) {
             mView.navigateToShare(mModel.getPlayStoreUrl());
-        } else if(menuId == R.id.nav_review) {
+        } else if (menuId == R.id.nav_review) {
             mView.navigateToReview(mModel.getReviewUrl());
-        } else if(menuId == R.id.nav_help) {
+        } else if (menuId == R.id.nav_help) {
             mView.navigateToHelp();
-        } else if(menuId == R.id.nav_settings) {
+        } else if (menuId == R.id.nav_settings) {
             mView.navigateToSettings();
         }
     }
@@ -50,8 +54,8 @@ class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK) {
-            if(requestCode == SettingsActivity.REQUEST_CODE_SETTING) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SettingsActivity.REQUEST_CODE_SETTING) {
                 if (data != null) {
                     if (data.getBooleanExtra("restart", false)) {
                         mView.restart();
@@ -69,7 +73,7 @@ class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onTabReselected(int position) {
-        if(position == mTabManager.getTabSelectedPosition()) {
+        if (position == mTabManager.getTabSelectedPosition()) {
             String name = mDBManager.getTabName(position);
             mView.showTabNameEditDialog(name, mTabManager.isRemoveTab());
         }
@@ -77,8 +81,8 @@ class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onTabNameEditDialogButtonClick(String tabName, int which) {
-        if(which == TabManager.BUTTON_TYPE_OK) {
-            if(ObjectUtils.isEmpty(tabName)) {
+        if (which == TabManager.BUTTON_TYPE_OK) {
+            if (ObjectUtils.isEmpty(tabName)) {
                 String oldTabName = mDBManager.getTabName(mTabManager.getTabSelectedPosition());
                 mView.showTabNameEditDialog(oldTabName, mTabManager.isRemoveTab());
                 mView.showEditNameError(R.string.empty_input_text);
@@ -86,7 +90,7 @@ class MainPresenterImpl implements MainPresenter {
                 mDBManager.setTabName(tabName, mTabManager.getTabSelectedPosition());
                 mView.setTabTitle(tabName, mTabManager.getTabSelectedPosition());
             }
-        } else if(which == TabManager.BUTTON_TYPE_DEL) {
+        } else if (which == TabManager.BUTTON_TYPE_DEL) {
             boolean deleted = mDBManager.deleteTable(mTabManager.getTabSelectedPosition());
             if (deleted) {
                 mView.removeTab(mTabManager.getTabSelectedPosition());
@@ -101,12 +105,36 @@ class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onAddTabClick() {
-        if (mDBManager.createTable()) {
-            mView.addTab();
-            int tabCount = mDBManager.getTabCount();
-            mView.updateViewPager(tabCount, mDBManager.getPageTitleList(tabCount));
-            mView.setTabLayout();
-        }
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                mView.showProgressBar();
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                if (mDBManager.createTable()) {
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mView.addTab();
+                            int tabCount = mDBManager.getTabCount();
+                            mView.updateViewPager(tabCount, mDBManager.getPageTitleList(tabCount));
+                            mView.setTabLayout();
+                        }
+                    });
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                mView.hideProgressBar();
+            }
+        }.execute();
+
     }
 
     @Override
