@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.android.gms.analytics.Tracker;
+
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 
@@ -40,5 +43,9 @@ public class MainModel extends Model {
     public String getAppCode() {
         return AD_ID_CAULY;
     }
-
+    private Tracker mTracker;
+    public void setTracker() {
+        MyApplication application = (MyApplication)mContext.getApplicationContext();
+        mTracker = application.getDefaultTracker();
+    }
 }

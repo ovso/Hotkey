@@ -3,10 +3,8 @@ package kr.blogspot.ovsoce.hotkey.main;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputLayout;
@@ -51,14 +49,9 @@ public class MainActivity extends AppCompatActivity
     private MainPresenter mPresenter;
 
     private Unbinder mUnbinder;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mUnbinder = ButterKnife.bind(this);
-
         mPresenter = new MainPresenterImpl(this);
         mPresenter.onCreate();
 
@@ -153,6 +146,12 @@ public class MainActivity extends AppCompatActivity
         if (mProgressBar != null) {
             mProgressBar.dismiss();
         }
+    }
+
+    @Override
+    public void setRootView() {
+        setContentView(R.layout.activity_main);
+        mUnbinder = ButterKnife.bind(this);
     }
 
     @Override

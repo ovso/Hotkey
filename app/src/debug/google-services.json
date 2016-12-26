@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "699786351474",
+    "project_id": "speed-dial-3"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699786351474:android:41fe4c41990d520f",
+        "android_client_info": {
+          "package_name": "kr.blogspot.ovsoce.hotkey"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANunv1T1CqX_RuMFnUu4qtD-xMVXUYGos"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-89501253-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

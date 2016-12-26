@@ -41,6 +41,8 @@ class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void onCreate() {
+        mView.setRootView();
+        mModel.setTracker();
         mView.setVersionName(mModel.getVersionName());
         mModel.setFontsSize();
         mView.setToolbar();

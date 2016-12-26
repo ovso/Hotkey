@@ -64,5 +64,7 @@ public interface MainPresenter {
         void showProgressBar();
 
         void hideProgressBar();
+
+        void setRootView();
     }
 }

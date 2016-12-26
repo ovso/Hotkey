@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import kr.blogspot.ovsoce.hotkey.application.MyApplication;
-
 public class Model {
     protected Context mContext;
     public Model(Context context) {

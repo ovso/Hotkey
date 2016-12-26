@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 23
@@ -33,4 +34,5 @@ dependencies {
     compile "com.jakewharton:butterknife:$butterKnifeVersion"
     apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
     compile project(':CaulySDK-3.4.8')
+    compile "com.google.android.gms:play-services-analytics:$rootProject.playServicesAnalytics"
 }
