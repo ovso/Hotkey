@@ -43,9 +43,4 @@ public class MainModel extends Model {
     public String getAppCode() {
         return AD_ID_CAULY;
     }
-    private Tracker mTracker;
-    public void setTracker() {
-        MyApplication application = (MyApplication)mContext.getApplicationContext();
-        mTracker = application.getDefaultTracker();
-    }
 }

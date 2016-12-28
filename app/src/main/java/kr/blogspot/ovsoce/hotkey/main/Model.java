@@ -25,7 +25,7 @@ public class Model {
         mTracker.setScreenName(screenName);
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
-    public void setSendTracker(String action) {
+    public void setSendEventTracker(String action) {
         mTracker.send(new HitBuilders.EventBuilder()
                 .setCategory("Action")
                 .setAction(action)

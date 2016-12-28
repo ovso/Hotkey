@@ -29,12 +29,16 @@ class MainPresenterImpl implements MainPresenter {
     @Override
     public void onNavigationItemSelected(int menuId) {
         if (menuId == R.id.nav_share) {
+            mModel.setSendEventTracker("share");
             mView.navigateToShare(mModel.getPlayStoreUrl());
         } else if (menuId == R.id.nav_review) {
+            mModel.setSendEventTracker("review");
             mView.navigateToReview(mModel.getReviewUrl());
         } else if (menuId == R.id.nav_help) {
+            mModel.setSendEventTracker("help");
             mView.navigateToHelp();
         } else if (menuId == R.id.nav_settings) {
+            mModel.setSendEventTracker("setting");
             mView.navigateToSettings();
         }
     }
@@ -42,7 +46,6 @@ class MainPresenterImpl implements MainPresenter {
     @Override
     public void onCreate() {
         mView.setRootView();
-        mModel.setTracker();
         mView.setVersionName(mModel.getVersionName());
         mModel.setFontsSize();
         mView.setToolbar();
