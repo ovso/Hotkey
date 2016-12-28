@@ -35,10 +35,8 @@ class MainPresenterImpl implements MainPresenter {
             mModel.setSendEventTracker("review");
             mView.navigateToReview(mModel.getReviewUrl());
         } else if (menuId == R.id.nav_help) {
-            mModel.setSendEventTracker("help");
             mView.navigateToHelp();
         } else if (menuId == R.id.nav_settings) {
-            mModel.setSendEventTracker("setting");
             mView.navigateToSettings();
         }
     }

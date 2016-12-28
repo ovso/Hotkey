@@ -173,4 +173,9 @@ public class ItemAlertDialogBuilder extends AlertDialog.Builder implements Dialo
     public interface OnOkClickListener {
         void onClick(DialogInterface dialog, String itemId);
     }
+
+    @Override
+    public Context getContext() {
+        return super.getContext();
+    }
 }

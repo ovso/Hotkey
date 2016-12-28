@@ -25,5 +25,7 @@ public interface DialogPresenter {
         void navigateToContacts(Intent intent);
         void navigateToSMS(Intent intent);
         void showToast(String msg);
+
+        Context getContext();
     }
 }

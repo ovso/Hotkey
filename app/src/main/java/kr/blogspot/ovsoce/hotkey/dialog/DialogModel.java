@@ -8,8 +8,13 @@ import android.provider.ContactsContract;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
+import kr.blogspot.ovsoce.hotkey.main.Model;
 
-public class DialogModel {
+public class DialogModel extends Model {
+    public DialogModel(Context context) {
+        super(context);
+    }
+
     public String[] getDefaultColors(Context context) {
         MyApplication app = (MyApplication)context.getApplicationContext();
         return app.getDatabaseHelper().getDefaultColors();

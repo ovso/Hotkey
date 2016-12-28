@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.help;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -58,5 +59,10 @@ public class HelpActivity extends AppCompatActivity implements HelpPresenter.Vie
     public boolean onOptionsItemSelected(MenuItem item) {
         mPresenter.onOptionsItemSelected(item.getItemId());
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

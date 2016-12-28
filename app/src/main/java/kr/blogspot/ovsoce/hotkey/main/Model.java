@@ -22,7 +22,7 @@ public class Model {
         mTracker = application.getDefaultTracker();
     }
     public void setScreenTracker(String screenName) {
-        mTracker.setScreenName(screenName);
+        mTracker.setScreenName("screen_"+screenName);
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     public void setSendEventTracker(String action) {

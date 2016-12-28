@@ -10,7 +10,7 @@ public class HelpPresenterImpl implements HelpPresenter {
     private HelpModel mModel;
     HelpPresenterImpl(HelpPresenter.View view) {
         mView = view;
-        mModel = new HelpModel();
+        mModel = new HelpModel(view.getContext());
     }
     @Override
     public void onClick(android.view.View view) {
@@ -26,6 +26,7 @@ public class HelpPresenterImpl implements HelpPresenter {
         } else {
             mView.initWebView("http://blog.naver.com/share_oneone/220701347695");
         }
+        mModel.setScreenTracker("help");
     }
 
     @Override
