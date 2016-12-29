@@ -19,5 +19,7 @@ public interface HelpPresenter {
         void initWebView(String url);
 
         Context getContext();
+
+        void setRootView();
     }
 }

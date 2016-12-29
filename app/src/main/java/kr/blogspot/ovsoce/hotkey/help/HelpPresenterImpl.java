@@ -2,8 +2,6 @@ package kr.blogspot.ovsoce.hotkey.help;
 
 import android.content.Context;
 
-import kr.blogspot.ovsoce.hotkey.common.Log;
-
 public class HelpPresenterImpl implements HelpPresenter {
     private final static String URL = "";
     private HelpPresenter.View mView;
@@ -19,6 +17,7 @@ public class HelpPresenterImpl implements HelpPresenter {
 
     @Override
     public void onCreate(Context context) {
+        mView.setRootView();
         mView.onInit();
         String language = mModel.getLanguage(context);
         if(language.equalsIgnoreCase("ko")) {
