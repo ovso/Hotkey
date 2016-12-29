@@ -3,6 +3,7 @@ package kr.blogspot.ovsoce.hotkey.main;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -38,7 +39,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.common.MyProgressDialog;
+import kr.blogspot.ovsoce.hotkey.common.Prefs;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
@@ -54,7 +57,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         mPresenter = new MainPresenterImpl(this);
         mPresenter.onCreate();
-
     }
 
     @BindView(R.id.nav_view)

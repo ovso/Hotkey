@@ -90,13 +90,17 @@ public class HelpActivity extends AppCompatActivity implements HelpPresenter.Vie
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            mLoadingProgressBar.setVisibility(View.VISIBLE);
+            if (mLoadingProgressBar != null) {
+                mLoadingProgressBar.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            mLoadingProgressBar.setVisibility(View.GONE);
+            if (mLoadingProgressBar != null) {
+                mLoadingProgressBar.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -104,7 +108,9 @@ public class HelpActivity extends AppCompatActivity implements HelpPresenter.Vie
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
-            mLoadingProgressBar.setProgress(newProgress);
+            if (mLoadingProgressBar != null) {
+                mLoadingProgressBar.setProgress(newProgress);
+            }
         }
     }
 

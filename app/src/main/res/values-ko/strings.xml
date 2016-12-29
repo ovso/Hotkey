@@ -58,4 +58,7 @@
     <string name="do_you_want_to_add_a_tab">탭(그룹)을 추가하시겠어요?</string>
     <string name="btn_del_tab">탭 제거</string>
     <string name="default_tab_name">\?</string>
+    <string name="automatic_end_after_call">통화 후 자동종료</string>
+    <string name="quit_app_after_call">통화를 마친 후 앱을 종료합니다.</string>
+    <string name="keep_app_after_call">통화를 마친 후 앱을 유지합니다.</string>
 </resources>

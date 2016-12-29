@@ -11,6 +11,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
@@ -35,6 +36,9 @@ public class SettingsFragment extends PreferenceFragment implements
         String fontsSizeListPrefsTitle = getFontSizeTitle(fontsSizeListPrefs, fontsSizeListPrefs.getValue());
         fontsSizeListPrefs.setTitle(fontsSizeListPrefsTitle);
 
+        SwitchPreference autoEndPrefs = (SwitchPreference) findPreference("auto_end");
+        autoEndPrefs.setOnPreferenceChangeListener(this);
+
     }
 
     @Override
@@ -47,13 +51,18 @@ public class SettingsFragment extends PreferenceFragment implements
             TypefaceUtil.overrideFont(preference.getContext(), "SERIF", "fonts/"+newValue);
             String title = getFontName((ListPreference)findPreference("fonts"), newValue.toString());
             preference.setTitle(title);
+            showRestartDialog();
 
         } else if(key.equals("fonts_size")) {
             TypefaceUtil.fontsSize(getActivity().getApplicationContext(), getFontsSize());
             String title = getFontSizeTitle((ListPreference)findPreference("fonts_size"), newValue.toString());
             preference.setTitle(title);
-
+            showRestartDialog();
         }
+
+        return true;
+    }
+    private void showRestartDialog() {
         new AlertDialog.Builder(getActivity())
                 .setMessage(R.string.settings_fonts_summary)
                 .setPositiveButton(R.string.settings_btn_restart, new DialogInterface.OnClickListener() {
@@ -69,8 +78,6 @@ public class SettingsFragment extends PreferenceFragment implements
 
             }
         }).show();
-
-        return true;
     }
     private float getFontsSize() {
         SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());

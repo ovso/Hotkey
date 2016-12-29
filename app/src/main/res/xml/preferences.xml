@@ -1,20 +1,22 @@
 <PreferenceScreen  xmlns:android="http://schemas.android.com/apk/res/android">
     <ListPreference
-        android:defaultValue="NanumBarunGothic.ttf"
+        android:defaultValue="0"
         android:entries="@array/font_names"
         android:entryValues="@array/font_names_value"
         android:key="fonts"
         android:title="@string/settings_fonts"
         android:summary="@string/settings_fonts_summary" />
-    android:negativeButtonText="@null"
-    android:positiveButtonText="@null"
-    android:dependency="useUserName"
     <ListPreference
-        android:defaultValue="1.0"
+        android:defaultValue="1"
         android:entries="@array/array_fonts_size"
         android:entryValues="@array/array_fonts_size_value"
         android:key="fonts_size"
         android:title="@string/settings_fonts_size"
         android:summary="@string/settings_fonts_size_summary" />
-
+    <SwitchPreference
+        android:defaultValue="false"
+        android:title="@string/automatic_end_after_call"
+        android:key="auto_end"
+        android:summaryOn="@string/quit_app_after_call"
+        android:summaryOff="@string/keep_app_after_call"/>
 </PreferenceScreen>
