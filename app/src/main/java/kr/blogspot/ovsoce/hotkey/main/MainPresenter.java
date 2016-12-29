@@ -21,6 +21,8 @@ public interface MainPresenter {
 
     void onAddTabClick();
 
+    void onPhoneStateReceiver(Intent intent);
+
     interface View {
         void navigateToShare(String playStoreUrl);
         void navigateToReview(String reviewUrl);
@@ -66,5 +68,7 @@ public interface MainPresenter {
         void hideProgressBar();
 
         void setRootView();
+
+        void exitApp();
     }
 }

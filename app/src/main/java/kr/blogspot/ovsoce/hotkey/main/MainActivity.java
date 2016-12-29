@@ -1,9 +1,10 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -19,6 +20,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         mPresenter = new MainPresenterImpl(this);
         mPresenter.onCreate();
+
+        registerReceiver(mPhoneStateBroadcastReceiver,
+                new IntentFilter("android.intent.action.PHONE_STATE"));
     }
 
     @BindView(R.id.nav_view)
@@ -381,8 +386,21 @@ public class MainActivity extends AppCompatActivity
         super.onDestroy();
         mPresenter.onDestroy();
         mUnbinder.unbind();
+
+        unregisterReceiver(mPhoneStateBroadcastReceiver);
     }
 
     public final static int[] DEFAULT_TITLE_RES_ID = {
             R.string.menu_title_family,R.string.menu_title_friends,R.string.menu_title_others};
+
+    @Override
+    public void exitApp() {
+        finish();
+    }
+
+    private BroadcastReceiver mPhoneStateBroadcastReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            mPresenter.onPhoneStateReceiver(intent);
+        }
+    };
 }

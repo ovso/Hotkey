@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.blogspot.ovsoce.hotkey" >
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    package="kr.blogspot.ovsoce.hotkey">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".application.MyApplication">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".main.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,25 +30,17 @@
         </activity>
         <activity
             android:name=".help.HelpActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait">
-        </activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".settings.SettingsActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait">
-        </activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <receiver android:name=".reveiver.PhoneStateReceiver">
-            <intent-filter android:priority="0">
-                <!--<action android:name="android.intent.action.PHONE_STATE" />-->
-                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

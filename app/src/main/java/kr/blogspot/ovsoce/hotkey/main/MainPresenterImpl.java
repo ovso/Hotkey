@@ -16,7 +16,6 @@ class MainPresenterImpl implements MainPresenter {
     private MainPresenter.View mView;
     private MainModel mModel;
     private MainDBManager mDBManager;
-
     private TabManager mTabManager;
 
     MainPresenterImpl(MainPresenter.View view) {
@@ -25,7 +24,6 @@ class MainPresenterImpl implements MainPresenter {
         mDBManager = new MainDBManager(mView.getContext());
         mTabManager = new TabManager(mView.getContext(), mDBManager);
     }
-
     @Override
     public void onNavigationItemSelected(int menuId) {
         if (menuId == R.id.nav_share) {
@@ -138,6 +136,13 @@ class MainPresenterImpl implements MainPresenter {
             }
         }.execute();
 
+    }
+
+    @Override
+    public void onPhoneStateReceiver(Intent intent) {
+        if (mModel.isAppExit(intent)) {
+            mView.exitApp();
+        }
     }
 
     @Override

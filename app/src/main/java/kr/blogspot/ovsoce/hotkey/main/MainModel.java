@@ -1,14 +1,18 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 
 import com.google.android.gms.analytics.Tracker;
+import com.gun0912.tedpermission.util.ObjectUtils;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.common.Log;
+import kr.blogspot.ovsoce.hotkey.common.Prefs;
 import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 
 public class MainModel extends Model {
@@ -42,5 +46,14 @@ public class MainModel extends Model {
 
     public String getAppCode() {
         return AD_ID_CAULY;
+    }
+
+    public boolean isAppExit(Intent intent) {
+        String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+        if (!ObjectUtils.isEmpty(state) && state.equals("IDLE")) {
+            return Prefs.getBoolean(mContext, "auto_end", false);
+        } else {
+            return false;
+        }
     }
 }
