@@ -11,9 +11,9 @@
         <item>LottemartBold.ttf</item>
     </string-array>
     <string-array name="array_fonts_size">
-        <item>Small</item>
-        <item>Basic</item>
-        <item>Big</item>
+        <item>작게</item>
+        <item>기본</item>
+        <item>크게</item>
     </string-array>
     <string-array name="array_fonts_size_value">
         <item>0.8</item>

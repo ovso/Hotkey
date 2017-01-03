@@ -49,11 +49,11 @@ public class EmergencyActivity extends AppCompatActivity implements EmergencyPre
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
     @Override
-    public void setViewPager() {
+    public void setViewPager(int tabCount) {
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(EmergencyFragment.getInstance(0));
-        fragmentList.add(EmergencyFragment.getInstance(1));
-        fragmentList.add(EmergencyFragment.getInstance(2));
+        for (int i = 0; i < tabCount; i++) {
+            fragmentList.add(EmergencyFragment.getInstance(i));
+        }
         EmergencyPagerAdapter adapter
                 = new EmergencyPagerAdapter(getSupportFragmentManager(), fragmentList);
         mViewPager.setAdapter(adapter);
@@ -64,10 +64,17 @@ public class EmergencyActivity extends AppCompatActivity implements EmergencyPre
 
     @Override
     public void setTabLayout() {
+        
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.getTabAt(0).setText(R.string.tab_emergency_label);
         mTabLayout.getTabAt(1).setText(R.string.tab_living_info_label);
         mTabLayout.getTabAt(2).setText(R.string.tab_complaints_label);
+        mTabLayout.getTabAt(3).setText(R.string.tab_child_label);
+        mTabLayout.getTabAt(4).setText(R.string.tab_teen_label);
+        mTabLayout.getTabAt(5).setText(R.string.tab_female_label);
+        mTabLayout.getTabAt(6).setText(R.string.tab_old_disabled_label);
+        mTabLayout.getTabAt(7).setText(R.string.tab_disease_addicted_label);
+        mTabLayout.getTabAt(8).setText(R.string.tab_family_label);
     }
 
     @Override

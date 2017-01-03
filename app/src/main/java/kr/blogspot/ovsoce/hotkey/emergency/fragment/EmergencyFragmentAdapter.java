@@ -37,11 +37,23 @@ public class EmergencyFragmentAdapter extends
         holder.mReceptionTv.setText(contact.receptionContents);
         holder.mPhoneNumberTv.setText(contact.phoneNumber);
         holder.mRelatedTv.setText(contact.relatedInstitutions);
+        holder.position = position;
+        holder.mOnEmergencyItemClickListener = mOnEmergencyItemClickListener;
     }
 
     @Override
     public int getItemCount() {
         return mEmergencyList.size();
+    }
+
+    private OnEmergencyItemClickListener mOnEmergencyItemClickListener;
+
+    public void setOnEmergencyItemClickListener(@Nonnull OnEmergencyItemClickListener listener) {
+        mOnEmergencyItemClickListener = listener;
+    }
+
+    public interface OnEmergencyItemClickListener {
+        void onItemClick(int position);
     }
 
     final static class EmergencyViewHolder extends RecyclerView.ViewHolder {
@@ -51,9 +63,17 @@ public class EmergencyFragmentAdapter extends
         TextView mPhoneNumberTv;
         @BindView(R.id.related_institutions_textview)
         TextView mRelatedTv;
+        int position;
+        OnEmergencyItemClickListener mOnEmergencyItemClickListener;
         public EmergencyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnEmergencyItemClickListener.onItemClick(position);
+                }
+            });
         }
     }
 }

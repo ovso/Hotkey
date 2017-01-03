@@ -19,12 +19,7 @@ public class HelpPresenterImpl implements HelpPresenter {
     public void onCreate(Context context) {
         mView.setRootView();
         mView.onInit();
-        String language = mModel.getLanguage(context);
-        if(language.equalsIgnoreCase("ko")) {
-            mView.initWebView("http://blog.naver.com/share_oneone/220701321810");
-        } else {
-            mView.initWebView("http://blog.naver.com/share_oneone/220701347695");
-        }
+        mView.initWebView("http://blog.naver.com/share_oneone/220701321810");
         mModel.setScreenTracker("help");
     }
 

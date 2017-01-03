@@ -8,10 +8,15 @@ public interface EmergencyFragmentPresenter {
 
     void onActivityCreate(int index);
 
+    void onItemClick(int position);
+
+
     interface View {
 
         void setRecyclerView(List<EmergencyContact> contactList);
 
         Context getContext();
+
+        void showMakeCallDialog(EmergencyContact contact);
     }
 }

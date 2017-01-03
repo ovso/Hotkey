@@ -10,7 +10,7 @@ public interface EmergencyPresenter {
 
         void setRootView();
         void setToolbar();
-        void setViewPager();
+        void setViewPager(int tabCount);
         void setTabLayout();
         Context getContext();
     }
