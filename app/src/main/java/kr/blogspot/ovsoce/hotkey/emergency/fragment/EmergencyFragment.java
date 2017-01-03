@@ -1,13 +1,18 @@
 package kr.blogspot.ovsoce.hotkey.emergency.fragment;
 
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.List;
 
@@ -57,6 +62,14 @@ public class EmergencyFragment extends Fragment implements EmergencyFragmentPres
 
     @Override
     public void setRecyclerView(List<EmergencyContact> contactList) {
+
+        Paint paint = new Paint();
+        paint.setStrokeWidth(3);
+        paint.setColor(Color.TRANSPARENT);
+        paint.setAlpha(20);
+        HorizontalDividerItemDecoration divider = new HorizontalDividerItemDecoration
+                .Builder(getActivity()).paint(paint).build();
+        mRecyclerView.addItemDecoration(divider);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);

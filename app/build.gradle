@@ -38,4 +38,5 @@ dependencies {
     compile "com.google.android.gms:play-services-analytics:$rootProject.playServicesAnalytics"
     compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     compile "jp.wasabeef:glide-transformations:$rootProject.glideTransformationsVersion"
+    compile "com.yqritc:recyclerview-flexibledivider:$rootProject.flexibledividerVersion"
 }
