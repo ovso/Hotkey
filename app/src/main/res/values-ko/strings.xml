@@ -42,6 +42,12 @@
     <!-- help -->
     <string name="activity_help_label">도움말</string>
 
+    <!-- emergency -->
+    <string name="activity_emergency_label">긴급 전화번호</string>
+    <string name="tab_emergency_label">긴급 전화번호</string>
+    <string name="tab_living_info_label">생활정보 전화번호</string>
+    <string name="tab_complaints_label">민원 신고/상담 전화번호</string>
+
     <!-- settings -->
     <string name="settings_fonts">글꼴</string>
     <string name="settings_fonts_summary">설정 후 재시작해야 전체 반영 됩니다.</string>

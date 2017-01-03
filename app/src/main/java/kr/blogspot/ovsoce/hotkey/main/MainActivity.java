@@ -41,6 +41,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.MyProgressDialog;
+import kr.blogspot.ovsoce.hotkey.emergency.EmergencyActivity;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
@@ -233,7 +234,12 @@ public class MainActivity extends AppCompatActivity
                 .setMessage(R.string.do_you_want_to_add_a_tab)
                 .show();
     }
-
+    @OnClick(R.id.emergency_button)
+    void navigateToEmergency() {
+        Intent intent = new Intent(this, EmergencyActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
     @Override
     public void restart() {
         finish();

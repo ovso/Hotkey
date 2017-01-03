@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@id/thumbnail_imageview"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            android:scaleType="center"
+            android:src="@android:drawable/ic_menu_search" />
+        <TextView
+            android:id="@id/reception_contents_textview"
+            style="@style/EmergencyAdapterItemTextView"
+            android:text="간첩신고" />
+        <TextView
+            android:id="@id/phone_number_textview"
+            style="@style/EmergencyAdapterItemTextView"
+            android:text="112"/>
+        <TextView
+            android:id="@id/related_institutions_textview"
+            style="@style/EmergencyAdapterItemTextView"
+            android:text="국가정보원"/>
+    </LinearLayout>
+</LinearLayout>

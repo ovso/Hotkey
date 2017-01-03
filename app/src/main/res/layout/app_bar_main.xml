@@ -53,11 +53,12 @@
     <include layout="@layout/content_main" />
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/emergency_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_add"
-        android:visibility="gone" />
+        android:src="@android:drawable/sym_action_call"
+        android:visibility="visible" />
 
 </android.support.design.widget.CoordinatorLayout>

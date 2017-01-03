@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.TabLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/tablayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<!--
+    app:tabIndicatorColor="@color/color_52d8ff"
+    android:background="@color/color_07294f"
+-->
+
+    <android.support.design.widget.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:text="@string/tab_emergency_label" />
+
+    <android.support.design.widget.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:text="@string/tab_living_info_label" />
+
+    <android.support.design.widget.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:text="@string/tab_complaints_label" />
+</android.support.design.widget.TabLayout>

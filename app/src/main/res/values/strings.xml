@@ -50,6 +50,12 @@
     <string name="settings_btn_restart">Restart APP</string>
     <string name="settings_btn_cancel">cancel</string>
 
+    <!-- emergency -->
+    <string name="activity_emergency_label">긴급 전화번호</string>
+    <string name="tab_emergency_label">긴급 전화번호</string>
+    <string name="tab_living_info_label">생활정보 전화번호</string>
+    <string name="tab_complaints_label">민원 신고/상담 전화번호</string>
+
     <!-- Change name dialog -->
     <string name="dialog_title_edit_name">Edit</string>
     <string name="empty_input_text">No values are entered</string>

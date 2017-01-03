@@ -1,17 +1,12 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
 import com.gun0912.tedpermission.util.ObjectUtils;
-
-import java.util.ArrayList;
 
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;

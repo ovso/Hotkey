@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="viewpager" type="id"/>
+    <item name="tablayout" type="id"/>
+    <item name="recyclerView" type="id"/>
+    <item name="thumbnail_imageview" type="id" />
+    <item name="reception_contents_textview" type="id" />
+    <item name="phone_number_textview" type="id" />
+    <item name="related_institutions_textview" type="id" />
+</resources>
