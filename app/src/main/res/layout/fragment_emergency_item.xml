@@ -3,31 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center_vertical">
+    android:gravity="center">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@id/reception_contents_textview"
+                style="@style/EmergencyAdapterItemTextView"
+                android:text="간첩신고" />
+            <TextView
+                android:id="@id/phone_number_textview"
+                style="@style/EmergencyAdapterItemTextView"
+                android:text="112"/>
+            <TextView
+                android:id="@id/related_institutions_textview"
+                style="@style/EmergencyAdapterItemTextView"
+                android:text="국가정보원"/>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@id/thumbnail_imageview"
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="@dimen/dp_100"
-            android:scaleType="center"
-            android:src="@android:drawable/ic_menu_search" />
-        <TextView
-            android:id="@id/reception_contents_textview"
-            style="@style/EmergencyAdapterItemTextView"
-            android:text="간첩신고" />
-        <TextView
-            android:id="@id/phone_number_textview"
-            style="@style/EmergencyAdapterItemTextView"
-            android:text="112"/>
-        <TextView
-            android:id="@id/related_institutions_textview"
-            style="@style/EmergencyAdapterItemTextView"
-            android:text="국가정보원"/>
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

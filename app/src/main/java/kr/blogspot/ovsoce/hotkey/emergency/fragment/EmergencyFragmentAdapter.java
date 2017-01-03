@@ -43,8 +43,6 @@ public class EmergencyFragmentAdapter extends
     }
 
     final static class EmergencyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.thumbnail_imageview)
-        ImageView mThumbnailTv;
         @BindView(R.id.reception_contents_textview)
         TextView mReceptionTv;
         @BindView(R.id.phone_number_textview)
