@@ -2,10 +2,11 @@ package kr.blogspot.ovsoce.hotkey.emergency;
 
 import android.content.Context;
 
-class EmergencyPresenterModel {
-    private Context mContext;
+import kr.blogspot.ovsoce.hotkey.main.Model;
+
+class EmergencyPresenterModel extends Model {
     public EmergencyPresenterModel(Context context) {
-        mContext = context;
+        super(context);
     }
 
     public int getTabCount() {

@@ -27,6 +27,7 @@ public interface MainPresenter {
         void navigateToShare(String playStoreUrl);
         void navigateToReview(String reviewUrl);
         void navigateToHelp();
+        void navigateToEmergency();
         void setVersionName(String versionName);
         void setAd(String appCode);
 
@@ -70,5 +71,7 @@ public interface MainPresenter {
         void setRootView();
 
         void exitApp();
+
+        void navigateToDonate();
     }
 }

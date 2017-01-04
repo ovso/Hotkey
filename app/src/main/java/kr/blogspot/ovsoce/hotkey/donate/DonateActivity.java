@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.hotkey.help;
+package kr.blogspot.ovsoce.hotkey.donate;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,22 +12,20 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.R;
 
-public class HelpActivity extends AppCompatActivity implements HelpPresenter.View {
-    private HelpPresenter mPresenter;
+public class DonateActivity extends AppCompatActivity implements DonatePresenter.View {
+    private DonatePresenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = new HelpPresenterImpl(this);
+        mPresenter = new DonatePresenterImpl(this);
         mPresenter.onCreate(getApplicationContext());
     }
-
     private Unbinder mUnbinder;
     @Override
     public void setRootView() {
@@ -35,48 +33,31 @@ public class HelpActivity extends AppCompatActivity implements HelpPresenter.Vie
         mUnbinder = ButterKnife.bind(this);
     }
 
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mUnbinder.unbind();
-    }
-
-    @Override
-    public void onInit() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.activity_help_label);
-        setSupportActionBar(toolbar);
+    public void setToolbar() {
+        mToolbar.setTitle(R.string.activity_donate_label);
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
 
-    @Override
-    public void showToast(int resId) {
-        Toast.makeText(getApplicationContext(), resId, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showToast(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void activityFinish() {
-        onBackPressed();
     }
     @BindView(R.id.wv_help)
     WebView mWebView;
+
     @Override
-    public void initWebView(String url) {
+    public void setWebView(String donateUrl) {
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebChromeClient(new WebChromeClientExt());
         mWebView.setWebViewClient(new WebViewClientExt());
-        mWebView.loadUrl(url);
+        mWebView.loadUrl(donateUrl);
         mWebView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return true;
             }
         });
+
     }
     @BindView(R.id.loading_progressbar)
     ContentLoadingProgressBar mLoadingProgressBar;
@@ -115,8 +96,16 @@ public class HelpActivity extends AppCompatActivity implements HelpPresenter.Vie
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        mPresenter.onOptionsItemSelected(item.getItemId());
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 

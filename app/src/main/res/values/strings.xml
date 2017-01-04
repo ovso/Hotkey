@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">빠른단축번호 3</string>
+    <string name="app_name">단축번호 앱</string>
     <string name="app_ver">버전&#160;&#160;&#160;</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -76,4 +76,6 @@
     <string name="automatic_end_after_call">통화 후 자동종료</string>
     <string name="quit_app_after_call">통화를 마친 후 앱을 종료합니다.</string>
     <string name="keep_app_after_call">통화를 마친 후 앱을 유지합니다.</string>
+    <string name="activity_donate_label">이웃돕기</string>
+    <string name="menu_donate_help">이웃돕기</string>
 </resources>

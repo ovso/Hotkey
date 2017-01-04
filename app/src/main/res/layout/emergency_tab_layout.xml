@@ -5,10 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:tabMode="scrollable">
-    <!--
-        app:tabIndicatorColor="@color/color_52d8ff"
-        android:background="@color/color_07294f"
-    -->
 
     <android.support.design.widget.TabItem
         android:layout_width="wrap_content"

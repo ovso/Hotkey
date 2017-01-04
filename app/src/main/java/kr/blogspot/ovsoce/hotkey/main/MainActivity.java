@@ -41,17 +41,19 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.MyProgressDialog;
+import kr.blogspot.ovsoce.hotkey.donate.DonateActivity;
 import kr.blogspot.ovsoce.hotkey.emergency.EmergencyActivity;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View{
+        implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private MainPresenter mPresenter;
 
     private Unbinder mUnbinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -211,13 +213,28 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void navigateToHelp() {
         Intent intent = new Intent(this, HelpActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
+    @Override
+    public void navigateToEmergency() {
+        Intent intent = new Intent(this, EmergencyActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToDonate() {
+        Intent intent = new Intent(this, DonateActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
     @Override
     public void navigateToSettings() {
         Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivityForResult(intent, SettingsActivity.REQUEST_CODE_SETTING);
     }
 
@@ -234,17 +251,12 @@ public class MainActivity extends AppCompatActivity
                 .setMessage(R.string.do_you_want_to_add_a_tab)
                 .show();
     }
-    @OnClick(R.id.emergency_button)
-    void navigateToEmergency() {
-        Intent intent = new Intent(this, EmergencyActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
+
     @Override
     public void restart() {
         finish();
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -266,7 +278,8 @@ public class MainActivity extends AppCompatActivity
         builder.setView(mTabNameEditDialogView);
         builder.setPositiveButton(R.string.btn_ok, mOnTabNameEditDialogClickListener);
         builder.setNegativeButton(R.string.btn_cancel, mOnTabNameEditDialogClickListener);
-        if(isRemoveTab) builder.setNeutralButton(R.string.btn_del_tab, mOnTabNameEditDialogClickListener);
+        if (isRemoveTab)
+            builder.setNeutralButton(R.string.btn_del_tab, mOnTabNameEditDialogClickListener);
         builder.show();
     }
 
@@ -279,6 +292,7 @@ public class MainActivity extends AppCompatActivity
             mPresenter.onTabNameEditDialogButtonClick(name, which);
         }
     };
+
     @Override
     public void setTabTitle(String name, int position) {
         mTabLayout.getTabAt(position).setText(name);
@@ -313,7 +327,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void setVersionName(String versionName) {
-        ((TextView)mNavigationView.getHeaderView(0).findViewById(R.id.tv_version)).setText(versionName);
+        ((TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_version)).setText(versionName);
     }
 
     @Override
@@ -328,9 +342,10 @@ public class MainActivity extends AppCompatActivity
         view.setAdViewListener(caulyAdViewListener);
 
 
-        ViewGroup adContainer = (ViewGroup)findViewById(R.id.ad_container);
+        ViewGroup adContainer = (ViewGroup) findViewById(R.id.ad_container);
         adContainer.addView(view);
     }
+
     private CaulyAdViewListener caulyAdViewListener = new CaulyAdViewListener() {
         @Override
         public void onReceiveAd(CaulyAdView caulyAdView, boolean b) {
@@ -357,6 +372,7 @@ public class MainActivity extends AppCompatActivity
 
         private List<Fragment> mFragmentList;
         private List<String> mPageTitleList;
+
         public SectionsPagerAdapter(FragmentManager fm
                 , List<Fragment> fragmentList, List<String> pageTitleList) {
             super(fm);
@@ -395,7 +411,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public final static int[] DEFAULT_TITLE_RES_ID = {
-            R.string.menu_title_family,R.string.menu_title_friends,R.string.menu_title_others};
+            R.string.menu_title_family, R.string.menu_title_friends, R.string.menu_title_others};
 
     @Override
     public void exitApp() {

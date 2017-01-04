@@ -3,7 +3,7 @@ package kr.blogspot.ovsoce.hotkey.help;
 import android.content.Context;
 
 public class HelpPresenterImpl implements HelpPresenter {
-    private final static String URL = "";
+
     private HelpPresenter.View mView;
     private HelpModel mModel;
     HelpPresenterImpl(HelpPresenter.View view) {
@@ -19,7 +19,7 @@ public class HelpPresenterImpl implements HelpPresenter {
     public void onCreate(Context context) {
         mView.setRootView();
         mView.onInit();
-        mView.initWebView("http://blog.naver.com/share_oneone/220701321810");
+        mView.initWebView(mModel.getHelpUrl());
         mModel.setScreenTracker("help");
     }
 

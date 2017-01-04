@@ -36,6 +36,10 @@ class MainPresenterImpl implements MainPresenter {
             mView.navigateToHelp();
         } else if (menuId == R.id.nav_settings) {
             mView.navigateToSettings();
+        } else if (menuId == R.id.nav_emergency) {
+            mView.navigateToEmergency();
+        } else if (menuId == R.id.nav_donate) {
+            mView.navigateToDonate();
         }
     }
 
