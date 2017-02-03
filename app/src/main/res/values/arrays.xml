@@ -16,7 +16,7 @@
         <item>크게</item>
     </string-array>
     <string-array name="array_fonts_size_value">
-        <item>0.8</item>
+        <item>0.5</item>
         <item>1.0</item>
         <item>1.2</item>
     </string-array>

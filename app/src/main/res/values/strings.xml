@@ -77,5 +77,5 @@
     <string name="quit_app_after_call">통화를 마친 후 앱을 종료합니다.</string>
     <string name="keep_app_after_call">통화를 마친 후 앱을 유지합니다.</string>
     <string name="activity_donate_label">이웃돕기</string>
-    <string name="menu_donate_help">이웃돕기</string>
+    <string name="menu_donate_help">후원</string>
 </resources>

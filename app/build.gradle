@@ -10,13 +10,17 @@ android {
         applicationId "kr.blogspot.ovsoce.hotkey"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 19
-        versionName "0.9.2"
+        versionCode 20
+        versionName "0.9.3"
         renderscriptTargetApi 16
         renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
