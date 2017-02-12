@@ -11,13 +11,17 @@
         <item>LottemartBold.ttf</item>
     </string-array>
     <string-array name="array_fonts_size">
+        <item>아주작게</item>
         <item>작게</item>
         <item>기본</item>
         <item>크게</item>
+        <item>아주크게</item>
     </string-array>
     <string-array name="array_fonts_size_value">
         <item>0.5</item>
+        <item>0.8</item>
         <item>1.0</item>
         <item>1.2</item>
+        <item>1.5</item>
     </string-array>
 </resources>
