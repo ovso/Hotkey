@@ -19,6 +19,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import hugo.weaving.DebugLog;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.dialog.ItemAlertDialogBuilder;
 import kr.blogspot.ovsoce.hotkey.fragment.adapter.MyAdapter;
@@ -33,6 +34,7 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     private ItemAlertDialogBuilder mItemAlertDialogBuilder;
     private Unbinder mUnbinder;
 
+    @DebugLog
     public static BaseFragment newInstance(int sectionNumber) {
         BaseFragment fragment = new BaseFragment();
         Bundle args = new Bundle();
@@ -61,6 +63,7 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
         mUnbinder = ButterKnife.bind(this, view);
     }
 
+    @DebugLog
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -78,12 +81,15 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     }
 
     private MyAdapter.OnAdapterItemClickListener mOnAdapterItemClickListener = new MyAdapter.OnAdapterItemClickListener() {
+
+        @DebugLog
         @Override
         public void onClick(android.view.View v) {
             int position = mRecyclerView.getChildAdapterPosition(v);
             mPresenter.onAdapterItemClick(position);
         }
 
+        @DebugLog
         @Override
         public boolean onLongClick(android.view.View v) {
             int position = mRecyclerView.getChildAdapterPosition(v);
@@ -92,6 +98,7 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
         }
     };
 
+    @DebugLog
     @Override
     public void showItemSetDialog(ContactsItem item) {
         mItemAlertDialogBuilder = new ItemAlertDialogBuilder(this, item);

@@ -8,6 +8,7 @@ import android.os.Looper;
 
 import com.gun0912.tedpermission.util.ObjectUtils;
 
+import hugo.weaving.DebugLog;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
@@ -142,6 +143,7 @@ class MainPresenterImpl implements MainPresenter {
 
     }
 
+    @DebugLog
     @Override
     public void onPhoneStateReceiver(Intent intent) {
         if (mModel.isAppExit(intent)) {
@@ -149,6 +151,7 @@ class MainPresenterImpl implements MainPresenter {
         }
     }
 
+    @DebugLog
     @Override
     public void onDestroy() {
 

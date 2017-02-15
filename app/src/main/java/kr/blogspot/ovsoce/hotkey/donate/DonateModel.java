@@ -2,9 +2,6 @@ package kr.blogspot.ovsoce.hotkey.donate;
 
 import android.content.Context;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import kr.blogspot.ovsoce.hotkey.main.Model;
 
 public class DonateModel extends Model {
