@@ -28,6 +28,7 @@
     <string name="dialog_title">연락처 설정</string>
     <string name="dialog_import_contacts">연락처 가져오기</string>
     <string name="dialog_btn_text_message">SMS 보내기</string>
+    <string name="dialog_btn_text_init">연락처 초기화</string>
 
     <!-- common -->
     <string name="btn_ok">확인</string>

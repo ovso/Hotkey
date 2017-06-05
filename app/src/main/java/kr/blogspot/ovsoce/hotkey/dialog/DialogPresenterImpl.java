@@ -84,4 +84,8 @@ public class DialogPresenterImpl implements DialogPresenter {
             mView.showToast(mModel.getSMSToastMsg(v.getContext()));
         }
     }
+
+    @Override public void onClickContactsInit() {
+        mView.setEmptyContacts();
+    }
 }
