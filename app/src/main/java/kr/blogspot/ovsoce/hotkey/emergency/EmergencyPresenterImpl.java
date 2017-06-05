@@ -14,6 +14,5 @@ public class EmergencyPresenterImpl implements EmergencyPresenter {
         mView.setToolbar();
         mView.setViewPager(mModel.getTabCount());
         mView.setTabLayout();
-        mModel.setScreenTracker("Emergency");
     }
 }

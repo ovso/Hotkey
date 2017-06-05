@@ -1,35 +1,39 @@
 {
   "project_info": {
-    "project_number": "699786351474",
-    "project_id": "speed-dial-3"
+    "project_number": "672330836357",
+    "firebase_url": "https://hotkey-b300b.firebaseio.com",
+    "project_id": "hotkey-b300b",
+    "storage_bucket": "hotkey-b300b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:699786351474:android:41fe4c41990d520f",
+        "mobilesdk_app_id": "1:672330836357:android:41fe4c41990d520f",
         "android_client_info": {
           "package_name": "kr.blogspot.ovsoce.hotkey"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "672330836357-eol3nb3qpulbqm3c1m4j3p9ob8i7ps62.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyANunv1T1CqX_RuMFnUu4qtD-xMVXUYGos"
+          "current_key": "AIzaSyAZJYtWSuA9F6hnKfQ0FqtD59f2nRCZRio"
         }
       ],
       "services": {
         "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-89501253-1"
-          }
+          "status": 1
         },
         "appinvite_service": {
           "status": 1,
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

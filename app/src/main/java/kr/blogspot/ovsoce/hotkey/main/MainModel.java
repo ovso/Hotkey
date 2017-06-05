@@ -5,12 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
-
-import com.google.android.gms.analytics.Tracker;
 import com.gun0912.tedpermission.util.ObjectUtils;
-
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.common.Prefs;
 import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
