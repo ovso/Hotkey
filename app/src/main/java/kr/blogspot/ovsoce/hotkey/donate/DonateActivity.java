@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -12,106 +13,104 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import kr.blogspot.ovsoce.hotkey.R;
 
 public class DonateActivity extends AppCompatActivity implements DonatePresenter.View {
-    private DonatePresenter mPresenter;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mPresenter = new DonatePresenterImpl(this);
-        mPresenter.onCreate(getApplicationContext());
-    }
-    private Unbinder mUnbinder;
-    @Override
-    public void setRootView() {
-        setContentView(R.layout.activity_help);
-        mUnbinder = ButterKnife.bind(this);
-    }
+  private DonatePresenter mPresenter;
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
-    @Override
-    public void setToolbar() {
-        mToolbar.setTitle(R.string.activity_donate_label);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    mPresenter = new DonatePresenterImpl(this);
+    mPresenter.onCreate(getApplicationContext());
+  }
 
-    }
-    @BindView(R.id.wv_help)
-    WebView mWebView;
+  private Unbinder mUnbinder;
 
-    @Override
-    public void setWebView(String donateUrl) {
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.setWebChromeClient(new WebChromeClientExt());
-        mWebView.setWebViewClient(new WebViewClientExt());
-        mWebView.loadUrl(donateUrl);
-        mWebView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
+  @Override public void setRootView() {
+    setContentView(R.layout.activity_donate);
+    mUnbinder = ButterKnife.bind(this);
+  }
 
-    }
-    @BindView(R.id.loading_progressbar)
-    ContentLoadingProgressBar mLoadingProgressBar;
+  @BindView(R.id.toolbar) Toolbar mToolbar;
 
-    private class WebViewClientExt extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            return super.shouldOverrideUrlLoading(view, url);
-        }
+  @Override public void setToolbar() {
+    mToolbar.setTitle(R.string.activity_donate_label);
+    setSupportActionBar(mToolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+  }
 
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            super.onPageStarted(view, url, favicon);
-            if (mLoadingProgressBar != null) {
-                mLoadingProgressBar.setVisibility(View.VISIBLE);
-            }
-        }
+  @BindView(R.id.wv_help) WebView mWebView;
 
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            super.onPageFinished(view, url);
-            if (mLoadingProgressBar != null) {
-                mLoadingProgressBar.setVisibility(View.GONE);
-            }
-        }
+  @Override public void setWebView(String donateUrl) {
+    mWebView.getSettings().setJavaScriptEnabled(true);
+    mWebView.setWebChromeClient(new WebChromeClientExt());
+    mWebView.setWebViewClient(new WebViewClientExt());
+    mWebView.loadUrl(donateUrl);
+    mWebView.setOnTouchListener(new View.OnTouchListener() {
+      @Override public boolean onTouch(View v, MotionEvent event) {
+        return true;
+      }
+    });
+  }
+
+  @BindView(R.id.recyclerview) RecyclerView mRecyclerView;
+
+  @Override public void setRecyclerView() {
+
+  }
+
+  @BindView(R.id.loading_progressbar) ContentLoadingProgressBar mLoadingProgressBar;
+
+  private class WebViewClientExt extends WebViewClient {
+    @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
+      return super.shouldOverrideUrlLoading(view, url);
     }
 
-    private class WebChromeClientExt extends WebChromeClient {
-        @Override
-        public void onProgressChanged(WebView view, int newProgress) {
-            super.onProgressChanged(view, newProgress);
-            if (mLoadingProgressBar != null) {
-                mLoadingProgressBar.setProgress(newProgress);
-            }
-        }
+    @Override public void onPageStarted(WebView view, String url, Bitmap favicon) {
+      super.onPageStarted(view, url, favicon);
+      if (mLoadingProgressBar != null) {
+        mLoadingProgressBar.setVisibility(View.VISIBLE);
+      }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mUnbinder.unbind();
+    @Override public void onPageFinished(WebView view, String url) {
+      super.onPageFinished(view, url);
+      if (mLoadingProgressBar != null) {
+        mLoadingProgressBar.setVisibility(View.GONE);
+      }
     }
+  }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
+  private class WebChromeClientExt extends WebChromeClient {
+    @Override public void onProgressChanged(WebView view, int newProgress) {
+      super.onProgressChanged(view, newProgress);
+      if (mLoadingProgressBar != null) {
+        mLoadingProgressBar.setProgress(newProgress);
+      }
     }
+  }
 
-    @Override
-    public Context getContext() {
-        return this;
+  @Override protected void onDestroy() {
+    super.onDestroy();
+    mUnbinder.unbind();
+  }
+
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == android.R.id.home) {
+      finish();
     }
+    return super.onOptionsItemSelected(item);
+  }
 
+  @Override public Context getContext() {
+    return this;
+  }
 }

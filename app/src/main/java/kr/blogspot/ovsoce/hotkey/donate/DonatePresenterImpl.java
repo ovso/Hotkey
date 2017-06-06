@@ -16,6 +16,7 @@ public class DonatePresenterImpl implements DonatePresenter {
         mView.setRootView();
         mView.setToolbar();
         mView.setWebView(mModel.getDonateUrl());
+        mView.setRecyclerView();
     }
 
 }

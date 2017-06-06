@@ -6,27 +6,38 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".donate.DonateActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    >
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
+      <WebView
+          android:id="@+id/wv_help"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+    </ScrollView>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <WebView
-                android:id="@+id/wv_help"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </ScrollView>
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/loading_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleInverse"
+        />
+  </FrameLayout>
 
-        <android.support.v4.widget.ContentLoadingProgressBar
-            android:id="@+id/loading_progressbar"
-            style="?android:attr/progressBarStyleInverse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone" />
-    </FrameLayout>
+  <android.support.v7.widget.RecyclerView
+      android:id="@id/recyclerview"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+
 </RelativeLayout>

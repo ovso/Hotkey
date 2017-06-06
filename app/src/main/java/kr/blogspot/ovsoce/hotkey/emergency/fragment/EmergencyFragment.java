@@ -61,7 +61,7 @@ public class EmergencyFragment extends Fragment implements EmergencyFragmentPres
         super.onDetach();
         mUnbinder.unbind();
     }
-    @BindView(R.id.recyclerView)
+    @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
     @Override
