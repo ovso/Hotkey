@@ -1,34 +1,33 @@
 package kr.blogspot.ovsoce.hotkey.donate;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.donate.adapter.DonateAdapter;
+import kr.blogspot.ovsoce.hotkey.donate.adapter.DonateAdapterDataModel;
+import kr.blogspot.ovsoce.hotkey.donate.adapter.DonateAdapterView;
 
 public class DonateActivity extends AppCompatActivity implements DonatePresenter.View {
   private DonatePresenter mPresenter;
+  private DonateAdapterView mAdapterView;
+  private DonateAdapter mAdapter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    mPresenter = new DonatePresenterImpl(this);
+
+    mAdapter = new DonateAdapter(getApplicationContext());
+    DonateAdapterDataModel adapterDataModel = mAdapter;
+    mAdapterView = mAdapter;
+
+    mPresenter = new DonatePresenterImpl(this, adapterDataModel);
     mPresenter.onCreate(getApplicationContext());
   }
 
@@ -47,55 +46,16 @@ public class DonateActivity extends AppCompatActivity implements DonatePresenter
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
   }
 
-  @BindView(R.id.wv_help) WebView mWebView;
-
-  @Override public void setWebView(String donateUrl) {
-    mWebView.getSettings().setJavaScriptEnabled(true);
-    mWebView.setWebChromeClient(new WebChromeClientExt());
-    mWebView.setWebViewClient(new WebViewClientExt());
-    mWebView.loadUrl(donateUrl);
-    mWebView.setOnTouchListener(new View.OnTouchListener() {
-      @Override public boolean onTouch(View v, MotionEvent event) {
-        return true;
-      }
-    });
-  }
-
   @BindView(R.id.recyclerview) RecyclerView mRecyclerView;
 
   @Override public void setRecyclerView() {
-
+    LinearLayoutManager layout = new LinearLayoutManager(getApplicationContext());
+    mRecyclerView.setLayoutManager(layout);
+    mRecyclerView.setAdapter(mAdapter);
   }
 
-  @BindView(R.id.loading_progressbar) ContentLoadingProgressBar mLoadingProgressBar;
-
-  private class WebViewClientExt extends WebViewClient {
-    @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
-      return super.shouldOverrideUrlLoading(view, url);
-    }
-
-    @Override public void onPageStarted(WebView view, String url, Bitmap favicon) {
-      super.onPageStarted(view, url, favicon);
-      if (mLoadingProgressBar != null) {
-        mLoadingProgressBar.setVisibility(View.VISIBLE);
-      }
-    }
-
-    @Override public void onPageFinished(WebView view, String url) {
-      super.onPageFinished(view, url);
-      if (mLoadingProgressBar != null) {
-        mLoadingProgressBar.setVisibility(View.GONE);
-      }
-    }
-  }
-
-  private class WebChromeClientExt extends WebChromeClient {
-    @Override public void onProgressChanged(WebView view, int newProgress) {
-      super.onProgressChanged(view, newProgress);
-      if (mLoadingProgressBar != null) {
-        mLoadingProgressBar.setProgress(newProgress);
-      }
-    }
+  @Override public void refresh() {
+    mAdapterView.refresh();
   }
 
   @Override protected void onDestroy() {

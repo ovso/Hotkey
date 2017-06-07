@@ -7,4 +7,5 @@
   <item name="phone_number_textview" type="id"/>
   <item name="related_institutions_textview" type="id"/>
   <item name="recyclerview" type="id"/>
+  <item name="donate_imageview" type="id"/>
 </resources>

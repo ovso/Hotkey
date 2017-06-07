@@ -13,8 +13,8 @@ interface DonatePresenter {
 
     void setToolbar();
 
-    void setWebView(String donateUrl);
-
     void setRecyclerView();
+
+    void refresh();
   }
 }
