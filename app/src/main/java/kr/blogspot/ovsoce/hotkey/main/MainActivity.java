@@ -261,7 +261,10 @@ public class MainActivity extends AppCompatActivity
       };
 
   @Override public void setTabTitle(String name, int position) {
-    mTabLayout.getTabAt(position).setText(name);
+    TabLayout.Tab tab = mTabLayout.getTabAt(position);
+    if (tab != null) {
+      tab.setText(name);
+    }
   }
 
   @Override public void showToast(int resId) {
@@ -323,12 +326,12 @@ public class MainActivity extends AppCompatActivity
     }
   };
 
-  public class SectionsPagerAdapter extends FragmentPagerAdapter {
+  private class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> mFragmentList;
     private List<String> mPageTitleList;
 
-    public SectionsPagerAdapter(FragmentManager fm, List<Fragment> fragmentList,
+    SectionsPagerAdapter(FragmentManager fm, List<Fragment> fragmentList,
         List<String> pageTitleList) {
       super(fm);
       mFragmentList = fragmentList;
@@ -347,7 +350,7 @@ public class MainActivity extends AppCompatActivity
       return mPageTitleList.get(position);
     }
 
-    public void updateFragmentList(List<Fragment> fragmentList, List<String> pageTitleList) {
+    void updateFragmentList(List<Fragment> fragmentList, List<String> pageTitleList) {
       mFragmentList = fragmentList;
       mPageTitleList = pageTitleList;
     }
