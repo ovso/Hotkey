@@ -29,7 +29,7 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
 
     public static final String ARG_SECTION_NUMBER = "position";
     protected BaseFragmentPresenter mPresenter;
-    @BindView(R.id.recyclerView)
+    @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
     private ItemAlertDialogBuilder mItemAlertDialogBuilder;
     private Unbinder mUnbinder;

@@ -20,7 +20,6 @@ public class HelpPresenterImpl implements HelpPresenter {
         mView.setRootView();
         mView.onInit();
         mView.initWebView(mModel.getHelpUrl());
-        mModel.setScreenTracker("help");
     }
 
     @Override

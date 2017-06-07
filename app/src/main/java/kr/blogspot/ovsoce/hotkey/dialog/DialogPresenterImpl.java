@@ -79,10 +79,13 @@ public class DialogPresenterImpl implements DialogPresenter {
     @Override
     public void onClickSMS(android.view.View v, String number) {
         if(!TextUtils.isEmpty(number)) {
-            mModel.setSendEventTracker("sms");
             mView.navigateToSMS(mModel.getSMSIntent(v.getContext(), number));
         } else {
             mView.showToast(mModel.getSMSToastMsg(v.getContext()));
         }
+    }
+
+    @Override public void onClickContactsInit() {
+        mView.setEmptyContacts();
     }
 }
