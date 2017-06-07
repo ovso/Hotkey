@@ -1,35 +1,33 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
-        classpath 'com.google.gms:google-services:3.1.0'
-        classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
-    }
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:2.3.2'
+    classpath 'com.google.gms:google-services:3.1.0'
+    classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
+  }
 }
 
 allprojects {
-    repositories {
-        jcenter()
-        maven { url "https://jitpack.io" }
-    }
+  repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+  }
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+  delete rootProject.buildDir
 }
 
 ext {
-    supportLibVersion = '25.3.1'
+  supportLibVersion = '25.3.1'
 
-    butterKnifeVersion = '8.6.0'
+  butterKnifeVersion = '8.6.0'
 
-    stethoVersion = '1.4.2'
+  stethoVersion = '1.4.2'
 
-    playServices = '10.2.6'
-
-    flexibledividerVersion = '1.4.0'
+  playServices = '10.2.6'
 }
