@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity
     mTabLayout.setupWithViewPager(mViewPager);
     mTabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
     mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-    mTabLayout.setOnTabSelectedListener(mOnTabSelectedListener);
+    mTabLayout.addOnTabSelectedListener(mOnTabSelectedListener);
   }
 
   private TabLayout.OnTabSelectedListener mOnTabSelectedListener =
