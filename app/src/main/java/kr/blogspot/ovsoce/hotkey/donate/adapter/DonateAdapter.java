@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
 
 public class DonateAdapter extends RecyclerView.Adapter<DonateViewHolder>
     implements DonateAdapterDataModel, DonateAdapterView {
-  private final static String TAG = "DonateAdapter";
+  //private final static String TAG = "DonateAdapter";
   private ArrayList<String> imageurls;
   private Context context;
 
@@ -27,6 +26,7 @@ public class DonateAdapter extends RecyclerView.Adapter<DonateViewHolder>
   }
 
   @Override public void onBindViewHolder(DonateViewHolder holder, int position) {
+
     String url = imageurls.get(position);
     Glide.with(context).load(url).into(holder.donateImageview);
   }
@@ -35,8 +35,11 @@ public class DonateAdapter extends RecyclerView.Adapter<DonateViewHolder>
     return getSize();
   }
 
+  @Override public String getItem(int position) {
+    return imageurls.get(position);
+  }
+
   @Override public void add(String imageUrl) {
-    Log.d(TAG, "add(" + imageUrl + ")");
     imageurls.add(imageUrl);
   }
 
@@ -54,6 +57,5 @@ public class DonateAdapter extends RecyclerView.Adapter<DonateViewHolder>
 
   @Override public void refresh() {
     notifyDataSetChanged();
-    Log.d(TAG, "refresh()");
   }
 }

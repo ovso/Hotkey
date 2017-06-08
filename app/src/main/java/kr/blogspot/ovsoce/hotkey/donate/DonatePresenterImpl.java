@@ -16,6 +16,7 @@ public class DonatePresenterImpl implements DonatePresenter {
   private DonateModel mModel;
   private DonateAdapterDataModel adapterDataModel;
   private final static String TAG = "DonatePresenterImpl";
+
   DonatePresenterImpl(View view, DonateAdapterDataModel adapterDataModel) {
     mView = view;
     this.adapterDataModel = adapterDataModel;
@@ -29,8 +30,8 @@ public class DonatePresenterImpl implements DonatePresenter {
   }
 
   private void initRecyclerView() {
+    mView.showLoading();
     mView.setRecyclerView();
-
     DatabaseReference reference =
         FirebaseDatabase.getInstance("https://hotkey-e0f76.firebaseio.com/")
             .getReference("donation");
@@ -41,12 +42,13 @@ public class DonatePresenterImpl implements DonatePresenter {
           adapterDataModel.add(imageUrl);
         }
         mView.refresh();
+        mView.hideLoading();
       }
 
       @Override public void onCancelled(DatabaseError databaseError) {
         Log.d(databaseError.getMessage());
+        mView.hideLoading();
       }
     });
-    
   }
 }

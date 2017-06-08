@@ -16,5 +16,8 @@ interface DonatePresenter {
     void setRecyclerView();
 
     void refresh();
+
+    void showLoading();
+    void hideLoading();
   }
 }

@@ -2,11 +2,14 @@ package kr.blogspot.ovsoce.hotkey.donate;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -19,6 +22,7 @@ public class DonateActivity extends AppCompatActivity implements DonatePresenter
   private DonatePresenter mPresenter;
   private DonateAdapterView mAdapterView;
   private DonateAdapter mAdapter;
+  @BindView(R.id.loading_progressbar) ProgressBar mLoadingProgressbar;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -56,6 +60,14 @@ public class DonateActivity extends AppCompatActivity implements DonatePresenter
 
   @Override public void refresh() {
     mAdapterView.refresh();
+  }
+
+  @Override public void showLoading() {
+    mLoadingProgressbar.setVisibility(View.VISIBLE);
+  }
+
+  @Override public void hideLoading() {
+    mLoadingProgressbar.setVisibility(View.GONE);
   }
 
   @Override protected void onDestroy() {

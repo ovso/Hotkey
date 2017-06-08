@@ -8,4 +8,5 @@
   <item name="related_institutions_textview" type="id"/>
   <item name="recyclerview" type="id"/>
   <item name="donate_imageview" type="id"/>
+  <item name="loading_progressbar" type="id"/>
 </resources>

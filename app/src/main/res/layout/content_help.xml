@@ -22,7 +22,7 @@
         </ScrollView>
 
         <android.support.v4.widget.ContentLoadingProgressBar
-            android:id="@+id/loading_progressbar"
+            android:id="@id/loading_progressbar"
             style="?android:attr/progressBarStyleInverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
