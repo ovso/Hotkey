@@ -27,6 +27,8 @@ public class DonateAdapter extends RecyclerView.Adapter<DonateViewHolder>
 
   @Override public void onBindViewHolder(DonateViewHolder holder, int position) {
 
+    String year = String.valueOf(2016 + position);
+    holder.yearTextview.setText(year);
     String url = imageurls.get(position);
     Glide.with(context).load(url).into(holder.donateImageview);
   }

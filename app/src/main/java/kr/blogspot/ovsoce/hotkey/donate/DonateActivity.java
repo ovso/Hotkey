@@ -1,8 +1,8 @@
 package kr.blogspot.ovsoce.hotkey.donate;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.donate.adapter.DonateAdapter;
 import kr.blogspot.ovsoce.hotkey.donate.adapter.DonateAdapterDataModel;
@@ -55,6 +56,11 @@ public class DonateActivity extends AppCompatActivity implements DonatePresenter
   @Override public void setRecyclerView() {
     LinearLayoutManager layout = new LinearLayoutManager(getApplicationContext());
     mRecyclerView.setLayoutManager(layout);
+    mRecyclerView.addItemDecoration(
+        new HorizontalDividerItemDecoration.Builder(this)
+            .color(Color.TRANSPARENT)
+            .sizeResId(R.dimen.dp_20)
+            .build());
     mRecyclerView.setAdapter(mAdapter);
   }
 
