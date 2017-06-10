@@ -19,5 +19,7 @@ interface DonatePresenter {
 
     void showLoading();
     void hideLoading();
+
+    void setDescription(String description);
   }
 }

@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -74,6 +75,11 @@ public class DonateActivity extends AppCompatActivity implements DonatePresenter
 
   @Override public void hideLoading() {
     mLoadingProgressbar.setVisibility(View.GONE);
+  }
+
+  @BindView(R.id.desc_textview) TextView mDescTextview;
+  @Override public void setDescription(String description) {
+    mDescTextview.setText(description);
   }
 
   @Override protected void onDestroy() {

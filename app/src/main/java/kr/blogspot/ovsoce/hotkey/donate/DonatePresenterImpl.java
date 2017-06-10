@@ -41,6 +41,7 @@ public class DonatePresenterImpl implements DonatePresenter {
         for (String imageUrl : donation.getImageurls()) {
           adapterDataModel.add(imageUrl);
         }
+        mView.setDescription(donation.getDescription());
         mView.refresh();
         mView.hideLoading();
       }

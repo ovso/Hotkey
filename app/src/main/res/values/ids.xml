@@ -10,4 +10,5 @@
   <item name="donate_imageview" type="id"/>
   <item name="loading_progressbar" type="id"/>
   <item name="year_textview" type="id"/>
+  <item name="desc_textview" type="id"/>
 </resources>
