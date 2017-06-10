@@ -2,7 +2,6 @@ package kr.blogspot.ovsoce.hotkey.donate.vo;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 import java.util.List;
-import lombok.Data;
 import lombok.Getter;
 
 @IgnoreExtraProperties public class Donation {

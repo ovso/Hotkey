@@ -3,23 +3,29 @@ package kr.blogspot.ovsoce.hotkey.help;
 import android.content.Context;
 
 public interface HelpPresenter {
-    void onClick(android.view.View view);
+  void onClick(android.view.View view);
 
-    void onCreate(Context context);
+  void onCreate(Context context);
 
-    void onOptionsItemSelected(int itemId);
+  void onOptionsItemSelected(int itemId);
 
-    interface View {
-        void onInit();
-        void showToast(int resId);
-        void showToast(String msg);
+  interface View {
+    void onInit();
 
-        void activityFinish();
+    void showToast(int resId);
 
-        void initWebView(String url);
+    void showToast(String msg);
 
-        Context getContext();
+    void activityFinish();
 
-        void setRootView();
-    }
+    Context getContext();
+
+    void setRootView();
+
+    void showLoading();
+
+    void hideLoading();
+
+    void setHelpText(String text);
+  }
 }
