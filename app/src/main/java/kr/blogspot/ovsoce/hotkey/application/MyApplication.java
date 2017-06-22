@@ -6,16 +6,19 @@ import android.preference.PreferenceManager;
 import com.facebook.stetho.Stetho;
 import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
+import lombok.Getter;
 
 public class MyApplication extends Application {
 
   private DatabaseHelper mDatabaseHelper;
+  @Getter private static MyApplication instance;
 
   @Override public void onCreate() {
     super.onCreate();
     mDatabaseHelper = new DatabaseHelper(getApplicationContext());
     Stetho.initializeWithDefaults(this);
     setFonts();
+    instance = this;
   }
 
   /**

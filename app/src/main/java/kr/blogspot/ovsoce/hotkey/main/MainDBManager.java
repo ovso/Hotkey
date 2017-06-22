@@ -66,8 +66,7 @@ public class MainDBManager {
     }
 
     private DatabaseHelper getDbHelper() {
-        MyApplication app = (MyApplication) mContext.getApplicationContext();
-        return app.getDatabaseHelper();
+        return MyApplication.getInstance().getDatabaseHelper();
     }
 
     public List<String> getPageTitleList(int tabCount) {
