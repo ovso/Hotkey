@@ -2,10 +2,8 @@ package kr.blogspot.ovsoce.hotkey.help;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -45,8 +43,9 @@ public class HelpActivity extends AppCompatActivity implements HelpPresenter.Vie
   @BindView(R.id.textview) TextView mTextView;
 
   @Override public void setHelpText(String text) {
-    //mTextView.setMovementMethod(new ScrollingMovementMethod());
-    mTextView.setText(text);
+    if (mTextView != null) {
+      mTextView.setText(text);
+    }
   }
 
   @Override protected void onDestroy() {

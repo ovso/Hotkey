@@ -79,7 +79,9 @@ public class DonateActivity extends AppCompatActivity implements DonatePresenter
 
   @BindView(R.id.desc_textview) TextView mDescTextview;
   @Override public void setDescription(String description) {
-    mDescTextview.setText(description);
+    if (mDescTextview != null) {
+      mDescTextview.setText(description);
+    }
   }
 
   @Override protected void onDestroy() {
