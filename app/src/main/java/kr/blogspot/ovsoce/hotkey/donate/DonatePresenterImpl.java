@@ -32,9 +32,8 @@ public class DonatePresenterImpl implements DonatePresenter {
   private void initRecyclerView() {
     mView.showLoading();
     mView.setRecyclerView();
-    DatabaseReference reference =
-        FirebaseDatabase.getInstance("https://hotkey-e0f76.firebaseio.com/")
-            .getReference("donation");
+    FirebaseDatabase db = FirebaseDatabase.getInstance("https://hotkey-e0f76.firebaseio.com/");
+    DatabaseReference reference = db.getReference("donation");
     reference.addValueEventListener(new ValueEventListener() {
       @Override public void onDataChange(DataSnapshot dataSnapshot) {
         Donation donation = dataSnapshot.getValue(Donation.class);
