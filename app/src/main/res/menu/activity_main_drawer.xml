@@ -18,7 +18,7 @@
         <item
             android:id="@+id/nav_donate"
             android:icon="@drawable/ic_supervisor_account_black_24dp"
-            android:title="@string/menu_donate_help" />
+            android:title="@string/sponsorship_status" />
     </group>
 
     <item android:title="Communicate">

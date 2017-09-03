@@ -47,7 +47,7 @@ public class DonateActivity extends AppCompatActivity implements DonatePresenter
   @BindView(R.id.toolbar) Toolbar mToolbar;
 
   @Override public void setToolbar() {
-    mToolbar.setTitle(R.string.activity_donate_label);
+    mToolbar.setTitle(R.string.sponsorship_status);
     setSupportActionBar(mToolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
   }
