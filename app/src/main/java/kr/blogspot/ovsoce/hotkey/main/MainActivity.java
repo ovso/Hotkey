@@ -37,12 +37,14 @@ import com.fsn.cauly.CaulyAdViewListener;
 import java.util.ArrayList;
 import java.util.List;
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.common.MyProgressDialog;
 import kr.blogspot.ovsoce.hotkey.donate.DonateActivity;
 import kr.blogspot.ovsoce.hotkey.emergency.EmergencyActivity;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View {
@@ -58,6 +60,11 @@ public class MainActivity extends AppCompatActivity
 
     registerReceiver(mPhoneStateBroadcastReceiver,
         new IntentFilter("android.intent.action.PHONE_STATE"));
+  }
+
+  @Override protected void attachBaseContext(Context newBase) {
+    MyApplication.setFont();
+    super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
   }
 
   @BindView(R.id.nav_view) NavigationView mNavigationView;

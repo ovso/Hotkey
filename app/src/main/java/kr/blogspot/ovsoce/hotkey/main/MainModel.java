@@ -52,4 +52,8 @@ public class MainModel extends Model {
             return false;
         }
     }
+
+    public void setFont(Context context) {
+
+    }
 }

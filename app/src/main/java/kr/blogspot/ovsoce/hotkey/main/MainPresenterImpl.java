@@ -54,6 +54,7 @@ class MainPresenterImpl implements MainPresenter {
         mView.setViewPager(tabCount, mDBManager.getPageTitleList(tabCount));
         mView.setTabLayout();
         mView.setAd(mModel.getAppCode());
+        mModel.setFont(mView.getContext());
     }
 
     @Override
