@@ -48,6 +48,7 @@ dependencies {
   compile 'org.projectlombok:lombok:1.16.16'
   provided "javax.annotation:jsr250-api:1.0"
   compile 'com.android.support.constraint:constraint-layout:1.0.2'
+  compile 'uk.co.chrisjenx:calligraphy:2.3.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
