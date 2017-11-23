@@ -26,7 +26,7 @@ public interface MainPresenter {
     interface View {
         void navigateToShare(String playStoreUrl);
         void navigateToReview(String reviewUrl);
-        void navigateToHelp();
+        void showHelpDialog();
         void navigateToEmergency();
         void setVersionName(String versionName);
         void setAd(String appCode);
@@ -72,6 +72,6 @@ public interface MainPresenter {
 
         void exitApp();
 
-        void navigateToDonate();
+        void showDonationDialog();
     }
 }

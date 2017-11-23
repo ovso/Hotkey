@@ -12,4 +12,6 @@
   <item name="year_textview" type="id"/>
   <item name="desc_textview" type="id"/>
   <item name="textview" type="id"/>
+  <item name="root_view" type="id"/>
+  <item name="imageview" type="id"/>
 </resources>
