@@ -21,7 +21,7 @@ android {
     applicationId "kr.blogspot.ovsoce.hotkey"
     minSdkVersion 16
     targetSdkVersion 26
-    versionCode versionCodeNumber
+    versionCode 29
     versionName "${versionMajor}.${versionMinor}.${versionCodeNumber}"
   }
 
