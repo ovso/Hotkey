@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "300240578487",
+    "firebase_url": "https://hotkey-e0f76.firebaseio.com",
+    "project_id": "hotkey-e0f76",
+    "storage_bucket": "hotkey-e0f76.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300240578487:android:41fe4c41990d520f",
+        "android_client_info": {
+          "package_name": "kr.blogspot.ovsoce.hotkey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300240578487-eeckbi499i4ot58h5bo4qedod5p9b8tn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1SmO6zsuVwHJ5yh7RbM5AjrT6qXw2tGo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

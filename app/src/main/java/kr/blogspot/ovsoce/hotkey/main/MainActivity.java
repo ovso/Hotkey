@@ -39,10 +39,8 @@ import java.util.List;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.common.MyProgressDialog;
-import kr.blogspot.ovsoce.hotkey.donate.DonateActivity;
 import kr.blogspot.ovsoce.hotkey.emergency.EmergencyActivity;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
-import kr.blogspot.ovsoce.hotkey.help.HelpActivity;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -169,7 +167,7 @@ public class MainActivity extends AppCompatActivity
   @SuppressWarnings("StatementWithEmptyBody") @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     mPresenter.onNavigationItemSelected(item.getItemId());
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
   }
@@ -192,10 +190,8 @@ public class MainActivity extends AppCompatActivity
     startActivity(intent);
   }
 
-  @Override public void navigateToHelp() {
-    Intent intent = new Intent(this, HelpActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    startActivity(intent);
+  @Override public void showHelpDialog() {
+    new HelpDialog().show(getSupportFragmentManager(), HelpDialog.class.getSimpleName());
   }
 
   @Override public void navigateToEmergency() {
@@ -204,10 +200,8 @@ public class MainActivity extends AppCompatActivity
     startActivity(intent);
   }
 
-  @Override public void navigateToDonate() {
-    Intent intent = new Intent(this, DonateActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    startActivity(intent);
+  @Override public void showDonationDialog() {
+    new DonationDialog().show(getSupportFragmentManager(), DonationDialog.class.getSimpleName());
   }
 
   @Override public void navigateToSettings() {

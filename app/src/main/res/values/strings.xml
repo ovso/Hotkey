@@ -69,5 +69,6 @@
   <string name="automatic_end_after_call">통화 후 자동종료</string>
   <string name="quit_app_after_call">통화를 마친 후 앱을 종료합니다.</string>
   <string name="keep_app_after_call">통화를 마친 후 앱을 유지합니다.</string>
-  <string name="sponsorship_status">후원 현황</string>
+  <string name="donation">후원</string>
+  <string name="empty"/>
 </resources>

@@ -1,26 +1,54 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.hugo'
 
+// keystorePropertiesFile 변수를 만들고 프로젝트 폴더의 keystore.properties 파일로 초기화 한다.
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+// keystoreProperties 변수를 만들고 Properties() 객체를 초기화 한다.
+def keystoreProperties = new Properties()
+// keystore.properties 파일을 keystoreProperties 객체에 로드한다.
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+
 android {
   compileSdkVersion 26
-  buildToolsVersion "26.0.0"
+  buildToolsVersion "26.0.2"
+
+  def versionMajor = 1
+  def versionMinor = 0
+  def versionCodeNumber = 2
 
   defaultConfig {
     applicationId "kr.blogspot.ovsoce.hotkey"
     minSdkVersion 16
     targetSdkVersion 26
-    versionCode 28
-    versionName "1.0.1"
+    versionCode versionCodeNumber
+    versionName "${versionMajor}.${versionMinor}.${versionCodeNumber}"
   }
+
+  signingConfigs {
+    release {
+      keyAlias keystoreProperties['keyAlias']
+      storePassword keystoreProperties['storePassword']
+      keyPassword keystoreProperties['keyPassword']
+      storeFile file(keystoreProperties['storeFile'])
+    }
+  }
+
   buildTypes {
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+      signingConfig signingConfigs.release
     }
     debug {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
   }
 }
 
@@ -36,7 +64,9 @@ dependencies {
   compile "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
   annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
 
-  compile 'com.github.bumptech.glide:glide:3.8.0'
+  compile 'com.github.bumptech.glide:glide:4.3.1'
+  annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
+
   compile 'com.google.firebase:firebase-database:11.0.4'
   compile 'com.google.firebase:firebase-storage:11.0.4'
   compile 'com.firebaseui:firebase-ui-storage:2.3.0'
@@ -45,10 +75,12 @@ dependencies {
   compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
   compile 'com.facebook.stetho:stetho:1.5.0'
 
-  compile 'org.projectlombok:lombok:1.16.16'
+  compile "org.projectlombok:lombok:1.16.18"
+  annotationProcessor "org.projectlombok:lombok:1.16.18"
   provided "javax.annotation:jsr250-api:1.0"
   compile 'com.android.support.constraint:constraint-layout:1.0.2'
   compile 'uk.co.chrisjenx:calligraphy:2.3.0'
 }
 
+// Add to the bottom of the file
 apply plugin: 'com.google.gms.google-services'
