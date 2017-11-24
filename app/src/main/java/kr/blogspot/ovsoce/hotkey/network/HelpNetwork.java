@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Created by jaeho on 2017. 11. 24..
+ * Created by jaeho on 2017. 11. 24
  */
 
 public class HelpNetwork {
