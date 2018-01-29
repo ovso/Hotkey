@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
-
 import com.gun0912.tedpermission.util.ObjectUtils;
-
 import hugo.weaving.DebugLog;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
@@ -28,13 +26,11 @@ class MainPresenterImpl implements MainPresenter {
 
   @Override public void onNavigationItemSelected(int menuId) {
     if (menuId == R.id.nav_help) {
-      mView.showHelpDialog();
+      mView.showHelpDialog(R.string.help_msg);
     } else if (menuId == R.id.nav_settings) {
       mView.navigateToSettings();
     } else if (menuId == R.id.nav_emergency) {
       mView.navigateToEmergency();
-    } else if (menuId == R.id.nav_donate) {
-      mView.showDonationDialog();
     }
   }
 
