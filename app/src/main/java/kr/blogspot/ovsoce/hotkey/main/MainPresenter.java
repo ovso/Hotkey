@@ -3,75 +3,82 @@ package kr.blogspot.ovsoce.hotkey.main;
 import android.content.Context;
 import android.content.Intent;
 
+import android.support.annotation.StringRes;
 import java.util.List;
 
 public interface MainPresenter {
-    void onNavigationItemSelected(int id);
-    void onCreate();
+  void onNavigationItemSelected(int id);
 
-    void onActivityResult(int requestCode, int resultCode, Intent data);
+  void onCreate();
 
-    void onTabSelected(int position);
+  void onActivityResult(int requestCode, int resultCode, Intent data);
 
-    void onTabReselected(int position);
+  void onTabSelected(int position);
 
-    void onTabNameEditDialogButtonClick(String tabName, int which);
+  void onTabReselected(int position);
 
-    void onDestroy();
+  void onTabNameEditDialogButtonClick(String tabName, int which);
 
-    void onAddTabClick();
+  void onDestroy();
 
-    void onPhoneStateReceiver(Intent intent);
+  void onAddTabClick();
 
-    interface View {
-        void navigateToShare(String playStoreUrl);
-        void navigateToReview(String reviewUrl);
-        void showHelpDialog();
-        void navigateToEmergency();
-        void setVersionName(String versionName);
-        void setAd(String appCode);
+  void onPhoneStateReceiver(Intent intent);
 
-        void navigateToSettings();
+  interface View {
+    void navigateToShare(String playStoreUrl);
 
-        void restart();
+    void navigateToReview(String reviewUrl);
 
-        void setViewPagerCurrentItem(int position);
+    void showHelpDialog(@StringRes int resId);
 
-        void showTabNameEditDialog(String name, boolean isRemoveTab);
+    void navigateToEmergency();
 
-        void setTabTitle(String name, int position);
+    void setVersionName(String versionName);
 
-        void showToast(int resId);
-        void showToast(String msg);
+    void setAd(String appCode);
 
-        void showEditNameError(int resId);
+    void navigateToSettings();
 
-        Context getContext();
+    void restart();
 
-        void setToolbar();
+    void setViewPagerCurrentItem(int position);
 
-        void setDrawableLayout();
+    void showTabNameEditDialog(String name, boolean isRemoveTab);
 
-        void setListener();
+    void setTabTitle(String name, int position);
 
-        void setViewPager(int count, List<String> pageTitleList);
+    void showToast(int resId);
 
-        void setTabLayout();
+    void showToast(String msg);
 
-        void addTab();
+    void showEditNameError(int resId);
 
-        void updateViewPager(int count, List<String> pageTitleList);
+    Context getContext();
 
-        void removeTab(int tabPosition);
+    void setToolbar();
 
-        void showProgressBar();
+    void setDrawableLayout();
 
-        void hideProgressBar();
+    void setListener();
 
-        void setRootView();
+    void setViewPager(int count, List<String> pageTitleList);
 
-        void exitApp();
+    void setTabLayout();
 
-        void showDonationDialog();
-    }
+    void addTab();
+
+    void updateViewPager(int count, List<String> pageTitleList);
+
+    void removeTab(int tabPosition);
+
+    void showProgressBar();
+
+    void hideProgressBar();
+
+    void setRootView();
+
+    void exitApp();
+
+  }
 }

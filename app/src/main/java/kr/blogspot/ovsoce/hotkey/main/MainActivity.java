@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputLayout;
@@ -190,18 +191,17 @@ public class MainActivity extends AppCompatActivity
     startActivity(intent);
   }
 
-  @Override public void showHelpDialog() {
-    new HelpDialog().show(getSupportFragmentManager(), HelpDialog.class.getSimpleName());
+  @Override public void showHelpDialog(@StringRes int resId) {
+    new AlertDialog.Builder(getContext()).setTitle(R.string.help)
+        .setMessage(resId)
+        .setPositiveButton(android.R.string.ok, null)
+        .show();
   }
 
   @Override public void navigateToEmergency() {
     Intent intent = new Intent(this, EmergencyActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
     startActivity(intent);
-  }
-
-  @Override public void showDonationDialog() {
-    new DonationDialog().show(getSupportFragmentManager(), DonationDialog.class.getSimpleName());
   }
 
   @Override public void navigateToSettings() {

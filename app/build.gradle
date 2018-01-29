@@ -13,16 +13,30 @@ android {
   compileSdkVersion 26
   buildToolsVersion "26.0.2"
 
-  def versionMajor = 1
-  def versionMinor = 0
-  def versionCodeNumber = 2
-
   defaultConfig {
     applicationId "kr.blogspot.ovsoce.hotkey"
     minSdkVersion 16
     targetSdkVersion 26
-    versionCode 29
-    versionName "${versionMajor}.${versionMinor}.${versionCodeNumber}"
+    versionCode 103
+    int versionMajor = 0
+    int versionMinor = 0
+    int versionPatch = versionCode
+
+    if (1000 > versionPatch && versionPatch > 99) {
+      versionMajor = versionPatch / 100
+      versionMinor = (versionPatch % 100) / 10
+      versionPatch = (versionPatch % 100) % 10
+    } else if (100 > versionCode && versionPatch > 9) {
+      versionMajor = 0
+      versionMinor = versionPatch / 10
+      versionPatch = versionPatch % 10
+    } else if (versionPatch < 10) {
+      versionMajor = 0
+      versionMinor = 0
+      versionPatch = versionPatch / 1
+    }
+
+    versionName "${versionMajor}.${versionMinor}.${versionPatch}"
   }
 
   signingConfigs {
