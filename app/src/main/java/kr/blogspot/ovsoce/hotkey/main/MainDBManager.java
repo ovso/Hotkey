@@ -4,16 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
-
-import com.gun0912.tedpermission.util.ObjectUtils;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.common.Prefs;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
+import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
 
 public class MainDBManager {
     private Context mContext;

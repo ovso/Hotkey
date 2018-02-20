@@ -1,44 +1,39 @@
 package kr.blogspot.ovsoce.hotkey.emergency.fragment;
 
 import android.Manifest;
-
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
-
-import java.util.ArrayList;
-
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import kr.blogspot.ovsoce.hotkey.R;
 
 public class EmergencyFragmentPresenterImpl implements EmergencyFragmentPresenter {
 
-    private EmergencyFragmentPresenter.View mView;
-    private EmergencyFragmentContactModel mContactModel;
-    EmergencyFragmentPresenterImpl(EmergencyFragmentPresenter.View view) {
-        mView = view;
-        mContactModel = new EmergencyFragmentContactModel(mView.getContext());
-    }
+  private EmergencyFragmentPresenter.View mView;
+  private EmergencyFragmentContactModel mContactModel;
+  private RxPermissions permissions;
 
-    @Override
-    public void onActivityCreate(int type) {
-        mContactModel.setType(type);
-        mView.setRecyclerView(mContactModel.getContactList(mContactModel.getType()));
-    }
+  EmergencyFragmentPresenterImpl(EmergencyFragmentPresenter.View view) {
+    mView = view;
+    mContactModel = new EmergencyFragmentContactModel(mView.getContext());
+    permissions = new RxPermissions(view.getActivity());
+  }
 
-    @Override
-    public void onItemClick(int position) {
-        final EmergencyContact contact = mContactModel.getContact(mContactModel.getType(), position);
-        new TedPermission(mView.getContext()).setPermissions(Manifest.permission.CALL_PHONE)
-                .setPermissionListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted() {
-                        mView.showMakeCallDialog(contact);
-                    }
+  @Override public void onActivityCreate(int type) {
+    mContactModel.setType(type);
+    mView.setRecyclerView(mContactModel.getContactList(mContactModel.getType()));
+  }
 
-                    @Override
-                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+  @Override public void onItemClick(int position) {
+    final EmergencyContact contact = mContactModel.getContact(mContactModel.getType(), position);
+    reqPermission(contact);
+  }
 
-                    }
-                }).setDeniedMessage(R.string.call_phone_denied_msg).check();
-    }
-
+  private void reqPermission(EmergencyContact contact) {
+    permissions.request(Manifest.permission.CALL_PHONE).subscribe(granted -> {
+      if (granted) { // Always true pre-M
+        mView.showMakeCallDialog(contact);
+      } else {
+        // Oups permission denied
+        mView.showPermissionAlert(R.string.call_phone_denied_msg);
+      }
+    });
+  }
 }

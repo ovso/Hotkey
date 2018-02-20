@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
-import com.gun0912.tedpermission.util.ObjectUtils;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
 import kr.blogspot.ovsoce.hotkey.common.Prefs;
 import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
+import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
 
 public class MainModel extends Model {
 
