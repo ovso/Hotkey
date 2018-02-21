@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override public void onFailedToReceiveAd(CaulyAdView caulyAdView, int i, String s) {
-      caulyAdView.reload();
+      //caulyAdView.reload();
     }
 
     @Override public void onShowLandingScreen(CaulyAdView caulyAdView) {
