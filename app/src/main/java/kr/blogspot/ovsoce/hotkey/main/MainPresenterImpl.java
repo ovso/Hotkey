@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
+
 import hugo.weaving.DebugLog;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.common.Log;
@@ -121,6 +122,7 @@ class MainPresenterImpl implements MainPresenter {
         mView.hideProgressBar();
       }
     }.execute();
+
   }
 
   @DebugLog @Override public void onPhoneStateReceiver(Intent intent) {
