@@ -2,6 +2,8 @@ package kr.blogspot.ovsoce.hotkey.fragment;
 
 import android.content.Context;
 
+import kr.blogspot.ovsoce.hotkey.R;
+
 public class BaseFragmentModel extends FragmentModel {
 
     private int tabPosition = 0;
@@ -17,5 +19,9 @@ public class BaseFragmentModel extends FragmentModel {
 
     public void setTabPosition(int tabPosition) {
         this.tabPosition = tabPosition;
+    }
+
+    public String getTTSString(String name) {
+        return name;
     }
 }

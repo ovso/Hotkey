@@ -44,6 +44,10 @@ public class SettingsFragment extends PreferenceFragment
 
     SwitchPreference autoEndPrefs = (SwitchPreference) findPreference("auto_end");
     autoEndPrefs.setOnPreferenceChangeListener(this);
+
+    SwitchPreference ttsPrefs = (SwitchPreference) findPreference("tts");
+    ttsPrefs.setOnPreferenceChangeListener(this);
+
   }
 
   @Override public boolean onPreferenceChange(Preference preference, Object newValue) {
