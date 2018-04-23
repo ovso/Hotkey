@@ -101,9 +101,9 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
                         TextToSpeech.QUEUE_FLUSH, params);
             }
         });
-        String localeString = SystemUtils.getLocaleToString(MyApplication.getInstance()
-                .getApplicationContext());
-        tts.setLanguage(SystemUtils.getStringToLocale(localeString));
+        tts.setLanguage(SystemUtils.getStringToLocale(SystemUtils.getLocaleToString(MyApplication
+                .getInstance()
+                .getApplicationContext())));
     }
 
     @Override
