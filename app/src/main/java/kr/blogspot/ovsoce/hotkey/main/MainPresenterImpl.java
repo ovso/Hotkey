@@ -8,7 +8,7 @@ import android.os.Looper;
 
 import hugo.weaving.DebugLog;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
+import kr.blogspot.ovsoce.hotkey.framework.Log;
 import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 

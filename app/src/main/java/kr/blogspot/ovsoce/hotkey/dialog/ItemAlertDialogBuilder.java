@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
+import kr.blogspot.ovsoce.hotkey.framework.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItemImpl;

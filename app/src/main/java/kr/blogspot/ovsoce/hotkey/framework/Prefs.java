@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.hotkey.common;
+package kr.blogspot.ovsoce.hotkey.framework;
 
 import android.content.Context;
 import android.content.SharedPreferences;

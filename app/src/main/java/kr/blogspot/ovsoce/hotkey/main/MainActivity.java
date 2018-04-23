@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
-import kr.blogspot.ovsoce.hotkey.common.MyProgressDialog;
+import kr.blogspot.ovsoce.hotkey.framework.MyProgressDialog;
 import kr.blogspot.ovsoce.hotkey.emergency.EmergencyActivity;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;

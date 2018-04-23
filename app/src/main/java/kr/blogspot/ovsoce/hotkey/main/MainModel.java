@@ -6,9 +6,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
-import kr.blogspot.ovsoce.hotkey.common.Prefs;
-import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
+import kr.blogspot.ovsoce.hotkey.framework.Log;
+import kr.blogspot.ovsoce.hotkey.framework.Prefs;
+import kr.blogspot.ovsoce.hotkey.framework.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
 
 public class MainModel extends Model {

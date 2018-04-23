@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import kr.blogspot.ovsoce.hotkey.common.Log;
+import kr.blogspot.ovsoce.hotkey.framework.Log;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItemImpl;
 

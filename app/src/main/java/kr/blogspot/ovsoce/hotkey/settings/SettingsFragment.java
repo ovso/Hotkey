@@ -12,8 +12,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
-import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
+import kr.blogspot.ovsoce.hotkey.framework.Log;
+import kr.blogspot.ovsoce.hotkey.framework.TypefaceUtil;
 
 public class SettingsFragment extends PreferenceFragment
     implements Preference.OnPreferenceChangeListener {

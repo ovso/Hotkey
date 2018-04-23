@@ -14,10 +14,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
-import kr.blogspot.ovsoce.hotkey.common.Prefs;
 import kr.blogspot.ovsoce.hotkey.fragment.listener.SimpleUtteranceProgressListener;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
+import kr.blogspot.ovsoce.hotkey.framework.Prefs;
+import kr.blogspot.ovsoce.hotkey.framework.SystemUtils;
 
 class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
 
@@ -100,12 +101,20 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
                         TextToSpeech.QUEUE_FLUSH, params);
             }
         });
+        String localeString = SystemUtils.getLocaleToString(MyApplication.getInstance()
+                .getApplicationContext());
+        tts.setLanguage(SystemUtils.getStringToLocale(localeString));
     }
 
     @Override
     public void onDetach() {
-        tts.stop();
-        tts.shutdown();
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        if (subscribe != null) {
+            subscribe.dispose();
+        }
     }
 
     @Override

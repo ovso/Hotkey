@@ -1,4 +1,4 @@
-package kr.blogspot.ovsoce.hotkey.common;
+package kr.blogspot.ovsoce.hotkey.framework;
 
 import android.app.Dialog;
 import android.content.Context;
