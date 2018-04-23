@@ -2,12 +2,20 @@ package kr.blogspot.ovsoce.hotkey.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.media.AudioManager;
+import android.speech.tts.TextToSpeech;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.util.HashMap;
+
+import hugo.weaving.DebugLog;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.common.Prefs;
+import kr.blogspot.ovsoce.hotkey.fragment.listener.SimpleUtteranceProgressListener;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
 
@@ -16,6 +24,8 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
     private View view;
     private BaseFragmentModel model;
     private RxPermissions permissions;
+    private TextToSpeech tts;
+    private Disposable subscribe;
 
     BaseFragmentPresenterImpl(View view) {
         Context context = view.getContext();
@@ -48,13 +58,16 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
     }
 
     private void reqPermission(final ContactsItem item) {
-        permissions.request(Manifest.permission.CALL_PHONE).subscribe(granted -> {
-            if (granted) { // Always true pre-M
-                makeCall(item);
-            } else {
-                view.showPermissionAlert(R.string.call_phone_denied_msg);
-            }
-        });
+        subscribe = permissions.request(Manifest.permission.CALL_PHONE)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.computation())
+                .subscribe(granted -> {
+                    if (granted) { // Always true pre-M
+                        BaseFragmentPresenterImpl.this.makeCall(item);
+                    } else {
+                        view.showPermissionAlert(R.string.call_phone_denied_msg);
+                    }
+                });
     }
 
     private void makeCall(final ContactsItem item) {
@@ -63,11 +76,36 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
         if (!isTTS) {
             view.makeCall(item.getNumber());
         } else {
-            String message = model.getTTSString(item.getName());
-            view.playTTS(message);
-            view.showTTSDialog(message, (dialog, which) -> view.makeCall
-                    (item.getNumber()));
+            makeCallAfterTts(item);
         }
+    }
+
+    private void makeCallAfterTts(final ContactsItem item) {
+        tts = new TextToSpeech(MyApplication.getInstance().getApplicationContext(), status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                tts.setOnUtteranceProgressListener(new SimpleUtteranceProgressListener() {
+                    @Override
+                    @DebugLog
+                    public void onDone(String utteranceId) {
+                        view.makeCall(item.getNumber());
+                    }
+
+                });
+                HashMap<String, String> params = new HashMap<>();
+                params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf
+                        (AudioManager.STREAM_ALARM));
+                params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "SOME MESSAGE");
+
+                tts.speak(item.getName(),
+                        TextToSpeech.QUEUE_FLUSH, params);
+            }
+        });
+    }
+
+    @Override
+    public void onDetach() {
+        tts.stop();
+        tts.shutdown();
     }
 
     @Override

@@ -134,9 +134,10 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDetach() {
         mUnbinder.unbind();
+        mPresenter.onDetach();
+        super.onDetach();
     }
 
     @Override
@@ -153,17 +154,4 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
                 .show();
     }
 
-    @Override
-    public void playTTS(String name) {
-        tts = new TextToSpeech(getContext().getApplicationContext(), status -> tts.speak(name,
-                TextToSpeech.QUEUE_FLUSH, null));
-    }
-
-    @Override
-    public void showTTSDialog(String msg, DialogInterface.OnClickListener
-            pClickListener) {
-        new AlertDialog.Builder(getContext()).setMessage(msg).setPositiveButton
-                (R.string.make_call, pClickListener).setNegativeButton(android.R.string.cancel,
-                null).show();
-    }
 }
