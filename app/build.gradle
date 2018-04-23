@@ -17,7 +17,7 @@ android {
     applicationId "kr.blogspot.ovsoce.hotkey"
     minSdkVersion 16
     targetSdkVersion 27
-    versionCode 104
+    versionCode 105
     int versionMajor = 0
     int versionMinor = 0
     int versionPatch = versionCode
