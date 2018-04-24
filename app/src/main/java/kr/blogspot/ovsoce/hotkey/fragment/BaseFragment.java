@@ -125,6 +125,12 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     }
 
     @Override
+    public void onDestroyView() {
+        dispose();
+        super.onDestroyView();
+    }
+
+    @Override
     public void updateRecyclerViewItem(ContactsItem item) {
         MyAdapter adapter = (MyAdapter) mRecyclerView.getAdapter();
         adapter.setUpdateItem(item);
@@ -135,18 +141,13 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     public void onDetach() {
         mUnbinder.unbind();
         mPresenter.onDetach();
-        dispose();
         super.onDetach();
     }
 
     private void dispose() {
-        if (mRecyclerView != null) {
-            if (mRecyclerView.getAdapter() != null) {
-                MyAdapter adapter = (MyAdapter) mRecyclerView.getAdapter();
-                if (adapter != null) {
-                    adapter.onDetach();
-                }
-            }
+        MyAdapter adapter = (MyAdapter) mRecyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.onDetach();
         }
     }
 
