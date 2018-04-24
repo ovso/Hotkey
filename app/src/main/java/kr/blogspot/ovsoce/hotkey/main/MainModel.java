@@ -13,19 +13,10 @@ import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
 
 public class MainModel extends Model {
 
-    public final static String URL_PLAYSTORE = "https://play.google.com/store/apps/details?id=kr.blogspot.ovsoce.hotkey";
-    public final static String URL_REVIEW = "market://details?id=kr.blogspot.ovsoce.hotkey";
     public final static String AD_ID_CAULY = "V2f5YVvL";
 
     MainModel(Context context) {
         super(context);
-    }
-
-    public String getPlayStoreUrl() {
-        return URL_PLAYSTORE;
-    }
-    public String getReviewUrl() {
-        return URL_REVIEW;
     }
 
     public void setFontsSize() {
@@ -51,9 +42,5 @@ public class MainModel extends Model {
         } else {
             return false;
         }
-    }
-
-    public void setFont(Context context) {
-
     }
 }
