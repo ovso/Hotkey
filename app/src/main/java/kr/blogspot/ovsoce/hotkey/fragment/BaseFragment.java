@@ -137,6 +137,9 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     public void onDetach() {
         mUnbinder.unbind();
         mPresenter.onDetach();
+        if (mRecyclerView.getAdapter() != null) {
+            ((MyAdapter) mRecyclerView.getAdapter()).onDetach();
+        }
         super.onDetach();
     }
 
