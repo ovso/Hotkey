@@ -27,7 +27,7 @@ task clean(type: Delete) {
   delete rootProject.buildDir
 }
 ext {
-  supportLibVersion = '26.0.2'
+  supportLibVersion = '27.1.1'
   butterKnifeVersion = '8.6.0'
   calligraphy = '2.3.0'
   rxpermissions = '0.9.5@aar'

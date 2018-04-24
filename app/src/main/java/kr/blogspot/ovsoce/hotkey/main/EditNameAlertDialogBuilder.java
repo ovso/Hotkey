@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
+import kr.blogspot.ovsoce.hotkey.framework.Log;
 
 public class EditNameAlertDialogBuilder extends AlertDialog.Builder {
     private View view;

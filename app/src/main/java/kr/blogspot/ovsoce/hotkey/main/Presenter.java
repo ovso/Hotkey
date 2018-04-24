@@ -1,7 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
 import android.content.Context;
-import android.speech.tts.Voice;
 
 public interface Presenter {
     void onCreate(Context context);

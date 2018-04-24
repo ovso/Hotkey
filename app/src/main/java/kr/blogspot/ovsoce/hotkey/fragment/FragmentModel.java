@@ -16,12 +16,12 @@ public abstract class FragmentModel extends Model {
 
     public List<ContactsItem> getContactsItemList() {
 
-        MyApplication app = (MyApplication) mContext.getApplicationContext();
+        MyApplication app = (MyApplication) context.getApplicationContext();
 
         return app.getDatabaseHelper().getTableContactsItemList(getTabPosition());
     }
     public ContactsItem getContactsItem(int itemPosition) {
-        MyApplication app = (MyApplication)mContext.getApplicationContext();
+        MyApplication app = (MyApplication) context.getApplicationContext();
         ContactsItem item = app.getDatabaseHelper().getContactsItem(getTabPosition(), itemPosition);
         return item;
     }

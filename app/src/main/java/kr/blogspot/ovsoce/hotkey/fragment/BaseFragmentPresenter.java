@@ -9,6 +9,8 @@ public interface BaseFragmentPresenter extends FragmentPresenter {
 
     void onAdapterItemLongClick(int position);
 
+    void onDetach();
+
     interface View extends FragmentPresenter.View {
 
         Context getContext();

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.application.MyApplication;
-import kr.blogspot.ovsoce.hotkey.common.Prefs;
+import kr.blogspot.ovsoce.hotkey.framework.Prefs;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
 

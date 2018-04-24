@@ -6,37 +6,28 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.Log;
-import kr.blogspot.ovsoce.hotkey.common.Prefs;
-import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
+import kr.blogspot.ovsoce.hotkey.framework.Log;
+import kr.blogspot.ovsoce.hotkey.framework.Prefs;
+import kr.blogspot.ovsoce.hotkey.framework.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
 
 public class MainModel extends Model {
 
-    public final static String URL_PLAYSTORE = "https://play.google.com/store/apps/details?id=kr.blogspot.ovsoce.hotkey";
-    public final static String URL_REVIEW = "market://details?id=kr.blogspot.ovsoce.hotkey";
     public final static String AD_ID_CAULY = "V2f5YVvL";
 
     MainModel(Context context) {
         super(context);
     }
 
-    public String getPlayStoreUrl() {
-        return URL_PLAYSTORE;
-    }
-    public String getReviewUrl() {
-        return URL_REVIEW;
-    }
-
     public void setFontsSize() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         float fonts_size = Float.parseFloat(sharedPreferences.getString("fonts_size", "1.0"));
         Log.d("fonts_size = " + fonts_size);
-        TypefaceUtil.fontsSize(mContext, fonts_size);
+        TypefaceUtil.fontsSize(context, fonts_size);
     }
     @Override
     public String getVersionName() {
-        return new StringBuilder(mContext.getString(R.string.app_ver))
+        return new StringBuilder(context.getString(R.string.app_ver))
                 .append(super.getVersionName()).toString();
     }
 
@@ -47,13 +38,9 @@ public class MainModel extends Model {
     public boolean isAppExit(Intent intent) {
         String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
         if (!ObjectUtils.isEmpty(state) && state.equals("IDLE")) {
-            return Prefs.getBoolean(mContext, "auto_end", false);
+            return Prefs.getBoolean(context, "auto_end", false);
         } else {
             return false;
         }
-    }
-
-    public void setFont(Context context) {
-
     }
 }

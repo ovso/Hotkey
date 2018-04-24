@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.facebook.stetho.Stetho;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.common.TypefaceUtil;
+import kr.blogspot.ovsoce.hotkey.framework.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 import lombok.Getter;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
