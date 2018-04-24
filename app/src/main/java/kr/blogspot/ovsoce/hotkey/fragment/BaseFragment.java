@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -33,7 +32,6 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     protected BaseFragmentPresenter mPresenter;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
-    TextToSpeech tts;
     private ItemAlertDialogBuilder mItemAlertDialogBuilder;
     private Unbinder mUnbinder;
     private MyAdapter.OnAdapterItemClickListener mOnAdapterItemClickListener =
@@ -137,10 +135,19 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     public void onDetach() {
         mUnbinder.unbind();
         mPresenter.onDetach();
-        if (mRecyclerView.getAdapter() != null) {
-            ((MyAdapter) mRecyclerView.getAdapter()).onDetach();
-        }
+        dispose();
         super.onDetach();
+    }
+
+    private void dispose() {
+        if (mRecyclerView != null) {
+            if (mRecyclerView.getAdapter() != null) {
+                MyAdapter adapter = (MyAdapter) mRecyclerView.getAdapter();
+                if (adapter != null) {
+                    adapter.onDetach();
+                }
+            }
+        }
     }
 
     @Override
@@ -157,4 +164,8 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
                 .show();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }
