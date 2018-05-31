@@ -7,6 +7,7 @@ import android.speech.tts.TextToSpeech;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import io.reactivex.functions.Consumer;
 import java.util.HashMap;
 
 import hugo.weaving.DebugLog;
@@ -62,11 +63,13 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
         subscribe = permissions.request(Manifest.permission.CALL_PHONE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
-                .subscribe(granted -> {
-                    if (granted) { // Always true pre-M
-                        BaseFragmentPresenterImpl.this.makeCall(item);
-                    } else {
-                        view.showPermissionAlert(R.string.call_phone_denied_msg);
+                .subscribe(new Consumer<Boolean>() {
+                    @Override public void accept(Boolean granted) throws Exception {
+                        if (granted) { // Always true pre-M
+                            BaseFragmentPresenterImpl.this.makeCall(item);
+                        } else {
+                            view.showPermissionAlert(R.string.call_phone_denied_msg);
+                        }
                     }
                 });
     }
@@ -82,25 +85,27 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
     }
 
     private void makeCallAfterTts(final ContactsItem item) {
-        tts = new TextToSpeech(MyApplication.getInstance().getApplicationContext(), status -> {
-            if (status == TextToSpeech.SUCCESS) {
-                tts.setOnUtteranceProgressListener(new SimpleUtteranceProgressListener() {
-                    @Override
-                    @DebugLog
-                    public void onDone(String utteranceId) {
-                        view.makeCall(item.getNumber());
+        tts = new TextToSpeech(MyApplication.getInstance().getApplicationContext(),
+            new TextToSpeech.OnInitListener() {
+                @Override public void onInit(int status) {
+                    if (status == TextToSpeech.SUCCESS) {
+                        tts.setOnUtteranceProgressListener(new SimpleUtteranceProgressListener() {
+                            @Override
+                            @DebugLog
+                            public void onDone(String utteranceId) {
+                                view.makeCall(item.getNumber());
+                            }
+                        });
+                        HashMap<String, String> params = new HashMap<>();
+                        params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf
+                            (AudioManager.STREAM_ALARM));
+                        params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "SOME MESSAGE");
+
+                        tts.speak(item.getName(),
+                            TextToSpeech.QUEUE_FLUSH, params);
                     }
-
-                });
-                HashMap<String, String> params = new HashMap<>();
-                params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf
-                        (AudioManager.STREAM_ALARM));
-                params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "SOME MESSAGE");
-
-                tts.speak(item.getName(),
-                        TextToSpeech.QUEUE_FLUSH, params);
-            }
-        });
+                }
+            });
         tts.setLanguage(SystemUtils.getStringToLocale(SystemUtils.getLocaleToString(MyApplication
                 .getInstance()
                 .getApplicationContext())));

@@ -6,17 +6,18 @@ buildscript {
     maven {
       url "https://maven.google.com"
     }
+    google()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.0.1'
+    classpath 'com.android.tools.build:gradle:3.1.2'
     classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
+    classpath 'com.google.gms:google-services:4.0.1'
   }
 }
 
 allprojects {
   repositories {
     jcenter()
-    //maven { url "https://jitpack.io" }
     maven {
       url "https://maven.google.com"
     }
@@ -28,6 +29,8 @@ task clean(type: Delete) {
 }
 ext {
   supportLibVersion = '27.1.1'
+  play_service_version = '15.0.1'
+  firebase_ads_version = '15.0.1'
   butterKnifeVersion = '8.6.0'
   calligraphy = '2.3.0'
   rxpermissions = '0.9.5@aar'

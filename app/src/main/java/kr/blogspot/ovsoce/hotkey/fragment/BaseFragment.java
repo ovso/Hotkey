@@ -159,8 +159,10 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     @Override
     public void showPermissionAlert(int resId) {
         new AlertDialog.Builder(getActivity()).setMessage(resId)
-                .setPositiveButton(android.R.string.ok, (dialogInterface, which) -> {
-                    dialogInterface.dismiss();
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
                 })
                 .show();
     }

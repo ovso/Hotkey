@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 
+import io.reactivex.functions.Consumer;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -45,7 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ContactsItem data = mList.get(position);
-        MyViewHolder myViewHolder = (MyViewHolder) holder;
+        final MyViewHolder myViewHolder = (MyViewHolder) holder;
 
         MyApplication app = (MyApplication) myViewHolder.blockV.getContext()
                 .getApplicationContext();
@@ -56,8 +57,13 @@ public class MyAdapter extends RecyclerView.Adapter {
         myViewHolder.nameTv.setText(data.getName());
         subscribe = RxView.clicks(myViewHolder.itemView).throttleFirst(2, TimeUnit
                 .SECONDS, AndroidSchedulers
-                .mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(o -> mListener
-                .onClick(myViewHolder.itemView));
+                .mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+            new Consumer<Object>() {
+                @Override public void accept(Object o) throws Exception {
+                    mListener
+                        .onClick(myViewHolder.itemView);
+                }
+            });
         myViewHolder.itemView.setOnLongClickListener(mListener);
     }
 

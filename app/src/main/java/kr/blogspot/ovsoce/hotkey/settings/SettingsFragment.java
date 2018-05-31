@@ -2,6 +2,7 @@ package kr.blogspot.ovsoce.hotkey.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -76,14 +77,20 @@ public class SettingsFragment extends PreferenceFragment
 
     private void showRestartDialog() {
         new AlertDialog.Builder(getActivity()).setMessage(R.string.settings_fonts_summary)
-                .setPositiveButton(R.string.settings_btn_restart, (dialog, which) -> {
-                    Activity a = getActivity();
-                    a.setResult(Activity.RESULT_OK, new Intent().putExtra("restart", true));
-                    a.finish();
-                })
-                .setNegativeButton(R.string.settings_btn_cancel, (dialog, which) -> {
+                .setPositiveButton(R.string.settings_btn_restart,
+                    new DialogInterface.OnClickListener() {
+                        @Override public void onClick(DialogInterface dialog, int which) {
+                            Activity a = SettingsFragment.this.getActivity();
+                            a.setResult(Activity.RESULT_OK, new Intent().putExtra("restart", true));
+                            a.finish();
+                        }
+                    })
+                .setNegativeButton(R.string.settings_btn_cancel,
+                    new DialogInterface.OnClickListener() {
+                        @Override public void onClick(DialogInterface dialog, int which) {
 
-                })
+                        }
+                    })
                 .show();
     }
 

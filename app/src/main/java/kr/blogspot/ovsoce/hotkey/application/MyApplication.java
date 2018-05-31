@@ -5,13 +5,14 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.facebook.stetho.Stetho;
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.framework.SystemUtils;
 import kr.blogspot.ovsoce.hotkey.framework.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 import lombok.Getter;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class MyApplication extends Application {
-
+  public static boolean DEBUG = false;
   private DatabaseHelper mDatabaseHelper;
   @Getter private static MyApplication instance;
 
@@ -22,6 +23,10 @@ public class MyApplication extends Application {
     instance = this;
     setFont();
     setFontSize();
+    initDebuggable();
+  }
+  private void initDebuggable() {
+    this.DEBUG = SystemUtils.isDebuggable(this);
   }
 
   private void setFontSize() {
