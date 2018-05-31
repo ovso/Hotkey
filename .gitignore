@@ -1,3 +1,4 @@
 keystore.properties
-/app/src/main/java/kr/blogspot/ovso/ovsoce/Security.java
+/app/src/main/java/kr/blogspot/ovsoce/hotkey/Security.java
 .idea
+google-services.json
