@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.List;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.application.MyApplication;
+import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.framework.Prefs;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
@@ -63,7 +63,7 @@ public class MainDBManager {
     }
 
     private DatabaseHelper getDbHelper() {
-        return MyApplication.getInstance().getDatabaseHelper();
+        return App.getInstance().getDatabaseHelper();
     }
 
     public List<String> getPageTitleList(int tabCount) {

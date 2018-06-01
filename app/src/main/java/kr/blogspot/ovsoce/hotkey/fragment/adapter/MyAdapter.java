@@ -15,13 +15,11 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import hugo.weaving.DebugLog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.application.MyApplication;
+import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
-import kr.blogspot.ovsoce.hotkey.framework.Log;
 
 /**
  * RecyclerView Adapter
@@ -48,7 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter {
         ContactsItem data = mList.get(position);
         final MyViewHolder myViewHolder = (MyViewHolder) holder;
 
-        MyApplication app = (MyApplication) myViewHolder.blockV.getContext()
+        App app = (App) myViewHolder.blockV.getContext()
                 .getApplicationContext();
         String colorCode = app.getDatabaseHelper().getDefaultColors()[Integer.parseInt(data
                 .getColor())];

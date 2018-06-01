@@ -1,20 +1,19 @@
-package kr.blogspot.ovsoce.hotkey.application;
+package kr.blogspot.ovsoce.hotkey;
 
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.facebook.stetho.Stetho;
-import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.framework.SystemUtils;
 import kr.blogspot.ovsoce.hotkey.framework.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 import lombok.Getter;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
-public class MyApplication extends Application {
+public class App extends Application {
   public static boolean DEBUG = false;
   private DatabaseHelper mDatabaseHelper;
-  @Getter private static MyApplication instance;
+  @Getter private static App instance;
 
   @Override public void onCreate() {
     super.onCreate();

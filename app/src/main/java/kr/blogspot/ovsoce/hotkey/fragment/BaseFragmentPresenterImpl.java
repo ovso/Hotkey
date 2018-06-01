@@ -14,7 +14,7 @@ import hugo.weaving.DebugLog;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.application.MyApplication;
+import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.fragment.listener.SimpleUtteranceProgressListener;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
@@ -75,7 +75,7 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
     }
 
     private void makeCall(final ContactsItem item) {
-        Context context = MyApplication.getInstance().getApplicationContext();
+        Context context = App.getInstance().getApplicationContext();
         boolean isTTS = Prefs.getBoolean(context, "tts", false);
         if (!isTTS) {
             view.makeCall(item.getNumber());
@@ -85,7 +85,7 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
     }
 
     private void makeCallAfterTts(final ContactsItem item) {
-        tts = new TextToSpeech(MyApplication.getInstance().getApplicationContext(),
+        tts = new TextToSpeech(App.getInstance().getApplicationContext(),
             new TextToSpeech.OnInitListener() {
                 @Override public void onInit(int status) {
                     if (status == TextToSpeech.SUCCESS) {
@@ -106,7 +106,7 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
                     }
                 }
             });
-        tts.setLanguage(SystemUtils.getStringToLocale(SystemUtils.getLocaleToString(MyApplication
+        tts.setLanguage(SystemUtils.getStringToLocale(SystemUtils.getLocaleToString(App
                 .getInstance()
                 .getApplicationContext())));
     }

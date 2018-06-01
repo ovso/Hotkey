@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.NavigationView;
@@ -28,10 +27,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fsn.cauly.CaulyAdInfo;
-import com.fsn.cauly.CaulyAdInfoBuilder;
-import com.fsn.cauly.CaulyAdView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.application.MyApplication;
+import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.emergency.EmergencyActivity;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.framework.MyProgressDialog;
@@ -111,7 +106,7 @@ public class MainActivity extends AppCompatActivity
 
   @Override
   protected void attachBaseContext(Context newBase) {
-    MyApplication.setFont();
+    App.setFont();
     super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
   }
 

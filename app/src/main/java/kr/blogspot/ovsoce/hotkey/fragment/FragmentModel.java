@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
-import kr.blogspot.ovsoce.hotkey.application.MyApplication;
+import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.main.Model;
 
@@ -16,12 +16,12 @@ public abstract class FragmentModel extends Model {
 
     public List<ContactsItem> getContactsItemList() {
 
-        MyApplication app = (MyApplication) context.getApplicationContext();
+        App app = (App) context.getApplicationContext();
 
         return app.getDatabaseHelper().getTableContactsItemList(getTabPosition());
     }
     public ContactsItem getContactsItem(int itemPosition) {
-        MyApplication app = (MyApplication) context.getApplicationContext();
+        App app = (App) context.getApplicationContext();
         ContactsItem item = app.getDatabaseHelper().getContactsItem(getTabPosition(), itemPosition);
         return item;
     }

@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.application.MyApplication;
+import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 import kr.blogspot.ovsoce.hotkey.main.Model;
 
@@ -16,12 +16,12 @@ public class DialogModel extends Model {
     }
 
     public String[] getDefaultColors(Context context) {
-        MyApplication app = (MyApplication)context.getApplicationContext();
+        App app = (App)context.getApplicationContext();
         return app.getDatabaseHelper().getDefaultColors();
     }
 
     public DatabaseHelper getDatabaseHelper(Context context) {
-        MyApplication app = (MyApplication) context.getApplicationContext();
+        App app = (App) context.getApplicationContext();
         return app.getDatabaseHelper();
     }
 
