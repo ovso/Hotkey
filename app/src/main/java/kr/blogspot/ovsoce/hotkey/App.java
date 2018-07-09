@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.facebook.stetho.Stetho;
+import com.google.android.gms.ads.MobileAds;
 import kr.blogspot.ovsoce.hotkey.framework.SystemUtils;
 import kr.blogspot.ovsoce.hotkey.framework.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
@@ -23,7 +24,13 @@ public class App extends Application {
     setFont();
     setFontSize();
     initDebuggable();
+    initAdmob();
   }
+
+  private void initAdmob() {
+    MobileAds.initialize(getApplicationContext(), Security.ADMOB_APP_ID.getValue());
+  }
+
   private void initDebuggable() {
     this.DEBUG = SystemUtils.isDebuggable(this);
   }

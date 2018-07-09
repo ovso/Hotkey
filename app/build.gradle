@@ -11,13 +11,13 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
   compileSdkVersion 27
-  buildToolsVersion "27.0.3"
+  //buildToolsVersion "27.0.3"
 
   defaultConfig {
     applicationId "kr.blogspot.ovsoce.hotkey"
     minSdkVersion 16
     targetSdkVersion 27
-    versionCode 108
+    versionCode 109
     int versionMajor = 0
     int versionMinor = 0
     int versionPatch = versionCode
