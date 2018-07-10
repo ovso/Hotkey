@@ -1,9 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.framework.ad;
 
 import android.content.Context;
-import com.fsn.cauly.CaulyAdInfo;
-import com.fsn.cauly.CaulyAdInfoBuilder;
-import com.fsn.cauly.CaulyAdView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -18,16 +15,5 @@ public class MyAdView {
     AdRequest adRequest = new AdRequest.Builder().build();
     adView.loadAd(adRequest);
     return adView;
-  }
-
-  public static CaulyAdView getCaulyAdView(Context context) {
-    CaulyAdView view;
-    CaulyAdInfo info =
-        new CaulyAdInfoBuilder(Security.CAULY_APP_CODE.getValue()).effect(
-            CaulyAdInfo.Effect.Circle.toString())
-            .build();
-    view = new CaulyAdView(context);
-    view.setAdInfo(info);
-    return view;
   }
 }
