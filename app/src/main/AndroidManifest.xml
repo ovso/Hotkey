@@ -40,6 +40,9 @@
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme.NoActionBar"/>
-  </application>
+      <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="72029291686bbcb7797a8aeb00885fe6925eae5c" />
+    </application>
 
 </manifest>

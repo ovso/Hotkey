@@ -3,8 +3,10 @@ package kr.blogspot.ovsoce.hotkey;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import com.crashlytics.android.Crashlytics;
 import com.facebook.stetho.Stetho;
 import com.google.android.gms.ads.MobileAds;
+import io.fabric.sdk.android.Fabric;
 import kr.blogspot.ovsoce.hotkey.framework.SystemUtils;
 import kr.blogspot.ovsoce.hotkey.framework.TypefaceUtil;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
@@ -18,6 +20,7 @@ public class App extends Application {
 
   @Override public void onCreate() {
     super.onCreate();
+    Fabric.with(this, new Crashlytics());
     mDatabaseHelper = new DatabaseHelper(getApplicationContext());
     Stetho.initializeWithDefaults(this);
     instance = this;
