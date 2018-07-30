@@ -230,15 +230,11 @@ public class MainActivity extends AppCompatActivity
 
   @OnClick(R.id.add_tab_button)
   void onAddTabClick() {
-    new AlertDialog.Builder(this).setPositiveButton(R.string.btn_ok,
-        new DialogInterface.OnClickListener() {
-          @Override public void onClick(DialogInterface dialog, int which) {
-            mPresenter.onAddTabClick();
-          }
-        })
-        .setNegativeButton(R.string.btn_cancel, null)
-        .setMessage(R.string.do_you_want_to_add_a_tab)
-        .show();
+    new AddTabDialogBuilter(this).setOnOkClickListener(new AddTabDialogBuilter.OnOkClickListener() {
+      @Override public void onOkClick() {
+        mPresenter.onAddTabClick();
+      }
+    }).show();
   }
 
   @Override
