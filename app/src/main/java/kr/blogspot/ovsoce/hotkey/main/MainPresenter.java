@@ -25,6 +25,8 @@ public interface MainPresenter {
 
   void onPhoneStateReceiver(Intent intent);
 
+  void onTabRemoveClick();
+
   interface View {
 
     void showHelpDialog(@StringRes int resId);

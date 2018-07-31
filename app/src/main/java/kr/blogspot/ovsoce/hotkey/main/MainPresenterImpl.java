@@ -90,13 +90,7 @@ class MainPresenterImpl implements MainPresenter {
         mView.setTabTitle(tabName, mTabManager.getTabSelectedPosition());
       }
     } else if (which == TabManager.BUTTON_TYPE_DEL) {
-      boolean deleted = mDBManager.deleteTable(mTabManager.getTabSelectedPosition());
-      if (deleted) {
-        mView.removeTab(mTabManager.getTabSelectedPosition());
-        int tabCount = mDBManager.getTabCount();
-        mView.updateViewPager(tabCount, mDBManager.getPageTitleList(tabCount));
-        mView.setTabLayout();
-      }
+      // Do nothing.. Migrate to onTabRemoveClick()
     } else {
       Log.d("cancel");
     }
@@ -113,6 +107,16 @@ class MainPresenterImpl implements MainPresenter {
   public void onPhoneStateReceiver(Intent intent) {
     if (mModel.isAppExit(intent)) {
       mView.exitApp();
+    }
+  }
+
+  @Override public void onTabRemoveClick() {
+    boolean deleted = mDBManager.deleteTable(mTabManager.getTabSelectedPosition());
+    if (deleted) {
+      mView.removeTab(mTabManager.getTabSelectedPosition());
+      int tabCount = mDBManager.getTabCount();
+      mView.updateViewPager(tabCount, mDBManager.getPageTitleList(tabCount));
+      mView.setTabLayout();
     }
   }
 

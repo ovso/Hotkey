@@ -256,17 +256,23 @@ public class MainActivity extends AppCompatActivity
         getLayoutInflater().inflate(R.layout.dialog_custom_edit_tab_name, null);
     final EditText nameEdit = mTabNameEditDialogView.findViewById(R.id.et_edit_name);
     nameEdit.setText(name);
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    DelTabDialogBuilder builder = new DelTabDialogBuilder(this);
     builder.setTitle(R.string.dialog_title_edit_name);
     builder.setIcon(android.R.drawable.ic_menu_edit);
     builder.setView(mTabNameEditDialogView);
     builder.setPositiveButton(R.string.btn_ok, mOnTabNameEditDialogClickListener);
     builder.setNegativeButton(R.string.btn_cancel, mOnTabNameEditDialogClickListener);
     if (isRemoveTab) {
-      builder.setNeutralButton(R.string.btn_del_tab, mOnTabNameEditDialogClickListener);
+      builder.setOnRemoveClickListener(onRemoveClickListener);
+      //builder.setNeutralButton(R.string.btn_del_tab, mOnTabNameEditDialogClickListener);
     }
     builder.show();
   }
+  private DelTabDialogBuilder.OnRemoveClickListener onRemoveClickListener = new DelTabDialogBuilder.OnRemoveClickListener() {
+    @Override public void onRemoveClick() {
+      mPresenter.onTabRemoveClick();
+    }
+  };
 
   @Override
   public void setTabTitle(String name, int position) {
