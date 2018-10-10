@@ -25,18 +25,15 @@ public interface MainPresenter {
 
   void onPhoneStateReceiver(Intent intent);
 
-  interface View {
-    void navigateToShare(String playStoreUrl);
+  void onTabRemoveClick();
 
-    void navigateToReview(String reviewUrl);
+  interface View {
 
     void showHelpDialog(@StringRes int resId);
 
     void navigateToEmergency();
 
     void setVersionName(String versionName);
-
-    void setAd(String appCode);
 
     void navigateToSettings();
 
@@ -80,5 +77,6 @@ public interface MainPresenter {
 
     void exitApp();
 
+    void showAd();
   }
 }

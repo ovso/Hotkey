@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +19,10 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.emergency.fragment.EmergencyFragment;
+import kr.blogspot.ovsoce.hotkey.framework.ad.MyAdView;
 
 public class EmergencyActivity extends AppCompatActivity implements EmergencyPresenter.View {
-
+    @BindView(R.id.ad_container) ViewGroup adContainer;
     private EmergencyPresenter mPresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,6 +84,10 @@ public class EmergencyActivity extends AppCompatActivity implements EmergencyPre
         return this;
     }
 
+    @Override public void showAd() {
+        adContainer.addView(MyAdView.getAdmobAdView(getApplicationContext()));
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home) {
@@ -92,7 +98,7 @@ public class EmergencyActivity extends AppCompatActivity implements EmergencyPre
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mUnbinder.unbind();
+        super.onDestroy();
     }
 }

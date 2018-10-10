@@ -6,8 +6,10 @@ import kr.blogspot.ovsoce.hotkey.main.Presenter;
 
 public interface SettingsPresenter extends Presenter {
 
-    interface View extends Presenter.View {
+  interface View extends Presenter.View {
 
-        Context getContext();
-    }
+    Context getContext();
+
+    void showAd();
+  }
 }

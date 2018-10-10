@@ -1,10 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.fragment;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-
 import java.util.List;
-
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 
 public interface FragmentPresenter{

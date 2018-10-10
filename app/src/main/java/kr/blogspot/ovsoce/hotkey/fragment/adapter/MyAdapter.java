@@ -6,21 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.jakewharton.rxbinding2.view.RxView;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import hugo.weaving.DebugLog;
+import com.jakewharton.rxbinding2.view.RxView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.application.MyApplication;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
-import kr.blogspot.ovsoce.hotkey.framework.Log;
 
 /**
  * RecyclerView Adapter
@@ -45,9 +41,9 @@ public class MyAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ContactsItem data = mList.get(position);
-        MyViewHolder myViewHolder = (MyViewHolder) holder;
+        final MyViewHolder myViewHolder = (MyViewHolder) holder;
 
-        MyApplication app = (MyApplication) myViewHolder.blockV.getContext()
+        App app = (App) myViewHolder.blockV.getContext()
                 .getApplicationContext();
         String colorCode = app.getDatabaseHelper().getDefaultColors()[Integer.parseInt(data
                 .getColor())];
@@ -56,8 +52,13 @@ public class MyAdapter extends RecyclerView.Adapter {
         myViewHolder.nameTv.setText(data.getName());
         subscribe = RxView.clicks(myViewHolder.itemView).throttleFirst(2, TimeUnit
                 .SECONDS, AndroidSchedulers
-                .mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(o -> mListener
-                .onClick(myViewHolder.itemView));
+                .mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+            new Consumer<Object>() {
+                @Override public void accept(Object o) throws Exception {
+                    mListener
+                        .onClick(myViewHolder.itemView);
+                }
+            });
         myViewHolder.itemView.setOnLongClickListener(mListener);
     }
 

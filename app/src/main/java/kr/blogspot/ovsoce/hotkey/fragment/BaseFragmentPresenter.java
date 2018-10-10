@@ -5,18 +5,18 @@ import android.content.Context;
 import android.support.annotation.StringRes;
 
 public interface BaseFragmentPresenter extends FragmentPresenter {
-    void onAdapterItemClick(int position);
+  void onAdapterItemClick(int position);
 
-    void onAdapterItemLongClick(int position);
+  void onAdapterItemLongClick(int position);
 
-    void onDetach();
+  void onDestroyView();
 
-    interface View extends FragmentPresenter.View {
+  interface View extends FragmentPresenter.View {
 
-        Context getContext();
+    Context getContext();
 
-        Activity getActivity();
+    Activity getActivity();
 
-        void showPermissionAlert(@StringRes int resId);
-    }
+    void showPermissionAlert(@StringRes int resId);
+  }
 }

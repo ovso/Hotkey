@@ -1,78 +1,69 @@
 <resources>
-  <string name="app_name">단축번호 앱</string>
-  <string name="app_ver">버전&#160;&#160;&#160;</string>
+  <string name = "app_name">Hotkey</string>
+  <string name = "app_ver"> version </string>
 
-  <string name="navigation_drawer_open">Open navigation drawer</string>
-  <string name="navigation_drawer_close">Close navigation drawer</string>
+  <string name = "navigation_drawer_open"> Open Navigation Bar </string>
+  <string name = "navigation_drawer_close"> Close the navigation window </string>
 
-  <!-- main menu -->
-  <string name="action_settings">설정</string>
-  <string name="menu_title_family">가족</string>
-  <string name="menu_title_friends">친구</string>
-  <string name="menu_title_others">기타</string>
-  <string name="menu_title_review">리뷰 남기기</string>
-  <string name="menu_title_share">앱 공유하기</string>
-  <string name="menu_title_help">도움말</string>
+  <string name = "action_settings"> Settings </string>
+  <string name = "menu_title_family"> Family </string>
+  <string name = "menu_title_friends"> Friends </string>
+  <string name = "menu_title_others"> Miscellaneous </string>
+  <string name = "menu_title_review"> Leave a review </string>
+  <string name = "menu_title_share"> Sharing apps </string>
+  <string name = "menu_title_help"> Help </string>
 
-  <!-- item dialog -->
-  <string name="dialog_name_hint">이름을 입력해 주세요.</string>
-  <string name="dialog_number_hint">번호를 입력해 주세요.</string>
-  <string name="dialog_title">연락처 설정</string>
-  <string name="dialog_import_contacts">연락처 가져오기</string>
-  <string name="dialog_btn_text_message">SMS 보내기</string>
-  <string name="dialog_btn_text_init">연락처 초기화</string>
+  <string name = "dialog_name_hint"> Please enter your first name. </string>
+  <string name = "dialog_number_hint"> Please enter a number. </string>
+  <string name = "dialog_title"> Contact Settings </string>
+  <string name = "dialog_import_contacts"> Import contacts </string>
+  <string name = "dialog_btn_text_message"> Send SMS </string>
+  <string name = "dialog_btn_text_init"> Contact initialization </string>
 
-  <!-- common -->
-  <string name="btn_ok">확인</string>
-  <string name="btn_cancel">취소</string>
+  <string name = "btn_ok"> OK </string>
+  <string name = "btn_cancel"> Cancel </string>
 
-  <!-- toast msg -->
-  <string name="empty_number">입력된 번호가 없습니다.</string>
+  <string name = "empty_number"> No number entered. </string>
 
-  <!-- share -->
-  <string name="share_to_others">다른사람에게 공유하기</string>
+  <string name = "share_to_others"> Sharing with others </string>
 
-  <!-- help -->
-  <string name="activity_help_label">도움말</string>
+  <string name = "activity_help_label"> Help </string>
 
-  <!-- emergency -->
-  <string name="activity_emergency_label">긴급 전화번호</string>
+  <string name = "activity_emergency_label"> Emergency number </string>
 
-  <string name="tab_emergency_label">긴급 전화번호</string>
-  <string name="tab_living_info_label">생활정보</string>
-  <string name="tab_complaints_label">민원 신고/상담</string>
-  <string name="tab_child_label">아동</string>
-  <string name="tab_teen_label">청소년</string>
-  <string name="tab_female_label">여성</string>
-  <string name="tab_old_disabled_label">노인·장애인</string>
-  <string name="tab_disease_addicted_label">질병·중독</string>
-  <string name="tab_family_label">가족</string>
+  <string name = "tab_emergency_label"> Emergency number </string>
+  <string name = "tab_living_info_label"> Living Information </string>
+  <string name = "tab_complaints_label"> Complaints / Counseling </string>
+  <string name = "tab_child_label"> Children </string>
+  <string name = "tab_teen_label"> Youth </string>
+  <string name = "tab_female_label"> Female </string>
+  <string name = "tab_old_disabled_label"> Elderly / Disabled </string>
+  <string name = "tab_disease_addicted_label"> Illness / Addiction </string>
+  <string name = "tab_family_label"> Family </string>
 
-  <string name="make_call">전화걸기</string>
+  <string name = "make_call"> Dialing </string>
 
-  <!-- settings -->
-  <string name="settings_fonts">글꼴</string>
-  <string name="settings_fonts_summary">설정 후 재시작해야 전체 반영 됩니다.</string>
-  <string name="settings_fonts_size">글자 크기</string>
-  <string name="settings_fonts_size_summary">설정 후 재시작해야 전체 반영 됩니다.</string>
-  <string name="settings_btn_restart">앱 재시작</string>
-  <string name="settings_btn_cancel">취소</string>
+  <string name = "settings_fonts"> Font </string>
+  <string name = "settings_fonts_summary"> Reprocessing is possible after setting. </string>
+  <string name = "settings_fonts_size"> Font Size </string>
+  <string name = "settings_fonts_size_summary"> Reprocessing is possible after setting. </string>
+  <string name = "settings_btn_restart"> rewrite </string>
+  <string name = "settings_btn_cancel"> Cancel </string>
 
-  <!-- Change name dialog -->
-  <string name="dialog_title_edit_name">편집</string>
-  <string name="empty_input_text">입력된 값이 없습니다</string>
+  <string name = "dialog_title_edit_name"> Edit </string>
+  <string name = "empty_input_text"> No value entered </string>
 
-  <string name="call_phone_denied_msg">1. 권한을 허용하셔야 전화를 걸 수 있습니다. \n 2. 파일매니저 앱이 설치되어 있을 경우 [허용] 버튼이 눌러지지 않을 수 있습니다. 그럴 경우 설정으로 이동하여 직접 권한을 허용해 주어야 합니다.</string>
-  <string name="do_you_want_to_add_a_tab">탭(그룹)을 추가하시겠어요?</string>
-  <string name="btn_del_tab">탭 제거</string>
-  <string name="default_tab_name">\?</string>
-  <string name="automatic_end_after_call">통화 후 자동종료</string>
-  <string name="quit_app_after_call">통화를 마친 후 앱을 종료합니다.</string>
-  <string name="keep_app_after_call">통화를 마친 후 앱을 유지합니다.</string>
-  <string name="using_tts">음성 기능 사용</string>
-  <string name="using_tts_enable">전화 걸기 전 음성으로 상대방을 알려줍니다.</string>
-  <string name="using_tts_disable">곧바로 전화 겁니다.</string>
-  <string name="donation">후원</string>
-  <string name="empty"/>
-  <string name="help_msg">하나, 통화하려면 단지 클릭하세요\n\n두울, 연락처를 수정하려면 클릭하거나, 통탭(길게 누름)하세요\n\n세엣, 번호입력은 01012345678, 010-1234-6789, +82... 이처럼 다양해요\n\n네엣, 글꼴과 글씨 크기는 설정 화면에서 바꿀 수 있어요\n\n다섯, 탭이름을 바꾸려면 현재 탭이름을 클릭해보세요\n\n여섯, 통화 후 앱을 자동종료 하고 싶다면 설정에서 찾아보세요.\n\n일곱, 광고 수입으로 초록우산어린이재단에 정기후원하고 있어요</string>
+  <string name = "call_phone_denied_msg"> 1. Not required. \ n 2. Completing File Manager installation Click the [Allow] button. The setting is directly possible. </string>
+  <string name = "do_you_want_to_add_a_tab"> Do you want to add a tab (group)? </string>
+  <string name = "btn_del_tab"> Remove Tab </string>
+  <string name = "default_tab_name"> \? </string>
+  <string name = "automatic_end_after_call"> Auto end call </string>
+  <string name = "quit_app_after_call"> Quit the application after the call is finished. </string>
+  <string name = "keep_app_after_call"> Keep the application after you end the call. </string>
+  <string name = "using_tts"> Using Voice Features </string>
+  <string name = "using_tts_enable"> Tells the person you are calling. </string>
+  <string name = "using_tts_disable">I will call you straight.</string>
+  <string name = "donation"> Sponsorship </string>
+  <string name = "empty" />
+  <string name = "help_msg"> One click on Dubai \ n \ n Twice, long press \ n \ n Third, enter number 01012345678, 010-1234-6789, n \ nSquare, font and font size appear on the screen \ n \ nClick on the five paragraphs. \ n \ n Six</string>
 </resources>

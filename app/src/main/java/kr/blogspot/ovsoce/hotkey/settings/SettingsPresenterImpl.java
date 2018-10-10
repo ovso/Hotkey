@@ -12,7 +12,7 @@ public class SettingsPresenterImpl implements SettingsPresenter {
 
     @Override
     public void onCreate(Context context) {
-        // do something...
+        mView.showAd();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.emergency.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -79,16 +80,26 @@ public class EmergencyFragment extends Fragment implements EmergencyFragmentPres
     String message =
         contact.receptionContents + "\n" + contact.phoneNumber + "\n" + contact.relatedInstitutions;
     builder.setMessage(message);
-    builder.setPositiveButton(R.string.make_call, (dialog, which) -> makeCall(contact.phoneNumber)).setNeutralButton(R.string.dialog_btn_text_message,
-        (dialog, which) -> navigateToSMS(contact.phoneNumber));
+    builder.setPositiveButton(R.string.make_call, new DialogInterface.OnClickListener() {
+      @Override public void onClick(DialogInterface dialog, int which) {
+        EmergencyFragment.this.makeCall(contact.phoneNumber);
+      }
+    }).setNeutralButton(R.string.dialog_btn_text_message,
+        new DialogInterface.OnClickListener() {
+          @Override public void onClick(DialogInterface dialog, int which) {
+            EmergencyFragment.this.navigateToSMS(contact.phoneNumber);
+          }
+        });
     builder.setNegativeButton(R.string.btn_cancel, null);
     builder.show();
   }
 
   @Override public void showPermissionAlert(int resId) {
     new AlertDialog.Builder(getActivity()).setMessage(resId)
-        .setPositiveButton(android.R.string.ok, (dialogInterface, which) -> {
-          dialogInterface.dismiss();
+        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+          @Override public void onClick(DialogInterface dialogInterface, int which) {
+            dialogInterface.dismiss();
+          }
         })
         .show();
   }

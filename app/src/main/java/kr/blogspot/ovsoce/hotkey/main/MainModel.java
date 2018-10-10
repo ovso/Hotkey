@@ -13,34 +13,29 @@ import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
 
 public class MainModel extends Model {
 
-    public final static String AD_ID_CAULY = "V2f5YVvL";
+  MainModel(Context context) {
+    super(context);
+  }
 
-    MainModel(Context context) {
-        super(context);
-    }
+  public void setFontsSize() {
+    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    float fonts_size = Float.parseFloat(sharedPreferences.getString("fonts_size", "1.0"));
+    Log.d("fonts_size = " + fonts_size);
+    TypefaceUtil.fontsSize(context, fonts_size);
+  }
 
-    public void setFontsSize() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        float fonts_size = Float.parseFloat(sharedPreferences.getString("fonts_size", "1.0"));
-        Log.d("fonts_size = " + fonts_size);
-        TypefaceUtil.fontsSize(context, fonts_size);
-    }
-    @Override
-    public String getVersionName() {
-        return new StringBuilder(context.getString(R.string.app_ver))
-                .append(super.getVersionName()).toString();
-    }
+  @Override
+  public String getVersionName() {
+    return new StringBuilder(context.getString(R.string.app_ver))
+        .append(super.getVersionName()).toString();
+  }
 
-    public String getAppCode() {
-        return AD_ID_CAULY;
+  public boolean isAppExit(Intent intent) {
+    String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+    if (!ObjectUtils.isEmpty(state) && state.equals("IDLE")) {
+      return Prefs.getBoolean(context, "auto_end", false);
+    } else {
+      return false;
     }
-
-    public boolean isAppExit(Intent intent) {
-        String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
-        if (!ObjectUtils.isEmpty(state) && state.equals("IDLE")) {
-            return Prefs.getBoolean(context, "auto_end", false);
-        } else {
-            return false;
-        }
-    }
+  }
 }

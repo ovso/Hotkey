@@ -4,14 +4,20 @@ import android.content.Context;
 
 public interface EmergencyPresenter {
 
-    void onCreate();
+  void onCreate();
 
-    interface View {
+  interface View {
 
-        void setRootView();
-        void setToolbar();
-        void setViewPager(int tabCount);
-        void setTabLayout();
-        Context getContext();
-    }
+    void setRootView();
+
+    void setToolbar();
+
+    void setViewPager(int tabCount);
+
+    void setTabLayout();
+
+    Context getContext();
+
+    void showAd();
+  }
 }
