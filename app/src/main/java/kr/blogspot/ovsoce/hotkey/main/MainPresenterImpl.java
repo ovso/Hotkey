@@ -7,9 +7,12 @@ import android.os.Handler;
 import android.os.Looper;
 
 import hugo.weaving.DebugLog;
+import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.R;
+import kr.blogspot.ovsoce.hotkey.data.KeyName;
 import kr.blogspot.ovsoce.hotkey.framework.Log;
 import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
+import kr.blogspot.ovsoce.hotkey.framework.Prefs;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 
 class MainPresenterImpl implements MainPresenter {
@@ -49,6 +52,9 @@ class MainPresenterImpl implements MainPresenter {
     mView.setViewPager(tabCount, mDBManager.getPageTitleList(tabCount));
     mView.setTabLayout();
     mView.showAd();
+
+    mView.setViewPagerCurrentItem(
+        Prefs.getInt(App.getInstance(), KeyName.Prefs.VIEW_PAGER_POSITION.getValue(), 0));
   }
 
   @Override

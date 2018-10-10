@@ -36,9 +36,11 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.App;
+import kr.blogspot.ovsoce.hotkey.data.KeyName;
 import kr.blogspot.ovsoce.hotkey.emergency.EmergencyActivity;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.framework.MyProgressDialog;
+import kr.blogspot.ovsoce.hotkey.framework.Prefs;
 import kr.blogspot.ovsoce.hotkey.framework.ad.MyAdView;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -268,11 +270,13 @@ public class MainActivity extends AppCompatActivity
     }
     builder.show();
   }
-  private DelTabDialogBuilder.OnRemoveClickListener onRemoveClickListener = new DelTabDialogBuilder.OnRemoveClickListener() {
-    @Override public void onRemoveClick() {
-      mPresenter.onTabRemoveClick();
-    }
-  };
+
+  private DelTabDialogBuilder.OnRemoveClickListener onRemoveClickListener =
+      new DelTabDialogBuilder.OnRemoveClickListener() {
+        @Override public void onRemoveClick() {
+          mPresenter.onTabRemoveClick();
+        }
+      };
 
   @Override
   public void setTabTitle(String name, int position) {
@@ -323,6 +327,14 @@ public class MainActivity extends AppCompatActivity
     mUnbinder.unbind();
 
     unregisterReceiver(mPhoneStateBroadcastReceiver);
+  }
+
+  @Override protected void onPause() {
+    super.onPause();
+    Prefs.putInt(
+        App.getInstance(),
+        KeyName.Prefs.VIEW_PAGER_POSITION.getValue(),
+        mViewPager.getCurrentItem());
   }
 
   @Override
