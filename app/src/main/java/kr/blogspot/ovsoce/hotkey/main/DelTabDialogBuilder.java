@@ -4,21 +4,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
-import hugo.weaving.DebugLog;
+
+import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.Security;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 public class DelTabDialogBuilder extends AlertDialog.Builder {
 
   private InterstitialAd interstitialAd;
+  @SuppressWarnings("FieldCanBeLocal")
   private AlertDialog alertDialog;
 
-  public DelTabDialogBuilder(@NonNull Context context) {
+  DelTabDialogBuilder(@NonNull Context context) {
     super(context);
     initialize();
   }
@@ -48,7 +50,7 @@ public class DelTabDialogBuilder extends AlertDialog.Builder {
 
   private InterstitialAd provideInterstitialAd(Context context) {
     InterstitialAd interstitialAd = new InterstitialAd(context);
-    interstitialAd.setAdUnitId(Security.ADMOB_INTERSTITIAL_UNIT_ID.getValue());
+    interstitialAd.setAdUnitId(Ads.INTERSTITIAL_UNIT_ID);
     AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
     interstitialAd.loadAd(adRequestBuilder.build());
     return interstitialAd;

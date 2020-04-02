@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity
 
   @OnClick(R.id.add_tab_button)
   void onAddTabClick() {
-    new AddTabDialogBuilter(this).setOnOkClickListener(new AddTabDialogBuilter.OnOkClickListener() {
+    new AddTabDialogBuilder(this).setOnOkClickListener(new AddTabDialogBuilder.OnOkClickListener() {
       @Override public void onOkClick() {
         mPresenter.onAddTabClick();
       }

@@ -31,7 +31,7 @@ public class App extends Application {
   }
 
   private void initAdmob() {
-    MobileAds.initialize(getApplicationContext(), Security.ADMOB_APP_ID.getValue());
+    MobileAds.initialize(getApplicationContext(), Ads.APP_ID);
   }
 
   private void initDebuggable() {

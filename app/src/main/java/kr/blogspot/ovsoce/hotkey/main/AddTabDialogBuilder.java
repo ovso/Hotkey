@@ -4,15 +4,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+
+import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.Security;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-public class AddTabDialogBuilter extends AlertDialog.Builder {
+public class AddTabDialogBuilder extends AlertDialog.Builder {
   public DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
     @Override public void onClick(DialogInterface dialog, int which) {
       switch (which) {
@@ -33,12 +35,12 @@ public class AddTabDialogBuilter extends AlertDialog.Builder {
   };
   private InterstitialAd interstitialAd;
 
-  public AddTabDialogBuilter(@NonNull Context context) {
+  public AddTabDialogBuilder(@NonNull Context context) {
     super(context);
     initialize();
   }
 
-  public AddTabDialogBuilter(@NonNull Context context, int themeResId) {
+  public AddTabDialogBuilder(@NonNull Context context, int themeResId) {
     super(context, themeResId);
     initialize();
   }
@@ -60,7 +62,7 @@ public class AddTabDialogBuilter extends AlertDialog.Builder {
 
   private InterstitialAd provideInterstitialAd(Context context) {
     InterstitialAd interstitialAd = new InterstitialAd(context);
-    interstitialAd.setAdUnitId(Security.ADMOB_INTERSTITIAL_UNIT_ID.getValue());
+    interstitialAd.setAdUnitId(Ads.INTERSTITIAL_UNIT_ID);
     AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
     interstitialAd.loadAd(adRequestBuilder.build());
     return interstitialAd;
