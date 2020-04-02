@@ -2,8 +2,9 @@ package kr.blogspot.ovsoce.hotkey.main;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -11,12 +12,11 @@ import com.google.android.gms.ads.InterstitialAd;
 
 import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.R;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
 public class AddTabDialogBuilder extends AlertDialog.Builder {
   public DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
-    @Override public void onClick(DialogInterface dialog, int which) {
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
       switch (which) {
         case DialogInterface.BUTTON_POSITIVE:
           if (onOkClickListener != null) {
@@ -51,7 +51,8 @@ public class AddTabDialogBuilder extends AlertDialog.Builder {
     setMessage(R.string.do_you_want_to_add_a_tab);
     interstitialAd = provideInterstitialAd(getContext());
     interstitialAd.setAdListener(new AdListener() {
-      @Override public void onAdClosed() {
+      @Override
+      public void onAdClosed() {
         super.onAdClosed();
         if (onOkClickListener != null) {
           onOkClickListener.onOkClick();
@@ -68,7 +69,11 @@ public class AddTabDialogBuilder extends AlertDialog.Builder {
     return interstitialAd;
   }
 
-  @Setter @Accessors(chain = true) private OnOkClickListener onOkClickListener;
+  public OnOkClickListener onOkClickListener;
+
+  public void setOnOkClickListener(OnOkClickListener l) {
+    onOkClickListener = l;
+  }
 
   public interface OnOkClickListener {
     void onOkClick();

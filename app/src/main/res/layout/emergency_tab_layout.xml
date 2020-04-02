@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.TabLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.tabs.TabLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@id/tablayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:tabMode="scrollable">
 
-    <android.support.design.widget.TabItem
+    <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:text="@string/tab_emergency_label" />
 
-    <android.support.design.widget.TabItem
+    <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:text="@string/tab_living_info_label" />
 
-    <android.support.design.widget.TabItem
+    <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:text="@string/tab_complaints_label" />
 
-    <android.support.design.widget.TabItem
+    <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:text="@string/tab_child_label" />
 
-    <android.support.design.widget.TabItem
+    <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:text="@string/tab_teen_label" />
 
-    <android.support.design.widget.TabItem
+    <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:text="@string/tab_female_label" />
 
-    <android.support.design.widget.TabItem
+    <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:text="@string/tab_old_disabled_label" />
 
-    <android.support.design.widget.TabItem
+    <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:text="@string/tab_disease_addicted_label" />
 
-    <android.support.design.widget.TabItem
+    <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:text="@string/tab_family_label" />
-</android.support.design.widget.TabLayout>
+</com.google.android.material.tabs.TabLayout>

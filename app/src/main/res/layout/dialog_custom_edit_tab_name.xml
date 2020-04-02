@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_edit_tab_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -15,6 +15,6 @@
             android:inputType="text"
             android:maxLines="1"
             android:maxLength="10"/>
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>

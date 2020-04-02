@@ -2,8 +2,9 @@ package kr.blogspot.ovsoce.hotkey.main;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -11,8 +12,6 @@ import com.google.android.gms.ads.InterstitialAd;
 
 import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.R;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
 public class DelTabDialogBuilder extends AlertDialog.Builder {
 
@@ -61,8 +60,11 @@ public class DelTabDialogBuilder extends AlertDialog.Builder {
     return alertDialog;
   }
 
-  @Setter @Accessors(chain = true) private OnRemoveClickListener onRemoveClickListener;
+  public OnRemoveClickListener onRemoveClickListener;
 
+  public void setOnRemoveClickListener(OnRemoveClickListener l) {
+    onRemoveClickListener = l;
+  }
   public interface OnRemoveClickListener {
     void onRemoveClick();
   }

@@ -2,8 +2,6 @@ package kr.blogspot.ovsoce.hotkey.fragment;
 
 import android.content.Context;
 
-import kr.blogspot.ovsoce.hotkey.R;
-
 public class BaseFragmentModel extends FragmentModel {
 
     private int tabPosition = 0;

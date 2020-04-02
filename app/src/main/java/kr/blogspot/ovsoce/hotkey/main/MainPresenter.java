@@ -3,7 +3,8 @@ package kr.blogspot.ovsoce.hotkey.main;
 import android.content.Context;
 import android.content.Intent;
 
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
+
 import java.util.List;
 
 public interface MainPresenter {

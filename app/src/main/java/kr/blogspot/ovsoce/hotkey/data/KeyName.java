@@ -1,12 +1,15 @@
 package kr.blogspot.ovsoce.hotkey.data;
 
-import lombok.Getter;
 
 public interface KeyName {
 
-  @Getter enum Prefs {
+  enum Prefs {
     VIEW_PAGER_POSITION("now_tab_position");
     private String value;
+
+    public String getValue() {
+      return value;
+    }
 
     Prefs(String $value) {
       this.value = $value;

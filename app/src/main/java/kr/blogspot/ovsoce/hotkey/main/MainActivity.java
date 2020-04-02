@@ -6,26 +6,28 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.annotation.StringRes;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +36,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.App;
+import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.data.KeyName;
 import kr.blogspot.ovsoce.hotkey.emergency.EmergencyActivity;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
@@ -232,11 +234,9 @@ public class MainActivity extends AppCompatActivity
 
   @OnClick(R.id.add_tab_button)
   void onAddTabClick() {
-    new AddTabDialogBuilder(this).setOnOkClickListener(new AddTabDialogBuilder.OnOkClickListener() {
-      @Override public void onOkClick() {
-        mPresenter.onAddTabClick();
-      }
-    }).show();
+    AddTabDialogBuilder addTabDialogBuilder = new AddTabDialogBuilder(this);
+    addTabDialogBuilder.setOnOkClickListener(() -> mPresenter.onAddTabClick());
+    addTabDialogBuilder.show();
   }
 
   @Override
@@ -352,7 +352,7 @@ public class MainActivity extends AppCompatActivity
     private List<String> mPageTitleList;
 
     SectionsPagerAdapter(FragmentManager fm, List<Fragment> fragmentList,
-        List<String> pageTitleList) {
+                         List<String> pageTitleList) {
       super(fm);
       mFragmentList = fragmentList;
       mPageTitleList = pageTitleList;

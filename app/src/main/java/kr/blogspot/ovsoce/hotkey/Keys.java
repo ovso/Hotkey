@@ -1,8 +1,5 @@
 package kr.blogspot.ovsoce.hotkey;
 
-import lombok.Getter;
-
-@Getter
 public enum Keys {
   GOOGLE_API_KEY("AIzaSyBdY9vP4_vQs5YEGJ3Ghu6s5gGY8yFlo0s"),
   NAVER_CLIENT_ID("HLSg0Vn_L6Y2S65DbzKP"),
