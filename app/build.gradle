@@ -53,12 +53,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
+            resValue("string", "ads_app_id", "ca-app-pub-8679189423397017~9361379422")
             signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue("string", "ads_app_id", "ca-app-pub-3940256099942544~3347511713")
         }
     }
 
