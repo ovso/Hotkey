@@ -69,9 +69,9 @@ public class AddTabDialogBuilder extends AlertDialog.Builder {
     return interstitialAd;
   }
 
-  public OnOkClickListener onOkClickListener;
+  private OnOkClickListener onOkClickListener;
 
-  public void setOnOkClickListener(OnOkClickListener l) {
+  void setOnOkClickListener(OnOkClickListener l) {
     onOkClickListener = l;
   }
 
