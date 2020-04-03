@@ -7,14 +7,13 @@ import android.speech.tts.TextToSpeech;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import io.reactivex.functions.Consumer;
 import java.util.HashMap;
 
 import hugo.weaving.DebugLog;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.App;
+import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.fragment.listener.SimpleUtteranceProgressListener;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
@@ -63,13 +62,11 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
     subscribe = permissions.request(Manifest.permission.CALL_PHONE)
         .subscribeOn(Schedulers.io())
         .observeOn(Schedulers.computation())
-        .subscribe(new Consumer<Boolean>() {
-          @Override public void accept(Boolean granted) throws Exception {
-            if (granted) { // Always true pre-M
-              BaseFragmentPresenterImpl.this.makeCall(item);
-            } else {
-              view.showPermissionAlert(R.string.call_phone_denied_msg);
-            }
+        .subscribe(granted -> {
+          if (granted) { // Always true pre-M
+            BaseFragmentPresenterImpl.this.makeCall(item);
+          } else {
+            view.showPermissionAlert(R.string.call_phone_denied_msg);
           }
         });
   }
