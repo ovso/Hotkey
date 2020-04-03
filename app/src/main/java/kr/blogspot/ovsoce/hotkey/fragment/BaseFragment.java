@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -87,7 +89,7 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     mUnbinder = ButterKnife.bind(this, view);
   }
@@ -104,7 +106,7 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
   public void setRecyclerView(List<ContactsItem> contactsItemList) {
     MyAdapter adapter = new MyAdapter(contactsItemList, mOnAdapterItemClickListener);
     GridLayoutManager layout = new GridLayoutManager(getContext(),
-      getContext().getResources().getInteger(R.integer
+      Objects.requireNonNull(getContext()).getResources().getInteger(R.integer
         .recyclerview_gridlayout_spancount));
     mRecyclerView.setLayoutManager(layout);
     mRecyclerView.setAdapter(adapter);
@@ -154,7 +156,7 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
 
   @Override
   public void showPermissionAlert(int resId) {
-    new AlertDialog.Builder(getActivity())
+    new AlertDialog.Builder(requireActivity())
       .setMessage(resId)
       .setPositiveButton(android.R.string.ok, (dialogInterface, which) -> dialogInterface.dismiss())
       .show();
