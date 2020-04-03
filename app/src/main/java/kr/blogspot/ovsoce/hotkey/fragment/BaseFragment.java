@@ -29,38 +29,38 @@ import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 
 public class BaseFragment extends Fragment implements BaseFragmentPresenter.View {
 
-  public static final String ARG_SECTION_NUMBER = "position";
-  protected BaseFragmentPresenter mPresenter;
+  private static final String ARG_SECTION_NUMBER = "position";
+  private BaseFragmentPresenter mPresenter;
   @BindView(R.id.recyclerview)
   RecyclerView mRecyclerView;
   private ItemAlertDialogBuilder mItemAlertDialogBuilder;
   private Unbinder mUnbinder;
   private MyAdapter.OnAdapterItemClickListener mOnAdapterItemClickListener =
-      new MyAdapter.OnAdapterItemClickListener() {
+    new MyAdapter.OnAdapterItemClickListener() {
 
-        @DebugLog
-        @Override
-        public void onClick(android.view.View v) {
-          int position = mRecyclerView.getChildAdapterPosition(v);
-          mPresenter.onAdapterItemClick(position);
-        }
+      @DebugLog
+      @Override
+      public void onClick(android.view.View v) {
+        int position = mRecyclerView.getChildAdapterPosition(v);
+        mPresenter.onAdapterItemClick(position);
+      }
 
-        @DebugLog
-        @Override
-        public boolean onLongClick(android.view.View v) {
-          int position = mRecyclerView.getChildAdapterPosition(v);
-          mPresenter.onAdapterItemLongClick(position);
-          return true;
-        }
-      };
+      @DebugLog
+      @Override
+      public boolean onLongClick(android.view.View v) {
+        int position = mRecyclerView.getChildAdapterPosition(v);
+        mPresenter.onAdapterItemLongClick(position);
+        return true;
+      }
+    };
   private ItemAlertDialogBuilder.OnOkClickListener mOnOkClickListener =
-      new ItemAlertDialogBuilder.OnOkClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, String itemId) {
-          mPresenter.onItemAlertDialogOkClick(itemId);
-          dialog.dismiss();
-        }
-      };
+    new ItemAlertDialogBuilder.OnOkClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, String itemId) {
+        mPresenter.onItemAlertDialogOkClick(itemId);
+        dialog.dismiss();
+      }
+    };
 
   @DebugLog
   public static BaseFragment newInstance(int sectionNumber) {
@@ -82,7 +82,7 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+                           Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_base, container, false);
   }
 
@@ -104,8 +104,8 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
   public void setRecyclerView(List<ContactsItem> contactsItemList) {
     MyAdapter adapter = new MyAdapter(contactsItemList, mOnAdapterItemClickListener);
     GridLayoutManager layout = new GridLayoutManager(getContext(),
-        getContext().getResources().getInteger(R.integer
-            .recyclerview_gridlayout_spancount));
+      getContext().getResources().getInteger(R.integer
+        .recyclerview_gridlayout_spancount));
     mRecyclerView.setLayoutManager(layout);
     mRecyclerView.setAdapter(adapter);
   }
@@ -154,12 +154,9 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
 
   @Override
   public void showPermissionAlert(int resId) {
-    new AlertDialog.Builder(getActivity()).setMessage(resId)
-        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-          @Override public void onClick(DialogInterface dialogInterface, int which) {
-            dialogInterface.dismiss();
-          }
-        })
-        .show();
+    new AlertDialog.Builder(getActivity())
+      .setMessage(resId)
+      .setPositiveButton(android.R.string.ok, (dialogInterface, which) -> dialogInterface.dismiss())
+      .show();
   }
 }
