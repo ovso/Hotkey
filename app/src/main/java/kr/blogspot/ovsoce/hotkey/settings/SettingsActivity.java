@@ -25,14 +25,15 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
   private Unbinder unbinder;
   @BindView(R.id.ad_container)
   ViewGroup adContainer;
-  private InterstitialAd interstitialAd = AdaptiveBanner.loadInterstitial(this);
+  private InterstitialAd interstitialAd = null;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    interstitialAd = AdaptiveBanner.loadInterstitial(this);
     setContentView(R.layout.activity_settings);
     unbinder = ButterKnife.bind(this);
-    /**
+    /*
      * onInit에 구현하니 툴바가 나오지 않았다 HelpActivity에서는 제대로 나온다.
      */
     Toolbar toolbar = findViewById(R.id.toolbar);
@@ -60,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
 
   @Override
   public void activityFinish() {
-    onBackPressed();
+    finish();
   }
 
   @Override
@@ -87,6 +88,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
 
   @Override
   public void onBackPressed() {
+
     interstitialAd.setAdListener(new AdListener() {
       @Override
       public void onAdLoaded() {
@@ -97,14 +99,20 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
       @Override
       public void onAdFailedToLoad(int i) {
         super.onAdFailedToLoad(i);
-        onBackPressed();
+        activityFinish();
       }
 
       @Override
       public void onAdClosed() {
         super.onAdClosed();
-        onBackPressed();
+        activityFinish();
       }
     });
+
+    if (interstitialAd.isLoaded()) {
+      interstitialAd.show();
+    } else {
+      activityFinish();
+    }
   }
 }
