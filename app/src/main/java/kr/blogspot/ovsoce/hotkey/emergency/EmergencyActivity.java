@@ -11,6 +11,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -28,10 +30,12 @@ public class EmergencyActivity extends AppCompatActivity implements EmergencyPre
   @BindView(R.id.ad_container)
   ViewGroup adContainer;
   private EmergencyPresenter mPresenter;
+  private InterstitialAd interstitialAd = null;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    interstitialAd = AdaptiveBanner.loadInterstitial(this);
     mPresenter = new EmergencyPresenterImpl(this);
     mPresenter.onCreate();
   }
@@ -99,7 +103,7 @@ public class EmergencyActivity extends AppCompatActivity implements EmergencyPre
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == android.R.id.home) {
-      finish();
+      onBackPressed();
     }
     return super.onOptionsItemSelected(item);
   }
@@ -108,5 +112,29 @@ public class EmergencyActivity extends AppCompatActivity implements EmergencyPre
   protected void onDestroy() {
     mUnbinder.unbind();
     super.onDestroy();
+  }
+
+  @Override
+  public void onBackPressed() {
+    interstitialAd.setAdListener(new AdListener() {
+
+      @Override
+      public void onAdFailedToLoad(int i) {
+        super.onAdFailedToLoad(i);
+        finish();
+      }
+
+      @Override
+      public void onAdClosed() {
+        super.onAdClosed();
+        finish();
+      }
+    });
+
+    if (interstitialAd.isLoaded()) {
+      interstitialAd.show();
+    } else {
+      finish();
+    }
   }
 }

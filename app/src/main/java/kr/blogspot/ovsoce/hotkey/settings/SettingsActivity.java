@@ -61,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
 
   @Override
   public void activityFinish() {
-    finish();
+    onBackPressed();
   }
 
   @Override
@@ -88,31 +88,24 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
 
   @Override
   public void onBackPressed() {
-
     interstitialAd.setAdListener(new AdListener() {
-      @Override
-      public void onAdLoaded() {
-        super.onAdLoaded();
-        interstitialAd.show();
-      }
-
       @Override
       public void onAdFailedToLoad(int i) {
         super.onAdFailedToLoad(i);
-        activityFinish();
+        finish();
       }
 
       @Override
       public void onAdClosed() {
         super.onAdClosed();
-        activityFinish();
+        finish();
       }
     });
 
     if (interstitialAd.isLoaded()) {
       interstitialAd.show();
     } else {
-      activityFinish();
+      finish();
     }
   }
 }
