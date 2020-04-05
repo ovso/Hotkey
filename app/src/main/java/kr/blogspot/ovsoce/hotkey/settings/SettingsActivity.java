@@ -20,7 +20,8 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
   public final static int REQUEST_CODE_SETTING = 1;
   private SettingsPresenter mPresenter;
   private Unbinder unbinder;
-  @BindView(R.id.ad_container) ViewGroup adContainer;
+  @BindView(R.id.ad_container)
+  ViewGroup adContainer;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +70,13 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
     return this;
   }
 
-  @Override public void showAd() {
+  @Override
+  public void showAd() {
     AdaptiveBanner.loadAdaptiveBanner(this, adContainer, Ads.BANNER_UNIT_ID);
   }
 
-  @Override protected void onDestroy() {
+  @Override
+  protected void onDestroy() {
     unbinder.unbind();
     super.onDestroy();
   }
