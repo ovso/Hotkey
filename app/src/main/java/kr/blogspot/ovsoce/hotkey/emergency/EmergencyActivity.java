@@ -3,7 +3,6 @@ package kr.blogspot.ovsoce.hotkey.emergency;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
-
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
@@ -20,9 +19,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import kr.blogspot.ovsoce.hotkey.AdaptiveBanner;
+import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.emergency.fragment.EmergencyFragment;
-import kr.blogspot.ovsoce.hotkey.framework.ad.MyAdView;
 
 public class EmergencyActivity extends AppCompatActivity implements EmergencyPresenter.View {
     @BindView(R.id.ad_container) ViewGroup adContainer;
@@ -69,7 +69,7 @@ public class EmergencyActivity extends AppCompatActivity implements EmergencyPre
 
     @Override
     public void setTabLayout() {
-        
+
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.getTabAt(0).setText(R.string.tab_emergency_label);
         mTabLayout.getTabAt(1).setText(R.string.tab_living_info_label);
@@ -88,7 +88,7 @@ public class EmergencyActivity extends AppCompatActivity implements EmergencyPre
     }
 
     @Override public void showAd() {
-        adContainer.addView(MyAdView.getAdmobAdView(getApplicationContext()));
+      AdaptiveBanner.loadAdaptiveBanner(this,adContainer, Ads.BANNER_UNIT_ID);
     }
 
     @Override
