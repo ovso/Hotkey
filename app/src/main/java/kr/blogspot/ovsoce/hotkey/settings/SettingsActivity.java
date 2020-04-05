@@ -12,8 +12,9 @@ import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import kr.blogspot.ovsoce.hotkey.AdaptiveBanner;
+import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.R;
-import kr.blogspot.ovsoce.hotkey.framework.ad.MyAdView;
 
 public class SettingsActivity extends AppCompatActivity implements SettingsPresenter.View {
   public final static int REQUEST_CODE_SETTING = 1;
@@ -69,7 +70,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
   }
 
   @Override public void showAd() {
-    adContainer.addView(MyAdView.getAdmobAdView(getApplicationContext()));
+    AdaptiveBanner.loadAdaptiveBanner(this, adContainer, Ads.BANNER_UNIT_ID);
   }
 
   @Override protected void onDestroy() {

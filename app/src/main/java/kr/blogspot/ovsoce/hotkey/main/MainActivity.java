@@ -36,6 +36,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import kr.blogspot.ovsoce.hotkey.AdaptiveBanner;
+import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.data.KeyName;
@@ -43,7 +45,6 @@ import kr.blogspot.ovsoce.hotkey.emergency.EmergencyActivity;
 import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.framework.MyProgressDialog;
 import kr.blogspot.ovsoce.hotkey.framework.Prefs;
-import kr.blogspot.ovsoce.hotkey.framework.ad.MyAdView;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -343,7 +344,7 @@ public class MainActivity extends AppCompatActivity
   }
 
   @Override public void showAd() {
-    adContainer.addView(MyAdView.getAdmobAdView(getApplicationContext()));
+    AdaptiveBanner.loadAdaptiveBanner(this,adContainer, Ads.BANNER_UNIT_ID);
   }
 
   private class SectionsPagerAdapter extends FragmentPagerAdapter {
