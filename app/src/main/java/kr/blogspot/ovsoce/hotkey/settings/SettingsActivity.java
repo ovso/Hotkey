@@ -9,6 +9,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.InterstitialAd;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -22,6 +25,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
   private Unbinder unbinder;
   @BindView(R.id.ad_container)
   ViewGroup adContainer;
+  private InterstitialAd interstitialAd = AdaptiveBanner.loadInterstitial(this);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -79,5 +83,28 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
   protected void onDestroy() {
     unbinder.unbind();
     super.onDestroy();
+  }
+
+  @Override
+  public void onBackPressed() {
+    interstitialAd.setAdListener(new AdListener() {
+      @Override
+      public void onAdLoaded() {
+        super.onAdLoaded();
+        interstitialAd.show();
+      }
+
+      @Override
+      public void onAdFailedToLoad(int i) {
+        super.onAdFailedToLoad(i);
+        onBackPressed();
+      }
+
+      @Override
+      public void onAdClosed() {
+        super.onAdClosed();
+        onBackPressed();
+      }
+    });
   }
 }
