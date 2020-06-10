@@ -1,12 +1,14 @@
 package kr.blogspot.ovsoce.hotkey.splash
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import kr.blogspot.ovsoce.hotkey.R
+import androidx.appcompat.app.AppCompatActivity
+import kr.blogspot.ovsoce.hotkey.main.MainActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }
