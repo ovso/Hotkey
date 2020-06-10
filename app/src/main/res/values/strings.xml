@@ -1,69 +1,69 @@
 <resources>
-  <string name = "app_name">Hotkey</string>
-  <string name = "app_ver"> version </string>
+    <string name="app_name">Hotkey</string>
+    <string name="app_ver"> version </string>
 
-  <string name = "navigation_drawer_open"> Open Navigation Bar </string>
-  <string name = "navigation_drawer_close"> Close the navigation window </string>
+    <string name="navigation_drawer_open"> Open Navigation Bar </string>
+    <string name="navigation_drawer_close"> Close the navigation window </string>
 
-  <string name = "action_settings"> Settings </string>
-  <string name = "menu_title_family"> Family </string>
-  <string name = "menu_title_friends"> Friends </string>
-  <string name = "menu_title_others"> Miscellaneous </string>
-  <string name = "menu_title_review"> Leave a review </string>
-  <string name = "menu_title_share"> Sharing apps </string>
-  <string name = "menu_title_help"> Help </string>
+    <string name="action_settings"> Settings </string>
+    <string name="menu_title_family"> Family </string>
+    <string name="menu_title_friends"> Friends </string>
+    <string name="menu_title_others"> Miscellaneous </string>
+    <string name="menu_title_review"> Leave a review </string>
+    <string name="menu_title_share"> Sharing apps </string>
+    <string name="menu_title_help"> Help </string>
 
-  <string name = "dialog_name_hint"> Please enter your first name. </string>
-  <string name = "dialog_number_hint"> Please enter a number. </string>
-  <string name = "dialog_title"> Contact Settings </string>
-  <string name = "dialog_import_contacts"> Import contacts </string>
-  <string name = "dialog_btn_text_message"> Send SMS </string>
-  <string name = "dialog_btn_text_init"> Contact initialization </string>
+    <string name="dialog_name_hint"> Please enter your first name. </string>
+    <string name="dialog_number_hint"> Please enter a number. </string>
+    <string name="dialog_title"> Contact Settings </string>
+    <string name="dialog_import_contacts"> Import contacts </string>
+    <string name="dialog_btn_text_message"> Send SMS </string>
+    <string name="dialog_btn_text_init"> Contact initialization </string>
 
-  <string name = "btn_ok"> OK </string>
-  <string name = "btn_cancel"> Cancel </string>
+    <string name="btn_ok"> OK </string>
+    <string name="btn_cancel"> Cancel </string>
 
-  <string name = "empty_number"> No number entered. </string>
+    <string name="empty_number"> No number entered. </string>
 
-  <string name = "share_to_others"> Sharing with others </string>
+    <string name="share_to_others"> Sharing with others </string>
 
-  <string name = "activity_help_label"> Help </string>
+    <string name="activity_help_label"> Help </string>
 
-  <string name = "activity_emergency_label"> Emergency number </string>
+    <string name="activity_emergency_label"> Emergency number </string>
 
-  <string name = "tab_emergency_label"> Emergency number </string>
-  <string name = "tab_living_info_label"> Living Information </string>
-  <string name = "tab_complaints_label"> Complaints / Counseling </string>
-  <string name = "tab_child_label"> Children </string>
-  <string name = "tab_teen_label"> Youth </string>
-  <string name = "tab_female_label"> Female </string>
-  <string name = "tab_old_disabled_label"> Elderly / Disabled </string>
-  <string name = "tab_disease_addicted_label"> Illness / Addiction </string>
-  <string name = "tab_family_label"> Family </string>
+    <string name="tab_emergency_label"> Emergency number </string>
+    <string name="tab_living_info_label"> Living Information </string>
+    <string name="tab_complaints_label"> Complaints / Counseling </string>
+    <string name="tab_child_label"> Children </string>
+    <string name="tab_teen_label"> Youth </string>
+    <string name="tab_female_label"> Female </string>
+    <string name="tab_old_disabled_label"> Elderly / Disabled </string>
+    <string name="tab_disease_addicted_label"> Illness / Addiction </string>
+    <string name="tab_family_label"> Family </string>
 
-  <string name = "make_call"> Dialing </string>
+    <string name="make_call"> Dialing </string>
 
-  <string name = "settings_fonts"> Font </string>
-  <string name = "settings_fonts_summary"> Reprocessing is possible after setting. </string>
-  <string name = "settings_fonts_size"> Font Size </string>
-  <string name = "settings_fonts_size_summary"> Reprocessing is possible after setting. </string>
-  <string name = "settings_btn_restart"> rewrite </string>
-  <string name = "settings_btn_cancel"> Cancel </string>
+    <string name="settings_fonts"> Font </string>
+    <string name="settings_fonts_summary"> Reprocessing is possible after setting. </string>
+    <string name="settings_fonts_size"> Font Size </string>
+    <string name="settings_fonts_size_summary"> Reprocessing is possible after setting. </string>
+    <string name="settings_btn_restart"> rewrite </string>
+    <string name="settings_btn_cancel"> Cancel </string>
 
-  <string name = "dialog_title_edit_name"> Edit </string>
-  <string name = "empty_input_text"> No value entered </string>
+    <string name="dialog_title_edit_name"> Edit </string>
+    <string name="empty_input_text"> No value entered </string>
 
-  <string name = "call_phone_denied_msg"> 1. Not required. \ n 2. Completing File Manager installation Click the [Allow] button. The setting is directly possible. </string>
-  <string name = "do_you_want_to_add_a_tab"> Do you want to add a tab (group)? </string>
-  <string name = "btn_del_tab"> Remove Tab </string>
-  <string name = "default_tab_name"> \? </string>
-  <string name = "automatic_end_after_call"> Auto end call </string>
-  <string name = "quit_app_after_call"> Quit the application after the call is finished. </string>
-  <string name = "keep_app_after_call"> Keep the application after you end the call. </string>
-  <string name = "using_tts"> Using Voice Features </string>
-  <string name = "using_tts_enable"> Tells the person you are calling. </string>
-  <string name = "using_tts_disable">I will call you straight.</string>
-  <string name = "donation"> Sponsorship </string>
-  <string name = "empty" />
-  <string name = "help_msg"> One click on Dubai \ n \ n Twice, long press \ n \ n Third, enter number 01012345678, 010-1234-6789, n \ nSquare, font and font size appear on the screen \ n \ nClick on the five paragraphs. \ n \ n Six</string>
+    <string name="call_phone_denied_msg"> 1. Not required. \ n 2. Completing File Manager installation Click the [Allow] button. The setting is directly possible. </string>
+    <string name="do_you_want_to_add_a_tab"> Do you want to add a tab (group)? </string>
+    <string name="btn_del_tab"> Remove Tab </string>
+    <string name="default_tab_name"> \? </string>
+    <string name="automatic_end_after_call"> Auto end call </string>
+    <string name="quit_app_after_call"> Quit the application after the call is finished. </string>
+    <string name="keep_app_after_call"> Keep the application after you end the call. </string>
+    <string name="using_tts"> Using Voice Features </string>
+    <string name="using_tts_enable"> Tells the person you are calling. </string>
+    <string name="using_tts_disable">I will call you straight.</string>
+    <string name="donation"> Sponsorship </string>
+    <string name="empty" />
+    <string name="help_msg"> One click on Dubai \ n \ n Twice, long press \ n \ n Third, enter number 01012345678, 010-1234-6789, n \ nSquare, font and font size appear on the screen \ n \ nClick on the five paragraphs. \ n \ n Six</string>
 </resources>
