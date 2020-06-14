@@ -46,22 +46,28 @@ import kr.blogspot.ovsoce.hotkey.fragment.BaseFragment;
 import kr.blogspot.ovsoce.hotkey.framework.MyProgressDialog;
 import kr.blogspot.ovsoce.hotkey.framework.Prefs;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, MainPresenter.View {
-  public final static int[] DEFAULT_TITLE_RES_ID = {
-      R.string.menu_title_family, R.string.menu_title_friends, R.string.menu_title_others
+  public static final int[] DEFAULT_TITLE_RES_ID = {
+    R.string.menu_title_family, R.string.menu_title_friends, R.string.menu_title_others
   };
+
   @BindView(R.id.nav_view)
   NavigationView mNavigationView;
+
   @BindView(R.id.toolbar)
   Toolbar mToolbar;
+
   @BindView(R.id.viewpager)
   ViewPager mViewPager;
+
   @BindView(R.id.tabs)
   TabLayout mTabLayout;
-  @BindView(R.id.ad_container) ViewGroup adContainer;
+
+  @BindView(R.id.ad_container)
+  ViewGroup adContainer;
+
   private SectionsPagerAdapter mSectionsPagerAdapter;
   private MainPresenter mPresenter;
   private Unbinder mUnbinder;
@@ -73,8 +79,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         @Override
-        public void onTabUnselected(TabLayout.Tab tab) {
-        }
+        public void onTabUnselected(TabLayout.Tab tab) {}
 
         @Override
         public void onTabReselected(TabLayout.Tab tab) {
@@ -87,17 +92,17 @@ public class MainActivity extends AppCompatActivity
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-          EditText nameEdit = mTabNameEditDialogView.findViewById(R.id
-              .et_edit_name);
+          EditText nameEdit = mTabNameEditDialogView.findViewById(R.id.et_edit_name);
           String name = nameEdit.getText().toString().trim();
           mPresenter.onTabNameEditDialogButtonClick(name, which);
         }
       };
-  private BroadcastReceiver mPhoneStateBroadcastReceiver = new BroadcastReceiver() {
-    public void onReceive(Context context, Intent intent) {
-      mPresenter.onPhoneStateReceiver(intent);
-    }
-  };
+  private BroadcastReceiver mPhoneStateBroadcastReceiver =
+      new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+          mPresenter.onPhoneStateReceiver(intent);
+        }
+      };
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -105,14 +110,8 @@ public class MainActivity extends AppCompatActivity
     mPresenter = new MainPresenterImpl(this);
     mPresenter.onCreate();
 
-    registerReceiver(mPhoneStateBroadcastReceiver,
-        new IntentFilter("android.intent.action.PHONE_STATE"));
-  }
-
-  @Override
-  protected void attachBaseContext(Context newBase) {
-    App.setFont();
-    super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    registerReceiver(
+        mPhoneStateBroadcastReceiver, new IntentFilter("android.intent.action.PHONE_STATE"));
   }
 
   @Override
@@ -186,7 +185,11 @@ public class MainActivity extends AppCompatActivity
   public void setDrawableLayout() {
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle =
-        new ActionBarDrawerToggle(this, drawer, mToolbar, R.string.navigation_drawer_open,
+        new ActionBarDrawerToggle(
+            this,
+            drawer,
+            mToolbar,
+            R.string.navigation_drawer_open,
             R.string.navigation_drawer_close);
     drawer.setDrawerListener(toggle);
     toggle.syncState();
@@ -213,7 +216,8 @@ public class MainActivity extends AppCompatActivity
 
   @Override
   public void showHelpDialog(@StringRes int resId) {
-    new AlertDialog.Builder(getContext()).setTitle(R.string.help)
+    new AlertDialog.Builder(getContext())
+        .setTitle(R.string.help)
         .setMessage(resId)
         .setPositiveButton(android.R.string.ok, null)
         .show();
@@ -267,14 +271,15 @@ public class MainActivity extends AppCompatActivity
     builder.setNegativeButton(R.string.btn_cancel, mOnTabNameEditDialogClickListener);
     if (isRemoveTab) {
       builder.setOnRemoveClickListener(onRemoveClickListener);
-      //builder.setNeutralButton(R.string.btn_del_tab, mOnTabNameEditDialogClickListener);
+      // builder.setNeutralButton(R.string.btn_del_tab, mOnTabNameEditDialogClickListener);
     }
     builder.show();
   }
 
   private DelTabDialogBuilder.OnRemoveClickListener onRemoveClickListener =
       new DelTabDialogBuilder.OnRemoveClickListener() {
-        @Override public void onRemoveClick() {
+        @Override
+        public void onRemoveClick() {
           mPresenter.onTabRemoveClick();
         }
       };
@@ -299,8 +304,7 @@ public class MainActivity extends AppCompatActivity
 
   @Override
   public void showEditNameError(int resId) {
-    TextInputLayout t =
-        mTabNameEditDialogView.findViewById(R.id.til_edit_tab_name);
+    TextInputLayout t = mTabNameEditDialogView.findViewById(R.id.til_edit_tab_name);
     t.setError(getString(resId));
   }
 
@@ -317,8 +321,8 @@ public class MainActivity extends AppCompatActivity
 
   @Override
   public void setVersionName(String versionName) {
-    ((TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_version)).setText(
-        versionName);
+    ((TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_version))
+        .setText(versionName);
   }
 
   @Override
@@ -330,7 +334,8 @@ public class MainActivity extends AppCompatActivity
     unregisterReceiver(mPhoneStateBroadcastReceiver);
   }
 
-  @Override protected void onPause() {
+  @Override
+  protected void onPause() {
     super.onPause();
     Prefs.putInt(
         App.getInstance(),
@@ -343,8 +348,9 @@ public class MainActivity extends AppCompatActivity
     finish();
   }
 
-  @Override public void showAd() {
-    AdaptiveBanner.loadAdaptiveBanner(this,adContainer, Ads.BANNER_UNIT_ID);
+  @Override
+  public void showAd() {
+    AdaptiveBanner.loadAdaptiveBanner(this, adContainer, Ads.BANNER_UNIT_ID);
   }
 
   private class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -352,8 +358,8 @@ public class MainActivity extends AppCompatActivity
     private List<Fragment> mFragmentList;
     private List<String> mPageTitleList;
 
-    SectionsPagerAdapter(FragmentManager fm, List<Fragment> fragmentList,
-                         List<String> pageTitleList) {
+    SectionsPagerAdapter(
+        FragmentManager fm, List<Fragment> fragmentList, List<String> pageTitleList) {
       super(fm);
       mFragmentList = fragmentList;
       mPageTitleList = pageTitleList;

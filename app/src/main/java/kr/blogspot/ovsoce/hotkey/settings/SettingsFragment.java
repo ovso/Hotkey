@@ -2,7 +2,6 @@ package kr.blogspot.ovsoce.hotkey.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,22 +23,12 @@ public class SettingsFragment extends PreferenceFragment
 
         addPreferencesFromResource(R.xml.preferences);
 
-        ListPreference fontsListPrefs = (ListPreference) findPreference("fonts");
-        fontsListPrefs.setOnPreferenceChangeListener(this);
-        String title = getFontName(fontsListPrefs, fontsListPrefs.getValue());
-        fontsListPrefs.setTitle(title);
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String fonts = sharedPreferences.getString("fonts", "NanumPen.ttf");
-        fontsListPrefs.setValue(fonts);
-
-
         ListPreference fontsSizeListPrefs = (ListPreference) findPreference("fonts_size");
         fontsSizeListPrefs.setOnPreferenceChangeListener(this);
         String fontsSizeListPrefsTitle =
                 getFontSizeTitle(fontsSizeListPrefs, fontsSizeListPrefs.getValue());
         fontsSizeListPrefs.setTitle(fontsSizeListPrefsTitle);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+      SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String fontSize = sharedPreferences.getString("fonts_size", "1.0");
         if (fontSize.equals("1")) fontSize = "1.0";
         fontsSizeListPrefs.setValue(fontSize);
@@ -78,19 +67,15 @@ public class SettingsFragment extends PreferenceFragment
     private void showRestartDialog() {
         new AlertDialog.Builder(getActivity()).setMessage(R.string.settings_fonts_summary)
                 .setPositiveButton(R.string.settings_btn_restart,
-                    new DialogInterface.OnClickListener() {
-                        @Override public void onClick(DialogInterface dialog, int which) {
-                            Activity a = SettingsFragment.this.getActivity();
-                            a.setResult(Activity.RESULT_OK, new Intent().putExtra("restart", true));
-                            a.finish();
-                        }
-                    })
+                  (dialog, which) -> {
+                      Activity a = SettingsFragment.this.getActivity();
+                      a.setResult(Activity.RESULT_OK, new Intent().putExtra("restart", true));
+                      a.finish();
+                  })
                 .setNegativeButton(R.string.settings_btn_cancel,
-                    new DialogInterface.OnClickListener() {
-                        @Override public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    })
+                  (dialog, which) -> {
+                    dialog.dismiss();
+                  })
                 .show();
     }
 
@@ -117,9 +102,9 @@ public class SettingsFragment extends PreferenceFragment
     }
 
     private String getFontSizeTitle(ListPreference preference, String newValue) {
-        int lenth = preference.getEntries().length;
+        int length = preference.getEntries().length;
         int newValueIndex = 0;
-        for (int i = 0; i < lenth; i++) {
+        for (int i = 0; i < length; i++) {
             if (preference.getEntryValues()[i].equals(newValue)) {
                 newValueIndex = i;
                 break;
