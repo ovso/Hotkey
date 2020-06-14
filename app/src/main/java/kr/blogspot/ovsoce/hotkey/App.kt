@@ -4,10 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.preference.PreferenceManager
 import androidx.multidex.MultiDex
-import com.crashlytics.android.Crashlytics
 import com.facebook.stetho.Stetho
 import com.google.android.gms.ads.MobileAds
-import io.fabric.sdk.android.Fabric
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper
 import kr.blogspot.ovsoce.hotkey.framework.SystemUtils
 import kr.blogspot.ovsoce.hotkey.framework.TypefaceUtil
@@ -19,7 +17,6 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Fabric.with(this, Crashlytics())
         databaseHelper = DatabaseHelper(applicationContext)
         Stetho.initializeWithDefaults(this)
         instance = this
