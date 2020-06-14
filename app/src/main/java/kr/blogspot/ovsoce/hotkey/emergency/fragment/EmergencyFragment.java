@@ -28,6 +28,7 @@ public class EmergencyFragment extends Fragment implements EmergencyFragmentPres
 
   @BindView(R.id.recyclerview)
   RecyclerView mRecyclerView;
+
   private Unbinder mUnbinder;
 
   public static Fragment getInstance(int type) {
@@ -40,36 +41,40 @@ public class EmergencyFragment extends Fragment implements EmergencyFragmentPres
 
   @Nullable
   @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
+  public View onCreateView(
+      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_base, container, false);
   }
 
-  @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  @Override
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     mUnbinder = ButterKnife.bind(this, view);
   }
 
   private EmergencyFragmentPresenter mPresenter;
 
-  @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+  @Override
+  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     mPresenter = new EmergencyFragmentPresenterImpl(this);
     mPresenter.onActivityCreate(getArguments().getInt("type"));
   }
 
-  @Override public void onDetach() {
+  @Override
+  public void onDetach() {
     super.onDetach();
     mUnbinder.unbind();
   }
 
-  @Override public void setRecyclerView(List<EmergencyContact> contactList) {
+  @Override
+  public void setRecyclerView(List<EmergencyContact> contactList) {
     Paint paint = new Paint();
     paint.setStrokeWidth(3);
     paint.setColor(Color.TRANSPARENT);
     paint.setAlpha(20);
     HorizontalDividerItemDecoration divider =
-        new HorizontalDividerItemDecoration.Builder(getActivity()).paint(paint).build();
+        new HorizontalDividerItemDecoration.Builder(requireActivity()).paint(paint).build();
     mRecyclerView.addItemDecoration(divider);
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -79,42 +84,46 @@ public class EmergencyFragment extends Fragment implements EmergencyFragmentPres
     mRecyclerView.setAdapter(adapter);
   }
 
-  @Override public void showMakeCallDialog(final EmergencyContact contact) {
-    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+  @Override
+  public void showMakeCallDialog(final EmergencyContact contact) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
     String message =
         contact.receptionContents + "\n" + contact.phoneNumber + "\n" + contact.relatedInstitutions;
     builder.setMessage(message);
-    builder.setPositiveButton(R.string.make_call, new DialogInterface.OnClickListener() {
-      @Override public void onClick(DialogInterface dialog, int which) {
-        EmergencyFragment.this.makeCall(contact.phoneNumber);
-      }
-    }).setNeutralButton(R.string.dialog_btn_text_message,
-        new DialogInterface.OnClickListener() {
-          @Override public void onClick(DialogInterface dialog, int which) {
-            EmergencyFragment.this.navigateToSMS(contact.phoneNumber);
-          }
-        });
+    builder
+        .setPositiveButton(
+            R.string.make_call,
+            (dialog, which) -> EmergencyFragment.this.makeCall(contact.phoneNumber))
+        .setNeutralButton(
+            R.string.dialog_btn_text_message,
+            new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                EmergencyFragment.this.navigateToSMS(contact.phoneNumber);
+              }
+            });
     builder.setNegativeButton(R.string.btn_cancel, null);
     builder.show();
   }
 
-  @Override public void showPermissionAlert(int resId) {
-    new AlertDialog.Builder(getActivity()).setMessage(resId)
-        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-          @Override public void onClick(DialogInterface dialogInterface, int which) {
-            dialogInterface.dismiss();
-          }
-        })
+  @Override
+  public void showPermissionAlert(int resId) {
+    new AlertDialog.Builder(requireContext())
+        .setMessage(resId)
+        .setPositiveButton(
+            android.R.string.ok, (dialogInterface, which) -> dialogInterface.dismiss())
         .show();
   }
 
-  @DebugLog public void navigateToSMS(String number) {
+  @DebugLog
+  public void navigateToSMS(String number) {
     Intent intent = new Intent(Intent.ACTION_VIEW);
     intent.setData(Uri.parse("sms:" + number));
-    getContext().startActivity(intent);
+    startActivity(intent);
   }
 
-  @DebugLog public void makeCall(String phoneNumber) {
+  @DebugLog
+  public void makeCall(String phoneNumber) {
     Intent intent = new Intent(Intent.ACTION_CALL);
     intent.setData(Uri.parse("tel:" + phoneNumber));
     startActivity(intent);
@@ -122,7 +131,8 @@ public class EmergencyFragment extends Fragment implements EmergencyFragmentPres
 
   private EmergencyFragmentAdapter.OnEmergencyItemClickListener mOnEmergencyItemClickListener =
       new EmergencyFragmentAdapter.OnEmergencyItemClickListener() {
-        @Override public void onItemClick(int position) {
+        @Override
+        public void onItemClick(int position) {
           mPresenter.onItemClick(position);
         }
       };
