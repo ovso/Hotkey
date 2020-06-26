@@ -150,12 +150,12 @@ class MainPresenterImpl implements MainPresenter {
       if (dbManager.createTable()) {
         new Handler(Looper.getMainLooper())
             .post(
-              () -> {
-                view.addTab();
-                int tabCount = dbManager.getTabCount();
-                view.updateViewPager(tabCount, dbManager.getPageTitleList(tabCount));
-                view.setTabLayout();
-              });
+                () -> {
+                  view.addTab();
+                  int tabCount = dbManager.getTabCount();
+                  view.updateViewPager(tabCount, dbManager.getPageTitleList(tabCount));
+                  view.setTabLayout();
+                });
       }
       return null;
     }
