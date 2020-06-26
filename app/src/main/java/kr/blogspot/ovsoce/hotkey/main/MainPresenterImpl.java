@@ -10,7 +10,6 @@ import hugo.weaving.DebugLog;
 import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.data.KeyName;
-import kr.blogspot.ovsoce.hotkey.framework.Log;
 import kr.blogspot.ovsoce.hotkey.framework.ObjectUtils;
 import kr.blogspot.ovsoce.hotkey.framework.Prefs;
 import kr.blogspot.ovsoce.hotkey.settings.SettingsActivity;
@@ -42,7 +41,6 @@ class MainPresenterImpl implements MainPresenter {
 
   @Override
   public void onCreate() {
-    mView.setRootView();
     mView.setVersionName(mModel.getVersionName());
     mModel.setFontsSize();
     mView.setToolbar();
@@ -95,10 +93,6 @@ class MainPresenterImpl implements MainPresenter {
         mDBManager.setTabName(tabName, mTabManager.getTabSelectedPosition());
         mView.setTabTitle(tabName, mTabManager.getTabSelectedPosition());
       }
-    } else if (which == TabManager.BUTTON_TYPE_DEL) {
-      // Do nothing.. Migrate to onTabRemoveClick()
-    } else {
-      Log.d("cancel");
     }
   }
 
@@ -116,7 +110,8 @@ class MainPresenterImpl implements MainPresenter {
     }
   }
 
-  @Override public void onTabRemoveClick() {
+  @Override
+  public void onTabRemoveClick() {
     boolean deleted = mDBManager.deleteTable(mTabManager.getTabSelectedPosition());
     if (deleted) {
       mView.removeTab(mTabManager.getTabSelectedPosition());
@@ -150,16 +145,20 @@ class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    @DebugLog protected Void doInBackground(Void... voids) {
+    @DebugLog
+    protected Void doInBackground(Void... voids) {
       if (dbManager.createTable()) {
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-          @Override public void run() {
-            view.addTab();
-            int tabCount = dbManager.getTabCount();
-            view.updateViewPager(tabCount, dbManager.getPageTitleList(tabCount));
-            view.setTabLayout();
-          }
-        });
+        new Handler(Looper.getMainLooper())
+            .post(
+                new Runnable() {
+                  @Override
+                  public void run() {
+                    view.addTab();
+                    int tabCount = dbManager.getTabCount();
+                    view.updateViewPager(tabCount, dbManager.getPageTitleList(tabCount));
+                    view.setTabLayout();
+                  }
+                });
       }
       return null;
     }
