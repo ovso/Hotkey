@@ -12,7 +12,7 @@ import kr.blogspot.ovsoce.hotkey.framework.TypefaceUtil
 
 
 class App : Application() {
-    var databaseHelper: DatabaseHelper? = null
+    lateinit var databaseHelper: DatabaseHelper
         private set
 
     override fun onCreate() {
@@ -47,6 +47,7 @@ class App : Application() {
 
     companion object {
         var DEBUG = false
+
         @JvmStatic
         var instance: App? = null
             private set
