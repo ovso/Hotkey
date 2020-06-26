@@ -6,18 +6,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -29,13 +30,13 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.AdaptiveBanner;
 import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.App;
@@ -68,9 +69,11 @@ public class MainActivity extends AppCompatActivity
   @BindView(R.id.ad_container)
   ViewGroup adContainer;
 
+  @BindView(R.id.root)
+  CoordinatorLayout root;
+
   private SectionsPagerAdapter mSectionsPagerAdapter;
   private MainPresenter mPresenter;
-  private Unbinder mUnbinder;
   private TabLayout.OnTabSelectedListener mOnTabSelectedListener =
       new TabLayout.OnTabSelectedListener() {
         @Override
@@ -107,6 +110,7 @@ public class MainActivity extends AppCompatActivity
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
     mPresenter = new MainPresenterImpl(this);
     mPresenter.onCreate();
 
@@ -176,12 +180,6 @@ public class MainActivity extends AppCompatActivity
   }
 
   @Override
-  public void setRootView() {
-    setContentView(R.layout.activity_main);
-    mUnbinder = ButterKnife.bind(this);
-  }
-
-  @Override
   public void setDrawableLayout() {
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle =
@@ -191,7 +189,7 @@ public class MainActivity extends AppCompatActivity
             mToolbar,
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close);
-    drawer.setDrawerListener(toggle);
+    drawer.addDrawerListener(toggle);
     toggle.syncState();
   }
 
@@ -205,7 +203,6 @@ public class MainActivity extends AppCompatActivity
     }
   }
 
-  @SuppressWarnings("StatementWithEmptyBody")
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     mPresenter.onNavigationItemSelected(item.getItemId());
@@ -260,7 +257,7 @@ public class MainActivity extends AppCompatActivity
   @Override
   public void showTabNameEditDialog(String name, boolean isRemoveTab) {
     mTabNameEditDialogView =
-        getLayoutInflater().inflate(R.layout.dialog_custom_edit_tab_name, null);
+        LayoutInflater.from(getContext()).inflate(R.layout.dialog_custom_edit_tab_name, root);
     final EditText nameEdit = mTabNameEditDialogView.findViewById(R.id.et_edit_name);
     nameEdit.setText(name);
     DelTabDialogBuilder builder = new DelTabDialogBuilder(this);
@@ -293,16 +290,6 @@ public class MainActivity extends AppCompatActivity
   }
 
   @Override
-  public void showToast(int resId) {
-    Toast.makeText(MainActivity.this, resId, Toast.LENGTH_SHORT).show();
-  }
-
-  @Override
-  public void showToast(String msg) {
-    Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-  }
-
-  @Override
   public void showEditNameError(int resId) {
     TextInputLayout t = mTabNameEditDialogView.findViewById(R.id.til_edit_tab_name);
     t.setError(getString(resId));
@@ -329,8 +316,6 @@ public class MainActivity extends AppCompatActivity
   protected void onDestroy() {
     super.onDestroy();
     mPresenter.onDestroy();
-    mUnbinder.unbind();
-
     unregisterReceiver(mPhoneStateBroadcastReceiver);
   }
 
@@ -353,18 +338,19 @@ public class MainActivity extends AppCompatActivity
     AdaptiveBanner.loadAdaptiveBanner(this, adContainer, Ads.BANNER_UNIT_ID);
   }
 
-  private class SectionsPagerAdapter extends FragmentPagerAdapter {
+  private static class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> mFragmentList;
     private List<String> mPageTitleList;
 
     SectionsPagerAdapter(
         FragmentManager fm, List<Fragment> fragmentList, List<String> pageTitleList) {
-      super(fm);
+      super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
       mFragmentList = fragmentList;
       mPageTitleList = pageTitleList;
     }
 
+    @NotNull
     @Override
     public Fragment getItem(int position) {
       return mFragmentList.get(position);

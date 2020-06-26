@@ -46,10 +46,6 @@ public interface MainPresenter {
 
     void setTabTitle(String name, int position);
 
-    void showToast(int resId);
-
-    void showToast(String msg);
-
     void showEditNameError(int resId);
 
     Context getContext();
@@ -73,8 +69,6 @@ public interface MainPresenter {
     void showProgressBar();
 
     void hideProgressBar();
-
-    void setRootView();
 
     void exitApp();
 
