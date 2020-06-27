@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.blogspot.ovsoce.hotkey.AdaptiveBanner;
 import kr.blogspot.ovsoce.hotkey.Ads;
@@ -111,6 +112,7 @@ public class MainActivity extends AppCompatActivity
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    ButterKnife.bind(this);
     mPresenter = new MainPresenterImpl(this);
     mPresenter.onCreate();
 
