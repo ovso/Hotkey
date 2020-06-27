@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.main;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -256,10 +257,12 @@ public class MainActivity extends AppCompatActivity
     mViewPager.setCurrentItem(position, true);
   }
 
+  @SuppressLint("InflateParams")
   @Override
   public void showTabNameEditDialog(String name, boolean isRemoveTab) {
     mTabNameEditDialogView =
-        LayoutInflater.from(getContext()).inflate(R.layout.dialog_custom_edit_tab_name, root);
+        LayoutInflater.from(getContext()).inflate(R.layout.dialog_custom_edit_tab_name, null);
+
     final EditText nameEdit = mTabNameEditDialogView.findViewById(R.id.et_edit_name);
     nameEdit.setText(name);
     DelTabDialogBuilder builder = new DelTabDialogBuilder(this);

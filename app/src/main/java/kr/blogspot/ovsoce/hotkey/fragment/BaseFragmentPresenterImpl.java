@@ -10,6 +10,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import java.util.HashMap;
 
 import hugo.weaving.DebugLog;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import kr.blogspot.ovsoce.hotkey.App;
@@ -43,7 +44,7 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
 
   @Override
   public void onItemAlertDialogOkClick(String itemId) {
-    ContactsItem item = model.getContactsItem(Integer.valueOf(itemId));
+    ContactsItem item = model.getContactsItem(Integer.parseInt(itemId));
     view.updateRecyclerViewItem(item);
   }
 
@@ -59,16 +60,19 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
   }
 
   private void reqPermission(final ContactsItem item) {
-    subscribe = permissions.request(Manifest.permission.CALL_PHONE)
-        .subscribeOn(Schedulers.io())
-        .observeOn(Schedulers.computation())
-        .subscribe(granted -> {
-          if (granted) { // Always true pre-M
-            BaseFragmentPresenterImpl.this.makeCall(item);
-          } else {
-            view.showPermissionAlert(R.string.call_phone_denied_msg);
-          }
-        });
+    subscribe =
+        permissions
+            .request(Manifest.permission.CALL_PHONE)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                granted -> {
+                  if (granted) { // Always true pre-M
+                    BaseFragmentPresenterImpl.this.makeCall(item);
+                  } else {
+                    view.showPermissionAlert(R.string.call_phone_denied_msg);
+                  }
+                });
   }
 
   private void makeCall(final ContactsItem item) {
@@ -82,33 +86,34 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
   }
 
   private void makeCallAfterTts(final ContactsItem item) {
-    tts = new TextToSpeech(App.getInstance().getApplicationContext(),
-        new TextToSpeech.OnInitListener() {
-          @Override public void onInit(int status) {
-            if (status == TextToSpeech.SUCCESS) {
-              tts.setOnUtteranceProgressListener(new SimpleUtteranceProgressListener() {
-                @Override
-                @DebugLog
-                public void onDone(String utteranceId) {
-                  view.makeCall(item.getNumber());
-                }
-              });
-              HashMap<String, String> params = new HashMap<>();
-              params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf
-                  (AudioManager.STREAM_ALARM));
-              params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "SOME MESSAGE");
+    tts =
+        new TextToSpeech(
+            App.getInstance(),
+            status -> {
+              if (status == TextToSpeech.SUCCESS) {
+                tts.setOnUtteranceProgressListener(
+                    new SimpleUtteranceProgressListener() {
+                      @Override
+                      @DebugLog
+                      public void onDone(String utteranceId) {
+                        view.makeCall(item.getNumber());
+                      }
+                    });
+                HashMap<String, String> params = new HashMap<>();
+                params.put(
+                    TextToSpeech.Engine.KEY_PARAM_STREAM,
+                    String.valueOf(AudioManager.STREAM_ALARM));
+                params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "SOME MESSAGE");
 
-              tts.speak(item.getName(),
-                  TextToSpeech.QUEUE_FLUSH, params);
-            }
-          }
-        });
-    tts.setLanguage(SystemUtils.getStringToLocale(SystemUtils.getLocaleToString(App
-        .getInstance()
-        .getApplicationContext())));
+                tts.speak(item.getName(), TextToSpeech.QUEUE_FLUSH, params);
+              }
+            });
+    tts.setLanguage(
+        SystemUtils.getStringToLocale(SystemUtils.getLocaleToString(App.getInstance())));
   }
 
-  @Override public void onDestroyView() {
+  @Override
+  public void onDestroyView() {
     if (tts != null) {
       tts.stop();
       tts.shutdown();

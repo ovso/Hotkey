@@ -49,7 +49,7 @@ class App : Application() {
         var DEBUG = false
 
         @JvmStatic
-        var instance: App? = null
+        lateinit var instance: App
             private set
     }
 }
