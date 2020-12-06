@@ -7,8 +7,6 @@ import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
 public interface DialogPresenter {
   void init(Context context, ContactsItem item);
 
-  void setColorSelected(int colorPosition, android.view.View container);
-
   int setContacts(Context context, ContactsItem item);
 
   void pickContacts(Context context);
@@ -23,8 +21,6 @@ public interface DialogPresenter {
     void setContentView();
 
     void setDialogTitle(String title);
-
-    void initScrollView(String[] colors, int colorPosition);
 
     void setVisible(android.view.View v, int visible);
 
