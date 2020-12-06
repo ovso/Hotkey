@@ -40,7 +40,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.blogspot.ovsoce.hotkey.AdaptiveBanner;
-import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.data.KeyName;
@@ -340,7 +339,7 @@ public class MainActivity extends AppCompatActivity
 
   @Override
   public void showAd() {
-    AdaptiveBanner.loadAdaptiveBanner(this, adContainer, Ads.BANNER_UNIT_ID);
+    AdaptiveBanner.loadAdaptiveBanner(this, adContainer);
   }
 
   private static class SectionsPagerAdapter extends FragmentPagerAdapter {

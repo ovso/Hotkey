@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -34,6 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter {
     mListener = listener;
   }
 
+  @NotNull
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout

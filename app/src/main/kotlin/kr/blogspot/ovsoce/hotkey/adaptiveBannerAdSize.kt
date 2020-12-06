@@ -44,12 +44,12 @@ private fun Fragment.adaptiveBannerAdSize(): AdSize {
 }
 
 @JvmOverloads
-fun Activity.loadAdaptiveBanner(container: ViewGroup, unitId: String) {
+fun Activity.loadAdaptiveBanner(container: ViewGroup) {
   val adView = AdView(container.context)
   container.addView(adView)
 
   fun load() {
-    adView.adUnitId = unitId
+    adView.adUnitId = getString(R.string.ads_unit_id_banner)
     adView.adSize = adaptiveBannerAdSize()
     val adRequest = AdRequest.Builder().build()
     adView.loadAd(adRequest)
@@ -59,12 +59,12 @@ fun Activity.loadAdaptiveBanner(container: ViewGroup, unitId: String) {
 }
 
 @JvmOverloads
-fun ViewGroup.loadBanner(unitId: String) {
+fun ViewGroup.loadBanner() {
   val adView = AdView(this.context)
   this.addView(adView)
 
   fun load() {
-    adView.adUnitId = unitId
+    adView.adUnitId = context.getString(R.string.ads_unit_id_banner)
     adView.adSize = AdSize.BANNER
     val adRequest = AdRequest.Builder().build()
     adView.loadAd(adRequest)
@@ -91,7 +91,7 @@ fun Fragment.loadAdaptiveBanner(container: ViewGroup, unitId: String) {
 @JvmOverloads
 fun Activity.loadInterstitial(): InterstitialAd {
   return InterstitialAd(applicationContext).apply {
-    adUnitId = Ads.INTERSTITIAL_UNIT_ID
+    adUnitId = getString(R.string.ads_unit_id_interstitial)
     loadAd(AdRequest.Builder().build())
   }
 }

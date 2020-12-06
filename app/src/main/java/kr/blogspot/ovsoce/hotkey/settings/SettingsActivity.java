@@ -1,5 +1,6 @@
 package kr.blogspot.ovsoce.hotkey.settings;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,37 +10,31 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.InterstitialAd;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.AdaptiveBanner;
-import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.R;
 
 public class SettingsActivity extends AppCompatActivity implements SettingsPresenter.View {
   public final static int REQUEST_CODE_SETTING = 1;
   private SettingsPresenter mPresenter;
   private Unbinder unbinder;
+  @SuppressLint("NonConstantResourceId")
   @BindView(R.id.ad_container)
   ViewGroup adContainer;
-  private InterstitialAd interstitialAd = null;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    interstitialAd = AdaptiveBanner.loadInterstitial(this);
     setContentView(R.layout.activity_settings);
     unbinder = ButterKnife.bind(this);
-    /*
-     * onInit에 구현하니 툴바가 나오지 않았다 HelpActivity에서는 제대로 나온다.
-     */
     Toolbar toolbar = findViewById(R.id.toolbar);
     toolbar.setTitle(R.string.action_settings);
     setSupportActionBar(toolbar);
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    if (getSupportActionBar() != null) {
+      getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
     mPresenter = new SettingsPresenterImpl(this);
     mPresenter.onCreate(getApplicationContext());
@@ -77,35 +72,12 @@ public class SettingsActivity extends AppCompatActivity implements SettingsPrese
 
   @Override
   public void showAd() {
-    AdaptiveBanner.loadAdaptiveBanner(this, adContainer, Ads.BANNER_UNIT_ID);
+    AdaptiveBanner.loadAdaptiveBanner(this, adContainer);
   }
 
   @Override
   protected void onDestroy() {
     unbinder.unbind();
     super.onDestroy();
-  }
-
-  @Override
-  public void onBackPressed() {
-    interstitialAd.setAdListener(new AdListener() {
-      @Override
-      public void onAdFailedToLoad(int i) {
-        super.onAdFailedToLoad(i);
-        finish();
-      }
-
-      @Override
-      public void onAdClosed() {
-        super.onAdClosed();
-        finish();
-      }
-    });
-
-    if (interstitialAd.isLoaded()) {
-      interstitialAd.show();
-    } else {
-      finish();
-    }
   }
 }

@@ -10,7 +10,6 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
-import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.R;
 
 public class DelTabDialogBuilder extends AlertDialog.Builder {
@@ -49,7 +48,7 @@ public class DelTabDialogBuilder extends AlertDialog.Builder {
 
   private InterstitialAd provideInterstitialAd(Context context) {
     InterstitialAd interstitialAd = new InterstitialAd(context);
-    interstitialAd.setAdUnitId(Ads.INTERSTITIAL_UNIT_ID);
+    interstitialAd.setAdUnitId(context.getString(R.string.ads_unit_id_interstitial));
     AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
     interstitialAd.loadAd(adRequestBuilder.build());
     return interstitialAd;

@@ -22,7 +22,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import kr.blogspot.ovsoce.hotkey.AdaptiveBanner;
-import kr.blogspot.ovsoce.hotkey.Ads;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.emergency.fragment.EmergencyFragment;
 
@@ -97,7 +96,7 @@ public class EmergencyActivity extends AppCompatActivity implements EmergencyPre
 
   @Override
   public void showAd() {
-    AdaptiveBanner.loadAdaptiveBanner(this, adContainer, Ads.BANNER_UNIT_ID);
+    AdaptiveBanner.loadAdaptiveBanner(this, adContainer);
   }
 
   @Override

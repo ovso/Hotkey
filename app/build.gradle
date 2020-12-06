@@ -13,12 +13,12 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "kr.blogspot.ovsoce.hotkey"
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 114
         int versionMajor = 0
         int versionMinor = 0
@@ -52,16 +52,21 @@ android {
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue("string", "ads_app_id", "ca-app-pub-8679189423397017~9361379422")
-            signingConfig signingConfigs.release
-        }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             resValue("string", "ads_app_id", "ca-app-pub-3940256099942544~3347511713")
+            resValue("string", "ads_unit_id_banner", "ca-app-pub-3940256099942544/6300978111")
+            resValue("string", "ads_unit_id_interstitial", "ca-app-pub-3940256099942544/1033173712")
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue("string", "ads_app_id", "ca-app-pub-8679189423397017~9361379422")
+            resValue("string", "ads_unit_id_banner", "ca-app-pub-8679189423397017/8758744192")
+            resValue("string", "ads_unit_id_interstitial", "ca-app-pub-8679189423397017/2384988367")
+            signingConfig signingConfigs.release
         }
     }
 
@@ -90,19 +95,19 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
-    implementation "androidx.appcompat:appcompat:1.1.0"
-    implementation "androidx.browser:browser:1.2.0"
-    implementation "androidx.palette:palette:1.0.0"
+    testImplementation 'junit:junit:4.13.1'
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation "androidx.browser:browser:1.3.0"
+    implementation "androidx.palette:palette-ktx:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
-    implementation "com.google.android.material:material:1.1.0"
+    implementation "com.google.android.material:material:1.2.1"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
 
-    implementation "com.google.firebase:firebase-ads:$firebase_ads_version"
-    implementation "com.google.firebase:firebase-crashlytics:17.0.1"
-    implementation "com.google.firebase:firebase-analytics-ktx:17.4.3"
-    implementation 'com.google.firebase:firebase-analytics:17.4.3'
-    implementation 'com.google.firebase:firebase-messaging:20.2.0'
+    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    implementation "com.google.firebase:firebase-ads"
+    implementation "com.google.firebase:firebase-crashlytics-ktx"
+    implementation "com.google.firebase:firebase-analytics-ktx"
+    implementation 'com.google.firebase:firebase-messaging-ktx'
 
     implementation "com.jakewharton:butterknife:10.2.1"
     annotationProcessor "com.jakewharton:butterknife-compiler:10.2.1"
@@ -119,10 +124,11 @@ dependencies {
 
     annotationProcessor "org.projectlombok:lombok:$lombok_version"
     compileOnly "javax.annotation:jsr250-api:$jsr250_version"
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation "com.tbruyelle.rxpermissions2:rxpermissions:$rxpermissions"
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.20'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

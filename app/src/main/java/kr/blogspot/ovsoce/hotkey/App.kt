@@ -2,8 +2,8 @@ package kr.blogspot.ovsoce.hotkey
 
 import android.app.Application
 import android.content.Context
-import android.preference.PreferenceManager
 import androidx.multidex.MultiDex
+import androidx.preference.PreferenceManager
 import com.facebook.stetho.Stetho
 import com.google.android.gms.ads.MobileAds
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper
@@ -31,7 +31,7 @@ class App : Application() {
     }
 
     private fun initAdmob() {
-        MobileAds.initialize(applicationContext, Ads.APP_ID)
+        MobileAds.initialize(this)
     }
 
     private fun initDebuggable() {
