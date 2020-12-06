@@ -109,13 +109,6 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
   @Override
   public void setRecyclerView(List<ContactsItem> contactsItemList) {
     MyAdapter adapter = new MyAdapter(contactsItemList, mOnAdapterItemClickListener);
-    GridLayoutManager layout =
-        new GridLayoutManager(
-            getContext(),
-            Objects.requireNonNull(getContext())
-                .getResources()
-                .getInteger(R.integer.recyclerview_gridlayout_spancount));
-    mRecyclerView.setLayoutManager(layout);
     mRecyclerView.setAdapter(adapter);
   }
 
