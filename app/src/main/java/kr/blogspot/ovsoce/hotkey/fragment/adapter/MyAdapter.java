@@ -48,13 +48,6 @@ public class MyAdapter extends RecyclerView.Adapter {
   public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     ContactsItem data = mList.get(position);
     final MyViewHolder myViewHolder = (MyViewHolder) holder;
-
-    App app = (App) myViewHolder.blockV.getContext()
-      .getApplicationContext();
-    String colorCode = app.getDatabaseHelper().getDefaultColors()[Integer.parseInt(data
-      .getColor())];
-
-    myViewHolder.blockV.setBackgroundColor(Color.parseColor(colorCode));
     myViewHolder.nameTv.setText(data.getName());
     subscribe = RxView.clicks(myViewHolder.itemView).throttleFirst(2, TimeUnit
       .SECONDS, AndroidSchedulers
@@ -87,8 +80,6 @@ public class MyAdapter extends RecyclerView.Adapter {
   static class MyViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.tv_name)
     TextView nameTv;
-    @BindView(R.id.v_block)
-    View blockV;
 
     MyViewHolder(View itemView) {
       super(itemView);
