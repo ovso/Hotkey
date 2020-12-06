@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 
-import hugo.weaving.DebugLog;
 import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.data.KeyName;
@@ -102,7 +101,6 @@ class MainPresenterImpl implements MainPresenter {
     addTabTask.execute();
   }
 
-  @DebugLog
   @Override
   public void onPhoneStateReceiver(Intent intent) {
     if (mModel.isAppExit(intent)) {
@@ -121,7 +119,6 @@ class MainPresenterImpl implements MainPresenter {
     }
   }
 
-  @DebugLog
   @Override
   public void onDestroy() {
     if (addTabTask != null) {
@@ -145,7 +142,6 @@ class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    @DebugLog
     protected Void doInBackground(Void... voids) {
       if (dbManager.createTable()) {
         new Handler(Looper.getMainLooper())

@@ -20,7 +20,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
-import hugo.weaving.DebugLog;
 import java.util.List;
 import kr.blogspot.ovsoce.hotkey.R;
 
@@ -115,14 +114,12 @@ public class EmergencyFragment extends Fragment implements EmergencyFragmentPres
         .show();
   }
 
-  @DebugLog
   public void navigateToSMS(String number) {
     Intent intent = new Intent(Intent.ACTION_VIEW);
     intent.setData(Uri.parse("sms:" + number));
     startActivity(intent);
   }
 
-  @DebugLog
   public void makeCall(String phoneNumber) {
     Intent intent = new Intent(Intent.ACTION_CALL);
     intent.setData(Uri.parse("tel:" + phoneNumber));

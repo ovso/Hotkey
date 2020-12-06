@@ -14,16 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import hugo.weaving.DebugLog;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.dialog.ItemAlertDialogBuilder;
 import kr.blogspot.ovsoce.hotkey.fragment.adapter.MyAdapter;
@@ -40,33 +37,30 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
   private ItemAlertDialogBuilder mItemAlertDialogBuilder;
   private Unbinder mUnbinder;
   private MyAdapter.OnAdapterItemClickListener mOnAdapterItemClickListener =
-      new MyAdapter.OnAdapterItemClickListener() {
+    new MyAdapter.OnAdapterItemClickListener() {
 
-        @DebugLog
-        @Override
-        public void onClick(android.view.View v) {
-          int position = mRecyclerView.getChildAdapterPosition(v);
-          mPresenter.onAdapterItemClick(position);
-        }
+      @Override
+      public void onClick(android.view.View v) {
+        int position = mRecyclerView.getChildAdapterPosition(v);
+        mPresenter.onAdapterItemClick(position);
+      }
 
-        @DebugLog
-        @Override
-        public boolean onLongClick(android.view.View v) {
-          int position = mRecyclerView.getChildAdapterPosition(v);
-          mPresenter.onAdapterItemLongClick(position);
-          return true;
-        }
-      };
+      @Override
+      public boolean onLongClick(android.view.View v) {
+        int position = mRecyclerView.getChildAdapterPosition(v);
+        mPresenter.onAdapterItemLongClick(position);
+        return true;
+      }
+    };
   private ItemAlertDialogBuilder.OnOkClickListener mOnOkClickListener =
-      new ItemAlertDialogBuilder.OnOkClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, String itemId) {
-          mPresenter.onItemAlertDialogOkClick(itemId);
-          dialog.dismiss();
-        }
-      };
+    new ItemAlertDialogBuilder.OnOkClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, String itemId) {
+        mPresenter.onItemAlertDialogOkClick(itemId);
+        dialog.dismiss();
+      }
+    };
 
-  @DebugLog
   public static BaseFragment newInstance(int sectionNumber) {
     BaseFragment fragment = new BaseFragment();
     Bundle args = new Bundle();
@@ -86,7 +80,7 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
 
   @Override
   public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_base, container, false);
   }
 
@@ -96,7 +90,6 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     mUnbinder = ButterKnife.bind(this, view);
   }
 
-  @DebugLog
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
@@ -112,7 +105,6 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
     mRecyclerView.setAdapter(adapter);
   }
 
-  @DebugLog
   @Override
   public void showItemSetDialog(ContactsItem item) {
     mItemAlertDialogBuilder = new ItemAlertDialogBuilder(this, item);
@@ -159,9 +151,9 @@ public class BaseFragment extends Fragment implements BaseFragmentPresenter.View
   @Override
   public void showPermissionAlert(int resId) {
     new AlertDialog.Builder(requireActivity())
-        .setMessage(resId)
-        .setPositiveButton(
-            android.R.string.ok, (dialogInterface, which) -> dialogInterface.dismiss())
-        .show();
+      .setMessage(resId)
+      .setPositiveButton(
+        android.R.string.ok, (dialogInterface, which) -> dialogInterface.dismiss())
+      .show();
   }
 }

@@ -7,8 +7,6 @@ import android.content.pm.PackageManager;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-import hugo.weaving.DebugLog;
-
 public class SystemUtils {
 
   public static String getLocaleToString(Context context) {
@@ -19,7 +17,7 @@ public class SystemUtils {
     return strLanguage + "," + strCountry;
   }
 
-  @DebugLog public static Locale getStringToLocale(String s) {
+  public static Locale getStringToLocale(String s) {
     StringTokenizer tempStringTokenizer = new StringTokenizer(s, ",");
     String language = null;
     String country = null;

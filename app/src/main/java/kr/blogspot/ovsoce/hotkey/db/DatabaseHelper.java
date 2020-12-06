@@ -222,10 +222,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private List<ContactsItem> getDBInitContactsItemListData() {
         List<ContactsItem> dataItems = new ArrayList<>();
-        String[] colors = sDefaultColors;
-        int k = 0;
+      int k = 0;
         for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < colors.length; j++) {
+            for (int j = 0; j < sDefaultColors.length; j++) {
                 String id = String.valueOf(k);
                 String name = "", number = "", color = "";
                 //color = colors[j];
@@ -246,7 +245,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return dataItems;
     }
 
-    private static String[] sDefaultColors = new String[]{"#3F51B5", "#E91E63", "#FF5722", "#4CAF50", "#607D8B", "#00BCD4", "#FFC107", "#795548", "#03A9F4", "#F44336"};
+    private static final String[] sDefaultColors = new String[]{"#3F51B5", "#E91E63", "#FF5722", "#4CAF50", "#607D8B", "#00BCD4", "#FFC107", "#795548", "#03A9F4", "#F44336"};
 
     public String[] getDefaultColors() {
         return sDefaultColors;

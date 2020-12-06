@@ -9,7 +9,6 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.HashMap;
 
-import hugo.weaving.DebugLog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -94,7 +93,6 @@ class BaseFragmentPresenterImpl implements BaseFragmentPresenter {
                 tts.setOnUtteranceProgressListener(
                     new SimpleUtteranceProgressListener() {
                       @Override
-                      @DebugLog
                       public void onDone(String utteranceId) {
                         view.makeCall(item.getNumber());
                       }
