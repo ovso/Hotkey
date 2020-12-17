@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.rxbinding2.view.RxView;
@@ -20,11 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import kr.blogspot.ovsoce.hotkey.App;
 import kr.blogspot.ovsoce.hotkey.R;
 import kr.blogspot.ovsoce.hotkey.db.DatabaseHelper;
 import kr.blogspot.ovsoce.hotkey.fragment.vo.ContactsItem;
-import kr.blogspot.ovsoce.hotkey.framework.Log;
 
 /**
  * RecyclerView Adapter
@@ -52,10 +49,15 @@ public class MyAdapter extends RecyclerView.Adapter {
     ContactsItem data = mList.get(position);
     final MyViewHolder myViewHolder = (MyViewHolder) holder;
     myViewHolder.nameTv.setText(data.getName());
+    final String color;
+    if (data.getColor() != null && data.getColor().length() != 0) {
+      color = data.getColor();
+    } else {
+      color = "#3F51B5";
+    }
     myViewHolder.nameTv.setBackgroundColor(
-      Color.parseColor(DatabaseHelper.sDefaultColors[Integer.parseInt(data.getColor())])
+      Color.parseColor(DatabaseHelper.sDefaultColors[Integer.parseInt(color)])
     );
-
     subscribe = RxView.clicks(myViewHolder.itemView).throttleFirst(2, TimeUnit
       .SECONDS, AndroidSchedulers
       .mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(
