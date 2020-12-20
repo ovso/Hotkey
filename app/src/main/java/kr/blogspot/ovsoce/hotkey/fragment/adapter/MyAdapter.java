@@ -1,6 +1,7 @@
 package kr.blogspot.ovsoce.hotkey.fragment.adapter;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,15 +50,13 @@ public class MyAdapter extends RecyclerView.Adapter {
     ContactsItem data = mList.get(position);
     final MyViewHolder myViewHolder = (MyViewHolder) holder;
     myViewHolder.nameTv.setText(data.getName());
-    final String color;
-    if (data.getColor() != null && data.getColor().length() != 0) {
-      color = data.getColor();
-    } else {
-      color = "#3F51B5";
+    try {
+      myViewHolder.nameTv.setBackgroundColor(Color.parseColor(DatabaseHelper.sDefaultColors[Integer.parseInt(data.getColor())]));
+    } catch (Exception e) {
+      Log.e("MyAdapter", e.getMessage(), e);
+      myViewHolder.nameTv.setBackgroundColor(Color.parseColor(DatabaseHelper.sDefaultColors[0]));
     }
-    myViewHolder.nameTv.setBackgroundColor(
-      Color.parseColor(DatabaseHelper.sDefaultColors[Integer.parseInt(color)])
-    );
+
     subscribe = RxView.clicks(myViewHolder.itemView).throttleFirst(2, TimeUnit
       .SECONDS, AndroidSchedulers
       .mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(
